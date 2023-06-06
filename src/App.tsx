@@ -1,5 +1,5 @@
 import "./App.css";
-import { Profile } from "./Pages/Index";
+import { Profile, Landing } from "./Pages/index";
 
 const App = () => {
     return (
