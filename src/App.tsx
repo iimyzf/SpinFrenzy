@@ -1,10 +1,11 @@
 import "./App.css";
-import Landing from "./Pages/Landing";
+import { Profile } from "./Pages/Index";
 
 const App = () => {
     return (
         <div className="overflow-hidden">
-            <Landing />
+            {/* <Landing /> */}
+			<Profile/>
         </div>
     );
 };
