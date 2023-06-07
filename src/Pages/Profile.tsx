@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsInstagram, BsLinkedin, BsCheckLg } from "react-icons/bs";
 
 const Profile = () => {
     return (
@@ -53,9 +53,9 @@ const Profile = () => {
                     </ul>
                 </div>
             </div>
-            <div className="child-container-2 pl-3 flex">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center ">
-                    <div className="editabl">
+            <div className="child-container-2 pl-3">
+                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center">
+                    <div className="editable">
                         <h3 className="pb-3">USERNAME</h3>
                         <div className="flex gap-5">
                             <input
@@ -65,7 +65,7 @@ const Profile = () => {
                             <span className="check-span w-14 h-14 rounded-[12px] "></span>
                         </div>
                     </div>
-                    <div className="editabl pt-8">
+                    <div className="editable pt-8">
                         <h3 className="pb-3">FULL NAME</h3>
                         <div className="flex gap-5">
                             <input
@@ -75,7 +75,7 @@ const Profile = () => {
                             <span className="check-span w-14 h-14 rounded-[12px] "></span>
                         </div>
                     </div>
-                    <div className="editabl pt-8">
+                    <div className="editable pt-8">
                         <h3 className="pb-3">EMAIL ADDRESS</h3>
                         <div className="flex gap-5">
                             <input
@@ -85,15 +85,49 @@ const Profile = () => {
                             <span className="check-span w-14 h-14 rounded-[12px] "></span>
                         </div>
                     </div>
-                    <div className="editabl pt-8">
+                    <div className="editable pt-8">
                         <h3 className="pb-3">SOCIAL LINKS</h3>
-                        {/* <span className="check-span w-14 h-19 rounded-[12px] bg-red-500"></span> */}
-                        <div className="flex gap-5">
-                            <input
-                                type="text"
-                                className="w-[60em] h-14 rounded-[12px] input-container"
-                            />
-                            <span className="check-span w-14 h-14 rounded-[12px] "></span>
+                        <div className="flex ">
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <div className="pew flex gap-5">
+                                <input
+                                    type="text"
+                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                />
+                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    {/* <BsCheckLg /> */}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex pt-5">
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <div className="pew flex gap-5">
+                                <input
+                                    type="text"
+                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                />
+                                <span className="check-span w-14 h-14 rounded-[12px]"></span>
+                            </div>
+                        </div>
+                        <div className="flex pt-5">
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <div className="pew flex gap-5">
+                                <input
+                                    type="text"
+                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                />
+                                <span className="check-span w-14 h-14 rounded-[12px]"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="pt-12 w-[64.2em]">
+                        <div className="child flex gap-8 justify-end items-end">
+                            <h3 className="font-light">
+                                <a href="#">CANCEL</a>
+                            </h3>
+                            <h3 className="font-bold text-xl">
+                                <a href="#">SAVE</a>
+                            </h3>
                         </div>
                     </div>
                 </div>
