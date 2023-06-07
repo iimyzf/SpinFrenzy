@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { BsGithub, BsInstagram, BsLinkedin, BsCheckLg } from "react-icons/bs";
+import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
 
 const Profile = () => {
     return (
@@ -60,9 +60,13 @@ const Profile = () => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="w-[60em] h-14 rounded-[12px] input-container"
+                                className="w-[65em] h-14 rounded-[12px] input-container"
                             />
-                            <span className="check-span w-14 h-14 rounded-[12px] "></span>
+                            <a href="#">
+                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    <BsCheck class="check-icon" />
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -70,9 +74,13 @@ const Profile = () => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="w-[60em] h-14 rounded-[12px] input-container"
+                                className="w-[65em] h-14 rounded-[12px] input-container"
                             />
-                            <span className="check-span w-14 h-14 rounded-[12px] "></span>
+                            <a href="#">
+                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    <BsCheck class="check-icon" />
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -80,47 +88,67 @@ const Profile = () => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="w-[60em] h-14 rounded-[12px] input-container"
+                                className="w-[65em] h-14 rounded-[12px] input-container"
                             />
-                            <span className="check-span w-14 h-14 rounded-[12px] "></span>
+                            <a href="#">
+                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    <BsCheck class="check-icon" />
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <div className="editable pt-8">
                         <h3 className="pb-3">SOCIAL LINKS</h3>
                         <div className="flex ">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                                GitHub
+                            </span>
                             <div className="pew flex gap-5">
                                 <input
                                     type="text"
-                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                    className="w-[55em] h-14 rounded-[12px] input-container"
                                 />
-                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
-                                    {/* <BsCheckLg /> */}
-                                </span>
+                                <a href="#">
+                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                        <BsCheck class="check-icon" />
+                                    </span>
+                                </a>
                             </div>
                         </div>
                         <div className="flex pt-5">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                                LinkedIn
+                            </span>
                             <div className="pew flex gap-5">
                                 <input
                                     type="text"
-                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                    className="w-[55em] h-14 rounded-[12px] input-container"
                                 />
-                                <span className="check-span w-14 h-14 rounded-[12px]"></span>
+                                <a href="#">
+                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                        <BsCheck class="check-icon" />
+                                    </span>
+                                </a>
                             </div>
                         </div>
                         <div className="flex pt-5">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5"></span>
+                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                                Instagram
+                            </span>
                             <div className="pew flex gap-5">
                                 <input
                                     type="text"
-                                    className="w-[50em] h-14 rounded-[12px] input-container"
+                                    className="w-[55em] h-14 rounded-[12px] input-container"
                                 />
-                                <span className="check-span w-14 h-14 rounded-[12px]"></span>
+                                <a href="#">
+                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                        <BsCheck class="check-icon" />
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div className="pt-12 w-[64.2em]">
+                    <div className="pt-12 w-[69em]">
                         <div className="child flex gap-8 justify-end items-end">
                             <h3 className="font-light">
                                 <a href="#">CANCEL</a>
