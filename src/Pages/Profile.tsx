@@ -1,5 +1,6 @@
 import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
+import Apollo from "../assets/Apollo.jpg";
 
 const Profile = () => {
     return (
@@ -9,7 +10,7 @@ const Profile = () => {
                     <div className="img-holder absolute top-[8em]">
                         <img
                             className="w-[8em] h-[8em] rounded-full"
-                            src="https://cdna.artstation.com/p/assets/images/images/054/000/524/large/fall-fox-collection-solar-gods.jpg?1663539057"
+                            src={Apollo}
                             alt="Apollo"
                         />
                         <span className="status rounded-full bg-green-400 w-[1.8em] h-[1.8em] absolute top-1 right-1"></span>
