@@ -1,12 +1,15 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Profile, Landing } from "./Pages/index";
 
 const App = () => {
     return (
-        <div className="overflow-hidden">
-            {/* <Landing /> */}
-			<Profile/>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/profile" element={<Profile />} />
+            </Routes>
+        </BrowserRouter>
     );
 };
 

@@ -12,7 +12,9 @@ const Landing = () => {
                     <p className="font-black text-[10em]">PONG</p>
                 </div>
             </div>
-            <h3 className="login font-semibold text-[1.2em]">42 LOGIN</h3>
+            <h3 className="login font-semibold text-[1.2em]">
+				<a href="/profile">42 LOGIN</a>
+			</h3>
         </div>
     );
 };

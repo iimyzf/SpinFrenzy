@@ -60,7 +60,8 @@ const Profile = () => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="w-[65em] h-14 rounded-[12px] input-container"
+                                maxLength={42}
+                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
                             <a href="#">
                                 <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
@@ -74,7 +75,8 @@ const Profile = () => {
                         <div className="flex gap-5">
                             <input
                                 type="text"
-                                className="w-[65em] h-14 rounded-[12px] input-container"
+                                maxLength={42}
+                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
                             <a href="#">
                                 <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
@@ -87,8 +89,9 @@ const Profile = () => {
                         <h3 className="pb-3">EMAIL ADDRESS</h3>
                         <div className="flex gap-5">
                             <input
-                                type="text"
-                                className="w-[65em] h-14 rounded-[12px] input-container"
+                                type="email"
+                                maxLength={42}
+                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
                             <a href="#">
                                 <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
@@ -105,8 +108,8 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
-                                    type="text"
-                                    className="w-[55em] h-14 rounded-[12px] input-container"
+                                    type="link"
+                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
                                 <a href="#">
                                     <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
@@ -121,8 +124,8 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
-                                    type="text"
-                                    className="w-[55em] h-14 rounded-[12px] input-container"
+                                    type="link"
+                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
                                 <a href="#">
                                     <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
@@ -137,8 +140,8 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
-                                    type="text"
-                                    className="w-[55em] h-14 rounded-[12px] input-container"
+                                    type="link"
+                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
                                 <a href="#">
                                     <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
