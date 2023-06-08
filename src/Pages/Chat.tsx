@@ -4,6 +4,7 @@ import { FiLogOut } from "react-icons/fi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useState } from "react";
+import MessageContainer from "../components/MessageContainer";
 
 const Chat = () => {
     const [channels, setChannels] = useState(["Channel 1"]);
@@ -47,7 +48,7 @@ const Chat = () => {
                 </div>
             </div>
             <div className="child-container-2 pl-3">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center relative">
+                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-start relative left-10">
                     <img
                         className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10"
                         src={Apollo}
@@ -61,6 +62,8 @@ const Chat = () => {
                     </a>
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
+					<MessageContainer />
+					<MessageContainer />
                     <input
                         type="text"
                         className="msg rounded-[12px] input-container outline-none indent-5 h-14 absolute bottom-5 left-10"
