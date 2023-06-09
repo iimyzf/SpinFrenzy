@@ -3,7 +3,7 @@ body.active.pop-up {
 }
 
 .add-channel {
-    background: rgba(16, 16, 16, 0.75);
+    background: rgba(16, 16, 16, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(2px);
     border-radius: 24px;
@@ -25,7 +25,7 @@ body.active.pop-up {
 
 .overlay {
 	background: rgba(16, 16, 16, 0.75);
-	backdrop-filter: blur(2px);
+	backdrop-filter: blur(1.5px);
 }
 
 .pop-up-container {

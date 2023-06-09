@@ -8,7 +8,7 @@ const AddChannel = () => {
                 <div className="pop-up-container">
                     <div className="flex justify-center items-center relative">
                         <div className="add-channel w-[40em] h-[35em] text-white font-satoshi flex justify-center items-center">
-                            <div className="pop-up w-[35em]">
+                            <div className="w-[35em]">
                                 <h3 className="uppercase font-medium">
                                     Channel Name
                                 </h3>
