@@ -1,0 +1,37 @@
+body.active.pop-up {
+	overflow-y: hidden;
+}
+
+.add-channel {
+    background: rgba(16, 16, 16, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(2px);
+    border-radius: 24px;
+}
+
+.input-container, .check-span {
+	background: rgba(217, 217, 217, 0.4);
+}
+
+.overlay {
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: fixed;
+}
+
+.overlay {
+	background: rgba(16, 16, 16, 0.75);
+	backdrop-filter: blur(2px);
+}
+
+.pop-up-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* background: red; */
+}

@@ -158,7 +158,7 @@ const Profile = () => {
                                 <a href="#">CANCEL</a>
                             </h3>
                             <h3 className="font-bold text-xl">
-                                <a href="#">SAVE</a>
+                                <a href="chat">SAVE</a>
                             </h3>
                         </div>
                     </div>
