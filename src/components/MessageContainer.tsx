@@ -12,7 +12,7 @@ const MessageContainer = () => {
         }
     }, []);
     return (
-        <div className="convo pt-5 relative ">
+        <div className="convo pt-5 pl-10 bottom-28">
             <div className="flex justify-start items-end gap-5">
                 <img
                     className="w-[2.5em] h-[2.5em] rounded-full"
