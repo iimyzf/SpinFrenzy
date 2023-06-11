@@ -13,9 +13,5 @@
 html,
 body {
     background-color: var(--bg);
-	/* background-image: url("https://cdn.dribbble.com/users/80960/screenshots/5875106/media/60d6bd3a671be79f133db6d408c62ccb.gif"); */
-	/* filter: blur(5px); */
-	/* background-size: cover; */
-	/* height: 100%; */
     color: var(--primary);
 }

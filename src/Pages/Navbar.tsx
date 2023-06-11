@@ -34,7 +34,8 @@ const Navbar = () => {
                     }}
                 >
                     <ul className="nav-links">
-                        <li className="nav-item">
+                        <li className="nav-item flex items-start">
+                            1 •
                             <a
                                 href="/"
                                 onClick={() => setNavOpen(!navOpen)}
@@ -47,7 +48,8 @@ const Navbar = () => {
                             </a>
                             <div className="nav-item-wrapper"></div>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item flex items-start">
+                            2 •
                             <a
                                 href="chat"
                                 onClick={() => setNavOpen(!navOpen)}
@@ -60,7 +62,8 @@ const Navbar = () => {
                             </a>
                             <div className="nav-item-wrapper"></div>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item flex items-start">
+                            3 •
                             <a
                                 href="profile"
                                 onClick={() => setNavOpen(!navOpen)}
@@ -70,6 +73,20 @@ const Navbar = () => {
                                 }}
                             >
                                 Profile
+                            </a>
+                            <div className="nav-item-wrapper"></div>
+                        </li>
+                        <li className="nav-item flex items-start">
+                            4 •
+                            <a
+                                href="profile"
+                                onClick={() => setNavOpen(!navOpen)}
+                                style={{
+                                    top: navOpen ? "0" : "120px",
+                                    transitionDelay: navOpen ? "0.8s" : "0s",
+                                }}
+                            >
+                                Friends
                             </a>
                             <div className="nav-item-wrapper"></div>
                         </li>

@@ -9,7 +9,7 @@ const Landing = () => {
                 className="back "
                 style={{
                     backgroundImage: "url(" + backgroundImg + ")",
-                    filter: "blur(3px)",
+                    filter: "blur(2px)",
                     backgroundSize: "cover",
                     height: "100vh",
                     zIndex: -1,
