@@ -13,15 +13,22 @@ const ViewProfile = () => {
         setChartOptions({
             stroke: {
                 show: true,
-                curve: "smooth",
-                lineCap: "butt",
-                colors: undefined,
-                width: 1,
-                // dashArray: 0,
+                curve: "straight",
+                // lineCap: "butt",
+                colors: ["red", "green", "blue", "yellow"],
+                width: 2,
             },
-            colors: ["red", "green", "blue",],
+            theme: {
+                mode: "dark",
+            },
+            colors: ["red", "green", "blue", "yellow"],
             chart: {
                 id: "basic-bar",
+                foreColor: "gray",
+                toolbar: {
+                    offsetX: -10,
+                    offsetY: -60,
+                },
             },
             xaxis: {
                 categories: [
@@ -34,22 +41,27 @@ const ViewProfile = () => {
                     "7 / 21",
                     "7 / 22",
                     "7 / 23",
+                    "7 / 24",
                 ],
             },
         });
 
         setChartSeries([
             {
-                name: "losses",
+                name: "LOSSES",
                 data: [1, 3, 2, 1, 1, 6, 2, 3, 4],
             },
             {
-                name: "wins",
-                data: [4, 7, 2, 4, 7, 12, 3, 6, 2],
+                name: "WINS",
+                data: [4, 7, 2, 4, 7, 12, 3, 6, 15],
             },
             {
-                name: "draws",
+                name: "DRAWS",
                 data: [2, 1, 3, 4, 7, 9, 5, 5, 2],
+            },
+            {
+                name: "DRAWS",
+                data: [2, 1, 7, 4, 2, 3, 5, 1, 2],
             },
         ]);
     }, []);
@@ -106,17 +118,19 @@ const ViewProfile = () => {
                 </div>
             </div>
             <div className="child-container-2 pl-3">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center">
-                    <div className="editable">
-                        <h3 className="pb-3">USERNAME</h3>
+                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center relative">
+                    <div className="editable absolute left-20 top-20">
+                        <h3 className="pb-3 uppercase">
+                            Match Statistics for Username
+                        </h3>
                     </div>
                     <Chart
-                        className="chart flex justify-center w-[90em]"
+                        className="chart flex justify-center w-[70em] absolute bottom-6"
                         options={chartOptions}
                         series={chartSeries}
                         type="area"
                         // height={400}
-                        width="1000"
+                        // width="1000"
                     />
                 </div>
             </div>
