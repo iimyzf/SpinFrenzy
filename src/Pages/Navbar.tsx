@@ -34,7 +34,7 @@ const Navbar = () => {
                     }}
                 >
                     <ul className="nav-links">
-                        <li className="nav-item">
+                        <li className="nav-item flex items-start">
                             1 •
                             <a
                                 href="/"

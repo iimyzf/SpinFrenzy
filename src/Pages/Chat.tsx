@@ -1,27 +1,45 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import { FiLogOut } from "react-icons/fi";
-import { BsArrowRightShort, BsCheck } from "react-icons/bs";
+import { BsArrowRightShort } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useState } from "react";
 import MessageContainer from "../components/MessageContainer";
-// import AddChannel from "../components/AddChannel";
 import "../components/AddChannel.css";
 import AddChannel from "../components/AddChannel";
 
 const Chat = () => {
-    // const [channels, setChannels] = useState(["Channel 1"]);
+    const [channels, setChannels] = useState<string[]>([]);
 
-    // const addChannel = () => {
-    //     const newChannel = [...channels, `Channel ${channels.length + 1}`];
-    //     setChannels(newChannel);
-    // };
+    const addChannel = (currentChannel: string) => {
+        const newChannel = [...channels, currentChannel];
+        setChannels(newChannel);
+    };
 
     const [popup, setPopup] = useState(false);
-
     const togglePopup = () => {
         setPopup(!popup);
+        if (!popup) {
+            console.log("togglePopup");
+        }
     };
+
+    const channelElements = channels.map(
+        (channel, idx) => (
+            <div
+                key={idx}
+                className="channel flex relative top-20 items-center px-5"
+            >
+                <img
+                    className="apollo w-[2.5em] h-[2.5em] rounded-full"
+                    src={Apollo}
+                    alt="Apollo"
+                />
+                <h4 className="font-medium ml-3 uppercase">{channel}</h4>
+            </div>
+        ),
+        [channels]
+    );
 
     return (
         <div className="parent flex justify-center items-center">
@@ -37,17 +55,8 @@ const Chat = () => {
                             <FiPlus className="text-3xl" />
                         </span>
                     </a>
-                    <div className="red-divs  h-[55em] w-full">
-                        <div className="channel flex relative top-20 items-center px-5">
-                            <img
-                                className="apollo w-[2.5em] h-[2.5em] rounded-full"
-                                src={Apollo}
-                                alt="Apollo"
-                            />
-                            <h4 className="font-medium ml-3 uppercase">
-                                Channel 1
-                            </h4>
-                        </div>
+                    <div className="red-divs h-[55em] w-full">
+                        {channelElements}
                     </div>
                 </div>
             </div>
@@ -67,20 +76,20 @@ const Chat = () => {
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
                     <MessageContainer />
-                    <MessageContainer />
-                    <MessageContainer />
                     <input
                         type="text"
                         className="msg rounded-[12px] input-container outline-none indent-5 h-14 absolute bottom-5 left-10"
                     />
                     <a href="#">
                         <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-10 bottom-5">
-                            <BsArrowRightShort class="check-icon" />
+                            <BsArrowRightShort className="check-icon" />
                         </span>
                     </a>
                 </div>
             </div>
-            {popup && <AddChannel togglePopup={togglePopup} />}
+            {popup && (
+                <AddChannel togglePopup={togglePopup} addChannel={addChannel} />
+            )}
         </div>
     );
 };
