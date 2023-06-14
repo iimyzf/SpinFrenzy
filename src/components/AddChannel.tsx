@@ -17,7 +17,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
     };
 
     const handleSave = () => {
-        if (channelName !== "") {
+        if (channelName !== "" && (isPublic || isPrivate)) {
             addChannel(channelName);
             setChannelName("");
             togglePopup();
@@ -41,6 +41,11 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                     <div className="flex justify-center items-center relative">
                         <div className="add-channel w-[40em] h-[35em] text-white font-satoshi flex justify-center items-center">
                             <div className="pop-up w-[35em]">
+                            <div className="pb-9 text-center">
+                                <h3 className="uppercase font-semibold">
+                                    Add a new Channel
+                                </h3>
+                            </div>
                                 <h3 className="uppercase">Channel Name</h3>
                                 <input
                                     onChange={handleChange}
@@ -84,7 +89,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         />
                                     </>
                                 )}
-                                <div className="pt-12">
+                                <div className="pt-8">
                                     <div className="child flex gap-8 justify-end items-end">
                                         <h3 className="font-light">
                                             <a
