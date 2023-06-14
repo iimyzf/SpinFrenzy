@@ -9,6 +9,8 @@ type Props = {
 
 const AddChannel = ({ togglePopup, addChannel }: Props) => {
     const [channelName, setChannelName] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
+    const [isPrivate, setIsPrivate] = useState(false);
 
     const handleChange = (e: any) => {
         setChannelName(e.target.value);
@@ -20,6 +22,16 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
             setChannelName("");
             togglePopup();
         }
+    };
+
+    const handlePublicCheck = () => {
+        setIsPublic(!isPublic);
+        setIsPrivate(false); // Uncheck private channel checkbox
+    };
+
+    const handlePrivateCheck = () => {
+        setIsPrivate(!isPrivate);
+        setIsPublic(false); // Uncheck public channel checkbox
     };
 
     return (
@@ -40,28 +52,38 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                     <h3 className="uppercase">
                                         Public Channel
                                     </h3>
-                                    <a href="#">
-                                        <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    <span
+                                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
+                                        onClick={handlePublicCheck}
+                                    >
+                                        {isPublic && (
                                             <BsCheck className="check-icon" />
-                                        </span>
-                                    </a>
+                                        )}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between items-center my-5 ">
                                     <h3 className="uppercase">
                                         Private Channel
                                     </h3>
-                                    <a href="#">
-                                        <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                    <span
+                                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
+                                        onClick={handlePrivateCheck}
+                                    >
+                                        {isPrivate && (
                                             <BsCheck className="check-icon" />
-                                        </span>
-                                    </a>
+                                        )}
+                                    </span>
                                 </div>
-                                <h3 className="uppercase">Password</h3>
-                                <input
-                                    type="password"
-                                    maxLength={42}
-                                    className="w-full h-14 mt-2 rounded-[12px] input-container outline-none indent-5"
-                                />
+                                {isPrivate && (
+                                    <>
+                                        <h3 className="uppercase">Password</h3>
+                                        <input
+                                            type="password"
+                                            maxLength={42}
+                                            className="w-full h-14 mt-2 rounded-[12px] input-container outline-none indent-5"
+                                        />
+                                    </>
+                                )}
                                 <div className="pt-12">
                                     <div className="child flex gap-8 justify-end items-end">
                                         <h3 className="font-light">
