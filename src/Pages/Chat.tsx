@@ -23,25 +23,6 @@ const Chat = () => {
         setPopup(!popup);
     };
 
-    const channelElements = channels.map(
-        (channel, idx) => (
-            <div
-                key={idx}
-                className="channel flex relative top-0 items-center px-5 scroll-auto  h-20"
-            >
-                <img
-                    className="apollo w-[2.5em] h-[2.5em] rounded-full"
-                    src={
-                        channel.img ? URL.createObjectURL(channel.img) : Apollo
-                    }
-                    alt="Apollo"
-                />
-                <h4 className="font-medium ml-3 uppercase">{channel.name}</h4>
-            </div>
-        )
-        //[channels]
-    );
-
     return (
         <div className="parent flex justify-center items-center">
             <div className="child-container-1 pr-3 ">
@@ -57,7 +38,25 @@ const Chat = () => {
                         </span>
                     </a>
                     <div className="red-divs h-[44em] w-full overflow-y-auto mb-4">
-                        {channelElements}
+                        {channels.map((channel, idx) => (
+                            <div
+                                key={idx}
+                                className="channel flex relative top-0 items-center px-5 scroll-auto  h-20"
+                            >
+                                <img
+                                    className="apollo w-[2.5em] h-[2.5em] rounded-full"
+                                    src={
+                                        channel.img
+                                            ? URL.createObjectURL(channel.img)
+                                            : Apollo
+                                    }
+                                    alt="Apollo"
+                                />
+                                <h4 className="font-medium ml-3 uppercase">
+                                    {channel.name}
+                                </h4>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -89,10 +88,7 @@ const Chat = () => {
                 </div>
             </div>
             {popup && (
-                <AddChannel
-                    togglePopup={togglePopup}
-                    addChannel={addChannel}
-                />
+                <AddChannel togglePopup={togglePopup} addChannel={addChannel} />
             )}
         </div>
     );
