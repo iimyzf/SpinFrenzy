@@ -5,7 +5,7 @@ import Apollo from "../assets/Apollo.jpg";
 
 type Props = {
     togglePopup: () => void;
-    addChannel: (channelName: { name: string; img: File | null }) => void;
+    addChannel: (channelProps: { name: string; img: File | null }) => void;
 };
 
 const AddChannel = ({ togglePopup, addChannel }: Props) => {

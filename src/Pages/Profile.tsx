@@ -5,15 +5,23 @@ import { useState } from "react";
 
 const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
-    const [username, setUsername] = useState("");
-    const [isChecked, setIsChecked] = useState(false);
+    const [username, setUsername] = useState("username");
+    const [fullName, setFullName] = useState("fullName");
+    const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
 
-    const handleCheck = () => {
-        setIsChecked(!isChecked);
+    const handleCheck = (field: string) => {
+        setIsChecked((prevState) => ({
+            ...prevState,
+            [field]: !prevState[field],
+        }));
     };
 
     const handleUsernameChange = (e: any) => {
-		setUsername(e.target.value);
+        setUsername(e.target.value);
+    };
+
+    const handleFullNameChange = (e: any) => {
+        setFullName(e.target.value);
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +56,7 @@ const Profile = () => {
                         @{username}
                     </h4>
                     <h3 className="font-bold absolute top-[19.5em]">
-                        MAMELLA INDUSTRY
+                        {fullName}
                     </h3>
                     <div className="bio flex absolute top-[22em] justify-center items-start">
                         <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
@@ -96,9 +104,11 @@ const Profile = () => {
                             />
                             <span
                                 className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
-                                onClick={handleCheck}
+                                onClick={() => handleCheck("username")}
                             >
-                                {isChecked && <BsCheck class="check-icon" />}
+                                {isChecked["username"] && (
+                                    <BsCheck class="check-icon" />
+                                )}
                             </span>
                         </div>
                     </div>
@@ -106,15 +116,19 @@ const Profile = () => {
                         <h3 className="pb-3">FULL NAME</h3>
                         <div className="flex gap-5">
                             <input
+                                onChange={handleFullNameChange}
                                 type="text"
                                 maxLength={42}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <a href="#">
-                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                            <span
+                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
+                                onClick={() => handleCheck("fullName")}
+                            >
+                                {isChecked["fullName"] && (
                                     <BsCheck class="check-icon" />
-                                </span>
-                            </a>
+                                )}
+                            </span>
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -125,11 +139,14 @@ const Profile = () => {
                                 maxLength={42}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <a href="#">
-                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                            <span
+                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
+                                onClick={() => handleCheck("email")}
+                            >
+                                {isChecked["email"] && (
                                     <BsCheck class="check-icon" />
-                                </span>
-                            </a>
+                                )}
+                            </span>
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -143,11 +160,14 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <a href="#">
-                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                <span
+                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
+                                    onClick={() => handleCheck("github")}
+                                >
+                                    {isChecked["github"] && (
                                         <BsCheck class="check-icon" />
-                                    </span>
-                                </a>
+                                    )}
+                                </span>
                             </div>
                         </div>
                         <div className="flex pt-5">
@@ -159,11 +179,14 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <a href="#">
-                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                <span
+                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
+                                    onClick={() => handleCheck("linkedin")}
+                                >
+                                    {isChecked["linkedin"] && (
                                         <BsCheck class="check-icon" />
-                                    </span>
-                                </a>
+                                    )}
+                                </span>
                             </div>
                         </div>
                         <div className="flex pt-5">
@@ -175,11 +198,14 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <a href="#">
-                                    <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
+                                <span
+                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
+                                    onClick={() => handleCheck("instagram")}
+                                >
+                                    {isChecked["instagram"] && (
                                         <BsCheck class="check-icon" />
-                                    </span>
-                                </a>
+                                    )}
+                                </span>
                             </div>
                         </div>
                     </div>
