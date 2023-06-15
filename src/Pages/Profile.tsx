@@ -1,17 +1,36 @@
 import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
+import { useState } from "react";
 
 const Profile = () => {
+    const [image, setImage] = useState<File | null>(null);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        setImage(file);
+    };
+
     return (
         <div className="parent flex justify-center items-center">
             <div className="child-container-1 pr-3">
                 <div className="container-1 font-satoshi text-white w-[20em] h-[55em] flex flex-col justify-center items-center relative">
                     <div className="img-holder absolute top-[8em]">
-                        <img
-                            className="w-[8em] h-[8em] rounded-full"
-                            src={Apollo}
-                            alt="Apollo"
+                        <label htmlFor="imageInput">
+                            <img
+                                className="w-[8em] h-[8em] rounded-full cursor-pointer"
+                                src={
+                                    image ? URL.createObjectURL(image) : Apollo
+                                }
+                                alt="Apollo"
+                            />
+                        </label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="hidden"
+                            id="imageInput"
                         />
                         <span className="status rounded-full bg-green-400 w-[1.8em] h-[1.8em] absolute top-1 right-1"></span>
                     </div>

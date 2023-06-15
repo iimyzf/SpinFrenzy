@@ -15,7 +15,7 @@ const Chat = () => {
     const addChannel = (currentChannel: string) => {
         const newChannel = [...channels, currentChannel];
         setChannels(newChannel);
-        // setSelectedImage(null);
+        setSelectedImage(null);
     };
 
     const setImage = (image: File | null) => {

@@ -42,9 +42,9 @@
 }
 
 .uploaded {
-	background: green;
+	/* background: green; */
 }
 
 .uploaded:hover {
-	background: red;
+	/* background: red; */
 }
