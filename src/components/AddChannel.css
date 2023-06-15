@@ -35,3 +35,16 @@
 	transform: translate(-50%, -50%);
 	/* background: red; */
 }
+
+.label {
+	/* background: blue;
+	z-index: 1000; */
+}
+
+.uploaded {
+	background: green;
+}
+
+.uploaded:hover {
+	background: red;
+}

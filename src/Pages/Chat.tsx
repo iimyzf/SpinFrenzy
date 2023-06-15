@@ -10,29 +10,42 @@ import AddChannel from "../components/AddChannel";
 
 const Chat = () => {
     const [channels, setChannels] = useState<string[]>([]);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const addChannel = (currentChannel: string) => {
         const newChannel = [...channels, currentChannel];
         setChannels(newChannel);
+        // setSelectedImage(null);
     };
+
+    const setImage = (image: File | null) => {
+        const newImage = image;
+        setSelectedImage(newImage);
+    };
+
+    // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = e.target.files && e.target.files[0];
+    //     setSelectedImage(file);
+    // };
 
     const [popup, setPopup] = useState(false);
     const togglePopup = () => {
         setPopup(!popup);
-        if (!popup) {
-            console.log("togglePopup");
-        }
     };
 
     const channelElements = channels.map(
         (channel, idx) => (
             <div
                 key={idx}
-                className="channel flex relative top-20 items-center px-5"
+                className="channel flex relative top-0 items-center px-5 scroll-auto  h-20"
             >
                 <img
                     className="apollo w-[2.5em] h-[2.5em] rounded-full"
-                    src={Apollo}
+                    src={
+                        selectedImage
+                            ? URL.createObjectURL(selectedImage)
+                            : Apollo
+                    }
                     alt="Apollo"
                 />
                 <h4 className="font-medium ml-3 uppercase">{channel}</h4>
@@ -43,7 +56,7 @@ const Chat = () => {
 
     return (
         <div className="parent flex justify-center items-center">
-            <div className="child-container-1 pr-3">
+            <div className="child-container-1 pr-3 ">
                 <div className="container-1 font-satoshi text-white w-[20em] h-[55em] flex flex-col items-center justify-center relative ">
                     <h3 className="absolute top-7 uppercase font-bold">
                         Channels
@@ -55,7 +68,7 @@ const Chat = () => {
                             <FiPlus className="text-3xl" />
                         </span>
                     </a>
-                    <div className="red-divs h-[55em] w-full">
+                    <div className="red-divs h-[44em] w-full overflow-y-auto mb-4">
                         {channelElements}
                     </div>
                 </div>
@@ -87,8 +100,19 @@ const Chat = () => {
                     </a>
                 </div>
             </div>
+            {/* <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+                id="imageInput"
+            /> */}
             {popup && (
-                <AddChannel togglePopup={togglePopup} addChannel={addChannel} />
+                <AddChannel
+                    togglePopup={togglePopup}
+                    addChannel={addChannel}
+                    setImage={setImage}
+                />
             )}
         </div>
     );

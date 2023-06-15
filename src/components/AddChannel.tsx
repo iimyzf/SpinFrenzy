@@ -1,16 +1,19 @@
 import { BsCheck } from "react-icons/bs";
 import "./AddChannel.css";
 import { useState } from "react";
+import Apollo from "../assets/Apollo.jpg";
 
 type Props = {
     togglePopup: () => void;
     addChannel: (channelName: string) => void;
+	setImage: (image: File | null) => void;
 };
 
-const AddChannel = ({ togglePopup, addChannel }: Props) => {
+const AddChannel = ({ togglePopup, addChannel, setImage }: Props) => {
     const [channelName, setChannelName] = useState("");
     const [isPublic, setIsPublic] = useState(false);
     const [isPrivate, setIsPrivate] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const handleChange = (e: any) => {
         setChannelName(e.target.value);
@@ -19,7 +22,9 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
     const handleSave = () => {
         if (channelName !== "" && (isPublic || isPrivate)) {
             addChannel(channelName);
+			setImage(selectedImage);
             setChannelName("");
+            setSelectedImage(null);
             togglePopup();
         }
     };
@@ -34,18 +39,39 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
         setIsPublic(false); // Uncheck public channel checkbox
     };
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        setSelectedImage(file);
+    };
+
     return (
         <div className="pop-up">
             <div className="overlay">
                 <div className="pop-up-container">
                     <div className="flex justify-center items-center relative">
-                        <div className="add-channel w-[40em] h-[35em] text-white font-satoshi flex justify-center items-center">
+                        <div className="add-channel w-[40em] h-[45em] text-white font-satoshi flex justify-center items-center">
                             <div className="pop-up w-[35em]">
-                            <div className="pb-9 text-center">
-                                <h3 className="uppercase font-semibold">
-                                    Add a new Channel
-                                </h3>
-                            </div>
+                                <div className="pb-9 flex flex-col items-center gap-3">
+                                    <h3 className="uppercase font-semibold ">
+                                        Add a new Channel
+                                    </h3>
+                                    <label
+                                        htmlFor="imageInput"
+                                        className=" label"
+                                    >
+                                        <img
+                                            src={
+                                                selectedImage
+                                                    ? URL.createObjectURL(
+                                                          selectedImage
+                                                      )
+                                                    : Apollo
+                                            }
+                                            className="uploaded w-[10em] h-[10em] rounded-full bg-white cursor-pointer"
+                                            alt="Selected"
+                                        />
+                                    </label>
+                                </div>
                                 <h3 className="uppercase">Channel Name</h3>
                                 <input
                                     onChange={handleChange}
@@ -109,6 +135,13 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         </h3>
                                     </div>
                                 </div>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className="hidden"
+                                    id="imageInput"
+                                />
                             </div>
                         </div>
                     </div>
