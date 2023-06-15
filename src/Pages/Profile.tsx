@@ -5,6 +5,16 @@ import { useState } from "react";
 
 const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
+    const [username, setUsername] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheck = () => {
+        setIsChecked(!isChecked);
+    };
+
+    const handleUsernameChange = (e: any) => {
+		setUsername(e.target.value);
+    };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
@@ -34,8 +44,8 @@ const Profile = () => {
                         />
                         <span className="status rounded-full bg-green-400 w-[1.8em] h-[1.8em] absolute top-1 right-1"></span>
                     </div>
-                    <h4 className="font-light absolute top-[18em]">
-                        @USERNAME
+                    <h4 className="font-light absolute top-[18em] opacity-80">
+                        @{username}
                     </h4>
                     <h3 className="font-bold absolute top-[19.5em]">
                         MAMELLA INDUSTRY
@@ -79,15 +89,17 @@ const Profile = () => {
                         <h3 className="pb-3">USERNAME</h3>
                         <div className="flex gap-5">
                             <input
+                                onChange={handleUsernameChange}
                                 type="text"
-                                maxLength={42}
+                                maxLength={24}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <a href="#">
-                                <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center">
-                                    <BsCheck class="check-icon" />
-                                </span>
-                            </a>
+                            <span
+                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
+                                onClick={handleCheck}
+                            >
+                                {isChecked && <BsCheck class="check-icon" />}
+                            </span>
                         </div>
                     </div>
                     <div className="editable pt-8">

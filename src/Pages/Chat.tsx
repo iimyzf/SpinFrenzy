@@ -9,24 +9,14 @@ import "../components/AddChannel.css";
 import AddChannel from "../components/AddChannel";
 
 const Chat = () => {
-    const [channels, setChannels] = useState<string[]>([]);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [channels, setChannels] = useState<
+        { name: string; img: File | null }[]
+    >([]);
 
-    const addChannel = (currentChannel: string) => {
+    const addChannel = (currentChannel: { name: string; img: File | null }) => {
         const newChannel = [...channels, currentChannel];
         setChannels(newChannel);
-        setSelectedImage(null);
     };
-
-    const setImage = (image: File | null) => {
-        const newImage = image;
-        setSelectedImage(newImage);
-    };
-
-    // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files && e.target.files[0];
-    //     setSelectedImage(file);
-    // };
 
     const [popup, setPopup] = useState(false);
     const togglePopup = () => {
@@ -42,16 +32,14 @@ const Chat = () => {
                 <img
                     className="apollo w-[2.5em] h-[2.5em] rounded-full"
                     src={
-                        selectedImage
-                            ? URL.createObjectURL(selectedImage)
-                            : Apollo
+                        channel.img ? URL.createObjectURL(channel.img) : Apollo
                     }
                     alt="Apollo"
                 />
-                <h4 className="font-medium ml-3 uppercase">{channel}</h4>
+                <h4 className="font-medium ml-3 uppercase">{channel.name}</h4>
             </div>
-        ),
-        [channels]
+        )
+        //[channels]
     );
 
     return (
@@ -100,18 +88,10 @@ const Chat = () => {
                     </a>
                 </div>
             </div>
-            {/* <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-                id="imageInput"
-            /> */}
             {popup && (
                 <AddChannel
                     togglePopup={togglePopup}
                     addChannel={addChannel}
-                    setImage={setImage}
                 />
             )}
         </div>

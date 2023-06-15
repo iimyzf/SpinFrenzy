@@ -5,11 +5,10 @@ import Apollo from "../assets/Apollo.jpg";
 
 type Props = {
     togglePopup: () => void;
-    addChannel: (channelName: string) => void;
-	setImage: (image: File | null) => void;
+    addChannel: (channelName: { name: string; img: File | null }) => void;
 };
 
-const AddChannel = ({ togglePopup, addChannel, setImage }: Props) => {
+const AddChannel = ({ togglePopup, addChannel }: Props) => {
     const [channelName, setChannelName] = useState("");
     const [isPublic, setIsPublic] = useState(false);
     const [isPrivate, setIsPrivate] = useState(false);
@@ -21,8 +20,7 @@ const AddChannel = ({ togglePopup, addChannel, setImage }: Props) => {
 
     const handleSave = () => {
         if (channelName !== "" && (isPublic || isPrivate)) {
-            addChannel(channelName);
-			setImage(selectedImage);
+            addChannel({ name: channelName, img: selectedImage });
             setChannelName("");
             setSelectedImage(null);
             togglePopup();
