@@ -1,13 +1,37 @@
 import "./Profile.css";
-import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
+import {
+    BsGithub,
+    BsInstagram,
+    BsLinkedin,
+    BsCheck,
+    BsFillPencilFill,
+} from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
+import { ClassNames } from "@emotion/react";
 
 const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
     const [username, setUsername] = useState("username");
     const [fullName, setFullName] = useState("fullName");
     const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
+    const [bio, setBio] = useState(
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    );
+    const [isBioEditing, setIsBioEditing] = useState(false);
+
+    const handleBioEdit = () => {
+        setIsBioEditing(!isBioEditing);
+    };
+
+    const handleBioChange = (e: any) => {
+        setBio(e.target.value);
+    };
+
+    const handleBioSave = () => {
+        // Save the bio here (e.g., send it to the server)
+        setIsBioEditing(false);
+    };
 
     const handleCheck = (field: string) => {
         setIsChecked((prevState) => ({
@@ -58,7 +82,7 @@ const Profile = () => {
                     <h3 className="font-bold absolute top-[19.5em]">
                         {fullName}
                     </h3>
-                    <div className="bio flex absolute top-[22em] justify-center items-start">
+                    {/* <div className="bio flex absolute top-[22em] justify-center items-start">
                         <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
                             Lorem ipsum dolor sit amet consectetur, adipisicing
                             elit. Quas, quis quae nulla optio suscipit libero
@@ -71,7 +95,51 @@ const Profile = () => {
                             repudiandae quia, omnis odio minus numquam nam
                             adipisci assumenda.
                         </p>
+                    </div> */}
+                    <div className="bio absolute top-[22em] justify-center items-end">
+                        {isBioEditing ? (
+                            <>
+                                <textarea
+                                    className="font-light w-[16em] leading-5 text-ellipsis text-justify custom-textarea"
+                                    value={bio}
+                                    onChange={handleBioChange}
+                                />
+                                <button
+                                    onClick={handleBioSave}
+                                    className="float-right mt-10"
+                                >
+                                    Save
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
+                                    {bio}
+                                </p>
+                                <button
+                                    className="float-right mt-10"
+                                    onClick={handleBioEdit}
+                                >
+                                    edit
+                                </button>
+                            </>
+                            // <div className="bio">
+                            //     <button
+                            //         className="btn bg-red-600"
+                            //         onClick={handleBioEdit}
+                            //     >
+                            //         <BsFillPencilFill
+                            //             className="pencil-icon"
+                            //             size="10px"
+                            //         />
+                            //     </button>
+                            //     <p className="curved-text">
+                            //         {bio}
+                            //     </p>
+                            // </div>
+                        )}
                     </div>
+
                     <ul className="flex gap-5 absolute bottom-20">
                         <li>
                             <a href="#">
