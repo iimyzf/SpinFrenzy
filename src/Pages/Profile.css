@@ -1,5 +1,3 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
-
 .container-1,
 .container-2 {
     background: rgba(255, 255, 255, 0.05);
@@ -32,24 +30,10 @@
     border: none;
     outline: none;
     background: none;
-    resize: none; /* Prevent resizing of the textarea */
-    height: 15em; /* Adjust the height as needed */
-    width: 16em; 
+    /* resize: none; */
+    /* height: 20vh; */
+    /* width: 16em;  */
     /* font-family: inherit; */
     /* font-size: inherit; */
     /* color: inherit; */
 }
-/* 
-.edit-icon::before {
-    content: "\f044";
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: red;
-    border: 2px solid green;
-    padding: 1em;
-    border-radius: 50%;
-} */

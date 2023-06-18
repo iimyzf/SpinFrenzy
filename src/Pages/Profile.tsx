@@ -1,14 +1,7 @@
 import "./Profile.css";
-import {
-    BsGithub,
-    BsInstagram,
-    BsLinkedin,
-    BsCheck,
-    BsFillPencilFill,
-} from "react-icons/bs";
+import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
-import { ClassNames } from "@emotion/react";
 
 const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
@@ -82,61 +75,33 @@ const Profile = () => {
                     <h3 className="font-bold absolute top-[19.5em]">
                         {fullName}
                     </h3>
-                    {/* <div className="bio flex absolute top-[22em] justify-center items-start">
-                        <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Quas, quis quae nulla optio suscipit libero
-                            excepturi omnis cum, quidem cupiditate asperiores
-                            odio quam! Distinctio nesciunt soluta quam quas
-                            accusamus minus? Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Aspernatur fugit
-                            praesentium ducimus atque! Reprehenderit
-                            exercitationem, saepe iusto ut nulla sit totam
-                            repudiandae quia, omnis odio minus numquam nam
-                            adipisci assumenda.
-                        </p>
-                    </div> */}
-                    <div className="bio absolute top-[22em] justify-center items-end">
+                    <div className="bio absolute top-[22em] justify-center items-start">
                         {isBioEditing ? (
                             <>
                                 <textarea
-                                    className="font-light w-[16em] leading-5 text-ellipsis text-justify custom-textarea"
+                                    className="flex font-light w-[16em] leading-5 text-start custom-textarea"
                                     value={bio}
                                     onChange={handleBioChange}
                                 />
                                 <button
                                     onClick={handleBioSave}
-                                    className="float-right mt-10"
+                                    className="float-right font-medium underline"
                                 >
-                                    Save
+                                    save
                                 </button>
                             </>
                         ) : (
                             <>
-                                <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
+                                <p className="font-light w-[16em] leading-5 text-justify">
                                     {bio}
                                 </p>
                                 <button
-                                    className="float-right mt-10"
+                                    className="float-right mt-5 font-medium underline"
                                     onClick={handleBioEdit}
                                 >
-                                    edit
+                                    edit bio
                                 </button>
                             </>
-                            // <div className="bio">
-                            //     <button
-                            //         className="btn bg-red-600"
-                            //         onClick={handleBioEdit}
-                            //     >
-                            //         <BsFillPencilFill
-                            //             className="pencil-icon"
-                            //             size="10px"
-                            //         />
-                            //     </button>
-                            //     <p className="curved-text">
-                            //         {bio}
-                            //     </p>
-                            // </div>
                         )}
                     </div>
 
