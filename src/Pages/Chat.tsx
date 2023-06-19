@@ -13,6 +13,20 @@ const Chat = () => {
         { name: string; img: File | null }[]
     >([]);
 
+    const [inputValue, setInputValue] = useState("");
+    const [messages, setMessages] = useState<string[]>([]);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleArrowClick = () => {
+        if (inputValue.trim() !== "") {
+            setMessages((prevMessages) => [...prevMessages, inputValue.trim()]);
+            setInputValue("");
+        }
+    };
+
     const addChannel = (currentChannel: { name: string; img: File | null }) => {
         const newChannel = [...channels, currentChannel];
         setChannels(newChannel);
@@ -76,17 +90,24 @@ const Chat = () => {
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
                     <div className="h-[44em] w-full overflow-y-auto mb-4 pl-10">
-                        <MessageContainer />
+                        {messages.map((message, idx) => (
+                            <MessageContainer key={idx} message={message} />
+                        ))}
                     </div>
                     <input
+						placeholder="Type your message here..."
                         type="text"
-                        className="msg rounded-[12px] input-container outline-none indent-5 h-14 absolute bottom-5 left-10"
+						maxLength={250}
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-10"
                     />
-                    <a href="#">
-                        <span className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-10 bottom-5">
-                            <BsArrowRightShort className="check-icon" />
-                        </span>
-                    </a>
+                    <span
+                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-10 bottom-5"
+                        onClick={handleArrowClick}
+                    >
+                        <BsArrowRightShort className="check-icon" />
+                    </span>
                 </div>
             </div>
             {popup && (

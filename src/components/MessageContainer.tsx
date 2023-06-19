@@ -1,7 +1,11 @@
 import { useEffect, useRef } from "react";
 import Apollo from "../assets/Apollo.jpg";
 
-const MessageContainer = () => {
+type props = {
+	message: string;
+};
+
+const MessageContainer = ({message}: props) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -21,10 +25,7 @@ const MessageContainer = () => {
                 />
                 <div ref={containerRef} className="msg-container w-[50em]">
                     <p className="msg-text text-start p-5">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, voluptatum.Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit.Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit.
+                        {message}
                     </p>
                 </div>
             </div>
