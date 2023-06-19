@@ -75,7 +75,9 @@ const Chat = () => {
                     </a>
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
-                    <MessageContainer />
+                    <div className="h-[44em] w-full overflow-y-auto mb-4 pl-10">
+                        <MessageContainer />
+                    </div>
                     <input
                         type="text"
                         className="msg rounded-[12px] input-container outline-none indent-5 h-14 absolute bottom-5 left-10"
