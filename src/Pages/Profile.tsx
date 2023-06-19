@@ -11,6 +11,7 @@ const Profile = () => {
     const [linkedin, setLinkedin] = useState("linkedin");
     const [instagram, setInstagram] = useState("instagram");
     const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
+    const [online, setOnline] = useState(false);
     const [bio, setBio] = useState(
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetur adipisicing elit."
     );
@@ -82,7 +83,11 @@ const Profile = () => {
                             className="hidden"
                             id="imageInput"
                         />
-                        <span className="status rounded-full bg-green-400 w-[1.8em] h-[1.8em] absolute top-1 right-1"></span>
+                        <span
+                            className={`status rounded-full w-[1.8em] h-[1.8em] absolute top-1 right-1 ${
+                                online ? "bg-green-400" : "bg-gray-400"
+                            }`}
+                        ></span>
                     </div>
                     <h4 className="font-light absolute top-[18em] opacity-80">
                         @{username}
