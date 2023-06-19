@@ -7,6 +7,9 @@ const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
     const [username, setUsername] = useState("username");
     const [fullName, setFullName] = useState("fullName");
+    const [github, setGithub] = useState("github");
+    const [linkedin, setLinkedin] = useState("linkedin");
+    const [instagram, setInstagram] = useState("instagram");
     const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
     const [bio, setBio] = useState(
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetur adipisicing elit."
@@ -31,6 +34,18 @@ const Profile = () => {
             ...prevState,
             [field]: !prevState[field],
         }));
+    };
+
+    const handleGithubChange = (e: any) => {
+        setGithub(e.target.value);
+    };
+
+    const handleLinkedinChange = (e: any) => {
+        setLinkedin(e.target.value);
+    };
+
+    const handleInstagramChange = (e: any) => {
+        setInstagram(e.target.value);
     };
 
     const handleUsernameChange = (e: any) => {
@@ -107,17 +122,17 @@ const Profile = () => {
 
                     <ul className="flex gap-5 absolute bottom-20">
                         <li>
-                            <a href="#">
+                            <a href={github} target="_blank">
                                 <BsGithub />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href={linkedin} target="_blank">
                                 <BsLinkedin />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href={instagram} target="_blank">
                                 <BsInstagram />
                             </a>
                         </li>
@@ -190,6 +205,7 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
+                                    onChange={handleGithubChange}
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
@@ -209,6 +225,7 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
+                                    onChange={handleLinkedinChange}
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
@@ -228,6 +245,7 @@ const Profile = () => {
                             </span>
                             <div className="pew flex gap-5">
                                 <input
+                                    onChange={handleInstagramChange}
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
