@@ -15,6 +15,7 @@ const MessageContainer = ({message}: props) => {
             container.style.height = `${containerHeight}px`;
         }
     }, []);
+
     return (
         <div className="w-full overflow-y-auto mb-4">
             <div className="flex items-end gap-5">

@@ -37,6 +37,10 @@ const Profile = () => {
         }));
     };
 
+    const handleOnline = () => {
+        setOnline(!online);
+    };
+
     const handleGithubChange = (e: any) => {
         setGithub(e.target.value);
     };
@@ -84,6 +88,7 @@ const Profile = () => {
                             id="imageInput"
                         />
                         <span
+                            onClick={handleOnline}
                             className={`status rounded-full w-[1.8em] h-[1.8em] absolute top-1 right-1 ${
                                 online ? "bg-green-400" : "bg-gray-400"
                             }`}

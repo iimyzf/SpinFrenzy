@@ -95,9 +95,9 @@ const Chat = () => {
                         ))}
                     </div>
                     <input
-						placeholder="Type your message here..."
+                        placeholder="Type your message here..."
                         type="text"
-						maxLength={250}
+                        maxLength={250}
                         value={inputValue}
                         onChange={handleInputChange}
                         className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-10"
