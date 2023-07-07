@@ -15,7 +15,7 @@ const Landing = () => {
                     zIndex: -1,
                 }}
             ></div>
-            <div className=" text-white flex font-satoshi flex-col items-center justify-center h-screen absolute top-0 left-0 w-full">
+            <div className="text-white flex font-satoshi flex-col items-center justify-center h-screen absolute top-0 left-0 w-full">
                 <Navbar />
                 <h4 className="text-center font-normal">
                     YOU DON’T HAVE TO BE IN THE SAME ROOM TO PLAY
