@@ -4,6 +4,7 @@ import { Profile, Landing, Chat } from "./Pages/index";
 import AddChannel from "./components/AddChannel";
 import ViewProfile from "./Pages/ViewProfile";
 import Home from "./Pages/Home";
+import GameMode from "./Pages/GameMode";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/gamemode" element={<GameMode />} />
                 <Route
                     path="/add-channel"
                     element={
