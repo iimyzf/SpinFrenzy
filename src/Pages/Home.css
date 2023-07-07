@@ -8,3 +8,7 @@
 	color: transparent;
 	backdrop-filter: blur(1.5px);
 }
+
+.play-span {
+	position: relative;
+}
