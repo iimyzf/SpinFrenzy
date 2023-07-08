@@ -85,17 +85,13 @@ const ViewProfile = () => {
                         MAMELLA INDUSTRY
                     </h3>
                     <div className="bio flex absolute top-[22em] justify-center items-start">
-                        <p className="font-light w-[16em] leading-5 text-ellipsis text-justify">
+                        <p className="font-light w-[16em] leading-5 text-ellipsis text-start">
                             Lorem ipsum dolor sit amet consectetur, adipisicing
                             elit. Quas, quis quae nulla optio suscipit libero
-                            excepturi omnis cum, quidem cupiditate asperiores
-                            odio quam! Distinctio nesciunt soluta quam quas
-                            accusamus minus? Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Aspernatur fugit
-                            praesentium ducimus atque! Reprehenderit
-                            exercitationem, saepe iusto ut nulla sit totam
-                            repudiandae quia, omnis odio minus numquam nam
-                            adipisci assumenda.
+                            excepturi omnis cum, quidem cupiditate
+                            asperioresodio quam! Distinctio nesciunt soluta quam
+                            quas accusamus minus? Lorem ipsum dolor sit amet
+                            consectetured
                         </p>
                     </div>
                     <ul className="flex gap-5 absolute bottom-20">

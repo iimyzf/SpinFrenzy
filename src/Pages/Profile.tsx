@@ -13,7 +13,7 @@ const Profile = () => {
     const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
     const [online, setOnline] = useState(false);
     const [bio, setBio] = useState(
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetured"
     );
     const [isBioEditing, setIsBioEditing] = useState(false);
 
@@ -106,6 +106,7 @@ const Profile = () => {
                                 <textarea
                                     className="flex font-light w-[16em] leading-5 text-start custom-textarea"
                                     value={bio}
+									maxLength={256}
                                     onChange={handleBioChange}
                                 />
                                 <button
@@ -117,7 +118,7 @@ const Profile = () => {
                             </>
                         ) : (
                             <>
-                                <p className="font-light w-[16em] leading-5 text-justify">
+                                <p className="font-light w-[16em] leading-5 text-start">
                                     {bio}
                                 </p>
                                 <button
@@ -160,14 +161,14 @@ const Profile = () => {
                                 maxLength={24}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <span
+                            {/* <span
                                 className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
                                 onClick={() => handleCheck("username")}
                             >
                                 {isChecked["username"] && (
                                     <BsCheck class="check-icon" />
                                 )}
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -179,14 +180,14 @@ const Profile = () => {
                                 maxLength={42}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <span
+                            {/* <span
                                 className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
                                 onClick={() => handleCheck("fullName")}
                             >
                                 {isChecked["fullName"] && (
                                     <BsCheck class="check-icon" />
                                 )}
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -197,14 +198,14 @@ const Profile = () => {
                                 maxLength={42}
                                 className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            <span
+                            {/* <span
                                 className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
                                 onClick={() => handleCheck("email")}
                             >
                                 {isChecked["email"] && (
                                     <BsCheck class="check-icon" />
                                 )}
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -219,14 +220,14 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <span
+                                {/* <span
                                     className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
                                     onClick={() => handleCheck("github")}
                                 >
                                     {isChecked["github"] && (
                                         <BsCheck class="check-icon" />
                                     )}
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                         <div className="flex pt-5">
@@ -239,14 +240,14 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <span
+                                {/* <span
                                     className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
                                     onClick={() => handleCheck("linkedin")}
                                 >
                                     {isChecked["linkedin"] && (
                                         <BsCheck class="check-icon" />
                                     )}
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                         <div className="flex pt-5">
@@ -259,18 +260,18 @@ const Profile = () => {
                                     type="link"
                                     className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                <span
+                                {/* <span
                                     className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
                                     onClick={() => handleCheck("instagram")}
                                 >
                                     {isChecked["instagram"] && (
                                         <BsCheck class="check-icon" />
                                     )}
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                     </div>
-                    <div className="pt-12 w-[69em]">
+                    <div className="pt-12 w-[65em]">
                         <div className="child flex gap-8 justify-end items-end">
                             <h3 className="font-light">
                                 <a href="#">CANCEL</a>
