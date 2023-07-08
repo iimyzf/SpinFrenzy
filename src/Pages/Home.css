@@ -12,3 +12,67 @@
 .play-span {
 	position: relative;
 }
+
+.ctr {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.ctr-span {
+	background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 24px;
+}
+
+.ctr-span:hover {
+	cursor: pointer;
+	background-image: url("src/assets/playy.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 150%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+
+}
+
+.ctr-span-chat:hover {
+	cursor: pointer;
+	background-image: url("src/assets/chat.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
+.ctr-span-friends:hover {
+	cursor: pointer;
+	background-image: url("src/assets/output.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
+.ctr-span-home:hover {
+	cursor: pointer;
+	background-image: url("src/assets/home.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
+.ctr-span-exit:hover {
+	cursor: pointer;
+	background-image: url("src/assets/out.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
