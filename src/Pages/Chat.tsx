@@ -27,6 +27,12 @@ const Chat = () => {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleArrowClick();
+        }
+    };
+
     const addChannel = (currentChannel: { name: string; img: File | null }) => {
         const newChannel = [...channels, currentChannel];
         setChannels(newChannel);
@@ -39,7 +45,7 @@ const Chat = () => {
 
     return (
         <div className="parent flex justify-center items-center">
-            <div className="child-container-1 pr-3 ">
+            <div className="child-container-1 pr-3">
                 <div className="container-1 font-satoshi text-white w-[20em] h-[55em] flex flex-col items-center justify-center relative ">
                     <h3 className="absolute top-7 uppercase font-bold">
                         Channels
@@ -75,7 +81,7 @@ const Chat = () => {
                 </div>
             </div>
             <div className="child-container-2 pl-3">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-start relative">
+                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
                     <img
                         className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10"
                         src={Apollo}
@@ -89,10 +95,12 @@ const Chat = () => {
                     </a>
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
-                    <div className="h-[44em] w-full overflow-y-auto mb-4 pl-10">
-                        {messages.map((message, idx) => (
-                            <MessageContainer key={idx} message={message} />
-                        ))}
+                    <div className="h-[44em] w-full overflow-y-auto mb-3 pl-10">
+                        <div className="max-h-[43.8em] overflow-y-auto">
+                            {messages.map((message, idx) => (
+                                <MessageContainer key={idx} message={message} />
+                            ))}
+                        </div>
                     </div>
                     <input
                         placeholder="Type your message here..."
@@ -100,6 +108,7 @@ const Chat = () => {
                         maxLength={250}
                         value={inputValue}
                         onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
                         className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-10"
                     />
                     <span

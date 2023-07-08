@@ -17,7 +17,7 @@ const MessageContainer = ({message}: props) => {
     }, []);
 
     return (
-        <div className="w-full overflow-y-auto mb-4">
+        <div className="w-full overflow-y-auto mb-3">
             <div className="flex items-end gap-5">
                 <img
                     className="w-[2.5em] h-[2.5em] rounded-full"
