@@ -1,14 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
-import { Profile, Landing, Chat } from "./Pages/index";
+import {
+    Profile,
+    Landing,
+    Chat,
+    ViewProfile,
+    Home,
+    GameMode,
+} from "./Pages/index";
 import AddChannel from "./components/AddChannel";
-import ViewProfile from "./Pages/ViewProfile";
-import Home from "./Pages/Home";
-import GameMode from "./Pages/GameMode";
+import "./App.css";
 
 const App = () => {
     return (
-        // <AddChannel />
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Landing />} />

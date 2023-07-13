@@ -1,6 +1,7 @@
 import "./Landing.css";
 import Navbar from "./Navbar";
 import backgroundImg from "../assets/ping.gif";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
     return (
@@ -27,7 +28,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <h3 className="login font-semibold text-[1.2em]">
-                    <a href="/profile">42 LOGIN</a>
+                    <Link to="/profile">42 LOGIN</Link>
                 </h3>
             </div>
         </>

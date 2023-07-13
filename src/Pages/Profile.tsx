@@ -2,6 +2,7 @@ import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin, BsCheck } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const [image, setImage] = useState<File | null>(null);
@@ -66,6 +67,8 @@ const Profile = () => {
         setImage(file);
     };
 
+    const navigate = useNavigate();
+
     return (
         <div className="parent flex justify-center items-center">
             <div className="child-container-1 pr-3">
@@ -106,7 +109,7 @@ const Profile = () => {
                                 <textarea
                                     className="flex font-light w-[16em] leading-5 text-start custom-textarea"
                                     value={bio}
-									maxLength={256}
+                                    maxLength={256}
                                     onChange={handleBioChange}
                                 />
                                 <button
@@ -274,10 +277,15 @@ const Profile = () => {
                     <div className="pt-12 w-[65em]">
                         <div className="child flex gap-8 justify-end items-end">
                             <h3 className="font-light">
-                                <a href="#">CANCEL</a>
+                                <a
+                                    className=" hover:cursor-pointer"
+                                    onClick={() => navigate(-1)}
+                                >
+                                    CANCEL
+                                </a>
                             </h3>
                             <h3 className="font-bold text-xl">
-                                <a href="chat">SAVE</a>
+                                <Link to="/chat">SAVE</Link>
                             </h3>
                         </div>
                     </div>

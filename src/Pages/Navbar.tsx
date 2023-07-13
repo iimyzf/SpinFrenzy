@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useState } from "react";
 
@@ -36,8 +37,8 @@ const Navbar = () => {
                     <ul className="nav-links">
                         <li className="nav-item flex items-start">
                             1 •
-                            <a
-                                href="/"
+                            <Link
+                                to="/"
                                 onClick={() => setNavOpen(!navOpen)}
                                 style={{
                                     top: navOpen ? "0" : "120px",
@@ -45,13 +46,13 @@ const Navbar = () => {
                                 }}
                             >
                                 Home
-                            </a>
+                            </Link>
                             <div className="nav-item-wrapper"></div>
                         </li>
                         <li className="nav-item flex items-start">
                             2 •
-                            <a
-                                href="chat"
+                            <Link
+                                to="/chat"
                                 onClick={() => setNavOpen(!navOpen)}
                                 style={{
                                     top: navOpen ? "0" : "120px",
@@ -59,13 +60,13 @@ const Navbar = () => {
                                 }}
                             >
                                 Chat
-                            </a>
+                            </Link>
                             <div className="nav-item-wrapper"></div>
                         </li>
                         <li className="nav-item flex items-start">
                             3 •
-                            <a
-                                href="profile"
+                            <Link
+                                to="/profile"
                                 onClick={() => setNavOpen(!navOpen)}
                                 style={{
                                     top: navOpen ? "0" : "120px",
@@ -73,13 +74,13 @@ const Navbar = () => {
                                 }}
                             >
                                 Profile
-                            </a>
+                            </Link>
                             <div className="nav-item-wrapper"></div>
                         </li>
                         <li className="nav-item flex items-start">
                             4 •
-                            <a
-                                href="profile"
+                            <Link
+                                to="/friends"
                                 onClick={() => setNavOpen(!navOpen)}
                                 style={{
                                     top: navOpen ? "0" : "120px",
@@ -87,7 +88,7 @@ const Navbar = () => {
                                 }}
                             >
                                 Friends
-                            </a>
+                            </Link>
                             <div className="nav-item-wrapper"></div>
                         </li>
                     </ul>
