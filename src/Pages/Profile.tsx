@@ -70,13 +70,13 @@ const Profile = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="parent flex justify-center items-center">
+        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center">
             <div className="child-container-1 pr-3">
-                <div className="container-1 font-satoshi text-white w-[20em] h-[55em] flex flex-col justify-center items-center relative">
-                    <div className="img-holder absolute top-[8em]">
+                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
+                    <div className="img-holder absolute xs:top-[3em] xl:top-[8em]">
                         <label htmlFor="imageInput">
                             <img
-                                className="w-[8em] h-[8em] rounded-full cursor-pointer"
+                                className="xs:w-[6em] xs:h-[6em] xl:w-[8em] xl:h-[8em] rounded-full cursor-pointer"
                                 src={
                                     image ? URL.createObjectURL(image) : Apollo
                                 }
@@ -92,18 +92,18 @@ const Profile = () => {
                         />
                         <span
                             onClick={handleOnline}
-                            className={`status rounded-full w-[1.8em] h-[1.8em] absolute top-1 right-1 ${
+                            className={`status rounded-full xs:w-[1.3em] xs:h-[1.3em] xl:w-[1.8em] xl:h-[1.8em] absolute top-1 right-1 ${
                                 online ? "bg-green-400" : "bg-gray-400"
                             }`}
                         ></span>
                     </div>
-                    <h4 className="font-light absolute top-[18em] opacity-80">
+                    <h4 className="font-light absolute xs:top-[10em] xl:top-[18em] opacity-80">
                         @{username}
                     </h4>
-                    <h3 className="font-bold absolute top-[19.5em]">
+                    <h3 className="font-bold absolute xs:top-[11.5em] xl:top-[19.5em]">
                         {fullName}
                     </h3>
-                    <div className="bio absolute top-[22em] justify-center items-start">
+                    <div className="bio absolute xs:top-[14em] xl:top-[22em] justify-center items-start">
                         {isBioEditing ? (
                             <>
                                 <textarea
@@ -134,7 +134,7 @@ const Profile = () => {
                         )}
                     </div>
 
-                    <ul className="flex gap-5 absolute bottom-20">
+                    <ul className="flex gap-5 absolute xs:bottom-14 xl:bottom-20">
                         <li>
                             <a href={github} target="_blank">
                                 <BsGithub />
@@ -153,7 +153,7 @@ const Profile = () => {
                     </ul>
                 </div>
             </div>
-            <div className="child-container-2 pl-3">
+            <div className="child-container-2 pl-3 xs:">
                 <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center">
                     <div className="editable">
                         <h3 className="pb-3">USERNAME</h3>
