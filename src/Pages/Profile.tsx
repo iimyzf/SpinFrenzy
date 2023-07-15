@@ -70,8 +70,8 @@ const Profile = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center">
-            <div className="child-container-1 pr-3">
+        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
+            <div className="child-container-1 xl:h-screen xl:pr-3">
                 <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
                     <div className="img-holder absolute xs:top-[3em] xl:top-[8em]">
                         <label htmlFor="imageInput">
@@ -153,8 +153,8 @@ const Profile = () => {
                     </ul>
                 </div>
             </div>
-            <div className="child-container-2 pl-3 xs:">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-center">
+            <div className="child-container-2 xl:h-screen xl:pl-3">
+                <div className="container-2 font-satoshi text-white xs:w-[20em] xs:h-[45em] xl:w-[80em] xl:h-[55em] flex flex-col justify-center items-center">
                     <div className="editable">
                         <h3 className="pb-3">USERNAME</h3>
                         <div className="flex gap-5">
@@ -162,16 +162,8 @@ const Profile = () => {
                                 onChange={handleUsernameChange}
                                 type="text"
                                 maxLength={24}
-                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                className="xs:w-[17em] xs:h-10 xl:w-[65em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            {/* <span
-                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
-                                onClick={() => handleCheck("username")}
-                            >
-                                {isChecked["username"] && (
-                                    <BsCheck class="check-icon" />
-                                )}
-                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -181,16 +173,8 @@ const Profile = () => {
                                 onChange={handleFullNameChange}
                                 type="text"
                                 maxLength={42}
-                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                className="xs:w-[17em] xs:h-10 xl:w-[65em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            {/* <span
-                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
-                                onClick={() => handleCheck("fullName")}
-                            >
-                                {isChecked["fullName"] && (
-                                    <BsCheck class="check-icon" />
-                                )}
-                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
@@ -199,82 +183,50 @@ const Profile = () => {
                             <input
                                 type="email"
                                 maxLength={42}
-                                className="w-[65em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                className="xs:w-[17em] xs:h-10 xl:w-[65em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                             />
-                            {/* <span
-                                className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
-                                onClick={() => handleCheck("email")}
-                            >
-                                {isChecked["email"] && (
-                                    <BsCheck class="check-icon" />
-                                )}
-                            </span> */}
                         </div>
                     </div>
                     <div className="editable pt-8">
                         <h3 className="pb-3">SOCIAL LINKS</h3>
-                        <div className="flex ">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                        <div className="xs:flex-col xl:flex-row flex">
+                            <span className="xs:hidden check-span xl:w-[8.6em] xl:h-14 rounded-[12px] mr-5 xl:flex justify-center items-center font-medium uppercase">
                                 GitHub
                             </span>
-                            <div className="pew flex gap-5">
+                            <div className="pew flex gap-5 xs:justify-center">
                                 <input
                                     onChange={handleGithubChange}
                                     type="link"
-                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                    className="xs:w-[17em] xs:h-10 xl:w-[55em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                {/* <span
-                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
-                                    onClick={() => handleCheck("github")}
-                                >
-                                    {isChecked["github"] && (
-                                        <BsCheck class="check-icon" />
-                                    )}
-                                </span> */}
                             </div>
                         </div>
-                        <div className="flex pt-5">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                        <div className="xs:flex-col xl:flex-row flex pt-5">
+                            <span className="xs:hidden check-span xl:w-[8.6em] xl:h-14 rounded-[12px] mr-5 xl:flex justify-center items-center font-medium uppercase">
                                 LinkedIn
                             </span>
-                            <div className="pew flex gap-5">
+                            <div className="pew flex gap-5 xs:justify-center">
                                 <input
                                     onChange={handleLinkedinChange}
                                     type="link"
-                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                    className="xs:w-[17em] xs:h-10 xl:w-[55em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                {/* <span
-                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
-                                    onClick={() => handleCheck("linkedin")}
-                                >
-                                    {isChecked["linkedin"] && (
-                                        <BsCheck class="check-icon" />
-                                    )}
-                                </span> */}
                             </div>
                         </div>
-                        <div className="flex pt-5">
-                            <span className="check-span w-[8.6em] h-14 rounded-[12px] mr-5 flex justify-center items-center font-medium uppercase">
+                        <div className="xs:flex-col xl:flex-row flex pt-5">
+                            <span className="xs:hidden check-span xl:w-[8.6em] xl:h-14 rounded-[12px] mr-5 xl:flex justify-center items-center font-medium uppercase">
                                 Instagram
                             </span>
-                            <div className="pew flex gap-5">
+                            <div className="pew flex gap-5 xs:justify-center">
                                 <input
                                     onChange={handleInstagramChange}
                                     type="link"
-                                    className="w-[55em] h-14 rounded-[12px] input-container outline-none indent-5"
+                                    className="xs:w-[17em] xs:h-10 xl:w-[55em] xl:h-14 rounded-[12px] input-container outline-none indent-5"
                                 />
-                                {/* <span
-                                    className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center"
-                                    onClick={() => handleCheck("instagram")}
-                                >
-                                    {isChecked["instagram"] && (
-                                        <BsCheck class="check-icon" />
-                                    )}
-                                </span> */}
                             </div>
                         </div>
                     </div>
-                    <div className="pt-12 w-[65em]">
+                    <div className="pt-12 xl:w-[65em]">
                         <div className="child flex gap-8 justify-end items-end">
                             <h3 className="font-light">
                                 <a
