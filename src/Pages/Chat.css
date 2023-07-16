@@ -33,6 +33,10 @@
 	height: 8%;
 }
 
+.active-channel, .channel:hover {
+	background: rgba(217, 217, 217, 0.18);
+}
+
 .msg-container {
 	border-radius: .6em;
 	background: rgba(217, 217, 217, 0.15);

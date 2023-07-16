@@ -15,6 +15,10 @@ const Chat = () => {
 
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<string[]>([]);
+    const [selectedChannel, setSelectedChannel] = useState<{
+        name: string;
+        img: File | null;
+    } | null>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -61,10 +65,15 @@ const Chat = () => {
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className="channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20"
+                                className={`channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20 hover:cursor-pointer ${
+                                    selectedChannel === channel
+                                        ? "active-channel"
+                                        : ""
+                                }`}
+                                onClick={() => setSelectedChannel(channel)}
                             >
                                 <img
-                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full"
+                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full object-cover"
                                     src={
                                         channel.img
                                             ? URL.createObjectURL(channel.img)
@@ -83,12 +92,16 @@ const Chat = () => {
             <div className="child-container-2 pl-3">
                 <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
                     <img
-                        className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10"
-                        src={Apollo}
+                        className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
+                        src={
+                            selectedChannel?.img
+                                ? URL.createObjectURL(selectedChannel?.img)
+                                : Apollo
+                        }
                         alt="Apollo"
                     />
                     <h3 className="absolute top-7 uppercase font-bold left-24">
-                        Chat
+                        {selectedChannel?.name || "Create a channel"}
                     </h3>
                     <a href="#">
                         <FiLogOut className="absolute top-7 right-10 text-2xl" />

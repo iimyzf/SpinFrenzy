@@ -65,7 +65,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                                       )
                                                     : Apollo
                                             }
-                                            className="uploaded xs:w-[3em] xs:h-[3em] xl:w-[10em] xl:h-[10em] rounded-full bg-white cursor-pointer"
+                                            className="uploaded xs:w-[3em] xs:h-[3em] xl:w-[10em] xl:h-[10em] rounded-full bg-white cursor-pointer object-cover"
                                             alt="Selected"
                                         />
                                     </label>
