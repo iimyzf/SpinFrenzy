@@ -156,7 +156,9 @@ const Profile = () => {
             <div className="child-container-2 xl:h-screen xl:pl-3">
                 <div className="container-2 font-satoshi text-white xs:w-[20em] xs:h-[45em] xl:w-[80em] xl:h-[55em] flex flex-col justify-center items-center">
                     <div className="editable">
-                        <h3 className="pb-3">USERNAME</h3>
+                        <h3 className="xs:text-[.7em] xl:text-[1.1em] pb-3">
+                            USERNAME
+                        </h3>
                         <div className="flex gap-5">
                             <input
                                 onChange={handleUsernameChange}
@@ -167,7 +169,9 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="editable pt-8">
-                        <h3 className="pb-3">FULL NAME</h3>
+                        <h3 className="xs:text-[.7em] xl:text-[1.1em] pb-3">
+                            FULL NAME
+                        </h3>
                         <div className="flex gap-5">
                             <input
                                 onChange={handleFullNameChange}
@@ -178,7 +182,9 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="editable pt-8">
-                        <h3 className="pb-3">EMAIL ADDRESS</h3>
+                        <h3 className="xs:text-[.7em] xl:text-[1.1em] pb-3">
+                            EMAIL ADDRESS
+                        </h3>
                         <div className="flex gap-5">
                             <input
                                 type="email"
@@ -188,7 +194,9 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="editable pt-8">
-                        <h3 className="pb-3">SOCIAL LINKS</h3>
+                        <h3 className="xs:text-[.7em] xl:text-[1.1em] pb-3">
+                            SOCIAL LINKS
+                        </h3>
                         <div className="xs:flex-col xl:flex-row flex">
                             <span className="xs:hidden check-span xl:w-[8.6em] xl:h-14 rounded-[12px] mr-5 xl:flex justify-center items-center font-medium uppercase">
                                 GitHub

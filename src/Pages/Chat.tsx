@@ -44,27 +44,27 @@ const Chat = () => {
     };
 
     return (
-        <div className="parent flex justify-center items-center">
-            <div className="child-container-1 pr-3">
-                <div className="container-1 font-satoshi text-white w-[20em] h-[55em] flex flex-col items-center justify-center relative ">
-                    <h3 className="absolute top-7 uppercase font-bold">
+        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
+            <div className="child-container-1 xl:h-screen xl:pr-3">
+                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
+                    <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
                         Channels
                     </h3>
-                    <span className="line absolute top-20"></span>
-                    <span className="line absolute bottom-24"></span>
+                    <span className="line absolute xs:top-16 xl:top-20"></span>
+                    <span className="line absolute xs:bottom-16 xl:bottom-24"></span>
                     <a onClick={togglePopup}>
-                        <span className="plus-icon w-[4em] h-[4em] rounded-full absolute bottom-4 right-5 flex justify-center items-center cursor-pointer">
-                            <FiPlus className="text-3xl" />
+                        <span className="plus-icon xs:w-[2em] xs:h-[2em] xl:w-[4em] xl:h-[4em] rounded-full absolute bottom-4 right-5 flex justify-center items-center cursor-pointer">
+                            <FiPlus className="xl:text-3xl" />
                         </span>
                     </a>
-                    <div className="red-divs h-[44em] w-full overflow-y-auto mb-4">
+                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4">
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className="channel flex relative top-0 items-center px-5 scroll-auto  h-20"
+                                className="channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20"
                             >
                                 <img
-                                    className="apollo w-[2.5em] h-[2.5em] rounded-full"
+                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full"
                                     src={
                                         channel.img
                                             ? URL.createObjectURL(channel.img)

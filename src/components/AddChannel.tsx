@@ -47,10 +47,10 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
             <div className="overlay">
                 <div className="pop-up-container">
                     <div className="flex justify-center items-center relative">
-                        <div className="add-channel w-[40em] h-[45em] text-white font-satoshi flex justify-center items-center">
-                            <div className="pop-up w-[35em]">
-                                <div className="pb-9 flex flex-col items-center gap-3">
-                                    <h3 className="uppercase font-semibold ">
+                        <div className="add-channel xs:w-[18em] xs:h-[30em] xl:w-[40em] xl:h-[45em] text-white font-satoshi flex justify-center items-center">
+                            <div className="pop-up xs:w-[14em] xl:w-[35em]">
+                                <div className="xs:pb-10 xl:pb-9 flex flex-col items-center gap-3">
+                                    <h3 className="xs:text-[.7em] xl:text-[1em] uppercase font-semibold ">
                                         Add a new Channel
                                     </h3>
                                     <label
@@ -65,24 +65,26 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                                       )
                                                     : Apollo
                                             }
-                                            className="uploaded w-[10em] h-[10em] rounded-full bg-white cursor-pointer"
+                                            className="uploaded xs:w-[3em] xs:h-[3em] xl:w-[10em] xl:h-[10em] rounded-full bg-white cursor-pointer"
                                             alt="Selected"
                                         />
                                     </label>
                                 </div>
-                                <h3 className="uppercase">Channel Name</h3>
+                                <h3 className="xs:text-[.7em] xl:text-[1em] uppercase">
+                                    Channel Name
+                                </h3>
                                 <input
                                     onChange={handleChange}
                                     type="text"
                                     maxLength={42}
-                                    className="w-full h-14 mt-2 rounded-[12px] input-container outline-none indent-5"
+                                    className="w-full xs:h-8 xl:h-14 mt-2 xs:rounded-md xl:rounded-[12px] input-container outline-none xs:indent-3 xl:indent-5 xs:text-[.8em] xl:text-[1.2em]"
                                 />
                                 <div className="flex justify-between items-center my-5 ">
-                                    <h3 className="uppercase">
+                                    <h3 className="xs:text-[.7em] xl:text-[1em] uppercase">
                                         Public Channel
                                     </h3>
                                     <span
-                                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
+                                        className="check-span xs:w-8 xs:h-8 xl:w-14 xl:h-14 xs:rounded-md xl:rounded-[12px] flex justify-center items-center cursor-pointer"
                                         onClick={handlePublicCheck}
                                     >
                                         {isPublic && (
@@ -91,11 +93,11 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center my-5 ">
-                                    <h3 className="uppercase">
+                                    <h3 className="xs:text-[.7em] xl:text-[1em] uppercase">
                                         Private Channel
                                     </h3>
                                     <span
-                                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center cursor-pointer"
+                                        className="check-span xs:w-8 xs:h-8 xl:w-14 xl:h-14 xs:rounded-md xl:rounded-[12px] flex justify-center items-center cursor-pointer"
                                         onClick={handlePrivateCheck}
                                     >
                                         {isPrivate && (
@@ -105,17 +107,19 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                 </div>
                                 {isPrivate && (
                                     <>
-                                        <h3 className="uppercase">Password</h3>
+                                        <h3 className="xs:text-[.7em] xl:text-[1em] uppercase">
+                                            Password
+                                        </h3>
                                         <input
                                             type="password"
                                             maxLength={42}
-                                            className="w-full h-14 mt-2 rounded-[12px] input-container outline-none indent-5"
+                                            className="w-full xs:h-8 xl:h-14 mt-2 xs:rounded-md xl:rounded-[12px] input-container outline-none indent-5"
                                         />
                                     </>
                                 )}
                                 <div className="pt-8">
-                                    <div className="child flex gap-8 justify-end items-end">
-                                        <h3 className="font-light">
+                                    <div className="child flex gap-8 xs:items-center justify-end xl:items-end">
+                                        <h3 className="xs:text-[.7em] xl:text-[1em] font-light">
                                             <a
                                                 className="cursor-pointer"
                                                 onClick={togglePopup}
@@ -123,7 +127,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                                 CANCEL
                                             </a>
                                         </h3>
-                                        <h3 className="font-bold text-xl">
+                                        <h3 className="xs:text-[1em] xl:text-[1.4em] font-bold">
                                             <a
                                                 className="cursor-pointer"
                                                 onClick={handleSave}
