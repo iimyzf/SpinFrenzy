@@ -20,6 +20,13 @@
 	transform: translate(-50%, -50%);
 }
 
+.ctr-xs {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 .ctr-span {
 	background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
