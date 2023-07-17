@@ -38,7 +38,7 @@ const Navbar = () => {
                         <li className="nav-item flex items-start">
                             1 •
                             <Link
-                                to="/"
+                                to="/home"
                                 onClick={() => setNavOpen(!navOpen)}
                                 style={{
                                     top: navOpen ? "0" : "120px",
