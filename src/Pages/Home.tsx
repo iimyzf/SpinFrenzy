@@ -75,7 +75,7 @@ const Home = () => {
                         </div>
                     </Link>
 
-                    <Link to="/profile">
+                    <Link to="/home">
                         <div className="xl:absolute flex flex-col xl:top-80 xl:-right-24 xl:rotate-12">
                             {isXsScreen ? (
                                 <>

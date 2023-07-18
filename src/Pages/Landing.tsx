@@ -32,8 +32,25 @@ const Landing = () => {
                         </p>
                     </div>
                 </div>
-                <h3 className="login font-semibold xs:text-[1em] sm:text-[1.2em]">
-                    <Link to="/profile">42 LOGIN</Link>
+                <h3 className="login font-semibold xs:text-[1em] sm:text-[1.2em] flex xs:gap-3 xl:gap-5 xs:flex-col xl:flex-row">
+                    <Link
+                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        to="/profile"
+                    >
+                        42 Intra
+                    </Link>
+                    <Link
+                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        to="/profile"
+                    >
+                        Google
+                    </Link>
+                    <Link
+                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        to="/profile"
+                    >
+                        Sign Up
+                    </Link>
                 </h3>
             </div>
         </>
