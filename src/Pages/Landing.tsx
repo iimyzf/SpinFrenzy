@@ -49,9 +49,10 @@ const Landing = () => {
                         className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
                         to="/profile"
                     >
-                        Sign Up
+                        Sign In
                     </Link>
                 </h3>
+				<p className="mt-5 font-light">Don't have an account yet? <span className="font-bold">Sign Up</span></p>
             </div>
         </>
     );
