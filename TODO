@@ -1,9 +1,16 @@
-- frineds page 
+- frineds page
 - add/ban friend
-- friend request
-- friend list
 - public/private/protected channels
 - popular channels
-- channel search
 - leaderboards
-- add buttons to profile page, add friend/message friend/ block friend
+- add buttons to profile page, add friend/message friend/ block friend .
+- separate the chat into chat/channels, when a user gets clicked on chat, you can message them directly, when a channel gets clicked, you can join the channel and chat with everyone in the channel (like discord)
+- when chatting with a user, profile will be displayed on the right side of the chat
+- when chatting with a channel, channel info will be displayed on the right side of the chat
+- add a search bar to search for users and channels
+- add a friends list to see who is online and offline
+- add a friends request page to see who has sent you a friend request
+- add a friends page to see all your friends
+- add a profile page to see your profile and edit it
+- add a settings page to change your settings
+- add a logout button to logout

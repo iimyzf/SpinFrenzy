@@ -139,30 +139,6 @@ const Chat = () => {
                     </h3>
                     <span className="line absolute xs:top-16 xl:top-20"></span>
                     <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4">
-                        {channels.map((channel, idx) => (
-                            <div
-                                key={idx}
-                                className={`channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20 hover:cursor-pointer ${
-                                    selectedChannel === channel
-                                        ? "active-channel"
-                                        : ""
-                                }`}
-                                onClick={() => setSelectedChannel(channel)}
-                            >
-                                <img
-                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full object-cover"
-                                    src={
-                                        channel.img
-                                            ? URL.createObjectURL(channel.img)
-                                            : Apollo
-                                    }
-                                    alt="Apollo"
-                                />
-                                <h4 className="font-medium ml-3 uppercase">
-                                    {channel.name}
-                                </h4>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </div>

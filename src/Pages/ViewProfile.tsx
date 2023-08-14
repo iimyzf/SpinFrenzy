@@ -79,7 +79,7 @@ const ViewProfile = () => {
                             <span className="add absolute -top-10 font-satoshi text-white font-bold">
                                 Add
                                 <br />
-                                Friend
+                                @USERNAME
                             </span>
                             <BsPersonFillAdd />
                         </button>
@@ -87,7 +87,7 @@ const ViewProfile = () => {
                             <span className="message absolute -top-10 font-satoshi text-white font-bold">
                                 Message
                                 <br />
-                                Friend
+                                @USERNAME
                             </span>
                             <BsFillChatSquareTextFill />
                         </button>
@@ -95,7 +95,7 @@ const ViewProfile = () => {
                             <span className="block absolute -top-10 font-satoshi text-white font-bold">
                                 Block
                                 <br />
-                                Friend
+								@USERNAME
                             </span>
                             <BsPersonFillSlash />
                         </button>
