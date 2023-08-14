@@ -48,9 +48,9 @@ const Chat = () => {
     };
 
     return (
-        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
-            <div className="child-container-1 xl:h-screen xl:pr-3">
-                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
+        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-3 xs:m-5 xl:m-0">
+            <div className="child-container-1 xl:h-screen xl:pr- pl-">
+                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[18em] xl:h-[55em] flex flex-col justify-center items-center relative">
                     <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
                         Channels
                     </h3>
@@ -89,8 +89,8 @@ const Chat = () => {
                     </div>
                 </div>
             </div>
-            <div className="child-container-2 pl-3">
-                <div className="container-2 font-satoshi text-white w-[80em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
+            <div className="child-container-2 pl-">
+                <div className="container-2 font-satoshi text-white w-[65em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
                     <img
                         className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
                         src={
@@ -130,6 +130,40 @@ const Chat = () => {
                     >
                         <BsArrowRightShort className="check-icon" />
                     </span>
+                </div>
+            </div>
+            <div className="child-container-1 xl:h-screen xl:pr- pl-">
+                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[18em] xl:h-[55em] flex flex-col justify-center items-center relative">
+                    <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
+                        Friends
+                    </h3>
+                    <span className="line absolute xs:top-16 xl:top-20"></span>
+                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4">
+                        {channels.map((channel, idx) => (
+                            <div
+                                key={idx}
+                                className={`channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20 hover:cursor-pointer ${
+                                    selectedChannel === channel
+                                        ? "active-channel"
+                                        : ""
+                                }`}
+                                onClick={() => setSelectedChannel(channel)}
+                            >
+                                <img
+                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full object-cover"
+                                    src={
+                                        channel.img
+                                            ? URL.createObjectURL(channel.img)
+                                            : Apollo
+                                    }
+                                    alt="Apollo"
+                                />
+                                <h4 className="font-medium ml-3 uppercase">
+                                    {channel.name}
+                                </h4>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             {popup && (
