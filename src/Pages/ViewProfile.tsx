@@ -1,7 +1,15 @@
-import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
+import {
+    BsFillChatSquareTextFill,
+    BsGithub,
+    BsInstagram,
+    BsLinkedin,
+    BsPersonFillAdd,
+    BsPersonFillSlash,
+} from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import React from "react";
 import Chart from "react-apexcharts";
+import "./ViewProfile.css";
 
 const ViewProfile = () => {
     const [chartOptions, setChartOptions] = React.useState({});
@@ -59,10 +67,6 @@ const ViewProfile = () => {
                 name: "DRAWS",
                 data: [2, 1, 3, 4, 7, 9, 5, 5, 2],
             },
-            {
-                name: "DRAWS",
-                data: [2, 1, 7, 4, 2, 3, 5, 1, 2],
-            },
         ]);
     }, []);
 
@@ -70,10 +74,31 @@ const ViewProfile = () => {
         <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
             <div className="child-container-1 xl:h-screen xl:pr-3">
                 <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
-                    <div className="flex flex-row gap-5 items-center justify-center absolute top-[6em]">
-                        <button className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-red400 container-1"></button>
-                        <button className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-green400 container-1"></button>
-                        <button className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-blue400 container-1"></button>
+                    <div className="flex flex-row gap-5 items-center justify-center absolute top-[5.5em]">
+                        <button className="btn-1 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-red400 container-1">
+                            <span className="add absolute -top-10 font-satoshi text-white font-bold">
+                                Add
+                                <br />
+                                Friend
+                            </span>
+                            <BsPersonFillAdd />
+                        </button>
+                        <button className="btn-2 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-green400 container-1">
+                            <span className="message absolute -top-10 font-satoshi text-white font-bold">
+                                Message
+                                <br />
+                                Friend
+                            </span>
+                            <BsFillChatSquareTextFill />
+                        </button>
+                        <button className="btn-3 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-blue400 container-1">
+                            <span className="block absolute -top-10 font-satoshi text-white font-bold">
+                                Block
+                                <br />
+                                Friend
+                            </span>
+                            <BsPersonFillSlash />
+                        </button>
                     </div>
                     <div className="img-holder absolute xs:top-[3em] xl:top-[10.5em] bg-blue300">
                         <div className="">
@@ -124,88 +149,33 @@ const ViewProfile = () => {
                 </div>
             </div>
             <div className="child-container-2 xl:h-screen xl:pl-3 bg-green300">
-                <div className="container-2 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[80em] xl:h-[55em] flex flex-col justify-center items-center relative bg-red-200 overflow-y-auto">
-                    {/* <div className="editable absolute xs:top-14 xl:left-20 xl:top-16 bg-blue-500">
+                <div className="container-2 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[80em] xl:h-[55em] flex flex-col justify-center items-center relative bg-red200 overflow-y-auto">
+                    <div className="editable absolute xs:top-14 xl:left-20 xl:top-16 bg-blue500">
                         <h3 className="pb-3 uppercase">
                             Match Statistics for Username
                         </h3>
-                    </div> */}
-                    <div className="flex flex-col justify-center items-center bg-blue-400 w-[55vw] h-[70vh] relative">
-                        {/* <span className="pb-10 bg-black w20 h20 absolute top-0">
-                            gfvbfdbfdbfd
-                        </span> */}
+                    </div>
+                    <Chart
+                        className="xl:w-[55w] pt-20"
+                        options={chartOptions}
+                        series={chartSeries}
+                        type="area"
+                        height={650}
+                        width={1150}
+                    />
+                    {/* <div className="flex flex-col justify-center items-center bg-blue-400 w-[vw] h-[70vw] relative">
                         <div className="editable absolute xs:top-14 xl:left-0 xl:top-12 bg-blue-500">
                             <h3 className="pb-3 uppercase">
                                 Match Statistics for Username
                             </h3>
                         </div>
-                        {/* <Chart
-                            className="xl:w-[55vw] pt-60"
-                            options={chartOptions}
-                            series={chartSeries}
-                            type="area"
-                            height={400}
-                        /> */}
-                        {/* <div className="text-8xl">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div>
-                        <div className="">
-                            <h1>hello</h1>
-                        </div> */}
                         <Chart
                             className="xl:w-[55vw] pt-20"
                             options={chartOptions}
                             series={chartSeries}
                             type="area"
-                            height={700}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
