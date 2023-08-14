@@ -32,29 +32,41 @@ const Landing = () => {
                         </p>
                     </div>
                 </div>
-                <h3 className="login font-semibold xs:text-[1em] sm:text-[1.2em] flex xs:gap-3 xl:gap-5 xs:flex-col xl:flex-row">
+                <div className="login bg-red-00 w-[29em] font-semibold xs:text-[1em] sm:text-[1.2em] flex justify-between xs:gap-3 xl:gap-5 xs:flex-col xl:flex-row">
                     <Link
-                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        className="container uppercase h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
                         to="/profile"
                     >
                         42 Intra
                     </Link>
                     <Link
-                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        className="container uppercase h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
                         to="/profile"
                     >
                         Google
                     </Link>
                     <Link
-                        className="container w-44 h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
+                        className="container uppercase h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
                         to="/profile"
+                    >
+                        Sign In
+                    </Link>
+                </div>
+                <div className="m-8 uppercase font-normal flex items-center justify-center gap-4">
+                    <p className="font-normal">Don't have an account yet?</p>
+                    <Link
+                        to="/sign-up"
+                        className="font-bold text-[1.2em] hover:scale-110"
                     >
                         Sign Up
                     </Link>
-                </h3>
+                </div>
             </div>
         </>
     );
 };
+// container w-40 h-10
+// container w-40 h-10
+// container w-40 h-10
 
 export default Landing;
