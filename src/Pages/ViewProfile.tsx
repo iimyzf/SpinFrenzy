@@ -74,7 +74,7 @@ const ViewProfile = () => {
         <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
             <div className="child-container-1 xl:h-screen xl:pr-3">
                 <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
-                    <div className="flex flex-row gap-5 items-center justify-center absolute top-[5.5em]">
+                    <div className="flex flex-row gap-5 items-center justify-center absolute xs:top-[3.2em] xl:top-[5.5em]">
                         <button className="btn-1 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-red400 container-1">
                             <span className="add absolute -top-10 font-satoshi text-white font-bold">
                                 Add
@@ -100,7 +100,7 @@ const ViewProfile = () => {
                             <BsPersonFillSlash />
                         </button>
                     </div>
-                    <div className="img-holder absolute xs:top-[3em] xl:top-[10.5em] bg-blue300">
+                    <div className="img-holder absolute xs:top-[7em] xl:top-[10.5em] bg-blue300">
                         <div className="">
                             <img
                                 className="xs:w-[6em] xs:h-[6em] xl:w-[8em] xl:h-[8em] rounded-full"
@@ -113,13 +113,13 @@ const ViewProfile = () => {
                         <button className="absolute top-1/2 left-0 transform -translate-x-10 -translate-y-1/2 bg-red-400 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"></button>
                         <button className="absolute top-1/2 right-0 transform translate-x-10 -translate-y-1/2 bg-pink-400 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"></button> */}
                     </div>
-                    <h4 className="font-light absolute xs:top-[10em] xl:top-[19em]">
+                    <h4 className="font-light absolute xs:top-[13.5em] xl:top-[19em]">
                         @USERNAME
                     </h4>
-                    <h3 className="font-bold absolute xs:top-[11.5em] xl:top-[20.5em]">
+                    <h3 className="font-bold absolute xs:top-[15em] xl:top-[20.5em]">
                         MAMELLA INDUSTRY
                     </h3>
-                    <div className="bio flex absolute xs:top-[14em] xl:top-[24em] justify-center items-start">
+                    <div className="bio flex absolute xs:top-[18em] xl:top-[24em] justify-center items-start">
                         <p className="font-light w-[16em] leading-5 text-ellipsis text-start">
                             Lorem ipsum dolor sit amet consectetur, adipisicing
                             elit. Quas, quis quae nulla optio suscipit libero
