@@ -163,19 +163,6 @@ const ViewProfile = () => {
                         height={650}
                         width={1150}
                     />
-                    {/* <div className="flex flex-col justify-center items-center bg-blue-400 w-[vw] h-[70vw] relative">
-                        <div className="editable absolute xs:top-14 xl:left-0 xl:top-12 bg-blue-500">
-                            <h3 className="pb-3 uppercase">
-                                Match Statistics for Username
-                            </h3>
-                        </div>
-                        <Chart
-                            className="xl:w-[55vw] pt-20"
-                            options={chartOptions}
-                            series={chartSeries}
-                            type="area"
-                        />
-                    </div> */}
                 </div>
             </div>
         </div>
