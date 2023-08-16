@@ -1,5 +1,4 @@
 import { Sketch, SketchProps } from "@p5-wrapper/react";
-import "./Game.css"
 
 
 interface Ball {
@@ -18,7 +17,7 @@ interface GameProps extends SketchProps {
 
 
 
-const GameField: Sketch<GameProps> = (p5) => {
+const GameField: Sketch<GameProps> = (p5: any) => {
   let playerY: number;
   let playerX: number;
   let opponentY: number;
@@ -56,7 +55,7 @@ const GameField: Sketch<GameProps> = (p5) => {
     p5.createCanvas(width*scale, height*scale);
   }
 
-  p5.updateWithProps = (props) => { 
+  p5.updateWithProps = (props: GameProps) => { 
     playerY = props.playerY;
     ball = props.ball;
     opponentX = props.opponentX;

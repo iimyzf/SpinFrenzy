@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import GameField from './GameField';
 
 
-const socket: Socket = io("http://localhost:8000");
+// const socket: Socket = io("http://localhost:8000");
 
 
 
@@ -22,34 +22,10 @@ function Game() {
   const [ball, setBall] = useState({x: 0, y: 0});
   const [side, setSide] = useState<number>();
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+  const [started, setStarted] = useState<boolean>(false);
+  
+  
 
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        if (side === 0) {
-          socket.emit("move", { direction: "down", side: "left" } );
-        } else {
-          socket.emit("move", { direction: "down", side: "right" } );
-        }
-      }
-      else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        if (side === 0) {
-          socket.emit("move", { direction: "up", side: "left" } );
-        } else {
-          socket.emit("move", { direction: "up", side: "right" } );
-        }
-      }
-    };
-
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-
-  }, [side]);
 
 
   // useEffect(() => {
@@ -84,6 +60,8 @@ function Game() {
 
 
   useEffect(() => {
+    
+    const socket: Socket = io("localhost:8000");
 
     socket.on("side", (data) => {
       setSide(data);
@@ -97,6 +75,14 @@ function Game() {
       }
     });
 
+    socket.on("started", () => {
+      setStarted(true);
+    });
+
+    socket.on("end", () => {
+      setStarted(false);
+    })
+
     socket.on("update", (data) => {
       if (side === 0) {
         setPlayerY(data.leftPlayerY);
@@ -109,35 +95,67 @@ function Game() {
       setRightScore(data.rightScore);
       setLeftScore(data.leftScore);
     });
-    return() => {
-      socket.off("update");
-    }
+    
+    const handleKeyDown = (event: KeyboardEvent) => {
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        if (side === 0) {
+          socket.emit("move", { direction: "down", side: "left" } );
+        } else {
+          socket.emit("move", { direction: "down", side: "right" } );
+        }
+      }
+      else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        if (side === 0) {
+          socket.emit("move", { direction: "up", side: "left" } );
+        } else {
+          socket.emit("move", { direction: "up", side: "right" } );
+        }
+      }
+    };
+
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      socket.disconnect();
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+
   }, [side]);
 
 
-
-  return (
-    <div className="bg-black h-screen flex flex-col py-12  items-center space-y-4  overflow-y-scroll">
-      <div className="absolute top-4 left-4 flex items-center space-x-2">
-      <div className=" w-12 h-12 rounded-full bg-gray-400 "></div>
-      <span className="text-white text-xl font-bold">leave the match</span>
+  if (!started) {
+    return (
+      <div className='bg-black text-white text-xl'>
+        waiting an other player to join you
       </div>
-      <div className="flex space-x-16 lg:space-x-48 items-center">
-        <span className="flex flex-col items-center space-y-2">
-          <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
-          <span className='text-white text-lg font-mono font-bold'>@USER</span>
-        </span>
-        <span className="text-4xl lg:text-6xl text-white font-bold">VS</span>
-        <span className="flex flex-col items-center space-y-2">
-          <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
-          <span className='text-white text-lg font-mono font-bold'>@USER</span>
-        </span>
-      </div>
-      <div className='canvas' >
-        <ReactP5Wrapper sketch={GameField} playerY={playerY} opponentY={opponentY}  playerX={playerX} opponentX={opponentX} side={side} ball={ball}/>
-      </div>
-      <div className="flex flex-col items-center">
-      <span className="text-2xl lg:text-4xl text-white font-bold underline">score</span>
+    );
+  }
+  else {
+    return (
+      <div className="bg-black h-screen flex flex-col py-12  items-center space-y-4  overflow-y-scroll">
+        <div className="absolute top-4 left-4 flex items-center space-x-2">
+        <div className=" w-12 h-12 rounded-full bg-gray-400 "></div>
+        <span className="text-white text-xl font-bold">leave the match</span>
+        </div>
+        <div className="flex space-x-16 lg:space-x-48 items-center">
+          <span className="flex flex-col items-center space-y-2">
+            <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
+            <span className='text-white text-lg font-mono font-bold'>@USER</span>
+          </span>
+          <span className="text-4xl lg:text-6xl text-white font-bold">VS</span>
+          <span className="flex flex-col items-center space-y-2">
+            <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
+            <span className='text-white text-lg font-mono font-bold'>@USER</span>
+          </span>
+        </div>
+        <div className='canvas' >
+          <ReactP5Wrapper sketch={GameField} playerY={playerY} opponentY={opponentY}  playerX={playerX} opponentX={opponentX} side={side} ball={ball}/>
+        </div>
+        <div className="flex flex-col items-center">
+        <span className="text-2xl lg:text-4xl text-white font-bold underline">score</span>
         <div className="flex space-x-16 lg:space-x-48 items-center">
           <span className="text-white text-2xl lg:text-4xl font-black">{leftScore}</span>
           <span className="text-white text-2xl lg:text-4xl font-black">:</span>
@@ -146,6 +164,7 @@ function Game() {
       </div>
     </div>
   );
+  }
 }
 
 export default Game;
