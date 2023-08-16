@@ -9,6 +9,7 @@ import {
 } from "./Pages/index";
 import AddChannel from "./components/AddChannel";
 import "./App.css";
+import Game from "./Game/Game";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/gamemode" element={<GameMode />} />
+                <Route path="/game" element={<Game/>}/>
                 <Route
                     path="/add-channel"
                     element={

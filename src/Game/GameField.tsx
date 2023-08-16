@@ -15,6 +15,9 @@ interface GameProps extends SketchProps {
   ball: Ball;
 }
 
+
+
+
 const GameField: Sketch<GameProps> = (p5) => {
   let playerY: number;
   let playerX: number;
@@ -22,6 +25,9 @@ const GameField: Sketch<GameProps> = (p5) => {
   let opponentX: number;
 
   let ball: Ball = {x: 500, y:300};
+  
+  
+
   let width = 1000;
   let height  = 600;
 
@@ -79,6 +85,9 @@ const GameField: Sketch<GameProps> = (p5) => {
 
 
   }
+  return {
+		cleanup: p5.remove,
+	};
 
 }
 
