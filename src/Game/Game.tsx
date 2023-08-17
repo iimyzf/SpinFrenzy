@@ -5,9 +5,6 @@ import { useEffect, useState } from 'react';
 import GameField from './GameField';
 
 
-// const socket: Socket = io("http://localhost:8000");
-
-
 
 function Game() {
 
@@ -24,40 +21,6 @@ function Game() {
 
   const [started, setStarted] = useState<boolean>(false);
   
-  
-
-
-
-  // useEffect(() => {
-  //   const handleMouseMove = (event: MouseEvent) => {
-  //     const mouseY = event.clientY;
-
-  //     const windowHeight = window.innerHeight;
-  //     const halfWindowHeight = windowHeight / 2;
-
-  
-  //     if (mouseY < halfWindowHeight) {
-  //       if (side === 0) {
-  //         socket.emit("move", { direction: "up", side: "left" });
-  //       } else {
-  //         socket.emit("move", { direction: "up", side: "right" });
-  //       }
-  //     } else {
-  //       if (side === 0) {
-  //         socket.emit("move", { direction: "down", side: "left" });
-  //       } else {
-  //         socket.emit("move", { direction: "down", side: "right" });
-  //       }
-  //     }
-  //   };
-  
-  //   document.addEventListener("click", handleMouseMove);
-  
-  //   return () => {
-  //     document.removeEventListener("click", handleMouseMove);
-  //   };
-  // }, [side]);
-
 
   useEffect(() => {
     
@@ -125,11 +88,10 @@ function Game() {
 
   }, [side]);
 
-
   if (!started) {
     return (
       <div className='bg-black text-white text-xl'>
-        waiting an other player to join you
+        waiting another player to join you
       </div>
     );
   }
