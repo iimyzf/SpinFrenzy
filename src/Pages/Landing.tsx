@@ -47,7 +47,7 @@ const Landing = () => {
                     </Link>
                     <Link
                         className="container h-10 rounded-lg flex justify-center items-center font-bold hover:scale-110"
-                        to="/profile"
+                        to="/new"
                     >
                         Sign In
                     </Link>

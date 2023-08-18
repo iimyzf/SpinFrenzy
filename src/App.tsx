@@ -6,6 +6,7 @@ import {
     ViewProfile,
     Home,
     GameMode,
+    New,
 } from "./Pages/index";
 import AddChannel from "./components/AddChannel";
 import "./App.css";
@@ -20,7 +21,8 @@ const App = () => {
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/gamemode" element={<GameMode />} />
-                <Route path="/game" element={<Game/>}/>
+                <Route path="/game" element={<Game />} />
+                <Route path="/new" element={<New />} />
                 <Route
                     path="/add-channel"
                     element={
