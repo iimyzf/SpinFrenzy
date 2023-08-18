@@ -229,7 +229,139 @@ const New = () => {
                         </button>
                     </div>
                 </div>
-                <div className="forth-container container-1 mt-5 mr-10 p-10 w-1/2 h-96"></div>
+                <div className="forth-container container-1 mt-5 mr-10 p-10 w-1/2 h-96 overflow-y-auto">
+                    <h2 className="font-medium font-satoshi lowercase">
+                        leaderboard
+                    </h2>
+                    <div className="person-div mt-10 flex justify-between container-1 h-20 px-10 items-center">
+                        <div className="flex items-center gap-5">
+                            <h1 className="font-black font-satoshi mr-3">1</h1>
+                            <img
+                                className="rounded-full w-14 h-14"
+                                src={Apollo}
+                                alt="channel-pic"
+                            />
+                            <div className="flex flex-col">
+                                <h2 className="font-medium font-satoshi lowercase">
+                                    username
+                                </h2>
+                                <div className="flex gap-10">
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games won: 24
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games losses: 12
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        draws: 6
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="person-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                        <div className="flex items-center gap-5">
+                            <h1 className="font-black font-satoshi mr-3">2</h1>
+                            <img
+                                className="rounded-full w-14 h-14"
+                                src={Apollo}
+                                alt="channel-pic"
+                            />
+                            <div className="flex flex-col">
+                                <h2 className="font-medium font-satoshi lowercase">
+                                    username
+                                </h2>
+                                <div className="flex gap-10">
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games won: 24
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games losses: 12
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        draws: 6
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="person-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                        <div className="flex items-center gap-5">
+                            <h1 className="font-black font-satoshi mr-3">3</h1>
+                            <img
+                                className="rounded-full w-14 h-14"
+                                src={Apollo}
+                                alt="channel-pic"
+                            />
+                            <div className="flex flex-col">
+                                <h2 className="font-medium font-satoshi lowercase">
+                                    username
+                                </h2>
+                                <div className="flex gap-10">
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games won: 24
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games losses: 12
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        draws: 6
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="person-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                        <div className="flex items-center gap-5">
+                            <h1 className="font-black font-satoshi mr-3">4</h1>
+                            <img
+                                className="rounded-full w-14 h-14"
+                                src={Apollo}
+                                alt="channel-pic"
+                            />
+                            <div className="flex flex-col">
+                                <h2 className="font-medium font-satoshi lowercase">
+                                    username
+                                </h2>
+                                <div className="flex gap-10">
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games won: 24
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        games losses: 12
+                                    </h3>
+                                    <h1 className="font-black font-satoshi">
+                                        /
+                                    </h1>
+                                    <h3 className="font-light font-satoshi lowercase">
+                                        draws: 6
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
