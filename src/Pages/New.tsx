@@ -28,14 +28,14 @@ const New = () => {
                 </div>
             </div>
             <div className="flex">
-                <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-24 justify-start items-center gap-4 overflow-y-auto h-[49.25rem]">
+                <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-24 justify-start items-center gap-4 overflow-y-scroll no-scrollbar h-[49.25rem]">
                     <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-5 h-5 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-5 h-5 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -43,7 +43,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -51,7 +51,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -59,7 +59,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -67,7 +67,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -75,7 +75,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -83,7 +83,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -91,7 +91,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -99,7 +99,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -107,7 +107,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -115,7 +115,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                     <button className="relative">
                         <img
@@ -123,7 +123,7 @@ const New = () => {
                             src={Apollo}
                             alt="friend-pic"
                         />
-						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                 </div>
                 <div className="bg-red300 w-full">
@@ -153,7 +153,7 @@ const New = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="third-container container-1 mt-5 mr-10 p-10 w-1/2 h-96 overflow-y-auto">
+                        <div className="third-container container-1 mt-5 mr-10 p-10 w-1/2 h-96 overflow-y-scroll no-scrollbar">
                             <h2 className="font-medium font-satoshi lowercase">
                                 live games
                             </h2>
@@ -260,7 +260,7 @@ const New = () => {
                         </div>
                     </div>
                     <div className="flex gap-5">
-                        <div className="forth-container container-1 mt-5 ml-5 p-10 w-1/2 h-96 overflow-y-auto">
+                        <div className="forth-container container-1 mt-5 ml-5 p-10 w-1/2 h-96 overflow-y-scroll no-scrollbar">
                             <h2 className="font-medium font-satoshi lowercase">
                                 popular public channels
                             </h2>
@@ -345,7 +345,7 @@ const New = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="forth-container container-1 mt-5 mr-10 p-10 w-1/2 h-96 overflow-y-auto">
+                        <div className="forth-container container-1 mt-5 mr-10 p-10 w-1/2 h-96 overflow-y-scroll no-scrollbar">
                             <h2 className="font-medium font-satoshi lowercase">
                                 leaderboard
                             </h2>
