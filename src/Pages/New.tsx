@@ -6,6 +6,8 @@ import {
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
 
+// array of user with just image to work with for testing purposes only
+
 const New = () => {
     return (
         <div>
@@ -27,89 +29,101 @@ const New = () => {
             </div>
             <div className="flex">
                 <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-24 justify-start items-center gap-4 overflow-y-auto h-[49.25rem]">
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-5 h-5 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
-                    <button>
+                    <button className="relative">
                         <img
                             className="w-16 h-16 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
+						<span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
                     </button>
                 </div>
                 <div className="bg-red300 w-full">
