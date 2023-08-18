@@ -18,9 +18,9 @@ const GameMode = () => {
                     ← back to home
                 </Link>
                 <div className="mt-10 xs:flex xs:flex-wrap xs:justify-center xs:items-center xs:gap-2 xl:gap-5">
-                    <div className="card xs:w-40 xs:h-40 xl:w-52 xl:h-52 flex justify-center items-center hover:cursor-pointer hover:scale-105">
+                    <Link to="/game" className="card xs:w-40 xs:h-40 xl:w-52 xl:h-52 flex justify-center items-center hover:cursor-pointer hover:scale-105">
                         <p className="font-black text-2xl">EASY</p>
-                    </div>
+                    </Link>
                     <div className="card xs:w-40 xs:h-40 xl:w-52 xl:h-52 flex justify-center items-center hover:cursor-pointer hover:scale-105">
                         <p className="font-black text-2xl">MEDIUM</p>
                     </div>
