@@ -157,7 +157,7 @@ const New = () => {
                             <h2 className="font-medium font-satoshi lowercase">
                                 live games
                             </h2>
-                            <div className="game-div mt-10 flex justify-between container-1 h-20 px-10 items-center">
+                            <div className="game-div mt-10 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
                                 <div className="profile flex items-center gap-5">
                                     <img
                                         className="rounded-full w-14 h-14"
@@ -182,7 +182,7 @@ const New = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
                                 <div className="profile flex items-center gap-5">
                                     <img
                                         className="rounded-full w-14 h-14"
@@ -207,7 +207,7 @@ const New = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
                                 <div className="profile flex items-center gap-5">
                                     <img
                                         className="rounded-full w-14 h-14"
@@ -232,7 +232,7 @@ const New = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center">
+                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
                                 <div className="profile flex items-center gap-5">
                                     <img
                                         className="rounded-full w-14 h-14"
@@ -280,7 +280,7 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 w-32 h-14 lowercase">
+                                <button className="container-1 w-24 h-12 lowercase hover:scale-105 hover:cursor-pointer">
                                     join
                                 </button>
                             </div>
@@ -300,7 +300,7 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 w-32 h-14 lowercase">
+                                <button className="container-1 w-24 h-12 lowercase hover:scale-105 hover:cursor-pointer">
                                     join
                                 </button>
                             </div>
@@ -320,7 +320,7 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 w-32 h-14 lowercase">
+                                <button className="container-1 w-24 h-12 lowercase hover:scale-105 hover:cursor-pointer">
                                     join
                                 </button>
                             </div>
@@ -340,7 +340,7 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 w-32 h-14 lowercase">
+                                <button className="container-1 w-24 h-12 lowercase hover:scale-105 hover:cursor-pointer">
                                     join
                                 </button>
                             </div>
