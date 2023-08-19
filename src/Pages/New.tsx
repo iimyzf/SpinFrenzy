@@ -66,137 +66,21 @@ const New = () => {
                 </div>
             </div>
             <div className="flex">
-                <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-[6vw] max-h-[98vh] justify-start items-center gap-4 overflow-y-scroll no-scrollbar bg-orange400">
-                    <button className="relative">
+                <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-[6vw] max-h-[98vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
+                    <button className="friend-btn absolute">
+                        <span className="show-name absolute top-1/2 left-24 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-md p-2">
+                            Hello there, how are you?
+                        </span>
                         <img
-                            className="w-16 h-16 rounded-full"
+                            className="w-12 h-12 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
-                        <span className="rounded-full bg-green-400 w-5 h-5 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
-                    </button>
-                    <button className="relative">
-                        <img
-                            className="w-16 h-16 rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-4 h-4 absolute top-0 right-0"></span>
+                        <span className="rounded-full bg-green-400 w-3 h-3 absolute top-0 right-0"></span>
                     </button>
                 </div>
                 <div className="w-full">
                     <div className="flex gap-5 bg-purple600 h-[50vh]">
-                        {/* <div className="second-container container-1 mt-5 ml-5 py-10 px-10 w-1/2 bg-blue400">
-                            <h2 className="font-medium font-satoshi lowercase">
-                                Play a Game
-                            </h2>
-                            <div className="mt-10 pb-10 flex flex-wap justify-between items-center gap-5 w-full h-full bg-red400">
-                                <Link
-                                    to="/game"
-                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
-                                >
-                                    <p className="font-medium lowercase">
-                                        EASY
-                                    </p>
-                                </Link>
-                                <Link
-                                    to="/game"
-                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
-                                >
-                                    <p className="font-medium lowercase">
-                                        MEDIUM
-                                    </p>
-                                </Link>
-                                <Link
-                                    to="/game"
-                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
-                                >
-                                    <p className="font-medium lowercase">
-                                        HARD
-                                    </p>
-                                </Link>
-                            </div>
-                        </div> */}
                         <div className="second-container container-1 mt-5 ml-5 py-10 px-10 w-1/2 bg-blue400 pb-20">
                             <h2 className="font-medium font-satoshi lowercase">
                                 Play a Game
