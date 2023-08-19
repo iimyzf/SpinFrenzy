@@ -6,11 +6,49 @@ import {
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
 
+import "./New.css";
+import { useState } from "react";
+
 // array of user with just image to work with for testing purposes only
 
 const New = () => {
+    const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
+        null
+    );
+    const [isNavExpanded, setIsNavExpanded] = useState<boolean>(false);
+
+    const handleCardClick = (index: number) => {
+        if (index === expandedCardIndex) {
+            setExpandedCardIndex(null);
+            setIsNavExpanded(false);
+        } else {
+            if (!isNavExpanded) {
+                setIsNavExpanded(true);
+            }
+            setExpandedCardIndex(index);
+            scrollToCard(index);
+        }
+    };
+
+    const scrollToCard = (index: number) => {
+        const outer = document.querySelector(".nav") as HTMLElement;
+        const target = document.querySelectorAll(".card")[index] as HTMLElement;
+
+        const containerWidth = outer.offsetWidth;
+        const targetWidth = 300;
+        const targetIndex = index;
+        const leftScreenOffset = (containerWidth - targetWidth) / 2;
+        const leftSiblingOffset = (target.offsetWidth + 10) * targetIndex;
+        const scrollValue = leftSiblingOffset - leftScreenOffset;
+
+        outer.scrollTo({
+            left: Math.max(0, scrollValue),
+            behavior: "smooth",
+        });
+    };
+
     return (
-        <div className="">
+        <div className="mb-10">
             <div className="first-container h-[5vw] container-1 mt-10 mx-10 px-10 flex justify-between items-center">
                 <h2 className="font-medium lowercase font-satoshi">
                     Dashboard
@@ -128,29 +166,96 @@ const New = () => {
                 </div>
                 <div className="w-full">
                     <div className="flex gap-5 bg-purple600 h-[50vh]">
-                        <div className="second-container container-1 mt-5 ml-5 p-10 w-1/2 bg-blue400">
+                        {/* <div className="second-container container-1 mt-5 ml-5 py-10 px-10 w-1/2 bg-blue400">
                             <h2 className="font-medium font-satoshi lowercase">
                                 Play a Game
                             </h2>
-                            <div className="mt-10 flex flex-wrap justify-between items-center gap-2 bg-red h-56">
+                            <div className="mt-10 pb-10 flex flex-wap justify-between items-center gap-5 w-full h-full bg-red400">
                                 <Link
                                     to="/game"
-                                    className="card w-52 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
+                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
                                 >
                                     <p className="font-medium lowercase">
                                         EASY
                                     </p>
                                 </Link>
-                                <div className="card w-52 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105">
+                                <Link
+                                    to="/game"
+                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
+                                >
                                     <p className="font-medium lowercase">
                                         MEDIUM
                                     </p>
-                                </div>
-                                <div className="card w-52 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105">
+                                </Link>
+                                <Link
+                                    to="/game"
+                                    className="card w-1/3 h-full flex justify-center items-center hover:cursor-pointer hover:scale-105"
+                                >
                                     <p className="font-medium lowercase">
                                         HARD
                                     </p>
-                                </div>
+                                </Link>
+                            </div>
+                        </div> */}
+                        <div className="second-container container-1 mt-5 ml-5 py-10 px-10 w-1/2 bg-blue400 pb-20">
+                            <h2 className="font-medium font-satoshi lowercase">
+                                Play a Game
+                            </h2>
+                            <div className="handler flex justify-center items-center bg-green400 w-full h-full mt-10">
+                                <nav
+                                    className={`no-scrollbar nav${
+                                        isNavExpanded ? " nav--expanded" : ""
+                                    } gap-3`}
+                                >
+                                    <Link to="/game">
+                                        <div
+                                            className={`card${
+                                                expandedCardIndex === 0
+                                                    ? " card--expanded"
+                                                    : ""
+                                            } flex justify-center items-center`}
+                                            onMouseEnter={() =>
+                                                handleCardClick(0)
+                                            }
+                                        >
+                                            <p className="font-medium lowercase">
+                                                EASY
+                                            </p>
+                                        </div>
+                                    </Link>
+                                    <Link to="/game">
+                                        <div
+                                            className={`card${
+                                                expandedCardIndex === 1
+                                                    ? " card--expanded"
+                                                    : ""
+                                            } flex justify-center items-center`}
+                                            onMouseEnter={() =>
+                                                handleCardClick(1)
+                                            }
+                                        >
+                                            <p className="font-medium lowercase">
+                                                Medium
+                                            </p>
+                                        </div>
+                                    </Link>
+                                    <Link to="/game">
+                                        <div
+                                            className={`card${
+                                                expandedCardIndex === 2
+                                                    ? " card--expanded"
+                                                    : ""
+                                            } flex justify-center items-center`}
+                                            onMouseEnter={() =>
+                                                handleCardClick(2)
+                                            }
+                                        >
+                                            <p className="font-medium lowercase">
+                                                Hard
+                                            </p>
+                                        </div>
+                                    </Link>
+                                </nav>
                             </div>
                         </div>
                         <div className="third-container container-1 mt-5 mr-10 p-10 w-1/2 overflow-y-scroll no-scrollbar bg-green400">
