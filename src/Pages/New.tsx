@@ -48,30 +48,66 @@ const New = () => {
     };
 
     const [isHovered, setIsHovered] = useState(false);
-
     const handleMouseEnter = () => {
         setIsHovered(true);
-    };
 
+    };
     const handleMouseLeave = () => {
         setIsHovered(false);
+    };
+
+	const [hoveredButton, setHoveredButton] = useState(null);
+
+    const mouseEnter = (buttonId: number) => {
+        setHoveredButton(buttonId);
+    };
+
+    const mouseLeave = () => {
+        setHoveredButton(null);
     };
 
     return (
         <div className="mb-10">
             <div className="first-container h-[5vw] container-1 mt-10 mx-10 px-10 flex justify-between items-center">
                 <h2 className="font-medium lowercase font-satoshi">
-                    Dashboard
+                    spinfrenzy
                 </h2>
-                <div className="flex gap-10">
-                    <button>
+                <div className="flex gap-14">
+                    <button
+                        className="hover:scale-110"
+                        onMouseEnter={() => mouseEnter(0)}
+                        onMouseLeave={mouseLeave}
+                    >
                         <BsFillChatLeftTextFill />
+                        {hoveredButton == 0 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                messages
+                            </div>
+                        )}
                     </button>
-                    <button>
+                    <button
+                        className="hover:scale-110"
+                        onMouseEnter={() => mouseEnter(1)}
+                        onMouseLeave={mouseLeave}
+                    >
                         <BsFillBellFill />
+                        {hoveredButton == 1 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                notifications
+                            </div>
+                        )}
                     </button>
-                    <button>
+                    <button
+                        className="hover:scale-110"
+                        onMouseEnter={() => mouseEnter(2)}
+                        onMouseLeave={mouseLeave}
+                    >
                         <BsFillPersonFill />
+                        {hoveredButton == 2 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                profile
+                            </div>
+                        )}
                     </button>
                 </div>
             </div>
@@ -89,7 +125,7 @@ const New = () => {
                         />
                         <span className="rounded-full bg-green-400 w-3 h-3 absolute top-0 right-0"></span>
                         {isHovered && (
-                            <div className="btn-name absolute top-1/2 left-14 -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-normal font-satoshi text-[.8em]">
+                            <div className="absolute top-1/2 left-14 -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-normal font-satoshi text-[.8em]">
                                 yagnaou
                             </div>
                         )}
