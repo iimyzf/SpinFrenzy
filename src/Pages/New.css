@@ -58,3 +58,15 @@
     right: -10px;
     position: absolute;
 }
+
+.game-div:hover {
+    cursor: pointer;
+    scale: 103%;
+}
+
+.game-div:hover .ppic,
+.game-div:hover .vs,
+.game-div:hover .username {
+    filter: blur(4px);
+    opacity: 0.2;
+}

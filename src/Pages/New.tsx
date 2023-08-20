@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
 
 import "./New.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // array of user with just image to work with for testing purposes only
 
@@ -50,21 +50,40 @@ const New = () => {
     const [isHovered, setIsHovered] = useState(false);
     const handleMouseEnter = () => {
         setIsHovered(true);
-
     };
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
 
-	const [hoveredButton, setHoveredButton] = useState(null);
-
-    const mouseEnter = (buttonId: number) => {
+    const [hoveredButton, setHoveredButton] = useState(null);
+    const [activeButton, setActiveButton] = useState(null);
+    const mouseEnter = (buttonId: any) => {
         setHoveredButton(buttonId);
     };
-
     const mouseLeave = () => {
         setHoveredButton(null);
     };
+    const handleButtonClick = (buttonId: any) => {
+        setActiveButton(buttonId === activeButton ? null : buttonId);
+    };
+
+    // const contentRef = useRef<HTMLDivElement | null>(null);
+
+    // useEffect(() => {
+    //     const handleDocumentClick = (event: MouseEvent) => {
+    //         if (
+    //             contentRef.current &&
+    //             !contentRef.current.contains(event.target as Node)
+    //         )
+    //             setActiveButton(null);
+    //     };
+
+    //     document.addEventListener("click", handleDocumentClick);
+
+    //     return () => {
+    //         document.removeEventListener("click", handleDocumentClick);
+    //     };
+    // }, []);
 
     return (
         <div className="mb-10">
@@ -74,38 +93,53 @@ const New = () => {
                 </h2>
                 <div className="flex gap-14">
                     <button
-                        className="hover:scale-110"
                         onMouseEnter={() => mouseEnter(0)}
                         onMouseLeave={mouseLeave}
+                        onClick={() => handleButtonClick(0)}
                     >
-                        <BsFillChatLeftTextFill />
+                        <BsFillChatLeftTextFill className="hover:scale-110" />
                         {hoveredButton == 0 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
                                 messages
                             </div>
                         )}
+                        {activeButton == 0 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                Additional content for Notifications
+                            </div>
+                        )}
                     </button>
                     <button
-                        className="hover:scale-110"
                         onMouseEnter={() => mouseEnter(1)}
                         onMouseLeave={mouseLeave}
+                        onClick={() => handleButtonClick(1)}
                     >
-                        <BsFillBellFill />
+                        <BsFillBellFill className="hover:scale-110" />
                         {hoveredButton == 1 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
                                 notifications
                             </div>
                         )}
+                        {activeButton == 1 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                Additional content for Notifications
+                            </div>
+                        )}
                     </button>
                     <button
-                        className="hover:scale-110"
                         onMouseEnter={() => mouseEnter(2)}
                         onMouseLeave={mouseLeave}
+                        onClick={() => handleButtonClick(2)}
                     >
-                        <BsFillPersonFill />
+                        <BsFillPersonFill className="hover:scale-110" />
                         {hoveredButton == 2 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
                                 profile
+                            </div>
+                        )}
+                        {activeButton == 2 && (
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-medium font-satoshi text-[.8em]">
+                                Additional content for Notifications
                             </div>
                         )}
                     </button>
@@ -198,101 +232,26 @@ const New = () => {
                             <h2 className="font-medium font-satoshi lowercase">
                                 live games
                             </h2>
-                            <div className="game-div mt-10 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
+                            <div className="game-div mt-10 flex justify-between container-1 py-2 px-8 items-center">
                                 <div className="profile flex items-center gap-5">
                                     <img
-                                        className="rounded-full w-14 h-14"
+                                        className="ppic rounded-full w-12 h-12"
                                         src={Apollo}
                                         alt="profile-pic"
                                     />
-                                    <h2 className="font-medium font-satoshi">
+                                    <h2 className="username font-medium font-satoshi">
                                         username
                                     </h2>
                                 </div>
-                                <h1 className="font-black font-satoshi text-4xl">
+                                <h1 className="vs font-black font-sans text-4xl">
                                     VS
                                 </h1>
                                 <div className="profile flex items-center gap-5">
-                                    <h2 className="font-medium font-satoshi">
+                                    <h2 className="username font-medium font-satoshi">
                                         username
                                     </h2>
                                     <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                </div>
-                            </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
-                                <div className="profile flex items-center gap-5">
-                                    <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                </div>
-                                <h1 className="font-black font-satoshi text-4xl">
-                                    VS
-                                </h1>
-                                <div className="profile flex items-center gap-5">
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                    <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                </div>
-                            </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
-                                <div className="profile flex items-center gap-5">
-                                    <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                </div>
-                                <h1 className="font-black font-satoshi text-4xl">
-                                    VS
-                                </h1>
-                                <div className="profile flex items-center gap-5">
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                    <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                </div>
-                            </div>
-                            <div className="game-div mt-5 flex justify-between container-1 h-20 px-10 items-center hover:scale-105 hover:cursor-pointer">
-                                <div className="profile flex items-center gap-5">
-                                    <img
-                                        className="rounded-full w-14 h-14"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                </div>
-                                <h1 className="font-black font-satoshi text-4xl">
-                                    VS
-                                </h1>
-                                <div className="profile flex items-center gap-5">
-                                    <h2 className="font-medium font-satoshi">
-                                        username
-                                    </h2>
-                                    <img
-                                        className="rounded-full w-14 h-14"
+                                        className="ppic rounded-full w-12 h-12"
                                         src={Apollo}
                                         alt="profile-pic"
                                     />
