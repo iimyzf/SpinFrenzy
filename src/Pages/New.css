@@ -58,27 +58,3 @@
     right: -10px;
     position: absolute;
 }
-
-/* .show-name {
-	opacity: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
-	z-index: 9999;
-}
-
-.friend-btn:hover .show-name {
-	opacity: 1;
-} */
-
-.show-name {
-    opacity: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
-    line-height: 1em;
-    font-size: 0.8em;
-    font-weight: lighter;
-}
-
-.friend-btn:hover .show-name {
-    opacity: 1;
-}

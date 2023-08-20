@@ -47,6 +47,16 @@ const New = () => {
         });
     };
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <div className="mb-10">
             <div className="first-container h-[5vw] container-1 mt-10 mx-10 px-10 flex justify-between items-center">
@@ -67,16 +77,22 @@ const New = () => {
             </div>
             <div className="flex">
                 <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-[6vw] max-h-[98vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
-                    <button className="friend-btn absolute">
-                        <span className="show-name absolute top-1/2 left-24 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-md p-2">
-                            Hello there, how are you?
-                        </span>
+                    <button
+                        className="friend-btn absolute hover:scale-105"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <img
                             className="w-12 h-12 rounded-full"
                             src={Apollo}
                             alt="friend-pic"
                         />
                         <span className="rounded-full bg-green-400 w-3 h-3 absolute top-0 right-0"></span>
+                        {isHovered && (
+                            <div className="btn-name absolute top-1/2 left-14 -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-normal font-satoshi text-[.8em]">
+                                yagnaou
+                            </div>
+                        )}
                     </button>
                 </div>
                 <div className="w-full">
