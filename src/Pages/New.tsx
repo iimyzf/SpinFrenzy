@@ -8,11 +8,9 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
-
+import { useState } from "react";
 import "./New.css";
-import { useEffect, useRef, useState } from "react";
 
-// array of user with just image to work with for testing purposes only
 
 const New = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
@@ -74,23 +72,13 @@ const New = () => {
         setActiveButton(buttonId === activeButton ? null : buttonId);
     };
 
-    // const contentRef = useRef<HTMLDivElement | null>(null);
-
-    // useEffect(() => {
-    //     const handleDocumentClick = (event: MouseEvent) => {
-    //         if (
-    //             contentRef.current &&
-    //             !contentRef.current.contains(event.target as Node)
-    //         )
-    //             setActiveButton(null);
-    //     };
-
-    //     document.addEventListener("click", handleDocumentClick);
-
-    //     return () => {
-    //         document.removeEventListener("click", handleDocumentClick);
-    //     };
-    // }, []);
+    const [userHover, setUserHover] = useState(null);
+    const handleUserHoverEnter = (userId: any) => {
+        setUserHover(userId);
+    };
+    const handleUserHoverLeave = () => {
+        setUserHover(null);
+    };
 
     return (
         <div className="my-[1vw]">
@@ -185,14 +173,47 @@ const New = () => {
                                         <h2 className="uppercase">yagnaou</h2>
                                     </div>
                                     <div className="flex justify-between items-center mt-[.6vw] px-[.1vw] py-[.4vw]">
-                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                        <button
+                                            className="container-1 hover:cursor-pointer p-[.5vw]"
+                                            onMouseEnter={() =>
+                                                handleUserHoverEnter(0)
+                                            }
+                                            onMouseLeave={handleUserHoverLeave}
+                                        >
                                             <BsPersonFillAdd className="text-[1vw]" />
+                                            {userHover == 0 && (
+                                                <div className="absolute top-44 left-12 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                    add friend
+                                                </div>
+                                            )}
                                         </button>
-                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                        <button
+                                            className="container-1 hover:cursor-pointer p-[.5vw]"
+                                            onMouseEnter={() =>
+                                                handleUserHoverEnter(1)
+                                            }
+                                            onMouseLeave={handleUserHoverLeave}
+                                        >
                                             <BsVolumeMuteFill className="text-[1vw]" />
+                                            {userHover == 1 && (
+                                                <div className="absolute top-44 left-28 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                    mute friend
+                                                </div>
+                                            )}
                                         </button>
-                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                        <button
+                                            className="container-1 hover:cursor-pointer p-[.5vw]"
+                                            onMouseEnter={() =>
+                                                handleUserHoverEnter(2)
+                                            }
+                                            onMouseLeave={handleUserHoverLeave}
+                                        >
                                             <BsPersonFillSlash className="text-[1vw]" />
+                                            {userHover == 2 && (
+                                                <div className="absolute top-44 left-44 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                    block friend
+                                                </div>
+                                            )}
                                         </button>
                                     </div>
                                     <input
