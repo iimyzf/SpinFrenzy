@@ -62,7 +62,6 @@ const New = () => {
         setIsActiveUser(userId === isActiveUser ? null : userId);
     };
 
-
     const [hoveredButton, setHoveredButton] = useState(null);
     const [activeButton, setActiveButton] = useState(null);
     const mouseEnter = (buttonId: any) => {
@@ -171,57 +170,37 @@ const New = () => {
                                 <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
                             </div>
                             {isHovered == 0 && (
-                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                     yagnaou
                                 </div>
                             )}
                             {isActiveUser == 0 && (
-                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                    <div className="flex items-center gap-[.5vw]">
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-[.5vw] px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                    <div className="flex items-center gap-[.5vw] px-[.2vw]">
                                         <img
                                             className="w-[2vw] h-[2vw] rounded-full"
                                             src={Apollo}
                                             alt="userPic"
                                         />
-                                        <h2 className="uppercase">username</h2>
+                                        <h2 className="uppercase">yagnaou</h2>
                                     </div>
-                                    <div className="flex justify-between items-center mt-[.5vw] px-[.6vw] py-[.4vw]">
-                                        <button className="text-[.8vw]">
-                                            <BsPersonFillAdd />
+                                    <div className="flex justify-between items-center mt-[.6vw] px-[.1vw] py-[.4vw]">
+                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                            <BsPersonFillAdd className="text-[1vw]" />
                                         </button>
-                                        <button className="text-[.8vw]">
-                                            <BsVolumeMuteFill />
+                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                            <BsVolumeMuteFill className="text-[1vw]" />
                                         </button>
-                                        <button className="text-[.8vw]">
-                                            <BsPersonFillSlash />
+                                        <button className="container-1 hover:cursor-pointer p-[.5vw]">
+                                            <BsPersonFillSlash className="text-[1vw]" />
                                         </button>
                                     </div>
                                     <input
-                                        className="indent-[.4vw] outline-none mt-[.5vw] rounded-[.5vw] py-[.6vw] container-1 font-light"
+                                        className="indent-[.4vw] outline-none rounded-[.5vw] py-[.6vw] container-1 font-normal"
                                         type="text"
                                         placeholder="write a message..."
+                                        onClick={(e) => e.stopPropagation()}
                                     />
-                                </div>
-                            )}
-                        </button>
-                    </div>
-                    <div className="w-[2.5vw] h-[2.5vw] flex justify-center items-center mt-[1vw]">
-                        <button
-                            className="friend-btn absolute hover:scale-105"
-                            onMouseEnter={() => handleMouseEnter(1)}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <div className="hover:scale-105">
-                                <img
-                                    className="w-[2.5vw] h-[2.5vw] rounded-full"
-                                    src={Apollo}
-                                    alt="friend-pic"
-                                />
-                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
-                            </div>
-                            {isHovered == 1 && (
-                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
-                                    yagnaou
                                 </div>
                             )}
                         </button>
