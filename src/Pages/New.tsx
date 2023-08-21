@@ -2,6 +2,9 @@ import {
     BsFillBellFill,
     BsFillChatLeftTextFill,
     BsFillPersonFill,
+    BsPersonFillAdd,
+    BsPersonFillSlash,
+    BsVolumeMuteFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
@@ -47,13 +50,18 @@ const New = () => {
         });
     };
 
-    const [isHovered, setIsHovered] = useState(false);
-    const handleMouseEnter = () => {
-        setIsHovered(true);
+    const [isHovered, setIsHovered] = useState(null);
+    const [isActiveUser, setIsActiveUser] = useState(null);
+    const handleMouseEnter = (userId: any) => {
+        setIsHovered(userId);
     };
     const handleMouseLeave = () => {
-        setIsHovered(false);
+        setIsHovered(null);
     };
+    const handleUserClick = (userId: any) => {
+        setIsActiveUser(userId === isActiveUser ? null : userId);
+    };
+
 
     const [hoveredButton, setHoveredButton] = useState(null);
     const [activeButton, setActiveButton] = useState(null);
@@ -146,41 +154,78 @@ const New = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-5 py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
-                    <button
-                        className="friend-btn absolute hover:scale-105 bg-red-300"
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        <img
-                            className="w-[2.5vw] h-[2.5vw] rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
-                        {isHovered && (
-                            <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
-                                yagnaou
+                <div className="friends-container container-1 mt-5 py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap5 overflow-y-scroll no-scrollbar overflow-hidden">
+                    <div className="w-[2.5vw] h-[2.5vw] flex justify-center items-center">
+                        <button
+                            className="friend-btn absolute"
+                            onMouseEnter={() => handleMouseEnter(0)}
+                            onMouseLeave={handleMouseLeave}
+                            onClick={() => handleUserClick(0)}
+                        >
+                            <div className="hover:scale-105">
+                                <img
+                                    className="w-[2.5vw] h-[2.5vw] rounded-full"
+                                    src={Apollo}
+                                    alt="friend-pic"
+                                />
+                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
                             </div>
-                        )}
-                    </button>
-                    <button
-                        className="friend-btn absolute hover:scale-105 bg-blue-300"
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        <img
-                            className="w-[2.5vw] h-[2.5vw] rounded-full"
-                            src={Apollo}
-                            alt="friend-pic"
-                        />
-                        <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
-                        {isHovered && (
-                            <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
-                                yagnaou
+                            {isHovered == 0 && (
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                                    yagnaou
+                                </div>
+                            )}
+                            {isActiveUser == 0 && (
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                    <div className="flex items-center gap-[.5vw]">
+                                        <img
+                                            className="w-[2vw] h-[2vw] rounded-full"
+                                            src={Apollo}
+                                            alt="userPic"
+                                        />
+                                        <h2 className="uppercase">username</h2>
+                                    </div>
+                                    <div className="flex justify-between items-center mt-[.5vw] px-[.6vw] py-[.4vw]">
+                                        <button className="text-[.8vw]">
+                                            <BsPersonFillAdd />
+                                        </button>
+                                        <button className="text-[.8vw]">
+                                            <BsVolumeMuteFill />
+                                        </button>
+                                        <button className="text-[.8vw]">
+                                            <BsPersonFillSlash />
+                                        </button>
+                                    </div>
+                                    <input
+                                        className="indent-[.4vw] outline-none mt-[.5vw] rounded-[.5vw] py-[.6vw] container-1 font-light"
+                                        type="text"
+                                        placeholder="write a message..."
+                                    />
+                                </div>
+                            )}
+                        </button>
+                    </div>
+                    <div className="w-[2.5vw] h-[2.5vw] flex justify-center items-center mt-[1vw]">
+                        <button
+                            className="friend-btn absolute hover:scale-105"
+                            onMouseEnter={() => handleMouseEnter(1)}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <div className="hover:scale-105">
+                                <img
+                                    className="w-[2.5vw] h-[2.5vw] rounded-full"
+                                    src={Apollo}
+                                    alt="friend-pic"
+                                />
+                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
                             </div>
-                        )}
-                    </button>
+                            {isHovered == 1 && (
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                                    yagnaou
+                                </div>
+                            )}
+                        </button>
+                    </div>
                 </div>
                 <div className="w-full">
                     <div className="flex gap-5 h-[50vh]">
