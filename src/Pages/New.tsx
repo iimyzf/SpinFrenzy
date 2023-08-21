@@ -91,7 +91,7 @@ const New = () => {
                 <h2 className="font-black lowercase font-satoshi text-[.8vw] tracking-wider">
                     spinfrenzy
                 </h2>
-                <div className="flex gap-[5vw]">
+                <div className="flex gap-[2vw]">
                     <button
                         onMouseEnter={() => mouseEnter(0)}
                         onMouseLeave={mouseLeave}
@@ -146,9 +146,26 @@ const New = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-5 py-[.5vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
+                <div className="friends-container container-1 mt-5 py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
                     <button
-                        className="friend-btn absolute hover:scale-105"
+                        className="friend-btn absolute hover:scale-105 bg-red-300"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <img
+                            className="w-[2.5vw] h-[2.5vw] rounded-full"
+                            src={Apollo}
+                            alt="friend-pic"
+                        />
+                        <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
+                        {isHovered && (
+                            <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                                yagnaou
+                            </div>
+                        )}
+                    </button>
+                    <button
+                        className="friend-btn absolute hover:scale-105 bg-blue-300"
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     >
