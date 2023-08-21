@@ -106,12 +106,12 @@ const New = () => {
                     >
                         <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw]" />
                         {hoveredButton == 0 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 messages
                             </div>
                         )}
                         {activeButton == 0 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 Additional content for Notifications
                             </div>
                         )}
@@ -123,12 +123,12 @@ const New = () => {
                     >
                         <BsFillBellFill className="hover:scale-110 text-[.8vw]" />
                         {hoveredButton == 1 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 notifications
                             </div>
                         )}
                         {activeButton == 1 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 Additional content for Notifications
                             </div>
                         )}
@@ -140,12 +140,12 @@ const New = () => {
                     >
                         <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
                         {hoveredButton == 2 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 profile
                             </div>
                         )}
                         {activeButton == 2 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-2 bg-black font-bold font-satoshi text-[.6vw]">
+                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
                                 Additional content for Notifications
                             </div>
                         )}
@@ -153,8 +153,8 @@ const New = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-5 py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap5 overflow-y-scroll no-scrollbar overflow-hidden">
-                    <div className="w-[2.5vw] h-[2.5vw] flex justify-center items-center">
+                <div className="friends-container container-1 mt-[1vw] py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden">
+                    <div className="user-div w-[2.5vw] h-[2.5vw] flex justify-center items-center">
                         <button
                             className="friend-btn absolute"
                             onMouseEnter={() => handleMouseEnter(0)}
@@ -207,12 +207,12 @@ const New = () => {
                     </div>
                 </div>
                 <div className="w-full">
-                    <div className="flex gap-5 h-[50vh]">
-                        <div className="second-container container-1 mt-5 ml-5 p-[1vw] w-1/2 pb-[5vw]">
+                    <div className="flex gap-[1vw] h-[50vh]">
+                        <div className="second-container container-1 mt-[1vw] ml-[1vw] p-[1vw] w-1/2 pb-[5vw]">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 Play a Game
                             </h2>
-                            <div className="handler flex justify-center items-center w-full h-full mt-10">
+                            <div className="handler flex justify-center items-center w-full h-full mt-[2vw]">
                                 <nav
                                     className={`no-scrollbar nav${
                                         isNavExpanded ? " nav--expanded" : ""
@@ -269,7 +269,7 @@ const New = () => {
                                 </nav>
                             </div>
                         </div>
-                        <div className="third-container container-1 mt-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
+                        <div className="third-container container-1 mt-[1vw] p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 live games
                             </h2>
@@ -300,8 +300,8 @@ const New = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex gap-5 h-[50vh]">
-                        <div className="forth-container container-1 mt-5 ml-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
+                    <div className="flex gap-[1vw] h-[50vh]">
+                        <div className="forth-container container-1 mt-[1vw] ml-[1vw] p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 popular public channels
                             </h2>
@@ -326,7 +326,7 @@ const New = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="forth-container container-1 mt-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
+                        <div className="forth-container container-1 mt-[1vw] p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 leaderboard
                             </h2>

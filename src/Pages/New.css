@@ -54,7 +54,7 @@
     content: "";
     display: inline-block;
     width: 10px;
-    height: inherit;
+    /* height: inherit; */
     right: -10px;
     position: absolute;
 }
