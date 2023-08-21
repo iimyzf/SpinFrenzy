@@ -30,8 +30,8 @@
 
 .card {
     position: relative;
-    height: 17vh;
-    width: 17vh;
+    height: 20vh;
+    width: 20vh;
     cursor: pointer;
     transition: height 1s ease-in-out, width 1s ease-in-out;
     transform-origin: 50% 50% 0;
@@ -46,8 +46,8 @@
 .card--expanded {
     /* height: 200px; */
     /* width: 300px; */
-    height: 29vh;
-    width: 29vh;
+    height: 30vh;
+    width: 30vh;
 }
 
 .card:last-of-type::after {
