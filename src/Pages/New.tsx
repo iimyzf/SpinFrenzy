@@ -11,7 +11,6 @@ import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
 import "./New.css";
 
-
 const New = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
         null
@@ -78,6 +77,14 @@ const New = () => {
     };
     const handleUserHoverLeave = () => {
         setUserHover(null);
+    };
+
+    const [liveGameHover, setliveGameHover] = useState(null);
+    const handleLiveGameEnter = (gameId: any) => {
+        setliveGameHover(gameId);
+    };
+    const handleLiveGameLeave = () => {
+        setliveGameHover(null);
     };
 
     return (
@@ -294,7 +301,11 @@ const New = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 live games
                             </h2>
-                            <div className="game-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center">
+                            <div
+                                className="game-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center"
+                                onMouseEnter={() => handleLiveGameEnter(0)}
+                                onMouseLeave={handleLiveGameLeave}
+                            >
                                 <div className="profile flex items-center gap-5">
                                     <img
                                         className="ppic rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
@@ -318,6 +329,13 @@ const New = () => {
                                         alt="profile-pic"
                                     />
                                 </div>
+                                {liveGameHover == 0 && (
+                                    <div className="font-black text-2xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <p className="text-center">
+                                            {">>> "} WATCH NOW {" <<<"}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
