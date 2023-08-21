@@ -86,12 +86,12 @@ const New = () => {
     // }, []);
 
     return (
-        <div className="mb-10">
-            <div className="first-container h-[4vw] container-1 mt-10 mx-10 px-10 flex justify-between items-center">
+        <div className="my-[1vw]">
+            <div className="first-container h-[4vw] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
                 <h2 className="font-black lowercase font-satoshi text-[.8vw] tracking-wider">
                     spinfrenzy
                 </h2>
-                <div className="flex gap-14">
+                <div className="flex gap-[5vw]">
                     <button
                         onMouseEnter={() => mouseEnter(0)}
                         onMouseLeave={mouseLeave}
@@ -145,8 +145,8 @@ const New = () => {
                     </button>
                 </div>
             </div>
-            <div className="flex">
-                <div className="friends-container container-1 mt-5 py-5 ml-10 flex flex-col w-[5vw] max-h-[98vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
+            <div className="flex mx-[3vw]">
+                <div className="friends-container container-1 mt-5 py-[.5vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center gap-5 overflow-y-scroll no-scrollbar overflow-hidden">
                     <button
                         className="friend-btn absolute hover:scale-105"
                         onMouseEnter={handleMouseEnter}
@@ -167,7 +167,7 @@ const New = () => {
                 </div>
                 <div className="w-full">
                     <div className="flex gap-5 h-[50vh]">
-                        <div className="second-container container-1 mt-5 ml-5 py-10 px-10 w-1/2 pb-20">
+                        <div className="second-container container-1 mt-5 ml-5 p-[1vw] w-1/2 pb-[5vw]">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 Play a Game
                             </h2>
@@ -175,7 +175,7 @@ const New = () => {
                                 <nav
                                     className={`no-scrollbar nav${
                                         isNavExpanded ? " nav--expanded" : ""
-                                    } gap-3`}
+                                    } gap-[.4vw]`}
                                 >
                                     <Link to="/game">
                                         <div
@@ -228,14 +228,14 @@ const New = () => {
                                 </nav>
                             </div>
                         </div>
-                        <div className="third-container container-1 mt-5 mr-10 p-10 w-1/2 overflow-y-scroll no-scrollbar">
+                        <div className="third-container container-1 mt-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 live games
                             </h2>
-                            <div className="game-div mt-10 flex justify-between container-1 py-2 px-8 items-center">
+                            <div className="game-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center">
                                 <div className="profile flex items-center gap-5">
                                     <img
-                                        className="ppic rounded-full w-[2vw] h-[2vw]"
+                                        className="ppic rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="profile-pic"
                                     />
@@ -243,7 +243,7 @@ const New = () => {
                                         username
                                     </h2>
                                 </div>
-                                <h1 className="vs font-black font-satoshi text-4xl">
+                                <h1 className="vs font-black font-satoshi text-[1vw]">
                                     VS
                                 </h1>
                                 <div className="profile flex items-center gap-5">
@@ -251,7 +251,7 @@ const New = () => {
                                         username
                                     </h2>
                                     <img
-                                        className="ppic rounded-full w-[2vw] h-[2vw]"
+                                        className="ppic rounded-full w-[2vw] h-[2vw] ml-[.5vw]"
                                         src={Apollo}
                                         alt="profile-pic"
                                     />
@@ -260,14 +260,14 @@ const New = () => {
                         </div>
                     </div>
                     <div className="flex gap-5 h-[50vh]">
-                        <div className="forth-container container-1 mt-5 ml-5 p-10 w-1/2 overflow-y-scroll no-scrollbar">
+                        <div className="forth-container container-1 mt-5 ml-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 popular public channels
                             </h2>
-                            <div className="channel-div mt-10 flex justify-between container-1 py-2 px-8 items-center">
+                            <div className="channel-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center">
                                 <div className="flex items-center gap-5">
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
@@ -280,22 +280,22 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 px-8 py-2 uppercase font-bold hover:scale-105 hover:cursor-pointer">
+                                <button className="container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 hover:cursor-pointer text-[.7vw]">
                                     join
                                 </button>
                             </div>
                         </div>
-                        <div className="forth-container container-1 mt-5 mr-10 p-10 w-1/2 overflow-y-scroll no-scrollbar">
+                        <div className="forth-container container-1 mt-5 p-[1.5vw] w-1/2 overflow-y-scroll no-scrollbar">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 leaderboard
                             </h2>
-                            <div className="person-div mt-10 flex justify-between container-1 py-2 px-8 items-center">
+                            <div className="person-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center">
                                 <div className="flex items-center gap-5">
-                                    <h1 className="font-black font-satoshi mr-3">
+                                    <h1 className="font-black font-satoshi mr-[1vw] text-[.8vw]">
                                         1
                                     </h1>
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
@@ -303,17 +303,17 @@ const New = () => {
                                         <h2 className="font-medium font-satoshi lowercase text-[.8vw]">
                                             username
                                         </h2>
-                                        <div className="flex gap-10">
+                                        <div className="flex gap-10 items-center">
                                             <h3 className="font-normal font-satoshi lowercase text-[.7vw]">
                                                 games won: 24
                                             </h3>
-                                            <h1 className="font-black font-satoshi">
+                                            <h1 className="font-black font-satoshi text-[1vw]">
                                                 /
                                             </h1>
                                             <h3 className="font-normal font-satoshi lowercase text-[.7vw]">
                                                 games losses: 12
                                             </h3>
-                                            <h1 className="font-black font-satoshi">
+                                            <h1 className="font-black font-satoshi text-[1vw]">
                                                 /
                                             </h1>
                                             <h3 className="font-normal font-satoshi lowercase text-[.7vw]">
