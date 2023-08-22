@@ -107,7 +107,7 @@ const New = () => {
                         )}
                         {activeButton == 0 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                Additional content for Notifications
+                                No messages
                             </div>
                         )}
                     </button>
@@ -124,7 +124,7 @@ const New = () => {
                         )}
                         {activeButton == 1 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                Additional content for Notifications
+                                No notifications
                             </div>
                         )}
                     </button>
@@ -141,7 +141,10 @@ const New = () => {
                         )}
                         {activeButton == 2 && (
                             <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                Additional content for Notifications
+                                <div className="flex flex-col items-start justify-center bg-red-500 gap-5">
+                                    <button>edit profile</button>
+                                    <button>logout</button>
+                                </div>
                             </div>
                         )}
                     </button>
@@ -330,11 +333,9 @@ const New = () => {
                                     />
                                 </div>
                                 {liveGameHover == 0 && (
-                                    <div className="font-black text-2xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                        <p className="text-center">
-                                            {">>> "} WATCH NOW {" <<<"}
-                                        </p>
-                                    </div>
+                                    <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-black text-2xl">
+                                        WATCH NOW
+                                    </p>
                                 )}
                             </div>
                         </div>
