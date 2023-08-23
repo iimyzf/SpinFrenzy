@@ -90,7 +90,7 @@ const Chat = () => {
                 </div>
             </div>
             <div className="child-container-2 pl-">
-                <div className="container-2 font-satoshi text-white w-[65em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
+                <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
                     <img
                         className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
                         src={
@@ -108,10 +108,14 @@ const Chat = () => {
                     </a>
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
-                    <div className="h-[44em] w-full overflow-y-auto mb-3 pl-10">
-                        <div className="max-h-[43.8em] overflow-y-auto">
+                    <div className="h-[44em] w-full mb-3 px-5 overflow-y-scroll no-scrollbar bg-yellow500">
+                        <div className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden">
                             {messages.map((message, idx) => (
-                                <MessageContainer key={idx} message={message} />
+                                <MessageContainer
+                                    key={idx}
+                                    message={message}
+                                    isSentByMe={true}
+                                />
                             ))}
                         </div>
                     </div>
@@ -122,10 +126,10 @@ const Chat = () => {
                         value={inputValue}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
-                        className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-10"
+                        className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-6"
                     />
                     <span
-                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-10 bottom-5"
+                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-6 bottom-5"
                         onClick={handleArrowClick}
                     >
                         <BsArrowRightShort className="check-icon" />
@@ -138,8 +142,7 @@ const Chat = () => {
                         Friends
                     </h3>
                     <span className="line absolute xs:top-16 xl:top-20"></span>
-                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4">
-                    </div>
+                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4"></div>
                 </div>
             </div>
             {popup && (
