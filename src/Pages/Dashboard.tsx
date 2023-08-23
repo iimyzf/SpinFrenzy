@@ -9,9 +9,9 @@ import {
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
-import "./New.css";
+import "./Dashboard.css";
 
-const New = () => {
+const Dashboard = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
         null
     );
@@ -128,26 +128,39 @@ const New = () => {
                             </div>
                         )}
                     </button>
-                    <button
-                        onMouseEnter={() => mouseEnter(2)}
-                        onMouseLeave={mouseLeave}
-                        onClick={() => handleButtonClick(2)}
-                    >
-                        <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
-                        {hoveredButton == 2 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                profile
-                            </div>
-                        )}
-                        {activeButton == 2 && (
-                            <div className="absolute transform translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                <div className="flex flex-col items-start justify-center bg-red-500 gap-5">
-                                    <button>edit profile</button>
-                                    <button>logout</button>
+                    <div className="icons">
+                        <div className="notification">
+                            <a href="#">
+                                <div className="notBtn">
+                                    <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
+                                    <div className="box">
+                                        <div className="display">
+                                            <div className="cont">
+                                                {/* <div className="sec new">
+                                                    <a href="https://codepen.io/Golez/">
+                                                        <div className="profCont">
+                                                            <img
+                                                                className="profile"
+                                                                src="https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg"
+                                                            />
+                                                        </div>
+                                                        <div className="txt">
+                                                            James liked your
+                                                            post: "Pure css
+                                                            notification box"
+                                                        </div>
+                                                        <div className="txt sub">
+                                                            11/7 - 2:30 pm
+                                                        </div>
+                                                    </a>
+                                                </div> */}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="flex mx-[3vw]">
@@ -332,11 +345,6 @@ const New = () => {
                                         alt="profile-pic"
                                     />
                                 </div>
-                                {liveGameHover == 0 && (
-                                    <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-black text-2xl">
-                                        WATCH NOW
-                                    </p>
-                                )}
                             </div>
                         </div>
                     </div>
@@ -361,8 +369,8 @@ const New = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 hover:cursor-pointer text-[.7vw]">
-                                    join
+                                <button className="join-channel container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 text-[.7vw]">
+                                    joinfff
                                 </button>
                             </div>
                         </div>
@@ -412,4 +420,4 @@ const New = () => {
     );
 };
 
-export default New;
+export default Dashboard;
