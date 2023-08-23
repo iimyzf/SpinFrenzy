@@ -79,13 +79,13 @@ const Dashboard = () => {
         setUserHover(null);
     };
 
-    const [liveGameHover, setliveGameHover] = useState(null);
-    const handleLiveGameEnter = (gameId: any) => {
-        setliveGameHover(gameId);
-    };
-    const handleLiveGameLeave = () => {
-        setliveGameHover(null);
-    };
+    // const [liveGameHover, setliveGameHover] = useState(null);
+    // const handleLiveGameEnter = (gameId: any) => {
+    //     setliveGameHover(gameId);
+    // };
+    // const handleLiveGameLeave = () => {
+    //     setliveGameHover(null);
+    // };
 
     return (
         <div className="my-[1vw]">
@@ -165,9 +165,9 @@ const Dashboard = () => {
             </div>
             <div className="flex mx-[3vw]">
                 <div className="friends-container container-1 mt-[1vw] py-[1vw] flex flex-col w-[5vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden">
-                    <div className="user-div w-[2.5vw] h-[2.5vw] flex justify-center items-center">
+                    <div className="userdiv w-[2.5vw] h-[2.5vw] flex justify-center items-center bg-yellow-500">
                         <button
-                            className="friend-btn absolute"
+                            className="friend-bn absolute"
                             onMouseEnter={() => handleMouseEnter(0)}
                             onMouseLeave={handleMouseLeave}
                             onClick={() => handleUserClick(0)}
@@ -180,73 +180,73 @@ const Dashboard = () => {
                                 />
                                 <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] absolute top-0 right-0"></span>
                             </div>
-                            {isHovered == 0 && (
-                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                    yagnaou
+                            {/* {isHovered == 0 && (
+                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] hover:bg-blue-500 ">
+                                    yagnaousdfghjklkjhgfdsdfghjklkjhgfddfghjklkjhgfd
                                 </div>
-                            )}
-                            {isActiveUser == 0 && (
-                                <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 whitespace-nowrap rounded-[.5vw] px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                    <div className="flex items-center gap-[.5vw] px-[.2vw]">
-                                        <img
-                                            className="w-[2vw] h-[2vw] rounded-full"
-                                            src={Apollo}
-                                            alt="userPic"
-                                        />
-                                        <h2 className="uppercase">yagnaou</h2>
-                                    </div>
-                                    <div className="flex justify-between items-center mt-[.6vw] px-[.1vw] py-[.4vw]">
-                                        <button
-                                            className="container-1 hover:cursor-pointer p-[.5vw]"
-                                            onMouseEnter={() =>
-                                                handleUserHoverEnter(0)
-                                            }
-                                            onMouseLeave={handleUserHoverLeave}
-                                        >
-                                            <BsPersonFillAdd className="text-[1vw]" />
-                                            {userHover == 0 && (
-                                                <div className="absolute top-44 left-12 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                                    add friend
-                                                </div>
-                                            )}
-                                        </button>
-                                        <button
-                                            className="container-1 hover:cursor-pointer p-[.5vw]"
-                                            onMouseEnter={() =>
-                                                handleUserHoverEnter(1)
-                                            }
-                                            onMouseLeave={handleUserHoverLeave}
-                                        >
-                                            <BsVolumeMuteFill className="text-[1vw]" />
-                                            {userHover == 1 && (
-                                                <div className="absolute top-44 left-28 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                                    mute friend
-                                                </div>
-                                            )}
-                                        </button>
-                                        <button
-                                            className="container-1 hover:cursor-pointer p-[.5vw]"
-                                            onMouseEnter={() =>
-                                                handleUserHoverEnter(2)
-                                            }
-                                            onMouseLeave={handleUserHoverLeave}
-                                        >
-                                            <BsPersonFillSlash className="text-[1vw]" />
-                                            {userHover == 2 && (
-                                                <div className="absolute top-44 left-44 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
-                                                    block friend
-                                                </div>
-                                            )}
-                                        </button>
-                                    </div>
-                                    <input
-                                        className="indent-[.4vw] outline-none rounded-[.5vw] py-[.6vw] container-1 font-normal"
-                                        type="text"
-                                        placeholder="write a message..."
-                                        onClick={(e) => e.stopPropagation()}
+                            )} */}
+                            {/* {isActiveUser == 0 && ( */}
+                            <div className="absolute top-1/2 left-[3vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw] bg-red-500 hover:bg-green-500">
+                                <div className="flex items-center gap-[.5vw] px-[.2vw] bg-blue-500 hover:bg-pink-500">
+                                    <img
+                                        className="w-[2vw] h-[2vw] rounded-full"
+                                        src={Apollo}
+                                        alt="userPic"
                                     />
+                                    <h2 className="uppercase">yagnaou</h2>
                                 </div>
-                            )}
+                                <div className="flex justify-between items-center mt-[.6vw] px-[.1vw] py-[.4vw]">
+                                    <button
+                                        className="container-1 hover:cursor-pointer p-[.5vw]"
+                                        onMouseEnter={() =>
+                                            handleUserHoverEnter(0)
+                                        }
+                                        onMouseLeave={handleUserHoverLeave}
+                                    >
+                                        <BsPersonFillAdd className="text-[1vw]" />
+                                        {userHover == 0 && (
+                                            <div className="absolute top-44 left-12 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                add friend
+                                            </div>
+                                        )}
+                                    </button>
+                                    <button
+                                        className="container-1 hover:cursor-pointer p-[.5vw]"
+                                        onMouseEnter={() =>
+                                            handleUserHoverEnter(1)
+                                        }
+                                        onMouseLeave={handleUserHoverLeave}
+                                    >
+                                        <BsVolumeMuteFill className="text-[1vw]" />
+                                        {userHover == 1 && (
+                                            <div className="absolute top-44 left-28 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                mute friend
+                                            </div>
+                                        )}
+                                    </button>
+                                    <button
+                                        className="container-1 hover:cursor-pointer p-[.5vw]"
+                                        onMouseEnter={() =>
+                                            handleUserHoverEnter(2)
+                                        }
+                                        onMouseLeave={handleUserHoverLeave}
+                                    >
+                                        <BsPersonFillSlash className="text-[1vw]" />
+                                        {userHover == 2 && (
+                                            <div className="absolute top-44 left-44 transform -translate-y-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw]">
+                                                block friend
+                                            </div>
+                                        )}
+                                    </button>
+                                </div>
+                                <input
+                                    className="indent-[.4vw] outline-none rounded-[.5vw] py-[.6vw] container-1 font-normal"
+                                    type="text"
+                                    placeholder="write a message..."
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            </div>
+                            {/* )} */}
                         </button>
                     </div>
                 </div>
@@ -319,8 +319,8 @@ const Dashboard = () => {
                             </h2>
                             <div
                                 className="game-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center"
-                                onMouseEnter={() => handleLiveGameEnter(0)}
-                                onMouseLeave={handleLiveGameLeave}
+                                // onMouseEnter={() => handleLiveGameEnter(0)}
+                                // onMouseLeave={handleLiveGameLeave}
                             >
                                 <div className="profile flex items-center gap-5">
                                     <img
