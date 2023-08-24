@@ -7,10 +7,9 @@ import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
 import "../components/AddChannel.css";
-import {Socket, io} from 'socket.io-client'
+import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 import axios from "axios";
-
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -19,10 +18,12 @@ const Chat = () => {
     >([]);
 
     const [inputValue, setInputValue] = useState("");
-    const [messages, setMessages] = useState<{
-        message: string,
-        isSentByMe: boolean;
-    }[]>([]);
+    const [messages, setMessages] = useState<
+        {
+            message: string;
+            isSentByMe: boolean;
+        }[]
+    >([]);
     const [selectedChannel, setSelectedChannel] = useState<{
         name: string;
         img: File | null;
@@ -34,24 +35,24 @@ const Chat = () => {
 
     const handleArrowClick = () => {
         if (inputValue.trim() !== "") {
-
-            setMessages((prevMessages) => [...prevMessages,
-            {
-                message: inputValue.trim(),
-                isSentByMe: true,
-            }]);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    message: inputValue.trim(),
+                    isSentByMe: true,
+                },
+            ]);
             setInputValue("");
             const dto = {
                 id: 1,
                 message: inputValue.trim(),
                 receiverId: 2,
-            }
-            socket?.emit('createMessage', dto, {
+            };
+            socket?.emit("createMessage", dto, {
                 withCredentials: true,
             });
         }
     };
-
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -59,14 +60,17 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: File | null }) => {
+    const addChannel = async (currentChannel: {
+        name: string;
+        img: File | null;
+    }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const data = {
                 name: currentChannel.name,
             };
 
-            await axios.post('http://localhost:3000/chat/new', data, {
+            await axios.post("http://localhost:3000/chat/new", data, {
                 withCredentials: true,
             });
         } catch (error) {
@@ -89,27 +93,31 @@ const Chat = () => {
                 messagesContainerRef.current.scrollHeight;
         }
     }, [messages]);
+
     //-------------------------------------------casper-------------------------------------//
     const socketRef = useRef<Socket | null>(null);
+
     useEffect(() => {
         if (socketRef.current === null) {
-            socketRef.current = io('http://localhost:3000', {
+            socketRef.current = io("http://localhost:3000", {
                 withCredentials: true,
             });
         }
         setSocket(socketRef.current);
 
-        socket?.on('newmessage', (dto: any) => {
-            console.log("GOOT HERE")
+        socket?.on("newmessage", (dto: any) => {
+            console.log("GOOT HERE");
             console.log("message received: ", dto[0].message);
-            setMessages((prevMessages) => [...prevMessages, {
-                message: dto[0].message,
-                isSentByMe: false,
-            }
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    message: dto[0].message,
+                    isSentByMe: false,
+                },
             ]);
-        })
-
+        });
     }, [socket]);
+
     return (
         <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-3 xs:m-5 xl:m-0">
             <div className="child-container-1 xl:h-screen xl:pr- pl-">
@@ -172,7 +180,7 @@ const Chat = () => {
                         </a>
                         <span className="line absolute top-20"></span>
                         <span className="line absolute bottom-24"></span>
-                        <div className="w-full mb-3 px-5 overflow-y-scroll no-scrollbar bg-yellow500">
+                        <div className="h-[43.9em] w-full mb-3 px-5 overflow-y-scroll no-scrollbar">
                             <div
                                 className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
                                 ref={messagesContainerRef}
@@ -206,7 +214,7 @@ const Chat = () => {
             ) : (
                 <div className="child-container-2 pl-">
                     <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-center relative overflow-hidden">
-                        <div className="w-1/2 h-1/2 bg-red400 mb-10 flex justify-center items-center object-cover">
+                        <div className="w-1/2 h-1/2 bg-red400 mb-10 flex justify-center items-center object-cover overflow-hidden">
                             <img
                                 src={noChat}
                                 alt="nochat"

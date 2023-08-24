@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
 import { useState } from "react";
 import "./Dashboard.css";
+import { FiLogOut } from "react-icons/fi";
 
 const Dashboard = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
@@ -59,17 +60,17 @@ const Dashboard = () => {
         setIsActiveUser(userId === isActiveUser ? null : userId);
     };
 
-    const [hoveredButton, setHoveredButton] = useState(null);
-    const [activeButton, setActiveButton] = useState(null);
-    const mouseEnter = (buttonId: any) => {
-        setHoveredButton(buttonId);
-    };
-    const mouseLeave = () => {
-        setHoveredButton(null);
-    };
-    const handleButtonClick = (buttonId: any) => {
-        setActiveButton(buttonId === activeButton ? null : buttonId);
-    };
+    // const [hoveredButton, setHoveredButton] = useState(null);
+    // const [activeButton, setActiveButton] = useState(null);
+    // const mouseEnter = (buttonId: any) => {
+    //     setHoveredButton(buttonId);
+    // };
+    // const mouseLeave = () => {
+    //     setHoveredButton(null);
+    // };
+    // const handleButtonClick = (buttonId: any) => {
+    //     setActiveButton(buttonId === activeButton ? null : buttonId);
+    // };
 
     const [userHover, setUserHover] = useState(null);
     const handleUserHoverEnter = (userId: any) => {
@@ -94,7 +95,7 @@ const Dashboard = () => {
                     spinfrenzy
                 </h2>
                 <div className="flex gap-[2vw]">
-                    <button
+                    {/* <button
                         onMouseEnter={() => mouseEnter(0)}
                         onMouseLeave={mouseLeave}
                         onClick={() => handleButtonClick(0)}
@@ -110,8 +111,8 @@ const Dashboard = () => {
                                 No messages
                             </div>
                         )}
-                    </button>
-                    <button
+                    </button> */}
+                    {/* <button
                         onMouseEnter={() => mouseEnter(1)}
                         onMouseLeave={mouseLeave}
                         onClick={() => handleButtonClick(1)}
@@ -127,38 +128,92 @@ const Dashboard = () => {
                                 No notifications
                             </div>
                         )}
-                    </button>
+                    </button> */}
                     <div className="icons">
                         <div className="notification">
-                            <a href="#">
-                                <div className="notBtn">
-                                    <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
-                                    <div className="box">
-                                        <div className="display">
-                                            <div className="cont">
-                                                {/* <div className="sec new">
-                                                    <a href="https://codepen.io/Golez/">
-                                                        <div className="profCont">
-                                                            <img
-                                                                className="profile"
-                                                                src="https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg"
-                                                            />
-                                                        </div>
-                                                        <div className="txt">
-                                                            James liked your
-                                                            post: "Pure css
-                                                            notification box"
-                                                        </div>
-                                                        <div className="txt sub">
-                                                            11/7 - 2:30 pm
-                                                        </div>
-                                                    </a>
-                                                </div> */}
+                            <div className="notBtn">
+                                <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw]" />
+                                <div className="box messages-box">
+                                    <div className="display">
+                                        <div className="cont">
+                                            <div className="container-1 m-3 p-3 flex justify-center items-center">
+                                                <a href="https://google.com">
+                                                    <div className="flex justify-between items-center gap-2">
+                                                        <img
+                                                            className="w-12 h-12 rounded-full mr3"
+                                                            src={Apollo}
+                                                        />
+                                                        <p className="font-satoshi font-normal text-[1em]">
+                                                            mamella sent you a
+                                                            message
+                                                        </p>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="icons">
+                        <div className="notification">
+                            <div className="notBtn">
+                                <BsFillBellFill className="hover:scale-110 text-[.8vw]" />
+                                <div className="box notification-box">
+                                    <div className="display">
+                                        <div className="cont">
+                                            <div className="container-1 m-3 p-3 flex justify-center items-center">
+                                                <a href="https://google.com">
+                                                    <div className="flex justify-between items-center gap-2">
+                                                        <img
+                                                            className="w-12 h-12 rounded-full mr3"
+                                                            src={Apollo}
+                                                        />
+                                                        <p className="font-satoshi font-normal text-[1em]">
+                                                            mamella sent you a
+                                                            friend request
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="icons">
+                        <div className="notification">
+                            <div className="notBtn user-btn">
+                                <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
+                                <div className="box user-box">
+                                    <div className="display">
+                                        <div className="cont">
+                                            <Link to="/profile">
+                                                <div className="container-1 m-3 p-3 flex justify-center items-center">
+                                                    <div className="flex justify-between items-center gap-2">
+                                                        <BsFillPersonFill className="text-[.8vw]" />
+                                                        <h2 className="font-satoshi font-bold text-[1em]">
+                                                            profile
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            <Link to="/">
+                                                <div className="container-1 m-3 p-3 flex justify-center items-center">
+                                                    <div className="flex justify-between items-center gap-2">
+                                                        <FiLogOut className="text-[.8vw]" />
+                                                        <h2 className="font-satoshi font-bold text-[1em]">
+                                                            logout
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -322,7 +377,7 @@ const Dashboard = () => {
                                 // onMouseEnter={() => handleLiveGameEnter(0)}
                                 // onMouseLeave={handleLiveGameLeave}
                             >
-                                <div className="profile flex items-center gap-5">
+                                <div className="flex items-center gap-5">
                                     <img
                                         className="ppic rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
                                         src={Apollo}
@@ -335,7 +390,7 @@ const Dashboard = () => {
                                 <h1 className="vs font-black font-satoshi text-[1vw]">
                                     VS
                                 </h1>
-                                <div className="profile flex items-center gap-5">
+                                <div className="flex items-center gap-5">
                                     <h2 className="username font-medium font-satoshi text-[.8vw]">
                                         username
                                     </h2>
