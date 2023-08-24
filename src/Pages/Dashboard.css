@@ -6,7 +6,7 @@
 /* } */
 
 .nav {
-    position: relative;
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,18 +161,18 @@
     height: 60vh;
 }
 
-/* .display {
+.display {
     position: relative;
-} */
+}
 
-/* .cont {
+.cont {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: #f4f4f4;
-} */
+}
 
-/* .cont:empty {
+.cont:empty {
     display: none;
-} */
+}
