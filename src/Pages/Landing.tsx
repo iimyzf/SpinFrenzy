@@ -33,13 +33,13 @@ const Landing = () => {
                 <div className="w-[20vw] font-semibold text-[1vw] flex flex-col justify-between gap-[1vw] bg-red600">
                     <Link
                         className="container h-[2.5vw] rounded-[.6vw] flex justify-center items-center font-bold hover:scale-105"
-                        to="/home"
+                        to="http://localhost:3000/auth/signin"
                     >
                         42 Intra
                     </Link>
                     <Link
                         className="container h-[2.5vw] rounded-[.6vw] flex justify-center items-center font-bold hover:scale-105"
-                        to="/profile"
+                        to= "http://localhost:3000/auth/google/signin"
                     >
                         Google
                     </Link>

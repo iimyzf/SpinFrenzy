@@ -7,15 +7,22 @@ import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
 import "../components/AddChannel.css";
+import {Socket, io} from 'socket.io-client'
 import AddChannel from "../components/AddChannel";
+import axios from "axios";
+
 
 const Chat = () => {
+    const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
         { name: string; img: File | null }[]
     >([]);
 
     const [inputValue, setInputValue] = useState("");
-    const [messages, setMessages] = useState<string[]>([]);
+    const [messages, setMessages] = useState<{
+        message: string,
+        isSentByMe: boolean;
+    }[]>([]);
     const [selectedChannel, setSelectedChannel] = useState<{
         name: string;
         img: File | null;
@@ -27,10 +34,24 @@ const Chat = () => {
 
     const handleArrowClick = () => {
         if (inputValue.trim() !== "") {
-            setMessages((prevMessages) => [...prevMessages, inputValue.trim()]);
+
+            setMessages((prevMessages) => [...prevMessages,
+            {
+                message: inputValue.trim(),
+                isSentByMe: true,
+            }]);
             setInputValue("");
+            const dto = {
+                id: 1,
+                message: inputValue.trim(),
+                receiverId: 2,
+            }
+            socket?.emit('createMessage', dto, {
+                withCredentials: true,
+            });
         }
     };
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -38,8 +59,19 @@ const Chat = () => {
         }
     };
 
-    const addChannel = (currentChannel: { name: string; img: File | null }) => {
+    const addChannel = async (currentChannel: { name: string; img: File | null }) => {
         const newChannel = [...channels, currentChannel];
+        try {
+            const data = {
+                name: currentChannel.name,
+            };
+
+            await axios.post('http://localhost:3000/chat/new', data, {
+                withCredentials: true,
+            });
+        } catch (error) {
+            console.log(error);
+        }
         setChannels(newChannel);
     };
 
@@ -57,7 +89,27 @@ const Chat = () => {
                 messagesContainerRef.current.scrollHeight;
         }
     }, [messages]);
+    //-------------------------------------------casper-------------------------------------//
+    const socketRef = useRef<Socket | null>(null);
+    useEffect(() => {
+        if (socketRef.current === null) {
+            socketRef.current = io('http://localhost:3000', {
+                withCredentials: true,
+            });
+        }
+        setSocket(socketRef.current);
 
+        socket?.on('newmessage', (dto: any) => {
+            console.log("GOOT HERE")
+            console.log("message received: ", dto[0].message);
+            setMessages((prevMessages) => [...prevMessages, {
+                message: dto[0].message,
+                isSentByMe: false,
+            }
+            ]);
+        })
+
+    }, [socket]);
     return (
         <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-3 xs:m-5 xl:m-0">
             <div className="child-container-1 xl:h-screen xl:pr- pl-">
@@ -128,8 +180,8 @@ const Chat = () => {
                                 {messages.map((message, idx) => (
                                     <MessageContainer
                                         key={idx}
-                                        message={message}
-                                        isSentByMe={false}
+                                        message={message.message}
+                                        isSentByMe={message.isSentByMe}
                                     />
                                 ))}
                             </div>
