@@ -1,5 +1,6 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
+import noChat from "../assets/no-chat.svg";
 import { FiLogOut } from "react-icons/fi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
@@ -47,7 +48,7 @@ const Chat = () => {
         setPopup(!popup);
     };
 
-	const messagesContainerRef = useRef<HTMLDivElement>(null);
+    const messagesContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Scroll to the bottom when a new message is added
@@ -99,56 +100,79 @@ const Chat = () => {
                     </div>
                 </div>
             </div>
-            <div className="child-container-2 pl-">
-                <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
-                    <img
-                        className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
-                        src={
-                            selectedChannel?.img
-                                ? URL.createObjectURL(selectedChannel?.img)
-                                : Apollo
-                        }
-                        alt="Apollo"
-                    />
-                    <h3 className="absolute top-7 uppercase font-bold left-24">
-                        {selectedChannel?.name || "Create a channel"}
-                    </h3>
-                    <a href="#">
-                        <FiLogOut className="absolute top-7 right-10 text-2xl" />
-                    </a>
-                    <span className="line absolute top-20"></span>
-                    <span className="line absolute bottom-24"></span>
-                    <div className="h-[44em] w-full mb-3 px-5 overflow-y-scroll no-scrollbar bg-yellow500">
-                        <div
-                            className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
-                            ref={messagesContainerRef}
-                        >
-                            {messages.map((message, idx) => (
-                                <MessageContainer
-                                    key={idx}
-                                    message={message}
-                                    isSentByMe={true}
-                                />
-                            ))}
+            {selectedChannel ? (
+                <div className="child-container-2 pl-">
+                    <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
+                        <img
+                            className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
+                            src={
+                                selectedChannel?.img
+                                    ? URL.createObjectURL(selectedChannel?.img)
+                                    : Apollo
+                            }
+                            alt="Apollo"
+                        />
+                        <h3 className="absolute top-7 uppercase font-bold left-24">
+                            {selectedChannel?.name || "Create a channel"}
+                        </h3>
+                        <a href="#">
+                            <FiLogOut className="absolute top-7 right-10 text-2xl" />
+                        </a>
+                        <span className="line absolute top-20"></span>
+                        <span className="line absolute bottom-24"></span>
+                        <div className="w-full mb-3 px-5 overflow-y-scroll no-scrollbar bg-yellow500">
+                            <div
+                                className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
+                                ref={messagesContainerRef}
+                            >
+                                {messages.map((message, idx) => (
+                                    <MessageContainer
+                                        key={idx}
+                                        message={message}
+                                        isSentByMe={false}
+                                    />
+                                ))}
+                            </div>
                         </div>
+                        <input
+                            placeholder="Type your message here..."
+                            type="text"
+                            maxLength={250}
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                            className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-6"
+                        />
+                        <span
+                            className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-6 bottom-5"
+                            onClick={handleArrowClick}
+                        >
+                            <BsArrowRightShort className="check-icon" />
+                        </span>
                     </div>
-                    <input
-                        placeholder="Type your message here..."
-                        type="text"
-                        maxLength={250}
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={handleKeyDown}
-                        className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-6"
-                    />
-                    <span
-                        className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-6 bottom-5"
-                        onClick={handleArrowClick}
-                    >
-                        <BsArrowRightShort className="check-icon" />
-                    </span>
                 </div>
-            </div>
+            ) : (
+                <div className="child-container-2 pl-">
+                    <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-center relative overflow-hidden">
+                        <div className="w-1/2 h-1/2 bg-red400 mb-10 flex justify-center items-center object-cover">
+                            <img
+                                src={noChat}
+                                alt="nochat"
+                                className=" opacity-75"
+                            />
+                        </div>
+                        <h1 className="font-normal font-satoshi whitespace-nowrap text-center uppercase">
+                            OPS! There's no channel at this moment. <br />
+                            Please consider creating one by clicking on the{" "}
+                            <span className="font-black"> [ + ] </span>
+                            on your{" "}
+                            <span className="font-black underline">
+                                left sidebar.
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+            )}
             <div className="child-container-1 xl:h-screen xl:pr- pl-">
                 <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[18em] xl:h-[55em] flex flex-col justify-center items-center relative">
                     <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
