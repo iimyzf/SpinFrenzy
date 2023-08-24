@@ -3,7 +3,7 @@ import Apollo from "../assets/Apollo.jpg";
 import { FiLogOut } from "react-icons/fi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
 import "../components/AddChannel.css";
 import AddChannel from "../components/AddChannel";
@@ -46,6 +46,16 @@ const Chat = () => {
     const togglePopup = () => {
         setPopup(!popup);
     };
+
+	const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Scroll to the bottom when a new message is added
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTop =
+                messagesContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     return (
         <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-3 xs:m-5 xl:m-0">
@@ -109,7 +119,10 @@ const Chat = () => {
                     <span className="line absolute top-20"></span>
                     <span className="line absolute bottom-24"></span>
                     <div className="h-[44em] w-full mb-3 px-5 overflow-y-scroll no-scrollbar bg-yellow500">
-                        <div className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden">
+                        <div
+                            className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
+                            ref={messagesContainerRef}
+                        >
                             {messages.map((message, idx) => (
                                 <MessageContainer
                                     key={idx}
