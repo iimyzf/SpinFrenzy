@@ -89,7 +89,7 @@ const Dashboard = () => {
     // };
 
     return (
-        <div className="my-[1vw]">
+        <div className="my-[1vw] flex flex-col">
             <div className="first-container h-[4vw] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
                 <h2 className="font-black lowercase font-satoshi text-[.8vw] tracking-wider">
                     spinfrenzy
@@ -129,93 +129,92 @@ const Dashboard = () => {
                             </div>
                         )}
                     </button> */}
-                    <div className="icons">
-                        <div className="notification">
-                            <div className="notBtn">
-                                <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw]" />
-                                <div className="box messages-box">
-                                    <div className="display">
-                                        <div className="cont">
-                                            <div className="container-1 m-3 p-3 flex justify-center items-center">
-                                                <a href="https://google.com">
-                                                    <div className="flex justify-between items-center gap-2">
-                                                        <img
-                                                            className="w-12 h-12 rounded-full mr3"
-                                                            src={Apollo}
-                                                        />
-                                                        <p className="font-satoshi font-normal text-[1em]">
-                                                            mamella sent you a
-                                                            message
-                                                        </p>
-                                                    </div>
-                                                </a>
+                    {/* <div className="icons"> */}
+                    {/* <div className="notification"> */}
+                    <div className="iconBtn">
+                        <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw]" />
+                        <div className="box messages-box">
+                            <div className="display">
+                                <div className="cont">
+                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
+                                        <a href="https://google.com">
+                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                                <img
+                                                    className="w-[2.5vw] h-[2.5vw] rounded-full"
+                                                    src={Apollo}
+                                                />
+                                                <p className="font-satoshi font-normal text-[.8vw]">
+                                                    mamella sent you a message
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* </div> */}
+                    {/* </div> */}
+                    {/* <div className="icons"> */}
+                    {/* <div className="notification"> */}
+                    <div className="iconBtn">
+                        <BsFillBellFill className="hover:scale-110 text-[.8vw]" />
+                        <div className="box notification-box">
+                            <div className="display">
+                                <div className="cont">
+                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
+                                        <a href="https://google.com">
+                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                                <img
+                                                    className="w-[2.5vw] h-[2.5vw] rounded-full"
+                                                    src={Apollo}
+                                                />
+                                                <p className="font-satoshi font-normal text-[.8vw]">
+                                                    mamella sent you a friend
+                                                    request
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* </div> */}
+                    {/* </div> */}
+                    {/* <div className="icons"> */}
+                    {/* <div className="notification"> */}
+                    <div className="iconBtn user-btn">
+                        <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
+                        <div className="box user-box">
+                            <div className="display">
+                                <div className="cont">
+                                    <Link to="/profile">
+                                        <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
+                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                                <BsFillPersonFill className="text-[.8vw]" />
+                                                <h2 className="font-satoshi font-bold text-[.8vw]">
+                                                    profile
+                                                </h2>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="icons">
-                        <div className="notification">
-                            <div className="notBtn">
-                                <BsFillBellFill className="hover:scale-110 text-[.8vw]" />
-                                <div className="box notification-box">
-                                    <div className="display">
-                                        <div className="cont">
-                                            <div className="container-1 m-3 p-3 flex justify-center items-center">
-                                                <a href="https://google.com">
-                                                    <div className="flex justify-between items-center gap-2">
-                                                        <img
-                                                            className="w-12 h-12 rounded-full mr3"
-                                                            src={Apollo}
-                                                        />
-                                                        <p className="font-satoshi font-normal text-[1em]">
-                                                            mamella sent you a
-                                                            friend request
-                                                        </p>
-                                                    </div>
-                                                </a>
+                                    </Link>
+                                    <Link to="/">
+                                        <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
+                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                                <FiLogOut className="text-[.8vw]" />
+                                                <h2 className="font-satoshi font-bold text-[.8vw]">
+                                                    logout
+                                                </h2>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="icons">
-                        <div className="notification">
-                            <div className="notBtn user-btn">
-                                <BsFillPersonFill className="hover:scale-110 text-[.8vw]" />
-                                <div className="box user-box">
-                                    <div className="display">
-                                        <div className="cont">
-                                            <Link to="/profile">
-                                                <div className="container-1 m-3 p-3 flex justify-center items-center">
-                                                    <div className="flex justify-between items-center gap-2">
-                                                        <BsFillPersonFill className="text-[.8vw]" />
-                                                        <h2 className="font-satoshi font-bold text-[1em]">
-                                                            profile
-                                                        </h2>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                            <Link to="/">
-                                                <div className="container-1 m-3 p-3 flex justify-center items-center">
-                                                    <div className="flex justify-between items-center gap-2">
-                                                        <FiLogOut className="text-[.8vw]" />
-                                                        <h2 className="font-satoshi font-bold text-[1em]">
-                                                            logout
-                                                        </h2>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* </div> */}
+                    {/* </div> */}
                 </div>
             </div>
             <div className="flex mx-[3vw]">
@@ -372,35 +371,36 @@ const Dashboard = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw]">
                                 live games
                             </h2>
-                            <div
-                                className="game-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] items-center"
-                                // onMouseEnter={() => handleLiveGameEnter(0)}
-                                // onMouseLeave={handleLiveGameLeave}
-                            >
-                                <div className="flex items-center gap-5">
-                                    <img
-                                        className="ppic rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                    <h2 className="username font-medium font-satoshi text-[.8vw]">
-                                        username
-                                    </h2>
+                            <Link to="/game">
+                                <div
+                                    className="game-div mt-[1vw] flex container-1 px-[1.5vw] py-[.5vw] justify-between items-center"
+                                    title="Click to watch the game"
+                                >
+                                    <div className="flex items-center gap-5">
+                                        <img
+                                            className="ppic rounded-full w-[2vw] h-[2vw] mr-[.5vw]"
+                                            src={Apollo}
+                                            alt="profile-pic"
+                                        />
+                                        <h2 className="username font-medium font-satoshi text-[.8vw]">
+                                            username
+                                        </h2>
+                                    </div>
+                                    <h1 className="vs font-black font-satoshi text-[1vw]">
+                                        VS
+                                    </h1>
+                                    <div className="flex items-center gap-5">
+                                        <h2 className="username font-medium font-satoshi text-[.8vw]">
+                                            username
+                                        </h2>
+                                        <img
+                                            className="ppic rounded-full w-[2vw] h-[2vw] ml-[.5vw]"
+                                            src={Apollo}
+                                            alt="profile-pic"
+                                        />
+                                    </div>
                                 </div>
-                                <h1 className="vs font-black font-satoshi text-[1vw]">
-                                    VS
-                                </h1>
-                                <div className="flex items-center gap-5">
-                                    <h2 className="username font-medium font-satoshi text-[.8vw]">
-                                        username
-                                    </h2>
-                                    <img
-                                        className="ppic rounded-full w-[2vw] h-[2vw] ml-[.5vw]"
-                                        src={Apollo}
-                                        alt="profile-pic"
-                                    />
-                                </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <div className="flex gap-[1vw] h-[50vh]">
@@ -425,7 +425,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                                 <button className="join-channel container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 text-[.7vw]">
-                                    joinfff
+                                    join
                                 </button>
                             </div>
                         </div>
