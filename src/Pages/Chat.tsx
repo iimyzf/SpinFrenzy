@@ -7,12 +7,14 @@ import { useState } from "react";
 import MessageContainer from "../components/MessageContainer";
 import "../components/AddChannel.css";
 import AddChannel from "../components/AddChannel";
-
+// import {Socket, io} from 'socket.io-client'
 const Chat = () => {
     const [channels, setChannels] = useState<
         { name: string; img: File | null }[]
     >([]);
-
+    // const socket = io('http://localhost:3000', {
+    //     withCredentials: true,
+    // })
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<string[]>([]);
     const [selectedChannel, setSelectedChannel] = useState<{

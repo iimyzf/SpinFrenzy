@@ -1,9 +1,8 @@
 import { ReactP5Wrapper } from '@p5-wrapper/react';
 import './Game.css';
 import { io, Socket } from 'socket.io-client'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GameField from './GameField';
-
 
 
 function Game() {
@@ -20,15 +19,29 @@ function Game() {
   const [side, setSide] = useState<number>();
 
   const [started, setStarted] = useState<boolean>(false);
-  
+
+  const socketRef = useRef<Socket | null>(null);
+  const [roomName, setRoomName] = useState<string>();
+
+  const [socket, setSocket] = useState<Socket | null>(null);
+
 
   useEffect(() => {
-    
-    const socket: Socket = io("localhost:8000");
+    if (socketRef.current === null) {
+      socketRef.current = io("http://localhost:3000/game",{ withCredentials: true });
+    }
+    //setSocket(socketRef.current);
+    const socket = socketRef.current;
+    if (socket === null) {
+      console.log("peace");
+    }
 
-    socket.on("side", (data) => {
-      setSide(data);
-      if (data === 0) {
+    
+    socket?.on("join_room", (data) => {
+      console.log("join_room");
+      setSide(data.side);
+      setRoomName(data.roomName);
+      if (data.side === 0) {
         setPlayerX(4);
         setOpponentX(988);
       }
@@ -38,15 +51,16 @@ function Game() {
       }
     });
 
-    socket.on("started", () => {
+    socket?.on("started", () => {
+      console.log("start");
       setStarted(true);
     });
 
-    socket.on("end", () => {
+    socket?.on("end", () => {
       setStarted(false);
     })
 
-    socket.on("update", (data) => {
+    socket?.on("update", (data) => {
       if (side === 0) {
         setPlayerY(data.leftPlayerY);
         setOpponentY(data.rightPlayerY);
@@ -59,32 +73,70 @@ function Game() {
       setLeftScore(data.leftScore);
     });
     
-    const handleKeyDown = (event: KeyboardEvent) => {
+    // const handleKeyDown = (event: KeyboardEvent) => {
+    //   if (event.key === "ArrowDown") {
+    //     event.preventDefault();
+    //     if (side === 0) {
+    //       socket.emit("move", { direction: "down", side: "left", roomName: roomName } );
+    //     } else {
+    //       socket.emit("move", { direction: "down", side: "right", roomName: roomName } );
+    //     }
+    //   }
+    //   else if (event.key === "ArrowUp") {
+    //     event.preventDefault();
+    //     if (side === 0) {
+    //       socket.emit("move", { direction: "up", side: "left", roomName: roomName } );
+    //     } else {
+    //       socket.emit("move", { direction: "up", side: "right", roomName: roomName } );
+    //     }
+    //   }
+    // };
 
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        if (side === 0) {
-          socket.emit("move", { direction: "down", side: "left" } );
-        } else {
-          socket.emit("move", { direction: "down", side: "right" } );
-        }
-      }
-      else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        if (side === 0) {
-          socket.emit("move", { direction: "up", side: "left" } );
-        } else {
-          socket.emit("move", { direction: "up", side: "right" } );
-        }
-      }
+
+    // document.addEventListener('keydown', handleKeyDown);
+    // return () => {
+    //   // socket.disconnect();
+    //   document.removeEventListener('keydown', handleKeyDown);
+    // };
+
+    let isDragging = false;
+
+    const handleMouseDown = () => {
+      isDragging = true;
     };
 
+    const handleMouseMove = (event: MouseEvent) => {
+      if (isDragging) {
+        // Calculate the direction based on mouse movement
+        const deltaY = event.movementY;
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      socket.disconnect();
-      document.removeEventListener('keydown', handleKeyDown);
-    };
+    // const direction = deltaY > 0 ? "down" : "up";
+
+    // You can adjust the side and roomName logic as needed
+    // const side = /* Calculate side */;
+    // const roomName = /* Calculate roomName */;
+    let Side: string;
+    if (side === 0) { Side = "left" }
+    else { Side = "right" }
+
+    socket?.emit("move", { deltaY, Side, roomName });
+  }
+};
+
+const handleMouseUp = () => {
+  isDragging = false;
+};
+
+document.addEventListener("mousedown", handleMouseDown);
+document.addEventListener("mousemove", handleMouseMove);
+document.addEventListener("mouseup", handleMouseUp);
+
+return () => {
+  // socket.disconnect();
+  document.removeEventListener("mousedown", handleMouseDown);
+  document.removeEventListener("mousemove", handleMouseMove);
+  document.removeEventListener("mouseup", handleMouseUp);
+};
 
   }, [side]);
 
