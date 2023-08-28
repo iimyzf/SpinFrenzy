@@ -4,9 +4,9 @@ import {
     Landing,
     Chat,
     ViewProfile,
-    Home,
+    // Home,
     GameMode,
-    New,
+	Dashboard,
 } from "./Pages/index";
 import AddChannel from "./components/AddChannel";
 import "./App.css";
@@ -19,10 +19,10 @@ const App = () => {
                 <Route path="/" element={<Landing />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/chat" element={<Chat />} />
-                <Route path="/home" element={<Home />} />
+                {/* <Route path="/home" element={<Home />} /> */}
                 <Route path="/gamemode" element={<GameMode />} />
                 <Route path="/game" element={<Game />} />
-                <Route path="/new" element={<New />} />
+                <Route path="/home" element={<Dashboard />} />
                 <Route
                     path="/add-channel"
                     element={

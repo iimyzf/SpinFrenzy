@@ -28,17 +28,11 @@ function Game() {
 
   useEffect(() => {
     if (socketRef.current === null) {
-      socketRef.current = io("http://localhost:3000/game",{ withCredentials: true });
+      socketRef.current = io( "http://localhost:3000/game", { withCredentials: true } );
     }
-    //setSocket(socketRef.current);
-    const socket = socketRef.current;
-    if (socket === null) {
-      console.log("peace");
-    }
-
+    setSocket(socketRef.current);
     
     socket?.on("join_room", (data) => {
-      console.log("join_room");
       setSide(data.side);
       setRoomName(data.roomName);
       if (data.side === 0) {
@@ -49,16 +43,14 @@ function Game() {
         setPlayerX(988);
         setOpponentX(4);
       }
-    });
 
-    socket?.on("started", () => {
-      console.log("start");
       setStarted(true);
+      console.log("start");
     });
 
     socket?.on("end", () => {
       setStarted(false);
-    })
+    });
 
     socket?.on("update", (data) => {
       if (side === 0) {
@@ -72,78 +64,28 @@ function Game() {
       setRightScore(data.rightScore);
       setLeftScore(data.leftScore);
     });
-    
-    // const handleKeyDown = (event: KeyboardEvent) => {
-    //   if (event.key === "ArrowDown") {
-    //     event.preventDefault();
-    //     if (side === 0) {
-    //       socket.emit("move", { direction: "down", side: "left", roomName: roomName } );
-    //     } else {
-    //       socket.emit("move", { direction: "down", side: "right", roomName: roomName } );
-    //     }
-    //   }
-    //   else if (event.key === "ArrowUp") {
-    //     event.preventDefault();
-    //     if (side === 0) {
-    //       socket.emit("move", { direction: "up", side: "left", roomName: roomName } );
-    //     } else {
-    //       socket.emit("move", { direction: "up", side: "right", roomName: roomName } );
-    //     }
-    //   }
-    // };
 
+    return () => {
 
-    // document.addEventListener('keydown', handleKeyDown);
-    // return () => {
-    //   // socket.disconnect();
-    //   document.removeEventListener('keydown', handleKeyDown);
-    // };
-
-    let isDragging = false;
-
-    const handleMouseDown = () => {
-      isDragging = true;
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
-      if (isDragging) {
-        // Calculate the direction based on mouse movement
-        const deltaY = event.movementY;
+  }, [side, socket]);
 
-    // const direction = deltaY > 0 ? "down" : "up";
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
 
-    // You can adjust the side and roomName logic as needed
-    // const side = /* Calculate side */;
-    // const roomName = /* Calculate roomName */;
+    const deltaY = event.movementY;
+  
     let Side: string;
     if (side === 0) { Side = "left" }
     else { Side = "right" }
-
+  
     socket?.emit("move", { deltaY, Side, roomName });
   }
-};
-
-const handleMouseUp = () => {
-  isDragging = false;
-};
-
-document.addEventListener("mousedown", handleMouseDown);
-document.addEventListener("mousemove", handleMouseMove);
-document.addEventListener("mouseup", handleMouseUp);
-
-return () => {
-  // socket.disconnect();
-  document.removeEventListener("mousedown", handleMouseDown);
-  document.removeEventListener("mousemove", handleMouseMove);
-  document.removeEventListener("mouseup", handleMouseUp);
-};
-
-  }, [side]);
 
   if (!started) {
     return (
       <div className='bg-black text-white text-xl'>
-        waiting another player to join you
+        --- waiting another player to join you ---w 
       </div>
     );
   }
@@ -165,7 +107,7 @@ return () => {
             <span className='text-white text-lg font-mono font-bold'>@USER</span>
           </span>
         </div>
-        <div className='canvas' >
+        <div className='canvas' onMouseMove={handleMouseMove}>
           <ReactP5Wrapper sketch={GameField} playerY={playerY} opponentY={opponentY}  playerX={playerX} opponentX={opponentX} side={side} ball={ball}/>
         </div>
         <div className="flex flex-col items-center">
