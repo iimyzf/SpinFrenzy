@@ -82,7 +82,7 @@ const Profile = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="parent flex justify-center items-center gap-[1.2vw] w-screen h-screen max-sm:flex-col max-sm:mt-[20vw] max-sm:mb-[20vw]">
+        <div className="parent flex justify-center items-center gap-[1.2vw] h-screen max-sm:flex-col max-sm:mt-[20vw] max-sm:mb-[20vw]">
             <div className="child-container-1">
                 <div className="container-1 font-satoshi text-white w-[16vw] h-[90vh] max-sm:w-[30vw] max-sm:h-[40vw] flex flex-col justify-center items-center relative">
                     <div className="img-holder absolute top-[6vw]">
@@ -166,7 +166,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className="child-container-2">
-                <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] max-sm:w-[30vw] flex flex-col justify-center items-center">
+                <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] max-sm:w-[30vw] max-sm:h-[50vw] flex flex-col justify-center items-center">
                     <div className="flex justify-center items-center gap-[1vw] max-sm:flex-col">
                         <div className="editable">
                             <h3 className="text-[1vw] font-satoshi font-normal">
