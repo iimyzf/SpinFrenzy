@@ -63,13 +63,13 @@
     - adjust "width" to fit the content accordingly 
 */
 .switches-container {
-    width: 12vw;
+    width: 10vw;
     position: relative;
     display: flex;
     padding: 0;
     position: relative;
     background: var(--switches-bg-color);
-    line-height: 3vw;
+    line-height: 2.5vw;
     border-radius: 0.8vw;
     margin-left: auto;
     margin-right: auto;
@@ -90,7 +90,7 @@
     text-align: center;
     cursor: pointer;
     color: var(--switches-label-color);
-    font-size: 1vw;
+    font-size: .8vw;
     font-weight: bold;
 }
 
