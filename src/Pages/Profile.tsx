@@ -82,9 +82,9 @@ const Profile = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="parent flex justify-center items-center gap-[1.2vw] h-screen">
+        <div className="parent flex justify-center items-center gap-[1.2vw] w-screen h-screen max-sm:flex-col max-sm:mt-[20vw] max-sm:mb-[20vw]">
             <div className="child-container-1">
-                <div className="container-1 font-satoshi text-white w-[16vw] h-[90vh] flex flex-col justify-center items-center relative">
+                <div className="container-1 font-satoshi text-white w-[16vw] h-[90vh] max-sm:w-[30vw] max-sm:h-[40vw] flex flex-col justify-center items-center relative">
                     <div className="img-holder absolute top-[6vw]">
                         <label htmlFor="imageInput">
                             <img
@@ -166,8 +166,8 @@ const Profile = () => {
                 </div>
             </div>
             <div className="child-container-2">
-                <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] flex flex-col justify-center items-center">
-                    <div className="flex justify-center items-center gap-[1vw]">
+                <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] max-sm:w-[30vw] flex flex-col justify-center items-center">
+                    <div className="flex justify-center items-center gap-[1vw] max-sm:flex-col">
                         <div className="editable">
                             <h3 className="text-[1vw] font-satoshi font-normal">
                                 username
@@ -195,48 +195,48 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="editable flex flex-col mt-[2.5vw]">
-                        <h3 className="text-[1vw] font-satoshi font-normal">
+                    <div className="editable flex flex-col mt-[2.5vw] max-sm:w-full">
+                        <h3 className="text-[1vw] font-satoshi font-normal max-sm:pl-[2.8vw]">
                             social links
                         </h3>
-                        <div className="flex gap-[1vw] mt-[1vw]">
-                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal">
+                        <div className="flex gap-[1vw] mt-[1vw] max-sm:px-[2.8vw]">
+                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal max-sm:hidden">
                                 github
                             </span>
                             <div className="flex">
                                 <input
                                     onChange={handleGithubChange}
                                     type="link"
-                                    className="w-[42vw] h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
+                                    className="w-[42vw] max-sm:w-full h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
                                 />
                             </div>
                         </div>
-                        <div className="flex gap-[1vw] mt-[1vw]">
-                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal">
+                        <div className="flex gap-[1vw] mt-[1vw] max-sm:px-[2.8vw]">
+                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal max-sm:hidden">
                                 linkedin
                             </span>
                             <div className="flex">
                                 <input
                                     onChange={handleLinkedinChange}
                                     type="link"
-                                    className="w-[42vw] h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
+                                    className="w-[42vw] max-sm:w-full h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
                                 />
                             </div>
                         </div>
-                        <div className="flex gap-[1vw] mt-[1vw]">
-                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal">
+                        <div className="flex gap-[1vw] mt-[1vw] max-sm:px-[2.8vw]">
+                            <span className="check-span w-[6vw] h-[3vw] rounded-[.6vw] text-[1vw] flex justify-center items-center font-normal max-sm:hidden">
                                 instagram
                             </span>
                             <div className="flex">
                                 <input
                                     onChange={handleInstagramChange}
                                     type="link"
-                                    className="w-[42vw] h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
+                                    className="w-[42vw] max-sm:w-full h-[3vw] rounded-[.6vw] input-container outline-none indent-[1vw]"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-between mt-[2.5vw] w-[49vw]">
+                    <div className="flex items-center justify-between mt-[2.5vw] w-[49vw] max-sm:w-full max-sm:px-[2.8vw]">
                         <span className="text-[1vw] font-normal font-satoshi">
                             enable 2auth
                         </span>
@@ -273,7 +273,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-[3vw] w-[49vw]">
+                    <div className="mt-[3vw] w-[49vw] max-sm:w-full max-sm:pr-[2.8vw]">
                         <div className="child flex gap-[4vw] justify-end items-center">
                             <h3 className="font-light text-[1vw]">
                                 <a
