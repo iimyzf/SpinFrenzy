@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    height: 100vh;
+    height: 100%;
     transition: height 1s ease-in-out;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -57,6 +57,17 @@
     /* height: inherit; */
     right: -10px;
     position: absolute;
+}
+
+@media not all and (min-width: 640px) {
+    .card {
+        height: 14vh;
+        width: 14vh;
+    }
+    .card--expanded {
+        height: 16vh;
+        width: 16vh;
+    }
 }
 
 .game-div:hover {
@@ -154,6 +165,7 @@
     -moz-box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 10px 10px 23px 0px rgba(0, 0, 0, 0.1); */
     cursor: context-menu;
+    z-index: 5;
 }
 
 /* .fas:hover {
@@ -181,6 +193,15 @@
 
 .user-btn:hover > .user-box {
     height: 12vh;
+}
+
+@media not all and (min-width: 640px) {
+    .iconBtn:hover > .box {
+        height: 15vh;
+    }
+    .user-btn:hover > .user-box {
+        height: 6.2vh;
+    }
 }
 
 .notification-box {
