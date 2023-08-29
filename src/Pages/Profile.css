@@ -94,6 +94,16 @@
     font-weight: bold;
 }
 
+@media not all and (min-width: 640px) {
+	.switches-container {
+		width: 20vw;
+		line-height: 3.5vw;
+	}
+	.switches-container label {
+		font-size: 2vw;
+	}
+}
+
 /* switch highlighters wrapper (sliding left / right) 
     - need wrapper to enable the even margins around the highlight box
 */
