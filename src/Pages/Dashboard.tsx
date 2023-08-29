@@ -91,9 +91,12 @@ const Dashboard = () => {
     return (
         <div className="my-[1vw] max-sm:my-[2vw] flex flex-col">
             <div className="first-container h-[8vh] max-sm:h-[6vh] max-sm:mb-[.8vh] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
-                <h2 className="font-black lowercase font-satoshi text-[.8vw] max-sm:text-[1.2vh] tracking-wider">
+                <Link
+                    to="/home"
+                    className="font-black lowercase font-satoshi text-[.8vw] max-sm:text-[1.2vh] tracking-wider"
+                >
                     spinfrenzy
-                </h2>
+                </Link>
                 <div className="flex gap-[2vw] max-sm:gap-[5vw]">
                     <div className="iconBtn">
                         <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
@@ -102,9 +105,9 @@ const Dashboard = () => {
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                         <a href="https://google.com">
-                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw]">
                                                 <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] rounded-full"
                                                     src={Apollo}
                                                 />
                                                 <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh]">
@@ -124,9 +127,9 @@ const Dashboard = () => {
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                         <a href="https://google.com">
-                                            <div className="flex justify-between items-center gap-[.6vw]">
+                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw]">
                                                 <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] rounded-full"
                                                     src={Apollo}
                                                 />
                                                 <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh]">
@@ -141,7 +144,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="iconBtn user-btn">
-                        <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1vh]" />
+                        <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
                         <div className="box user-box">
                             <div className="display">
                                 <div className="cont">
@@ -172,7 +175,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidde">
+                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidden">
                     <div className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
                         <button
                             className="friend-bn absolute"
@@ -327,12 +330,12 @@ const Dashboard = () => {
                             </h2>
                             <Link to="/game">
                                 <div
-                                    className="game-div mt-[1vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] justify-between items-center"
+                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] justify-between items-center"
                                     title="Click to watch the game"
                                 >
                                     <div className="flex items-center gap-5 max-sm:gap-[1vw]">
                                         <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[4vw] max-sm:h-[4vw] mr-[.5vw]"
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
                                             src={Apollo}
                                             alt="profile-pic"
                                         />
@@ -348,7 +351,7 @@ const Dashboard = () => {
                                             username
                                         </h2>
                                         <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[4vw] max-sm:h-[4vw] ml-[.5vw]"
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] ml-[.5vw]"
                                             src={Apollo}
                                             alt="profile-pic"
                                         />
@@ -362,10 +365,10 @@ const Dashboard = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
                                 popular public channels
                             </h2>
-                            <div className="channel-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
+                            <div className="channel-div mt-[1vw] max-sm:mt-[2.5vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
                                 <div className="flex items-center gap-5 max-sm:gap-[1vw]">
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[4vw] max-sm:h-[4vw] mr-[.5vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
@@ -373,7 +376,7 @@ const Dashboard = () => {
                                         <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
                                             name of the channel
                                         </h2>
-                                        <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh]">
+                                        <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] opacity-70">
                                             42 members
                                         </h3>
                                     </div>
@@ -387,13 +390,13 @@ const Dashboard = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
                                 leaderboard
                             </h2>
-                            <div className="person-div mt-[1vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
-                                <div className="flex items-center gap-5 max-sm:gap-[1vw]">
+                            <div className="person-div mt-[1vw] max-sm:mt-[2.5vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
+                                <div className="flex items-center gap-[1vw] max-sm:gap-[1vw]">
                                     <h1 className="font-black font-satoshi mr-[1vw] text-[.8vw] max-sm:text-[1.2vh]">
                                         1
                                     </h1>
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[4vw] max-sm:h-[4vw] mr-[.5vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
@@ -401,7 +404,7 @@ const Dashboard = () => {
                                         <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
                                             username
                                         </h2>
-                                        <div className="flex gap-10 max-sm:gap-[10vw] items-center">
+                                        <div className="flex gap-[1vw] max-sm:gap-[7.5vw] items-center">
                                             <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh]">
                                                 games won: 24
                                             </h3>

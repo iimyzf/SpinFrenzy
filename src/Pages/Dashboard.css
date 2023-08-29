@@ -199,7 +199,15 @@
     .iconBtn:hover > .box {
         height: 15vh;
     }
+    .messages-box,
+    .notification-box {
+        width: 30vw;
+    }
+    .user-box {
+        left: -15vw;
+    }
     .user-btn:hover > .user-box {
+        width: 20vw;
         height: 6.2vh;
     }
 }
