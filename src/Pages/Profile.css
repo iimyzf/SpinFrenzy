@@ -104,6 +104,16 @@
 	}
 }
 
+@media not all and (min-width: 768px) {
+	.switches-container {
+		width: 15vw;
+		line-height: 3vw;
+	}
+	.switches-container label {
+		font-size: 1.5vw;
+	}
+}
+
 /* switch highlighters wrapper (sliding left / right) 
     - need wrapper to enable the even margins around the highlight box
 */
