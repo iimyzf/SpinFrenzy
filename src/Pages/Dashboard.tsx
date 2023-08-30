@@ -4,6 +4,7 @@ import {
     BsFillPersonFill,
     BsPersonFillAdd,
     BsPersonFillSlash,
+    BsSearch,
     BsVolumeMuteFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -97,7 +98,23 @@ const Dashboard = () => {
                 >
                     spinfrenzy
                 </Link>
-                <div className="flex gap-[2vw] max-sm:gap-[5vw]">
+                <div className="flex gap-[2vw] items-center max-sm:gap-[5vw]">
+                    <div className="flex items-center">
+                        <div className="search flex items-center container-1 outline-none h-[2.5vw]">
+                            <input
+                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw]"
+                                type="text"
+                                name=""
+                                placeholder="search for a user/channel"
+                            />
+                            <a
+                                className="search-btn container1 flex items-center justify-center w-[2vw] h-[2vw] m-2"
+                                href="#"
+                            >
+                                <BsSearch className="hover:scale110 text-[.8vw] max-sm:text-[1.2vh]" />
+                            </a>
+                        </div>
+                    </div>
                     <div className="iconBtn">
                         <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
                         <div className="box messages-box">
