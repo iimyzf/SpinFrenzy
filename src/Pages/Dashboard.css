@@ -101,7 +101,7 @@
 }
 
 .search:hover > .search-txt {
-    width: 15vw;
+    /* width: 15vw; */
 }
 
 .search-btn {

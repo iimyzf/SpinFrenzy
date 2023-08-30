@@ -9,9 +9,16 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
 import { FiLogOut } from "react-icons/fi";
+import axios from "axios";
+
+interface User {
+    id: number;
+    name: string;
+    image: string;
+}
 
 const Dashboard = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
@@ -61,18 +68,6 @@ const Dashboard = () => {
         setIsActiveUser(userId === isActiveUser ? null : userId);
     };
 
-    // const [hoveredButton, setHoveredButton] = useState(null);
-    // const [activeButton, setActiveButton] = useState(null);
-    // const mouseEnter = (buttonId: any) => {
-    //     setHoveredButton(buttonId);
-    // };
-    // const mouseLeave = () => {
-    //     setHoveredButton(null);
-    // };
-    // const handleButtonClick = (buttonId: any) => {
-    //     setActiveButton(buttonId === activeButton ? null : buttonId);
-    // };
-
     const [userHover, setUserHover] = useState(null);
     const handleUserHoverEnter = (userId: any) => {
         setUserHover(userId);
@@ -81,13 +76,41 @@ const Dashboard = () => {
         setUserHover(null);
     };
 
-    // const [liveGameHover, setliveGameHover] = useState(null);
-    // const handleLiveGameEnter = (gameId: any) => {
-    //     setliveGameHover(gameId);
-    // };
-    // const handleLiveGameLeave = () => {
-    //     setliveGameHover(null);
-    // };
+    const [users, setUsers] = useState<User[]>([]);
+    const [query, setQuery] = useState("");
+    const searchContainerRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const fetshData = async () => {
+            try {
+                const res = await axios.get(
+                    `https://rickandmortyapi.com/api/character/?name=${query}`
+                );
+                if (res.data.results) {
+                    setUsers(res.data.results);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetshData();
+    }, [query]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (
+                searchContainerRef.current &&
+                !searchContainerRef.current.contains(event.target)
+            ) {
+                setQuery("");
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [searchContainerRef]);
 
     return (
         <div className="my-[1vw] max-sm:my-[2vw] flex flex-col">
@@ -99,22 +122,52 @@ const Dashboard = () => {
                     spinfrenzy
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
-                    <div className="flex items-center">
-                        <div className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh]">
+                    <div className="flex flex-col items-center">
+                        <div
+                            className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] fixed top-[2.3vw] right-[13vw] z-10"
+                            ref={searchContainerRef}
+                        >
                             <input
                                 className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
                                 type="text"
-                                name=""
                                 placeholder="search for a user/channel"
+                                onChange={(e) => setQuery(e.target.value)}
+                                value={query}
                             />
                             <a
                                 className="search-btn container1 flex items-center justify-center w-[2vw] h-[2vw] max-sm:mr-[1.5vw] max-md:mr-[1.2vw]"
                                 href="#"
                             >
-                                <BsSearch className="hover:scale110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
+                                <BsSearch className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                             </a>
                         </div>
+                        {query && (
+                            <div className="results cursor-context-menu flex flex-col justify-start items-start bg-[#101010] py-[.4vw] -mr-2 w-[20vw] h-[20vw] mt-[23vw] overflow-y-scroll no-scrollbar overflow-hidden z-50 rounded-lg">
+                                {users.map((user) => (
+                                    <div
+                                        className="result w-full"
+                                        key={user.id}
+                                    >
+                                        <div className="container-1 mx-[.4vw] my-[.2vw] p-[.4vw] flex justify-start items-center">
+                                            <a href="https://google.com">
+                                                <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw]">
+                                                    <img
+                                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] rounded-full"
+                                                        src={user.image}
+                                                        alt={user.name}
+                                                    />
+                                                    <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
+                                                        {user.name}
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
+
                     <div className="iconBtn">
                         <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         <div className="box messages-box">
