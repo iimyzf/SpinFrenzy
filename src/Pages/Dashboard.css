@@ -140,3 +140,34 @@
         width: 30vw;
     }
 }
+
+@media not all and (min-width: 768px) {
+    .card {
+        height: 14vh;
+        width: 14vh;
+    }
+    .card--expanded {
+        height: 16vh;
+        width: 16vh;
+    }
+    .iconBtn:hover > .box {
+        height: 15vh;
+    }
+    .messages-box,
+    .notification-box {
+        width: 30vw;
+    }
+    .notification-box {
+        left: -20vw;
+    }
+    .user-box {
+        left: -12vw;
+    }
+    .user-btn:hover > .user-box {
+        width: 15vw;
+        height: 6.2vh;
+    }
+    .search:hover > .search-txt {
+        width: 30vw;
+    }
+}

@@ -91,43 +91,43 @@ const Dashboard = () => {
 
     return (
         <div className="my-[1vw] max-sm:my-[2vw] flex flex-col">
-            <div className="first-container h-[8vh] max-sm:h-[6vh] max-sm:mb-[.8vh] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
+            <div className="first-container h-[8vh] max-sm:h-[6vh] max-md:h-[5vh] max-sm:mb-[.8vh] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
                 <Link
                     to="/home"
-                    className="font-black lowercase font-satoshi text-[.8vw] max-sm:text-[1.2vh] tracking-wider"
+                    className="font-black lowercase font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] tracking-wider"
                 >
                     spinfrenzy
                 </Link>
-                <div className="flex gap-[2vw] items-center max-sm:gap-[5vw]">
+                <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
                     <div className="flex items-center">
-                        <div className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh]">
+                        <div className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh]">
                             <input
-                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw] max-sm:text-[2vw]"
+                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
                                 type="text"
                                 name=""
                                 placeholder="search for a user/channel"
                             />
                             <a
-                                className="search-btn container1 flex items-center justify-center w-[2vw] h-[2vw] m-2"
+                                className="search-btn container1 flex items-center justify-center w-[2vw] h-[2vw] max-sm:mr-[1.5vw] max-md:mr-[1.2vw]"
                                 href="#"
                             >
-                                <BsSearch className="hover:scale110 text-[.8vw] max-sm:text-[1.2vh]" />
+                                <BsSearch className="hover:scale110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                             </a>
                         </div>
                     </div>
                     <div className="iconBtn">
-                        <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
+                        <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         <div className="box messages-box">
                             <div className="display">
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                         <a href="https://google.com">
-                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw]">
+                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw]">
                                                 <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] rounded-full"
+                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] rounded-full"
                                                     src={Apollo}
                                                 />
-                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh]">
+                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
                                                     mamella sent you a message
                                                 </p>
                                             </div>
@@ -138,18 +138,18 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="iconBtn">
-                        <BsFillBellFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
+                        <BsFillBellFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         <div className="box notification-box">
                             <div className="display">
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                         <a href="https://google.com">
-                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw]">
+                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw]">
                                                 <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] rounded-full"
+                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] rounded-full"
                                                     src={Apollo}
                                                 />
-                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh]">
+                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
                                                     mamella sent you a friend
                                                     request
                                                 </p>
@@ -161,15 +161,15 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="iconBtn user-btn">
-                        <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh]" />
+                        <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         <div className="box user-box">
                             <div className="display">
                                 <div className="cont">
                                     <Link to="/profile">
                                         <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                             <div className="flex justify-between items-center gap-[.6vw]">
-                                                <BsFillPersonFill className="text-[.8vw] max-sm:text-[1vh]" />
-                                                <h2 className="font-satoshi font-bold text-[.8vw] max-sm:text-[1vh]">
+                                                <BsFillPersonFill className="text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]" />
+                                                <h2 className="font-satoshi font-bold text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
                                                     profile
                                                 </h2>
                                             </div>
@@ -178,8 +178,8 @@ const Dashboard = () => {
                                     <Link to="/">
                                         <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
                                             <div className="flex justify-between items-center gap-[.6vw]">
-                                                <FiLogOut className="text-[.8vw] max-sm:text-[1vh]" />
-                                                <h2 className="font-satoshi font-bold text-[.8vw] max-sm:text-[1vh]">
+                                                <FiLogOut className="text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]" />
+                                                <h2 className="font-satoshi font-bold text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
                                                     logout
                                                 </h2>
                                             </div>
@@ -192,7 +192,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidden">
+                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidden max-md:hidden">
                     <div className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
                         <button
                             className="friend-bn absolute"
@@ -279,16 +279,16 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="w-full">
-                    <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col">
-                        <div className="second-container container-1 mt-[1vw] ml-[1vw] p-[1vw] max-sm:p-[3vw] w-1/2 pb-[5vw] max-sm:ml-0 max-sm:w-full max-sm:h-full">
-                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
+                    <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">
+                        <div className="second-container container-1 mt-[1vw] ml-[1vw] p-[1vw] max-sm:p-[3vw] w-1/2 pb-[5vw] max-sm:ml-0 max-sm:w-full max-sm:h-full max-md:ml-0 max-md:w-full max-md:h-full">
+                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                 Play a Game
                             </h2>
-                            <div className="handler flex justify-center items-center w-full h-full mt-[2vw] max-sm:mt-0">
+                            <div className="handler flex justify-center items-center w-full h-full mt-[2vw] max-sm:mt-0 max-md:mt-0">
                                 <nav
                                     className={`no-scrollbar nav${
                                         isNavExpanded ? " nav--expanded" : ""
-                                    } gap-[.4vw] max-sm:gap-[1.2vw]`}
+                                    } gap-[.4vw] max-sm:gap-[1.2vw] max-md:gap-[1.2vw]`}
                                 >
                                     <Link to="/game">
                                         <div
@@ -301,7 +301,7 @@ const Dashboard = () => {
                                                 handleCardClick(0)
                                             }
                                         >
-                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
+                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                                 EASY
                                             </p>
                                         </div>
@@ -317,7 +317,7 @@ const Dashboard = () => {
                                                 handleCardClick(1)
                                             }
                                         >
-                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
+                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                                 Medium
                                             </p>
                                         </div>
@@ -333,7 +333,7 @@ const Dashboard = () => {
                                                 handleCardClick(2)
                                             }
                                         >
-                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
+                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                                 Hard
                                             </p>
                                         </div>
@@ -341,34 +341,34 @@ const Dashboard = () => {
                                 </nav>
                             </div>
                         </div>
-                        <div className="third-container container-1 mt-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:w-full max-sm:h-full">
-                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
+                        <div className="third-container container-1 mt-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:w-full max-sm:h-full max-md:w-full max-md:h-full">
+                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                 live games
                             </h2>
                             <Link to="/game">
                                 <div
-                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] justify-between items-center"
+                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] justify-between items-center"
                                     title="Click to watch the game"
                                 >
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw]">
+                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw]">
                                         <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] mr-[.5vw]"
                                             src={Apollo}
                                             alt="profile-pic"
                                         />
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh]">
+                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                             username
                                         </h2>
                                     </div>
-                                    <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh]">
+                                    <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh]">
                                         VS
                                     </h1>
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw]">
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh]">
+                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw]">
+                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                             username
                                         </h2>
                                         <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] ml-[.5vw]"
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] ml-[.5vw]"
                                             src={Apollo}
                                             alt="profile-pic"
                                         />
@@ -377,64 +377,64 @@ const Dashboard = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col">
-                        <div className="forth-container container-1 mt-[1vw] ml-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll max-sm:ml-0 max-sm:mt-[1.2vh] no-scrollbar max-sm:w-full max-sm:h-full">
-                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
+                    <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">
+                        <div className="forth-container container-1 mt-[1vw] ml-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:ml-0 max-sm:mt-[1.2vh] max-sm:w-full max-sm:h-full max-md:ml-0 max-md:mt-[1.2vh] max-md:w-full max-md:h-full">
+                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                 popular public channels
                             </h2>
-                            <div className="channel-div mt-[1vw] max-sm:mt-[2.5vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
-                                <div className="flex items-center gap-5 max-sm:gap-[1vw]">
+                            <div className="channel-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] items-center">
+                                <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw]">
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
                                     <div className="flex flex-col items-start">
-                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
+                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                             name of the channel
                                         </h2>
-                                        <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] opacity-70">
+                                        <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] opacity-70">
                                             42 members
                                         </h3>
                                     </div>
                                 </div>
-                                <button className="join-channel container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 text-[.7vw] max-sm:text-[1.1vh]">
+                                <button className="join-channel container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh]">
                                     join
                                 </button>
                             </div>
                         </div>
-                        <div className="forth-container container-1 mt-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:w-full max-sm:h-full">
-                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh]">
+                        <div className="forth-container container-1 mt-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:w-full max-sm:h-full max-md:w-full max-md:h-full">
+                            <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                 leaderboard
                             </h2>
-                            <div className="person-div mt-[1vw] max-sm:mt-[2.5vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] items-center">
-                                <div className="flex items-center gap-[1vw] max-sm:gap-[1vw]">
-                                    <h1 className="font-black font-satoshi mr-[1vw] text-[.8vw] max-sm:text-[1.2vh]">
+                            <div className="person-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] items-center">
+                                <div className="flex items-center gap-[1vw] max-sm:gap-[1vw] max-md:gap-[1vw]">
+                                    <h1 className="font-black font-satoshi mr-[1vw] text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                         1
                                     </h1>
                                     <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] mr-[.5vw]"
+                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] mr-[.5vw]"
                                         src={Apollo}
                                         alt="channel-pic"
                                     />
                                     <div className="flex flex-col">
-                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh]">
+                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                             username
                                         </h2>
-                                        <div className="flex gap-[1vw] max-sm:gap-[7.5vw] items-center">
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh]">
+                                        <div className="flex gap-[1vw] max-sm:gap-[7.5vw] max-md:gap-[7.5vw] items-center">
+                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh]">
                                                 games won: 24
                                             </h3>
-                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh]">
+                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh]">
                                                 /
                                             </h1>
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh]">
+                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh]">
                                                 games losses: 12
                                             </h3>
-                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh]">
+                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh]">
                                                 /
                                             </h1>
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh]">
+                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh]">
                                                 draws: 6
                                             </h3>
                                         </div>
