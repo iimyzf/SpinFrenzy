@@ -14,7 +14,7 @@ import axios from "axios";
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: File | null }[]
+        { name: string; img: File | null}[]
     >([]);
 
     const [inputValue, setInputValue] = useState("");
@@ -62,15 +62,18 @@ const Chat = () => {
 
     const addChannel = async (currentChannel: {
         name: string;
-        img: File | null;
+        img: File;
     }) => {
         const newChannel = [...channels, currentChannel];
         try {
+            const formData = new FormData();
+            formData.append('file', currentChannel.img);
+            formData.append('name', currentChannel.name);
             const data = {
                 name: currentChannel.name,
             };
 
-            await axios.post("http://localhost:3000/chat/new", data, {
+            await axios.post("http://localhost:3000/chat/new", formData, {
                 withCredentials: true,
             });
         } catch (error) {
@@ -106,7 +109,6 @@ const Chat = () => {
         setSocket(socketRef.current);
 
         socket?.on("newmessage", (dto: any) => {
-            console.log("GOOT HERE");
             console.log("message received: ", dto[0].message);
             setMessages((prevMessages) => [
                 ...prevMessages,
