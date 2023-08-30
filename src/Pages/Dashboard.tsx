@@ -100,9 +100,9 @@ const Dashboard = () => {
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw]">
                     <div className="flex items-center">
-                        <div className="search flex items-center container-1 outline-none h-[2.5vw]">
+                        <div className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh]">
                             <input
-                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw]"
+                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw] max-sm:text-[2vw]"
                                 type="text"
                                 name=""
                                 placeholder="search for a user/channel"
