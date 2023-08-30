@@ -3,20 +3,29 @@ import './Game.css';
 import { io, Socket } from 'socket.io-client'
 import { useEffect, useRef, useState } from 'react';
 import GameField from './GameField';
+import axios from 'axios';
+
+
+interface BallPos {
+	x: number;
+	y: number;
+}
+
+interface GameData {
+	ballPos: BallPos;
+	leftPlayerY: number;
+	rightPlayerY: number;
+	speedX: number;
+	speedY: number;
+}
+
+interface PlayerData {
+  name: string;
+  avatar: string
+}
 
 
 function Game() {
-
-  const [playerY, setPlayerY] = useState<number>();
-  const [playerX, setPlayerX] = useState<number>();
-  const [opponentX, setOpponentX] = useState<number>();
-  const [opponentY, setOpponentY] = useState<number>();
-
-  const [rightScore, setRightScore] = useState<number>(0);
-  const [leftScore, setLeftScore] = useState<number>(0);
-
-  const [ball, setBall] = useState({x: 0, y: 0});
-  const [side, setSide] = useState<number>();
 
   const [started, setStarted] = useState<boolean>(false);
 
@@ -25,6 +34,39 @@ function Game() {
 
   const [socket, setSocket] = useState<Socket | null>(null);
 
+  const [data, setData] = useState<GameData>();
+  const [playerOne, setPlayerOne] = useState<PlayerData>();
+  const [playerTwo, setPlayerTwo] = useState<PlayerData>();
+  const [scale, setScale] = useState<number>(1);
+
+
+  const handleWindowResize = () => {
+    if (window.innerWidth <= 600) {
+      setScale(0.4);
+    }
+    else if (window.innerWidth <= 800) {
+      setScale(0.5);
+    }
+    else if (window.innerWidth <= 1000) {
+      setScale(0.6);
+    }
+    else if (window.innerWidth <= 1400) {
+      setScale(0.8);
+    }
+    else {
+      setScale(1);
+    }
+  };
+
+  useEffect(() => {
+    // Attach the resize event listener when the component mounts
+    window.addEventListener('resize', handleWindowResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (socketRef.current === null) {
@@ -32,60 +74,47 @@ function Game() {
     }
     setSocket(socketRef.current);
     
-    socket?.on("join_room", (data) => {
-      setSide(data.side);
-      setRoomName(data.roomName);
-      if (data.side === 0) {
-        setPlayerX(4);
-        setOpponentX(988);
-      }
-      else {
-        setPlayerX(988);
-        setOpponentX(4);
-      }
+    socket?.on("join_room", async (obj: any) => {
+      setData(obj.data);
+      setRoomName(obj.roomName);
+
+      await axios.get( `http://localhost:3000/users/${obj.playerOneId}`, { withCredentials: true } )
+      .then( (res) => {
+        setPlayerOne({name: res.data.lastname, avatar: res.data.photo});
+      })
+
+      await axios.get( `http://localhost:3000/users/${obj.playerTwoId}`, { withCredentials: true } )
+      .then( (res) => {
+        setPlayerTwo({name: res.data.lastname, avatar: res.data.photo});
+      })
 
       setStarted(true);
       console.log("start");
     });
 
-    socket?.on("end", () => {
-      setStarted(false);
-    });
-
-    socket?.on("update", (data) => {
-      if (side === 0) {
-        setPlayerY(data.leftPlayerY);
-        setOpponentY(data.rightPlayerY);
-      } else {
-        setPlayerY(data.rightPlayerY);
-        setOpponentY(data.leftPlayerY);
-      }
-      setBall(data.ballPos);
-      setRightScore(data.rightScore);
-      setLeftScore(data.leftScore);
+    socket?.on("update", (data: GameData) => {
+      setData(data);
     });
 
     return () => {
-
+      socket?.off("update");
+      socket?.off("join_room");
     };
 
-  }, [side, socket]);
+  }, [socket]);
+
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-
-    const deltaY = event.movementY;
+    const divY = event.currentTarget.getBoundingClientRect().top;
+    const posY = (event.clientY - divY) * (1/scale);
   
-    let Side: string;
-    if (side === 0) { Side = "left" }
-    else { Side = "right" }
-  
-    socket?.emit("move", { deltaY, Side, roomName });
+    socket?.emit("move", { posY, roomName });
   }
 
   if (!started) {
     return (
       <div className='bg-black text-white text-xl'>
-        --- waiting another player to join you ---w 
+        --- waiting another player to join you ---
       </div>
     );
   }
@@ -98,24 +127,24 @@ function Game() {
         </div>
         <div className="flex space-x-16 lg:space-x-48 items-center">
           <span className="flex flex-col items-center space-y-2">
-            <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
-            <span className='text-white text-lg font-mono font-bold'>@USER</span>
+            <img src={playerOne?.avatar} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
+            <span className='text-white text-lg font-mono font-bold'>{playerOne?.name}</span>
           </span>
           <span className="text-4xl lg:text-6xl text-white font-bold">VS</span>
           <span className="flex flex-col items-center space-y-2">
-            <span className="h-16 lg:h-20 w-16 lg:w-20 canvas"></span>
-            <span className='text-white text-lg font-mono font-bold'>@USER</span>
+          <img src={playerTwo?.avatar} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
+            <span className='text-white text-lg font-mono font-bold'>{playerTwo?.name}</span>
           </span>
         </div>
-        <div className='canvas' onMouseMove={handleMouseMove}>
-          <ReactP5Wrapper sketch={GameField} playerY={playerY} opponentY={opponentY}  playerX={playerX} opponentX={opponentX} side={side} ball={ball}/>
+        <div  className='canvas' onMouseMove={handleMouseMove}>
+          <ReactP5Wrapper sketch={GameField} leftPlayerY={data?.leftPlayerY} rightPlayerY={data?.rightPlayerY} ball={data?.ballPos}/>
         </div>
         <div className="flex flex-col items-center">
         <span className="text-2xl lg:text-4xl text-white font-bold underline">score</span>
         <div className="flex space-x-16 lg:space-x-48 items-center">
-          <span className="text-white text-2xl lg:text-4xl font-black">{leftScore}</span>
+          <span className="text-white text-2xl lg:text-4xl font-black">0</span>
           <span className="text-white text-2xl lg:text-4xl font-black">:</span>
-          <span className="text-white text-2xl lg:text-4xl font-black">{rightScore}</span>
+          <span className="text-white text-2xl lg:text-4xl font-black">0</span>
         </div>
       </div>
     </div>

@@ -7,10 +7,8 @@ interface Ball {
 }
 
 interface GameProps extends SketchProps {
-  playerY: number;
-  opponentY: number;
-  playerX: number;
-  opponentX: number;
+  leftPlayerY: number;
+  rightPlayerY: number;
   ball: Ball;
 }
 
@@ -18,10 +16,8 @@ interface GameProps extends SketchProps {
 
 
 const GameField: Sketch<GameProps> = (p5: any) => {
-  let playerY: number;
-  let playerX: number;
-  let opponentY: number;
-  let opponentX: number;
+  let leftPlayerY: number;
+  let rightPlayerY: number;
 
   let ball: Ball = {x: 500, y:300};
   
@@ -56,11 +52,9 @@ const GameField: Sketch<GameProps> = (p5: any) => {
   }
 
   p5.updateWithProps = (props: GameProps) => { 
-    playerY = props.playerY;
+    leftPlayerY = props.leftPlayerY;
+    rightPlayerY = props.rightPlayerY;
     ball = props.ball;
-    opponentX = props.opponentX;
-    opponentY = props.opponentY;
-    playerX  = props.playerX;
   }
   
   p5.windowResized = () => {
@@ -70,20 +64,21 @@ const GameField: Sketch<GameProps> = (p5: any) => {
   
 
   p5.draw = () => {
-    
+
     p5.clear();
     p5.stroke(255);
     p5.strokeWeight(2);
     p5.ellipse((width*scale)/2, (height*scale)/2, 15*scale);
     p5.line((width*scale)/2, 0, (width*scale)/2, height*scale);
-    
-    p5.rect(playerX*scale ,playerY*scale, 8*scale, 80*scale, 50);
-    p5.rect(opponentX*scale ,opponentY*scale, 8*scale, 80*scale, 50);
-    
+
+    p5.rect(4*scale ,leftPlayerY*scale, 8*scale, 80*scale, 50);
+    p5.rect(988*scale ,rightPlayerY*scale, 8*scale, 80*scale, 50);
+
     p5.ellipse(ball.x * scale, ball.y * scale, 15*scale);
 
 
   }
+
   return {
 		cleanup: p5.remove,
 	};
