@@ -11,6 +11,7 @@ import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
+import { ClassNames } from "@emotion/react";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -42,7 +43,7 @@ const Chat = () => {
                 ...prevMessages,
                 {
                     message: inputValue.trim(),
-                    isSentByMe: true,
+                    isSentByMe: false,
                 },
             ]);
             setInputValue("");
@@ -146,7 +147,7 @@ const Chat = () => {
                                 onClick={() => setSelectedChannel(channel)}
                             >
                                 <img
-                                    className="apollo w-[2.5vw] h-[2.5vw] rounded-full object-cover"
+                                    className="w-[2.5vw] h-[2.5vw] rounded-full object-cover"
                                     src={
                                         channel.img
                                             ? URL.createObjectURL(channel.img)
@@ -154,7 +155,7 @@ const Chat = () => {
                                     }
                                     alt="Apollo"
                                 />
-                                <h4 className="font-medium ml-[.6vw]">
+                                <h4 className="font-medium ml-[.6vw] text-[1vw]">
                                     {channel.name}
                                 </h4>
                             </div>
@@ -166,7 +167,7 @@ const Chat = () => {
                 <div className="child-container-2">
                     <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-start relative overflow-hidden">
                         <img
-                            className="apollo w-[2.5vw] h-[2.5vw] rounded-full absolute top-[1.2vw] left-[2vw] object-cover"
+                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[1.2vw] left-[2vw] object-cover"
                             src={
                                 selectedChannel?.img
                                     ? URL.createObjectURL(selectedChannel?.img)
@@ -174,7 +175,7 @@ const Chat = () => {
                             }
                             alt="Apollo"
                         />
-                        <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw]">
+                        <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw] text-[1vw]">
                             {selectedChannel?.name || "Create a channel"}
                         </h3>
                         {/* <a href="#">
@@ -203,7 +204,7 @@ const Chat = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            className="w-[52.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw]"
+                            className="w-[52.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
                         />
                         <span
                             className="input-container w-[3.5vw] h-[3.2vw] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.2vw] cursor-pointer"
@@ -216,7 +217,7 @@ const Chat = () => {
             ) : (
                 <div className="child-container-2">
                     <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-center relative overflow-hidden">
-                        <div className="w-[30vw] h-[50vh] mb-[2vw] flex justify-center items-center object-cover overflow-hidden">
+                        <div className="w-[30vw] h-[50vh] p-[2vw] flex justify-center items-center object-cover overflow-hidden">
                             <img
                                 src={noChat}
                                 alt="nochat"
@@ -241,7 +242,9 @@ const Chat = () => {
                         Friends
                     </h3>
                     <span className="line absolute top-[4.7vw]"></span>
-                    <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden"></div>
+                    <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden">
+                        {/* Fetsh the friends data and display it here!!!! */}
+                    </div>
                 </div>
             </div>
             {popup && (
