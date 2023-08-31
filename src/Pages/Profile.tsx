@@ -1,11 +1,12 @@
 import "./Profile.css";
-import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsInstagram, BsLinkedin, BsPhone } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Profile = () => {
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState<string>(Apollo);
     const [username, setUsername] = useState("username");
     const [fullName, setFullName] = useState("fullName");
     const [github, setGithub] = useState("github");
@@ -19,6 +20,17 @@ const Profile = () => {
     const [isBioEditing, setIsBioEditing] = useState(false);
     const [isAuthOn, setIsAuthOn] = useState(false);
     const [isAuthOff, setIsAuthOff] = useState(false);
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3000/users/me", { withCredentials: true })
+        .then(res => {
+            setImage(res.data.photo);
+            setUsername(res.data.username);
+            setFullName(`${res.data.firstname} ${res.data.lastname}`);
+            setBio(res.data.bio);
+        })
+    }, [])
 
     const handleAuthOn = () => {
         console.log("it on now!");
@@ -75,9 +87,17 @@ const Profile = () => {
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0];
-        setImage(file);
+        // const file = e.target.files && e.target.files[0];
+        // // setImage(file);
     };
+
+    const postData = async () => {
+        await axios.post("http://localhost:3000/users/me", {
+            bio: bio,
+            username: username,
+            photo: image
+        }, {withCredentials: true});
+    }
 
     const navigate = useNavigate();
 
@@ -89,9 +109,7 @@ const Profile = () => {
                         <label htmlFor="imageInput">
                             <img
                                 className="w-[6vw] h-[6vw] max-sm:w-[14vw] max-sm:h-[14vw] max-md:w-[14vw] max-md:h-[14vw] rounded-full cursor-pointer"
-                                src={
-                                    image ? URL.createObjectURL(image) : Apollo
-                                }
+                                src={image}
                                 alt="Apollo"
                             />
                         </label>
@@ -284,7 +302,7 @@ const Profile = () => {
                                 </a>
                             </h3>
                             <h3 className="font-bold text-[1.3vw] max-sm:text-[2.5vw] max-md:text-[2.5vw]">
-                                <Link to="/chat">SAVE</Link>
+                                <a className="hover:cursor-pointer" onClick={postData}>SAVE</a>
                             </h3>
                         </div>
                     </div>
