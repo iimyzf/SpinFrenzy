@@ -142,8 +142,8 @@ const Dashboard = () => {
                                         className="result w-full"
                                         key={user.id}
                                     >
-                                        <Link to="/view-profile">
-                                            <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw] bg-red-500">
+                                        <Link to={`/view-profile?id=${user.id}`}>
+                                            <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw]">
                                                 <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[1.2vw] max-md:gap-[2vw]">
                                                     <img
                                                         className="w-[2.5vw] h-[2.5vw] max-sm:w-[6vw] max-sm:h-[6vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full"
