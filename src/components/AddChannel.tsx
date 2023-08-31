@@ -31,20 +31,19 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
     const handlePublicCheck = () => {
         setIsPublic(!isPublic);
         setIsPrivate(false);
-        // setIsProtected(false);
+        setIsProtected(false);
     };
 
     const handlePrivateCheck = () => {
         setIsPrivate(!isPrivate);
         setIsPublic(false);
-        // setIsProtected(false);
+        setIsProtected(false);
     };
 
     const handleProtectedCheck = () => {
         setIsProtected(!isProtected);
-        // setIsPublic(false);
-        // setIsPrivate(false);
-		console.log("tfooo")
+        setIsPublic(false);
+        setIsPrivate(false);
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
