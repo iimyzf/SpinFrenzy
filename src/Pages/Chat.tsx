@@ -1,8 +1,7 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
-import { FiLogOut } from "react-icons/fi";
-import { BsFillPersonFill, BsSendFill } from "react-icons/bs";
+import { BsSendFill } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";

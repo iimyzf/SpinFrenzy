@@ -124,9 +124,9 @@
     display: none;
 }
 
-.search:hover > .search-txt {
+/* .search:hover > .search-txt { */
     /* width: 15vw; */
-}
+/* } */
 
 .search-btn {
     float: right;
