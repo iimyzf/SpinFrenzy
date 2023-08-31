@@ -124,50 +124,44 @@ const Dashboard = () => {
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
                     <div className="flex flex-col items-center">
                         <div
-                            className="search flex items-center container-1 outline-none h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] fixed top-[2.3vw] right-[13vw] z-10"
+                            className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]"
                             ref={searchContainerRef}
                         >
                             <input
-                                className="search-txt border-none outline-none bg-transparent float-left px-2 text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
+                                className="search-txt border-none outline-none bg-transparent float-left px-[.5vw] max-sm:px-[1vw] max-md:px-[1vw] text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
                                 type="text"
-                                placeholder="search for a user/channel"
+                                placeholder="search for a user"
                                 onChange={(e) => setQuery(e.target.value)}
                                 value={query}
                             />
-                            <a
-                                className="search-btn container1 flex items-center justify-center w-[2vw] h-[2vw] max-sm:mr-[1.5vw] max-md:mr-[1.2vw]"
-                                href="#"
-                            >
-                                <BsSearch className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
-                            </a>
+                            <BsSearch className="text-[.8vw] mr-[.5vw] max-sm:mr-[1.5vw] max-md:mr-[1.5vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         </div>
                         {query && (
-                            <div className="results cursor-context-menu flex flex-col justify-start items-start bg-[#101010] py-[.4vw] -mr-2 w-[20vw] h-[20vw] mt-[23vw] overflow-y-scroll no-scrollbar overflow-hidden z-50 rounded-lg">
+                            <div className="results cursor-context-menu flex flex-col justify-start items-start bg-[#101010] py-[.4vw] -mr-[.8vw] mt-[23vw] w-[15vw] h-[20vw] max-sm:w-[28vw] max-sm:h-[25vw] max-sm:mt-[33vw] max-sm:py-[.6vw] max-md:w-[28vw] max-md:h-[25vw] max-md:mt-[30vw] max-md:py-[.6vw] overflow-y-scroll no-scrollbar overflow-hidden z-50 rounded-[.5vw]">
                                 {users.map((user) => (
                                     <div
                                         className="result w-full"
                                         key={user.id}
                                     >
-                                        <div className="container-1 mx-[.4vw] my-[.2vw] p-[.4vw] flex justify-start items-center">
-                                            <a href="https://google.com">
-                                                <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw]">
+                                        <Link to="/">
+                                            <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw]">
+                                                <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[1.2vw] max-md:gap-[2vw]">
                                                     <img
-                                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] rounded-full"
+                                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[6vw] max-sm:h-[6vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full"
                                                         src={user.image}
                                                         alt={user.name}
                                                     />
-                                                    <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh]">
+                                                    <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[.9vh] max-md:text-[1.1vh]">
                                                         {user.name}
                                                     </p>
                                                 </div>
-                                            </a>
-                                        </div>
+                                            </div>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>
                         )}
                     </div>
-
                     <div className="iconBtn">
                         <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         <div className="box messages-box">

@@ -136,9 +136,9 @@
         width: 20vw;
         height: 6.2vh;
     }
-    .search:hover > .search-txt {
-        width: 30vw;
-    }
+	.search-txt {
+		width: 20vw;
+	}
 }
 
 @media not all and (min-width: 768px) {
@@ -167,7 +167,7 @@
         width: 15vw;
         height: 6.2vh;
     }
-    .search:hover > .search-txt {
-        width: 30vw;
-    }
+    .search-txt {
+		width: 20vw;
+	}
 }
