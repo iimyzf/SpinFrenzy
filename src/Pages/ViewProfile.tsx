@@ -82,56 +82,53 @@ const ViewProfile = () => {
     }, []);
 
     return (
-        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-0 xs:m-5 xl:m-0">
-            <div className="child-container-1 xl:h-screen xl:pr-3">
-                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[20em] xl:h-[55em] flex flex-col justify-center items-center relative">
-                    <div className="flex flex-row gap-5 items-center justify-center absolute xs:top-[3.2em] xl:top-[5.5em]">
-                        <button className="btn-1 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-red400 container-1">
-                            <span className="add absolute -top-10 font-satoshi text-white font-bold">
+        <div className="parent flex justify-center items-center gap-[1vw] h-screen">
+            <div className="child-container-1">
+                <div className="container-1 font-satoshi text-white w-[18vw] h-[91.5vh] flex flex-col justify-center items-center relative">
+                    <div className="flex flex-row gap-[1vw] items-center justify-center absolute top-[5.5vw]">
+                        <button className="btn-1 w-[3vw] h-[3vw] rounded-full flex justify-center items-center cursor-pointer container-1">
+                            <span className="add absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw]">
                                 Add
                                 <br />
                                 @USERNAME
                             </span>
-                            <BsPersonFillAdd />
+                            <BsPersonFillAdd className="text-[1vw]" />
                         </button>
-                        <button className="btn-2 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-green400 container-1">
-                            <span className="message absolute -top-10 font-satoshi text-white font-bold">
+                        <button className="btn-2 w-[3vw] h-[3vw] rounded-full flex justify-center items-center cursor-pointer container-1">
+                            <span className="message absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw]">
                                 Message
                                 <br />
                                 @USERNAME
                             </span>
-                            <BsFillChatSquareTextFill />
+                            <BsFillChatSquareTextFill className="text-[1vw]" />
                         </button>
-                        <button className="btn-3 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer bg-blue400 container-1">
-                            <span className="block absolute -top-10 font-satoshi text-white font-bold">
+                        <button className="btn-3 w-[3vw] h-[3vw] rounded-full flex justify-center items-center cursor-pointer container-1">
+                            <span className="block absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw]">
                                 Block
                                 <br />
-								@USERNAME
+                                @USERNAME
                             </span>
-                            <BsPersonFillSlash />
+                            <BsPersonFillSlash className="text-[1vw]" />
                         </button>
                     </div>
-                    <div className="img-holder absolute xs:top-[7em] xl:top-[10.5em] bg-blue300">
+                    <div className="img-holder absolute top-[10.5vw]">
                         <div className="">
                             <img
-                                className="xs:w-[6em] xs:h-[6em] xl:w-[8em] xl:h-[8em] rounded-full"
+                                className="w-[7vw] h-[7vw] rounded-full"
                                 src={Apollo}
                                 alt="Apollo"
                             />
-                            <span className="status rounded-full bg-green-400 xs:w-[1.3em] xs:h-[1.3em] xl:w-[1.8em] xl:h-[1.8em] absolute top-1 right-1"></span>
+                            <span className="status rounded-full bg-green-400 w-[1.5vw] h-[1.5vw] absolute top-0 right-[.5vw]"></span>
                         </div>
-                        {/* <button className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-14 bg-yellow-400 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"></button>
-                        <button className="absolute top-1/2 left-0 transform -translate-x-10 -translate-y-1/2 bg-red-400 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"></button>
-                        <button className="absolute top-1/2 right-0 transform translate-x-10 -translate-y-1/2 bg-pink-400 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"></button> */}
                     </div>
-                    <h4 className="font-light absolute xs:top-[13.5em] xl:top-[19em]">
-                        @USERNAME
+                    <h4 className="font-light absolute top-[18vw] text-[1vw]">
+                        @mamella
                     </h4>
-                    <h3 className="font-bold absolute xs:top-[15em] xl:top-[20.5em]">
-                        MAMELLA INDUSTRY
+                    <h3 className="font-bold absolute top-[19.5vw] text-[1vw]">
+                        Mamella Industry
                     </h3>
-                    <div className="bio flex absolute xs:top-[18em] xl:top-[24em] justify-center items-start">
-                        <p className="font-light w-[16em] leading-5 text-ellipsis text-start">
+                    <div className="bio flex absolute top-[22vw] justify-center items-start">
+                        <p className="font-light w-[15vw] text-ellipsis text-start text-[1vw]">
                             Lorem ipsum dolor sit amet consectetur, adipisicing
                             elit. Quas, quis quae nulla optio suscipit libero
                             excepturi omnis cum, quidem cupiditate
@@ -140,39 +137,39 @@ const ViewProfile = () => {
                             consectetured
                         </p>
                     </div>
-                    <ul className="flex gap-5 absolute xs:bottom-14 xl:bottom-20">
+                    <ul className="flex gap-[2vw] absolute bottom-[4vw]">
                         <li>
-                            <a href="#">
+                            <a href="#" className="text-[1vw]">
                                 <BsGithub />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" className="text-[1vw]">
                                 <BsLinkedin />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" className="text-[1vw]">
                                 <BsInstagram />
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div className="child-container-2 xl:h-screen xl:pl-3 bg-green300">
-                <div className="container-2 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[80em] xl:h-[55em] flex flex-col justify-center items-center relative bg-red200 overflow-y-auto">
-                    <div className="editable absolute xs:top-14 xl:left-20 xl:top-16 bg-blue500">
-                        <h3 className="pb-3 uppercase">
-                            Match Statistics for Username
+            <div className="child-container-2">
+                <div className="container-2 font-satoshi text-white w-[70vw] h-[91.5vh] flex flex-col justify-center items-center relative overflow-y-auto">
+                    <div className="editable absolute left-[2vw] top-[3vw]">
+                        <h3 className="text-[1vw]">
+                            Match Statistics for <strong>Username</strong>
                         </h3>
                     </div>
                     <Chart
-                        className="xl:w-[55w] pt-20"
+                        className="w-[60vw] h-full pt-[10vw] text-[1vw]"
                         options={chartOptions}
                         series={chartSeries}
                         type="area"
-                        height={650}
-                        width={1150}
+                        // height={650}
+                        // width={1150}
                     />
                 </div>
             </div>

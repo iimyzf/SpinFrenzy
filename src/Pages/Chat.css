@@ -1,30 +1,11 @@
 .line {
 	width: 100%;
-	height: 1px;
+	height: .1vw;
 	background: rgba(255, 255, 255, 0.15);
-	/* top: 10px; */
-	/* background-color: #e6e6e6; */
-	/* margin: 0;
-	padding: 0;
-	border: 0; */
-	/* display: block; */
-	/* margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: auto;
-	margin-right: auto; */
-	/* clear: both; */
-}
-
-.apollo {
-	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .plus-icon {
 	background: rgba(217, 217, 217, 0.4);
-}
-
-.msg {
-	width: 88%;
 }
 
 .channel {
@@ -38,7 +19,7 @@
 }
 
 .msg-container {
-	border-radius: .6em;
+	border-radius: .5vw;
 	background: rgba(217, 217, 217, 0.15);
 }
 

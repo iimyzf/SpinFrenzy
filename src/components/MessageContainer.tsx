@@ -9,24 +9,36 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
     return (
         <>
             {isSentByMe ? (
-                <div className="mb-3 bg-red600">
-                    <div className="flex justify-end gap-5">
-                        <div className="msg-container">
-                            <p className="msg-text text-start p-5">{message}</p>
+                <div className="flex justify-end items-end ml-[15vw] mb-[.5vw] gap-[.5vw]">
+                    <span className="text-[.6vw] opacity-40 whitespace-nowrap">
+                        23:16 PM
+                    </span>
+                    <div className="flex justify-end items-end">
+                        <div className="flex justify-end">
+                            <div className="msg-container">
+                                <p className="text-start p-[1vw] text-[.9vw]">
+                                    {message}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="mb-3 bg-green600">
-                    <div className="flex justify-start gap-5">
+                <div className="flex justify-start items-end mr-[15vw] mb-[.5vw] gap-[.5vw]">
+                    <div className="flex justify-start items-end gap-[.5vw]">
                         <img
-                            className="w-[2.5em] h-[2.5em] rounded-full"
+                            className="w-[2.2vw] h-[2.2vw] rounded-full"
                             src={Apollo}
                             alt="Apollo"
                         />
                         <div className="msg-container">
-                            <p className="msg-text text-start p-5">{message}</p>
+                            <p className="text-start p-[1vw] text-[.9vw]">
+                                {message}
+                            </p>
                         </div>
+                        <span className="text-[.6vw] opacity-40 whitespace-nowrap">
+                            23:16 PM
+                        </span>
                     </div>
                 </div>
             )}

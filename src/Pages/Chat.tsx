@@ -2,7 +2,7 @@ import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
 import { FiLogOut } from "react-icons/fi";
-import { BsArrowRightShort } from "react-icons/bs";
+import { BsFillPersonFill, BsSendFill } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -11,11 +11,12 @@ import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: File | null}[]
+        { name: string; img: File | null }[]
     >([]);
     // const socket = io('http://localhost:3000', {
     //     withCredentials: true,
@@ -63,18 +64,15 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: {
-        name: string;
-        img: File;
-    }) => {
+    const addChannel = async (currentChannel: { name: string; img: File }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
-            formData.append('file', currentChannel.img);
-            formData.append('name', currentChannel.name);
-            const data = {
-                name: currentChannel.name,
-            };
+            formData.append("file", currentChannel.img);
+            formData.append("name", currentChannel.name);
+            // const data = {
+            //     name: currentChannel.name,
+            // };
 
             await axios.post("http://localhost:3000/chat/new", formData, {
                 withCredentials: true,
@@ -124,24 +122,24 @@ const Chat = () => {
     }, [socket]);
 
     return (
-        <div className="parent flex xs:flex-col xl:flex-row justify-center items-center xs:gap-5 xl:gap-3 xs:m-5 xl:m-0">
-            <div className="child-container-1 xl:h-screen xl:pr- pl-">
-                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[18em] xl:h-[55em] flex flex-col justify-center items-center relative">
-                    <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
+        <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen">
+            <div className="child-container-1">
+                <div className="container-1 font-satoshi text-white w-[18vw] h-[91.5vh] flex flex-col justify-center items-center relative">
+                    <h3 className="absolute top-[1.6vw] uppercase font-bold text-[1vw]">
                         Channels
                     </h3>
-                    <span className="line absolute xs:top-16 xl:top-20"></span>
-                    <span className="line absolute xs:bottom-16 xl:bottom-24"></span>
+                    <span className="line absolute top-[4.7vw]"></span>
+                    <span className="line absolute bottom-[5.7vw]"></span>
                     <a onClick={togglePopup}>
-                        <span className="plus-icon xs:w-[2em] xs:h-[2em] xl:w-[4em] xl:h-[4em] rounded-full absolute bottom-4 right-5 flex justify-center items-center cursor-pointer">
-                            <FiPlus className="xl:text-3xl" />
+                        <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[1.3vw] right-[1.5vw] flex justify-center items-center cursor-pointer">
+                            <FiPlus className="text-[1.2vw]" />
                         </span>
                     </a>
-                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4">
+                    <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden">
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className={`channel flex relative xs:top-[1px] xl:top-0 items-center px-5 scroll-auto xs:h-16 xl:h-20 hover:cursor-pointer ${
+                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[5vw] hover:cursor-pointer ${
                                     selectedChannel === channel
                                         ? "active-channel"
                                         : ""
@@ -149,7 +147,7 @@ const Chat = () => {
                                 onClick={() => setSelectedChannel(channel)}
                             >
                                 <img
-                                    className="apollo xs:w-[1.8em] xs:h-[1.8em] xl:w-[2.5em] xl:h-[2.5em] rounded-full object-cover"
+                                    className="w-[2.5vw] h-[2.5vw] rounded-full object-cover"
                                     src={
                                         channel.img
                                             ? URL.createObjectURL(channel.img)
@@ -157,7 +155,7 @@ const Chat = () => {
                                     }
                                     alt="Apollo"
                                 />
-                                <h4 className="font-medium ml-3 uppercase">
+                                <h4 className="font-medium ml-[.6vw] text-[1vw]">
                                     {channel.name}
                                 </h4>
                             </div>
@@ -166,10 +164,10 @@ const Chat = () => {
                 </div>
             </div>
             {selectedChannel ? (
-                <div className="child-container-2 pl-">
-                    <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-start relative overflow-hidden">
+                <div className="child-container-2">
+                    <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-start relative overflow-hidden">
                         <img
-                            className="apollo w-[2.5em] h-[2.5em] rounded-full absolute top-5 left-10 object-cover"
+                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[1.2vw] left-[2vw] object-cover"
                             src={
                                 selectedChannel?.img
                                     ? URL.createObjectURL(selectedChannel?.img)
@@ -177,15 +175,22 @@ const Chat = () => {
                             }
                             alt="Apollo"
                         />
-                        <h3 className="absolute top-7 uppercase font-bold left-24">
+                        <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw] text-[1vw]">
                             {selectedChannel?.name || "Create a channel"}
                         </h3>
-                        <a href="#">
-                            <FiLogOut className="absolute top-7 right-10 text-2xl" />
-                        </a>
-                        <span className="line absolute top-20"></span>
-                        <span className="line absolute bottom-24"></span>
-                        <div className="h-[43.9em] w-full mb-3 px-5 overflow-y-scroll no-scrollbar">
+                        <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
+                            <div className="flex gap-[.2vw] overflow-x-scroll no-scrollbar overflow-hidde">
+                                <img
+                                    className="w-[2vw] h-[2vw] rounded-full object-cover"
+                                    src={Apollo}
+                                    alt="Apollo"
+                                    title="Apollo" // This will display the name of the user
+                                />
+                            </div>
+                        </div>
+                        <span className="line absolute top-[4.7vw]"></span>
+                        <span className="line absolute bottom-[5.7vw]"></span>
+                        <div className="h-[73vh] w-full mb-[1vw] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
                             <div
                                 className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
                                 ref={messagesContainerRef}
@@ -206,27 +211,27 @@ const Chat = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            className="msg rounded-[12px] input-container outline-none resize px-5 h-14 absolute bottom-5 left-6"
+                            className="w-[52.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
                         />
                         <span
-                            className="check-span w-14 h-14 rounded-[12px] flex justify-center items-center absolute right-6 bottom-5"
+                            className="input-container w-[3.5vw] h-[3.2vw] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.2vw] cursor-pointer"
                             onClick={handleArrowClick}
                         >
-                            <BsArrowRightShort className="check-icon" />
+                            <BsSendFill className="check-icon text-[1vw]" />
                         </span>
                     </div>
                 </div>
             ) : (
-                <div className="child-container-2 pl-">
-                    <div className="container-2 font-satoshi text-white w-[60em] h-[55em] flex flex-col justify-center items-center relative overflow-hidden">
-                        <div className="w-1/2 h-1/2 bg-red400 mb-10 flex justify-center items-center object-cover overflow-hidden">
+                <div className="child-container-2">
+                    <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-center relative overflow-hidden">
+                        <div className="w-[30vw] h-[50vh] p-[2vw] flex justify-center items-center object-cover overflow-hidden">
                             <img
                                 src={noChat}
                                 alt="nochat"
-                                className=" opacity-75"
+                                className="opacity-75"
                             />
                         </div>
-                        <h1 className="font-normal font-satoshi whitespace-nowrap text-center uppercase">
+                        <h1 className="font-normal font-satoshi whitespace-nowrap text-center uppercase text-[1vw]">
                             OPS! There's no channel at this moment. <br />
                             Please consider creating one by clicking on the{" "}
                             <span className="font-black"> [ + ] </span>
@@ -238,13 +243,15 @@ const Chat = () => {
                     </div>
                 </div>
             )}
-            <div className="child-container-1 xl:h-screen xl:pr- pl-">
-                <div className="container-1 font-satoshi text-white xs:w-[20em] xs:h-[35em] xl:w-[18em] xl:h-[55em] flex flex-col justify-center items-center relative">
-                    <h3 className="absolute xs:top-5 xl:top-7 uppercase font-bold">
+            <div className="child-container-1">
+                <div className="container-1 font-satoshi text-white w-[18vw] h-[91.5vh] flex flex-col justify-center items-center relative">
+                    <h3 className="absolute top-[1.6vw] uppercase font-bold text-[1vw]">
                         Friends
                     </h3>
-                    <span className="line absolute xs:top-16 xl:top-20"></span>
-                    <div className="red-divs xs:h-[27em] xl:h-[44em] w-full overflow-y-auto xl:mb-4"></div>
+                    <span className="line absolute top-[4.7vw]"></span>
+                    <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden">
+                        {/* Fetsh the friends data and display it here!!!! */}
+                    </div>
                 </div>
             </div>
             {popup && (

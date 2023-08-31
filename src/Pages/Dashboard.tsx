@@ -96,7 +96,6 @@ const Dashboard = () => {
                 console.log(error);
             }
         };
-
         fetshData();
     }, [query]);
 
@@ -166,7 +165,9 @@ const Dashboard = () => {
                         )}
                     </div>
                     <div className="iconBtn">
-                        <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
+                        <Link to="/chat">
+                            <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
+                        </Link>
                         <div className="box messages-box">
                             <div className="display">
                                 <div className="cont">
