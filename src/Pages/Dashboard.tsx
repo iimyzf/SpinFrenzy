@@ -16,8 +16,11 @@ import axios from "axios";
 
 interface User {
     id: number;
-    name: string;
-    image: string;
+    username: string;
+    photo: string;
+    firstname: string;
+    lastname: string;
+    online: boolean;
 }
 
 const Dashboard = () => {
@@ -84,11 +87,11 @@ const Dashboard = () => {
         const fetshData = async () => {
             try {
                 const res = await axios.get(
-                    `https://rickandmortyapi.com/api/character/?name=${query}`
-                );
-                if (res.data.results) {
-                    setUsers(res.data.results);
-                }
+                    `http://localhost:3000/users/search/all?query=${query}`
+                , {withCredentials: true} );
+                // if (res.data) {
+                    setUsers(res.data);
+                // }
             } catch (error) {
                 console.log(error);
             }
@@ -122,10 +125,10 @@ const Dashboard = () => {
                     spinfrenzy
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center" ref={searchContainerRef}>
                         <div
                             className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]"
-                            ref={searchContainerRef}
+                            
                         >
                             <input
                                 className="search-txt border-none outline-none bg-transparent float-left px-[.5vw] max-sm:px-[1vw] max-md:px-[1vw] text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
@@ -143,16 +146,16 @@ const Dashboard = () => {
                                         className="result w-full"
                                         key={user.id}
                                     >
-                                        <Link to="/">
+                                        <Link to={`/view-profile?id=${user.id}`}>
                                             <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw]">
                                                 <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[1.2vw] max-md:gap-[2vw]">
                                                     <img
                                                         className="w-[2.5vw] h-[2.5vw] max-sm:w-[6vw] max-sm:h-[6vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full"
-                                                        src={user.image}
-                                                        alt={user.name}
+                                                        src={user.photo}
+                                                        alt={user.username}
                                                     />
                                                     <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[.9vh] max-md:text-[1.1vh]">
-                                                        {user.name}
+                                                        {user.username}
                                                     </p>
                                                 </div>
                                             </div>

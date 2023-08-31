@@ -10,14 +10,25 @@ import Apollo from "../assets/Apollo.jpg";
 import React from "react";
 import Chart from "react-apexcharts";
 import "./ViewProfile.css";
+import axios from "axios";
 
 const ViewProfile = () => {
     const [chartOptions, setChartOptions] = React.useState({});
     const [chartSeries, setChartSeries] = React.useState<
         { name: string; data: number[] }[]
     >([]);
+    
+    const queryParams = new URLSearchParams(window.location.search);
+    const id = queryParams.get("id");
 
+
+    
     React.useEffect(() => {
+        axios.get(`http://localhost:3000/users/byid?id=${id}`, {withCredentials: true})
+        .then(res => {
+            console.log(res.data);
+        });
+        
         setChartOptions({
             stroke: {
                 show: true,
