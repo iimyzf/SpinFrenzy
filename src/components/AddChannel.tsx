@@ -86,7 +86,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        maxLength={42}
+                                        maxLength={25}
                                         className="w-full h-14 mt-2 rounded-[12px] input-container outline-none indent-5 text-[1.2em]"
                                     />
                                 </div>

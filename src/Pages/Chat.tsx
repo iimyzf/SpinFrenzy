@@ -2,7 +2,7 @@ import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
 import { FiLogOut } from "react-icons/fi";
-import { BsArrowRightShort, BsSendFill } from "react-icons/bs";
+import { BsFillPersonFill, BsSendFill } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -11,7 +11,7 @@ import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
-import { ClassNames } from "@emotion/react";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -43,7 +43,7 @@ const Chat = () => {
                 ...prevMessages,
                 {
                     message: inputValue.trim(),
-                    isSentByMe: false,
+                    isSentByMe: true,
                 },
             ]);
             setInputValue("");
@@ -70,9 +70,9 @@ const Chat = () => {
             const formData = new FormData();
             formData.append("file", currentChannel.img);
             formData.append("name", currentChannel.name);
-            const data = {
-                name: currentChannel.name,
-            };
+            // const data = {
+            //     name: currentChannel.name,
+            // };
 
             await axios.post("http://localhost:3000/chat/new", formData, {
                 withCredentials: true,
@@ -178,9 +178,16 @@ const Chat = () => {
                         <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw] text-[1vw]">
                             {selectedChannel?.name || "Create a channel"}
                         </h3>
-                        {/* <a href="#">
-                            <FiLogOut className="absolute top-7 right-10 text-2xl" />
-                        </a> */}
+                        <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
+                            <div className="flex gap-[.2vw] overflow-x-scroll no-scrollbar overflow-hidde">
+                                <img
+                                    className="w-[2vw] h-[2vw] rounded-full object-cover"
+                                    src={Apollo}
+                                    alt="Apollo"
+                                    title="Apollo" // This will display the name of the user
+                                />
+                            </div>
+                        </div>
                         <span className="line absolute top-[4.7vw]"></span>
                         <span className="line absolute bottom-[5.7vw]"></span>
                         <div className="h-[73vh] w-full mb-[1vw] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">

@@ -93,7 +93,6 @@ const Dashboard = () => {
                 console.log(error);
             }
         };
-
         fetshData();
     }, [query]);
 
@@ -122,11 +121,11 @@ const Dashboard = () => {
                     spinfrenzy
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
-                    <div className="flex flex-col items-center">
-                        <div
-                            className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]"
-                            ref={searchContainerRef}
-                        >
+                    <div
+                        className="flex flex-col items-center"
+                        ref={searchContainerRef}
+                    >
+                        <div className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]">
                             <input
                                 className="search-txt border-none outline-none bg-transparent float-left px-[.5vw] max-sm:px-[1vw] max-md:px-[1vw] text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
                                 type="text"
@@ -143,8 +142,8 @@ const Dashboard = () => {
                                         className="result w-full"
                                         key={user.id}
                                     >
-                                        <Link to="/">
-                                            <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw]">
+                                        <Link to="/view-profile">
+                                            <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw] bg-red-500">
                                                 <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[1.2vw] max-md:gap-[2vw]">
                                                     <img
                                                         className="w-[2.5vw] h-[2.5vw] max-sm:w-[6vw] max-sm:h-[6vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full"
@@ -163,7 +162,9 @@ const Dashboard = () => {
                         )}
                     </div>
                     <div className="iconBtn">
-                        <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
+                        <Link to="/chat">
+                            <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
+                        </Link>
                         <div className="box messages-box">
                             <div className="display">
                                 <div className="cont">
