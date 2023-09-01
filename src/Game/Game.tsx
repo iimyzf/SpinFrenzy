@@ -57,8 +57,10 @@ function Game() {
       setScale(1);
     }
   };
-
+  
   useEffect(() => {
+    console.log("test");
+    handleWindowResize();
     // Attach the resize event listener when the component mounts
     window.addEventListener('resize', handleWindowResize);
 
@@ -78,12 +80,12 @@ function Game() {
       setData(obj.data);
       setRoomName(obj.roomName);
 
-      await axios.get( `http://localhost:3000/users/${obj.playerOneId}`, { withCredentials: true } )
+      await axios.get( `http://localhost:3000/users/byid?id=${obj.playerOneId}`, { withCredentials: true } )
       .then( (res) => {
         setPlayerOne({name: res.data.lastname, avatar: res.data.photo});
       })
 
-      await axios.get( `http://localhost:3000/users/${obj.playerTwoId}`, { withCredentials: true } )
+      await axios.get( `http://localhost:3000/users/byid?id=${obj.playerTwoId}`, { withCredentials: true } )
       .then( (res) => {
         setPlayerTwo({name: res.data.lastname, avatar: res.data.photo});
       })
