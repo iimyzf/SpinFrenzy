@@ -1,7 +1,7 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
-import { BsSendFill } from "react-icons/bs";
+import { BsSendFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -123,22 +123,22 @@ const Chat = () => {
     return (
         <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen">
             <div className="child-container-1">
-                <div className="container-1 font-satoshi text-white w-[18vw] h-[91.5vh] flex flex-col justify-center items-center relative">
-                    <h3 className="absolute top-[1.6vw] uppercase font-bold text-[1vw]">
-                        Channels
+                <div className="container-1 font-satoshi text-white w-[18vw] h-[90vh] flex flex-col justify-center items-center relative">
+                    <h3 className="absolute top-[3vh] uppercase font-bold text-[1vw]">
+                        Conversations
                     </h3>
-                    <span className="line absolute top-[4.7vw]"></span>
-                    <span className="line absolute bottom-[5.7vw]"></span>
+                    <span className="line absolute top-[8vh]"></span>
+                    <span className="line absolute bottom-[9vh]"></span>
                     <a onClick={togglePopup}>
-                        <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[1.3vw] right-[1.5vw] flex justify-center items-center cursor-pointer">
+                        <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[2vh] right-[1.5vw] flex justify-center items-center cursor-pointer">
                             <FiPlus className="text-[1.2vw]" />
                         </span>
                     </a>
-                    <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden">
+                    <div className="red-divs h-[72.5vh] mb-[1vh] w-full overflow-y-scroll no-scrollbar overflow-hidden bg-red600">
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[5vw] hover:cursor-pointer ${
+                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[8vh] hover:cursor-pointer ${
                                     selectedChannel === channel
                                         ? "active-channel"
                                         : ""
@@ -164,9 +164,9 @@ const Chat = () => {
             </div>
             {selectedChannel ? (
                 <div className="child-container-2">
-                    <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-start relative overflow-hidden">
+                    <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] flex flex-col justify-center items-start relative overflow-hidden">
                         <img
-                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[1.2vw] left-[2vw] object-cover"
+                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[2vh] left-[2vw] object-cover"
                             src={
                                 selectedChannel?.img
                                     ? URL.createObjectURL(selectedChannel?.img)
@@ -174,10 +174,10 @@ const Chat = () => {
                             }
                             alt="Apollo"
                         />
-                        <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw] text-[1vw]">
-                            {selectedChannel?.name || "Create a channel"}
+                        <h3 className="absolute top-[3vh] font-bold left-[5.5vw] text-[1vw]">
+                            {selectedChannel.name}
                         </h3>
-                        <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
+                        {/* <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
                             <div className="flex gap-[.2vw] overflow-x-scroll no-scrollbar overflow-hidde">
                                 <img
                                     className="w-[2vw] h-[2vw] rounded-full object-cover"
@@ -186,12 +186,15 @@ const Chat = () => {
                                     title="Apollo" // This will display the name of the user
                                 />
                             </div>
-                        </div>
-                        <span className="line absolute top-[4.7vw]"></span>
-                        <span className="line absolute bottom-[5.7vw]"></span>
-                        <div className="h-[73vh] w-full mb-[1vw] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
+                        </div> */}
+                        <span className="absolute top-[3vh] right-[2vw]">
+                            <BsThreeDotsVertical className="text-[1.2vw]" />
+                        </span>
+                        <span className="line absolute top-[8vh]"></span>
+                        <span className="line absolute bottom-[9vh]"></span>
+                        <div className="h-[72.5vh] w-full mb-[1vh] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
                             <div
-                                className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
+                                className="max-h-[72.5vh] overflow-y-scroll no-scrollbar overflow-hidden"
                                 ref={messagesContainerRef}
                             >
                                 {messages.map((message, idx) => (
@@ -210,10 +213,10 @@ const Chat = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            className="w-[52.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
+                            className="w-[57.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.7vh] left-[1.5vw] text-[1vw]"
                         />
                         <span
-                            className="input-container w-[3.5vw] h-[3.2vw] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.2vw] cursor-pointer"
+                            className="input-container w-[3.5vw] h-[5.5vh] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.7vh] cursor-pointer"
                             onClick={handleArrowClick}
                         >
                             <BsSendFill className="check-icon text-[1vw]" />
@@ -222,7 +225,7 @@ const Chat = () => {
                 </div>
             ) : (
                 <div className="child-container-2">
-                    <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-center relative overflow-hidden">
+                    <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] flex flex-col justify-center items-center relative overflow-hidden">
                         <div className="w-[30vw] h-[50vh] p-[2vw] flex justify-center items-center object-cover overflow-hidden">
                             <img
                                 src={noChat}
@@ -242,17 +245,17 @@ const Chat = () => {
                     </div>
                 </div>
             )}
-            <div className="child-container-1">
+            {/* <div className="child-container-1">
                 <div className="container-1 font-satoshi text-white w-[18vw] h-[91.5vh] flex flex-col justify-center items-center relative">
                     <h3 className="absolute top-[1.6vw] uppercase font-bold text-[1vw]">
                         Friends
                     </h3>
                     <span className="line absolute top-[4.7vw]"></span>
                     <div className="red-divs h-[73vh] mb-[1.1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden">
-                        {/* Fetsh the friends data and display it here!!!! */}
+                        {/* Fetsh the friends data and display it here!!!! 
                     </div>
                 </div>
-            </div>
+            </div> */}
             {popup && (
                 <AddChannel togglePopup={togglePopup} addChannel={addChannel} />
             )}
