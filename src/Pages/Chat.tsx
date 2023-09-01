@@ -130,7 +130,7 @@ const Chat = () => {
                     <span className="line absolute top-[8vh]"></span>
                     <span className="line absolute bottom-[9vh]"></span>
                     <a onClick={togglePopup}>
-                        <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[1.3vw] right-[1.5vw] flex justify-center items-center cursor-pointer">
+                        <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[2vh] right-[1.5vw] flex justify-center items-center cursor-pointer">
                             <FiPlus className="text-[1.2vw]" />
                         </span>
                     </a>
@@ -138,7 +138,7 @@ const Chat = () => {
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[5vw] hover:cursor-pointer ${
+                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[8vh] hover:cursor-pointer ${
                                     selectedChannel === channel
                                         ? "active-channel"
                                         : ""
@@ -166,7 +166,7 @@ const Chat = () => {
                 <div className="child-container-2">
                     <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] flex flex-col justify-center items-start relative overflow-hidden">
                         <img
-                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[1.2vw] left-[2vw] object-cover"
+                            className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[2vh] left-[2vw] object-cover"
                             src={
                                 selectedChannel?.img
                                     ? URL.createObjectURL(selectedChannel?.img)
@@ -175,7 +175,7 @@ const Chat = () => {
                             alt="Apollo"
                         />
                         <h3 className="absolute top-[3vh] font-bold left-[5.5vw] text-[1vw]">
-                            {selectedChannel?.name || "Create a channel"}
+                            {selectedChannel.name}
                         </h3>
                         {/* <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
                             <div className="flex gap-[.2vw] overflow-x-scroll no-scrollbar overflow-hidde">
@@ -187,14 +187,14 @@ const Chat = () => {
                                 />
                             </div>
                         </div> */}
-                        <span className="absolute top-[1.8vw] right-[2vw] text-[1vw]">
-                            <BsThreeDotsVertical />
+                        <span className="absolute top-[3vh] right-[2vw]">
+                            <BsThreeDotsVertical className="text-[1.2vw]" />
                         </span>
                         <span className="line absolute top-[8vh]"></span>
                         <span className="line absolute bottom-[9vh]"></span>
                         <div className="h-[72.5vh] w-full mb-[1vh] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
                             <div
-                                className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
+                                className="max-h-[72.5vh] overflow-y-scroll no-scrollbar overflow-hidden"
                                 ref={messagesContainerRef}
                             >
                                 {messages.map((message, idx) => (
@@ -213,10 +213,10 @@ const Chat = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            className="w-[57.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
+                            className="w-[57.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.7vh] left-[1.5vw] text-[1vw]"
                         />
                         <span
-                            className="input-container w-[3.5vw] h-[3.2vw] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.2vw] cursor-pointer"
+                            className="input-container w-[3.5vw] h-[5.5vh] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.7vh] cursor-pointer"
                             onClick={handleArrowClick}
                         >
                             <BsSendFill className="check-icon text-[1vw]" />
