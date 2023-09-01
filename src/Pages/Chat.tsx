@@ -124,17 +124,17 @@ const Chat = () => {
         <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen">
             <div className="child-container-1">
                 <div className="container-1 font-satoshi text-white w-[18vw] h-[90vh] flex flex-col justify-center items-center relative">
-                    <h3 className="absolute top-[1.6vw] uppercase font-bold text-[1vw]">
+                    <h3 className="absolute top-[3vh] uppercase font-bold text-[1vw]">
                         Conversations
                     </h3>
-                    <span className="line absolute top-[4.7vw]"></span>
-                    <span className="line absolute bottom-[5.7vw]"></span>
+                    <span className="line absolute top-[8vh]"></span>
+                    <span className="line absolute bottom-[9vh]"></span>
                     <a onClick={togglePopup}>
                         <span className="plus-icon w-[3vw] h-[3vw] rounded-full absolute bottom-[1.3vw] right-[1.5vw] flex justify-center items-center cursor-pointer">
                             <FiPlus className="text-[1.2vw]" />
                         </span>
                     </a>
-                    <div className="red-divs h-[71.5vh] mb-[1vw] w-full overflow-y-scroll no-scrollbar overflow-hidden bg-red600">
+                    <div className="red-divs h-[72.5vh] mb-[1vh] w-full overflow-y-scroll no-scrollbar overflow-hidden bg-red600">
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
@@ -174,7 +174,7 @@ const Chat = () => {
                             }
                             alt="Apollo"
                         />
-                        <h3 className="absolute top-[1.6vw] font-bold left-[5.5vw] text-[1vw]">
+                        <h3 className="absolute top-[3vh] font-bold left-[5.5vw] text-[1vw]">
                             {selectedChannel?.name || "Create a channel"}
                         </h3>
                         {/* <div className="absolute top-[1.4vw] right-[1vw] flex justify-end w-[15vw]">
@@ -190,9 +190,9 @@ const Chat = () => {
                         <span className="absolute top-[1.8vw] right-[2vw] text-[1vw]">
                             <BsThreeDotsVertical />
                         </span>
-                        <span className="line absolute top-[4.7vw]"></span>
-                        <span className="line absolute bottom-[5.7vw]"></span>
-                        <div className="h-[73vh] w-full mb-[1vw] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
+                        <span className="line absolute top-[8vh]"></span>
+                        <span className="line absolute bottom-[9vh]"></span>
+                        <div className="h-[72.5vh] w-full mb-[1vh] px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
                             <div
                                 className="max-h-[43.8em] overflow-y-scroll no-scrollbar overflow-hidden"
                                 ref={messagesContainerRef}
@@ -213,7 +213,7 @@ const Chat = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            className="w-[52.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
+                            className="w-[57.5vw] rounded-[.5vw] input-container outline-none resize px-[1vw] h-[5.5vh] absolute bottom-[1.2vw] left-[1.5vw] text-[1vw]"
                         />
                         <span
                             className="input-container w-[3.5vw] h-[3.2vw] rounded-[.5vw] flex justify-center items-center absolute right-[1.5vw] bottom-[1.2vw] cursor-pointer"
@@ -225,7 +225,7 @@ const Chat = () => {
                 </div>
             ) : (
                 <div className="child-container-2">
-                    <div className="container-2 font-satoshi text-white w-[60vw] h-[91.5vh] flex flex-col justify-center items-center relative overflow-hidden">
+                    <div className="container-2 font-satoshi text-white w-[65vw] h-[90vh] flex flex-col justify-center items-center relative overflow-hidden">
                         <div className="w-[30vw] h-[50vh] p-[2vw] flex justify-center items-center object-cover overflow-hidden">
                             <img
                                 src={noChat}
