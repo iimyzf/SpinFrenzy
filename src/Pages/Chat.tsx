@@ -11,15 +11,13 @@ import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { GiRoundBottomFlask } from "react-icons/gi";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: File | null }[]
+        { name: string; img: File | null; id: number }[]
     >([]);
-    // const socket = io('http://localhost:3000', {
-    //     withCredentials: true,
-    // })
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<
         {
@@ -63,16 +61,12 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: File }) => {
+    const addChannel = async (currentChannel: { name: string; img: File; id: number}) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
             formData.append("file", currentChannel.img);
             formData.append("name", currentChannel.name);
-            // const data = {
-            //     name: currentChannel.name,
-            // };
-
             await axios.post("http://localhost:3000/chat/new", formData, {
                 withCredentials: true,
             });
@@ -89,6 +83,17 @@ const Chat = () => {
 
     const messagesContainerRef = useRef<HTMLDivElement>(null);
 
+    const getRoomChannels = async () => {
+        try {
+          const response = await axios.get("http://localhost:3000/users/me/chatrooms", {
+            withCredentials: true,
+          });
+          return response.data;
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
     useEffect(() => {
         // Scroll to the bottom when a new message is added
         if (messagesContainerRef.current) {
