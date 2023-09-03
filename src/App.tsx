@@ -12,12 +12,14 @@ import AddChannel from "./components/AddChannel";
 import "./App.css";
 import Game from "./Game/Game";
 
+
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Landing />} />
-                <Route path="/profile" element={<Profile />} />
+
+                <Route path="/profile" element={ <Profile />} />
                 <Route path="/chat" element={<Chat />} />
                 {/* <Route path="/home" element={<Home />} /> */}
                 <Route path="/gamemode" element={<GameMode />} />
