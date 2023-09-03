@@ -163,8 +163,8 @@ function Game() {
           <span className="text-white text-2xl lg:text-4xl font-black">{data?.leftScore}</span>
           <span className="text-white text-2xl lg:text-4xl font-black">:</span>
           <span className="text-white text-2xl lg:text-4xl font-black">{data?.rightScore}</span>
-        </div>
-      </div>
+    </div>
+    </div>
     </div>
   );
 }

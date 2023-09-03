@@ -2,6 +2,7 @@ import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin, BsPhone } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 

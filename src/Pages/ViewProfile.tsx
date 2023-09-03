@@ -7,26 +7,50 @@ import {
     BsPersonFillSlash,
 } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import "./ViewProfile.css";
 import axios from "axios";
 
+
+interface UserInfo {
+    photo: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    bio: string;
+};
+
+
 const ViewProfile = () => {
     const [chartOptions, setChartOptions] = React.useState({});
     const [chartSeries, setChartSeries] = React.useState<
-        { name: string; data: number[] }[]
+    { name: string; data: number[] }[]
     >([]);
+    const [user, setUser] = useState<UserInfo>();
 
 
-    useEffect(() => {
-        
+    const getUserInfo = async () => {
         const queryParams = new URLSearchParams(window.location.search);
         const id = queryParams.get("id");
         axios.get(`http://localhost:3000/users/byid?id=${id}`, {withCredentials: true})
         .then(res => {
-            console.log(res.data);
+            const data = res.data;
+            console.log(data);
+            setUser({
+                photo: data.photo,
+                username: data.username,
+                firstname: data.firstname,
+                lastname: data.lastname,
+                bio: data.bio
+            });
         });
+    };
+
+
+    useEffect(() => {
+        
+        getUserInfo();
 
         setChartOptions({
             stroke: {
@@ -89,7 +113,7 @@ const ViewProfile = () => {
                             <span className="add absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw] max-sm:text-[1.2vw] max-sm:-top-[4vw] max-md:text-[1vw] max-md:-top-[4vw]">
                                 Add
                                 <br />
-                                @USERNAME
+                                {user?.username}
                             </span>
                             <BsPersonFillAdd className="text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]" />
                         </button>
@@ -97,7 +121,7 @@ const ViewProfile = () => {
                             <span className="message absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw] max-sm:text-[1.2vw] max-sm:-top-[4vw] max-md:text-[1vw] max-md:-top-[4vw]">
                                 Message
                                 <br />
-                                @USERNAME
+                                {user?.username}
                             </span>
                             <BsFillChatSquareTextFill className="text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]" />
                         </button>
@@ -105,7 +129,7 @@ const ViewProfile = () => {
                             <span className="block absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw] max-sm:text-[1.2vw] max-sm:-top-[4vw] max-md:text-[1vw] max-md:-top-[4vw]">
                                 Block
                                 <br />
-                                @USERNAME
+                                {user?.username}
                             </span>
                             <BsPersonFillSlash className="text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]" />
                         </button>
@@ -114,26 +138,21 @@ const ViewProfile = () => {
                         <div className="">
                             <img
                                 className="w-[7vw] h-[7vw] max-sm:w-[20vw] max-sm:h-[20vw] max-md:w-[15vw] max-md:h-[15vw] rounded-full"
-                                src={Apollo}
+                                src={user?.photo}
                                 alt="Apollo"
                             />
                             <span className="status rounded-full bg-green-400 w-[1.5vw] h-[1.5vw] max-sm:w-[4vw] max-sm:h-[4vw] max-md:w-[3vw] max-md:h-[3vw] absolute top-0 right-[.5vw]"></span>
                         </div>
                     </div>
                     <h4 className="font-light absolute top-[18vw] text-[1vw] max-sm:top-[36vw] max-sm:text-[2.2vw] max-md:top-[28vw] max-md:text-[1.5vw]">
-                        @mamella
+                        {user?.username}
                     </h4>
                     <h3 className="font-bold absolute top-[19.5vw] text-[1vw] max-sm:top-[39vw] max-sm:text-[2.5vw] max-md:top-[30vw] max-md:text-[1.5vw]">
-                        Mamella Industry
+                        {user?.firstname} {user?.lastname}
                     </h3>
                     <div className="bio flex absolute top-[22vw] max-sm:top-[45vw] max-md:top-[34vw] justify-center items-start">
                         <p className="font-light w-[15vw] max-sm:w-full max-md:w-full text-ellipsis text-start text-[1vw] max-sm:text-[2.8vw] max-sm:px-[3vw] max-md:text-[2vw] max-md:px-[3vw]">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Quas, quis quae nulla optio suscipit libero
-                            excepturi omnis cum, quidem cupiditate
-                            asperioresodio quam! Distinctio nesciunt soluta quam
-                            quas accusamus minus? Lorem ipsum dolor sit amet
-                            consectetured
+                            {user?.bio}
                         </p>
                     </div>
                     <ul className="flex gap-[2vw] max-sm:gap-[3vw] max-md:gap-[4vw] absolute bottom-[4vw] max-sm:bottom-[6vw] max-md:bottom-[6vw]">
