@@ -272,7 +272,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden max-lg:hidden space-y-4">
+                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
                     {friends?.map((friend, index) => (
                         <Link
                             to={`/view-profile?id=${friend.id}`}
@@ -303,7 +303,7 @@ const Dashboard = () => {
                 </div>
                 <div className="w-full">
                     <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">
-                        <div className="second-container container-1 mt-[1vw] ml-[1vw] p-[1vw] max-sm:p-[3vw] w-1/2 pb-[5vw] max-sm:ml-0 max-sm:w-full max-sm:h-full max-md:ml-0 max-md:w-full max-md:h-full max-lg:ml-0">
+                        <div className="second-container container-1 mt-[1vw] ml-[1vw] p-[1vw] max-sm:p-[3vw] w-1/2 pb-[5vw] max-sm:ml-0 max-sm:w-full max-sm:h-full max-md:ml-0 max-md:w-full max-md:h-full max-lg:ml-[1vw]">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                 Play a Game
                             </h2>
@@ -401,7 +401,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">
-                        <div className="forth-container container-1 mt-[1vw] ml-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:ml-0 max-sm:mt-[1.2vh] max-sm:w-full max-sm:h-full max-md:ml-0 max-md:mt-[1.2vh] max-md:w-full max-md:h-full max-lg:ml-0">
+                        <div className="forth-container container-1 mt-[1vw] ml-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:ml-0 max-sm:mt-[1.2vh] max-sm:w-full max-sm:h-full max-md:ml-0 max-md:mt-[1.2vh] max-md:w-full max-md:h-full max-lg:ml-[1vw]">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                 popular public channels
                             </h2>
