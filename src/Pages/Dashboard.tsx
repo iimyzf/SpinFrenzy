@@ -90,17 +90,6 @@ const Dashboard = () => {
     const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
     const [friends, setFriends] = useState<Friend[]>([]);
-
-    const getFriends = async () => {
-        try {
-          const response = axios.get("http://localhost:3000/users/me/friends", { withCredentials: true });
-          const newFriends = response.data.friends;
-          console.log(newFriends);
-          setFriends((prevFriends) => [...prevFriends, ...newFriends]);
-        } catch (error) {
-          console.error("Error fetching friends:", error);
-        }
-      };
       
       useEffect(() => {
         try {
@@ -122,10 +111,8 @@ const Dashboard = () => {
             try {
                 const res = await axios.get(
                     `http://localhost:3000/users/search/all?query=${query}`
-                , {withCredentials: true} );
-                // if (res.data) {
+                , {withCredentials: true} )
                     setUsers(res.data);
-                // }
             } catch (error) {
                 console.log(error);
             }
@@ -278,32 +265,31 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidden max-md:hidden">
-                        {friends?.map((friend, index) => (
-                            
-                            <Link to="/" className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center"><button
-                                    className="friend-bn absolute"
-                                    onMouseEnter={() => handleMouseEnter(index)}
-                                    onMouseLeave={handleMouseLeave}
-                                    onClick={() => handleUserClick(index)}
-                                >
-                                <div className="hover:scale-105">
-                                    <img
-                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
-                                        src={friend.photo}
-                                        alt="friend-pic"
-                                    />
-                                    <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
+                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
+                    {friends?.map((friend, index) => (
+                        <Link to={`/view-profile?id=${friend.id}`} className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
+                            <button
+                                className="friend-bn absolute"
+                                onMouseEnter={() => handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}
+                                onClick={() => handleUserClick(index)}
+                            >
+                            <div className="hover:scale-105">
+                                <img
+                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                    src={friend.photo}
+                                    alt="friend-pic"
+                                />
+                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
+                            </div>
+                            {isHovered == index && (
+                                <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
+                                    {friend.username}
                                 </div>
-                                 {isHovered == index && (
-                                     <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
-                                        {friend.username}
-                                    </div>
-                                )}
-                                </button>
-                                </Link>
-                            )
-                        )}
+                            )}
+                            </button>
+                        </Link>
+                    ))}
                     {/* <div className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
                         <Link to="/view-profile"><button
                             className="friend-bn absolute"
