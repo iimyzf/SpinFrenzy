@@ -23,6 +23,36 @@
     width: 30vh;
 }
 
+.easy-mode:hover {
+	cursor: pointer;
+	background-image: url("src/assets/easy.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
+.medium-mode:hover {
+	cursor: pointer;
+	background-image: url("src/assets/medium.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
+.hard-mode:hover {
+	cursor: pointer;
+	background-image: url("src/assets/hard.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 165%;
+	color: transparent;
+	backdrop-filter: blur(1.5px);
+}
+
 .card:last-of-type::after {
     content: "";
     display: inline-block;

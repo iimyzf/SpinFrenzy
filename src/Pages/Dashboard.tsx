@@ -146,11 +146,11 @@ const Dashboard = () => {
                     spinfrenzy
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw]">
-                    <div className="flex flex-col items-center" ref={searchContainerRef}>
-                        <div
-                            className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]"
-                            
-                        >
+                    <div
+                        className="flex flex-col items-center"
+                        ref={searchContainerRef}
+                    >
+                        <div className="search flex items-center container-1 outline-none absolute z-10 h-[2vw] max-sm:h-[3vh] max-md:h-[2.5vh] top-[2.3vw] right-[13.5vw] max-sm:top-[5.2vw] max-sm:right-[27.5vw] max-md:top-[2.8vw] max-md:right-[24.5vw]">
                             <input
                                 className="search-txt border-none outline-none bg-transparent float-left px-[.5vw] max-sm:px-[1vw] max-md:px-[1vw] text-[.6vw] max-sm:text-[2vw] max-md:text-[1.1vw]"
                                 type="text"
@@ -167,7 +167,9 @@ const Dashboard = () => {
                                         className="result w-full"
                                         key={user.id}
                                     >
-                                        <Link to={`/view-profile?id=${user.id}`}>
+                                        <Link
+                                            to={`/view-profile?id=${user.id}`}
+                                        >
                                             <div className="container-1 flex justify-start items-center mx-[.4vw] my-[.2vw] p-[.4vw] max-sm:mx-[1vw] max-sm:my-[.5vw] max-sm:p-[.4vw] max-md:mx-[1vw] max-md:my-[.5vw] max-md:p-[.4vw]">
                                                 <div className="flex justify-start items-center gap-[.6vw] max-sm:gap-[1.2vw] max-md:gap-[2vw]">
                                                     <img
@@ -267,26 +269,29 @@ const Dashboard = () => {
             <div className="flex mx-[3vw]">
                 <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
                     {friends?.map((friend, index) => (
-                        <Link to={`/view-profile?id=${friend.id}`} className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
+                        <Link
+                            to={`/view-profile?id=${friend.id}`}
+                            className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center"
+                        >
                             <button
                                 className="friend-bn absolute"
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onMouseLeave={handleMouseLeave}
                                 onClick={() => handleUserClick(index)}
                             >
-                            <div className="hover:scale-105">
-                                <img
-                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
-                                    src={friend.photo}
-                                    alt="friend-pic"
-                                />
-                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
-                            </div>
-                            {isHovered == index && (
-                                <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
-                                    {friend.username}
+                                <div className="hover:scale-105">
+                                    <img
+                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                        src={friend.photo}
+                                        alt="friend-pic"
+                                    />
+                                    <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
                                 </div>
-                            )}
+                                {isHovered == index && (
+                                    <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
+                                        {friend.username}
+                                    </div>
+                                )}
                             </button>
                         </Link>
                     ))}
@@ -310,7 +315,7 @@ const Dashboard = () => {
                                     yagnaou
                                 </div>
                             )} */}
-                            {/*{isActiveUser == 0 && (
+                    {/*{isActiveUser == 0 && (
                                 <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[.8vw]">
                                     <div className="flex items-center gap-[.5vw] px-[.2vw]">
                                         <img
@@ -372,7 +377,7 @@ const Dashboard = () => {
                                     />
                                 </div>
                             )} */}
-                        {/* </button>
+                    {/* </button>
                         </Link>
                     </div> */}
                 </div>
@@ -392,14 +397,14 @@ const Dashboard = () => {
                                         <div
                                             className={`card${
                                                 expandedCardIndex === 0
-                                                    ? " card--expanded"
+                                                    ? " card--expanded easy-mode"
                                                     : ""
                                             } flex justify-center items-center`}
                                             onMouseEnter={() =>
                                                 handleCardClick(0)
                                             }
                                         >
-                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
+                                            <p className="ctr-span-chat font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                                 EASY
                                             </p>
                                         </div>
@@ -408,7 +413,7 @@ const Dashboard = () => {
                                         <div
                                             className={`card${
                                                 expandedCardIndex === 1
-                                                    ? " card--expanded"
+                                                    ? " card--expanded medium-mode"
                                                     : ""
                                             } flex justify-center items-center`}
                                             onMouseEnter={() =>
@@ -424,14 +429,14 @@ const Dashboard = () => {
                                         <div
                                             className={`card${
                                                 expandedCardIndex === 2
-                                                    ? " card--expanded"
+                                                    ? " card--expanded hard-mode"
                                                     : ""
                                             } flex justify-center items-center`}
                                             onMouseEnter={() =>
                                                 handleCardClick(2)
                                             }
                                         >
-                                            <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
+                                            <p className="ctr-span-chat font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]">
                                                 Hard
                                             </p>
                                         </div>
