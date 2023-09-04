@@ -23,7 +23,7 @@ interface GameData {
 
 interface PlayerData {
   name: string;
-  avatar: string
+  avatar: string;
 }
 
 

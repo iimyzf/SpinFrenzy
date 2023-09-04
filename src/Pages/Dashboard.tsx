@@ -22,6 +22,12 @@ interface User {
     lastname: string;
     online: boolean;
 }
+interface Friend {
+    id: number;
+    online: boolean;
+    username: string;
+    photo: string;
+}
 
 const Dashboard = () => {
     const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
@@ -83,20 +89,36 @@ const Dashboard = () => {
     const [query, setQuery] = useState("");
     const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
+    const [friends, setFriends] = useState<Friend[]>([]);
+      
+      useEffect(() => {
+        try {
+            axios.get("http://localhost:3000/users/me/friends", { withCredentials: true })
+            .then( res => {
+                const newFriends = res.data.friends;
+                console.log(newFriends);
+                setFriends((prevFriends) => [...prevFriends, ...newFriends]);
+            }
+            );
+          } catch (error) {
+            console.error("Error fetching friends:", error);
+          }
+        console.log(friends);
+      }, []); 
+
     useEffect(() => {
         const fetshData = async () => {
             try {
                 const res = await axios.get(
                     `http://localhost:3000/users/search/all?query=${query}`
-                , {withCredentials: true} );
-                // if (res.data) {
+                , {withCredentials: true} )
                     setUsers(res.data);
-                // }
             } catch (error) {
                 console.log(error);
             }
         };
         fetshData();
+        
     }, [query]);
 
     useEffect(() => {
@@ -168,10 +190,10 @@ const Dashboard = () => {
                         <Link to="/chat">
                             <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
                         </Link>
-                        <div className="box messages-box">
+                        <div className="box messages-box overflow-y-scroll no-scrollbar">
                             <div className="display">
-                                <div className="cont">
-                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
+                                <div className="cont ">
+                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center ">
                                         <a href="https://google.com">
                                             <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw]">
                                                 <img
@@ -190,7 +212,7 @@ const Dashboard = () => {
                     </div>
                     <div className="iconBtn">
                         <BsFillBellFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
-                        <div className="box notification-box">
+                        <div className="box notification-box overflow-y-scroll no-scrollbar">
                             <div className="display">
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
@@ -213,7 +235,7 @@ const Dashboard = () => {
                     </div>
                     <div className="iconBtn user-btn">
                         <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]" />
-                        <div className="box user-box">
+                        <div className="box user-box overflow-y-scroll no-scrollbar">
                             <div className="display">
                                 <div className="cont">
                                     <Link to="/profile">
@@ -243,9 +265,33 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex mx-[3vw]">
-                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar overflow-hidden max-sm:hidden max-md:hidden">
-                    <div className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
-                        <button
+                <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
+                    {friends?.map((friend, index) => (
+                        <Link to={`/view-profile?id=${friend.id}`} className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
+                            <button
+                                className="friend-bn absolute"
+                                onMouseEnter={() => handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}
+                                onClick={() => handleUserClick(index)}
+                            >
+                            <div className="hover:scale-105">
+                                <img
+                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                    src={friend.photo}
+                                    alt="friend-pic"
+                                />
+                                <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
+                            </div>
+                            {isHovered == index && (
+                                <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
+                                    {friend.username}
+                                </div>
+                            )}
+                            </button>
+                        </Link>
+                    ))}
+                    {/* <div className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center">
+                        <Link to="/view-profile"><button
                             className="friend-bn absolute"
                             onMouseEnter={() => handleMouseEnter(0)}
                             onMouseLeave={handleMouseLeave}
@@ -259,12 +305,12 @@ const Dashboard = () => {
                                 />
                                 <span className="rounded-full bg-green-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0"></span>
                             </div>
-                            {isHovered == 0 && (
+                             {isHovered == 0 && (
                                 <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
                                     yagnaou
                                 </div>
-                            )}
-                            {isActiveUser == 0 && (
+                            )} */}
+                            {/*{isActiveUser == 0 && (
                                 <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.8vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[.8vw]">
                                     <div className="flex items-center gap-[.5vw] px-[.2vw]">
                                         <img
@@ -325,9 +371,10 @@ const Dashboard = () => {
                                         onClick={(e) => e.stopPropagation()}
                                     />
                                 </div>
-                            )}
-                        </button>
-                    </div>
+                            )} */}
+                        {/* </button>
+                        </Link>
+                    </div> */}
                 </div>
                 <div className="w-full">
                     <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">

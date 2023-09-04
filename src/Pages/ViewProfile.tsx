@@ -187,7 +187,7 @@ const ViewProfile = () => {
                 <div className="container-2 font-satoshi text-white w-[75vw] h-[90vh] max-sm:w-[80vw] max-sm:h-[50vh] max-md:w-[80vw] max-md:h-[50vh] flex flex-col justify-center items-center relative overflow-y-scroll no-scrollbar overflow-hidden">
                     <div className="editable absolute left-[2vw] top-[3vw] max-sm:left-[5vw] max-sm:top-[5vw] max-md:left-[5vw] max-md:top-[5vw]">
                         <h3 className="text-[1vw] max-sm:text-[2.5vw] max-md:text-[2vw]">
-                            Match Statistics for <strong>Username</strong>
+                            Match Statistics for <strong>{user?.username}</strong>
                         </h3>
                     </div>
                     <Chart
