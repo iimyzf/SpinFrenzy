@@ -28,6 +28,7 @@ const Chat = () => {
     const [selectedChannel, setSelectedChannel] = useState<{
         name: string;
         img: File | null;
+        id: number;
     } | null>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +45,10 @@ const Chat = () => {
                 },
             ]);
             setInputValue("");
+            console.log("channel id == ", selectedChannel?.id)
             const dto = {
-                id: 1,
+                id: selectedChannel?.id,
                 message: inputValue.trim(),
-                receiverId: 2,
             };
             socket?.emit("createMessage", dto, {
                 withCredentials: true,
@@ -61,7 +62,7 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: File; id: number}) => {
+    const addChannel = async (currentChannel: { name: string; img: File; id: number }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
@@ -85,18 +86,36 @@ const Chat = () => {
 
     const getRoomChannels = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/users/me/chatrooms", {
-            withCredentials: true,
-          });
-          return response.data;
+            const response = await axios.get("http://localhost:3000/users/me/chatrooms", {
+                withCredentials: true,
+            });
+            return response.data;
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-    const [rooms, setRooms] = useState<any>();
+    };
+    const getChannelmgs = async (id: any) => {
+        try {
+            const res = await axios.get("http://localhost:3000/chat/getroomsmgs?id=" + id, {
+                withCredentials: true,
+            })
+            console.log(res.data);
+            return res.data;
+
+        } catch (error) {
+            // console.log(error);
+        }
+    }
     useEffect(() => {
-        
-    }, [rooms])
+        const res = getRoomChannels().then((res) => {
+            let newchannel: any[] = [];
+            res.forEach((element: any) => {
+                const room = element.room;
+                newchannel = [...newchannel, { name: room.name, img: null, id: room.id }]
+            });
+            setChannels(newchannel);
+        });
+    }, [])
     useEffect(() => {
         // Scroll to the bottom when a new message is added
         if (messagesContainerRef.current) {
@@ -106,8 +125,44 @@ const Chat = () => {
     }, [messages]);
 
     //-------------------------------------------casper-------------------------------------//
-    const socketRef = useRef<Socket | null>(null);
 
+    useEffect(() => {
+        let id: number = 0; 
+        whoami().then((res)=> {
+            id = res.id;
+            console.log("id == ", id);
+            let messages:   {
+                message: string;
+                isSentByMe: boolean;
+            }[] = [];
+            getChannelmgs(1).then((res) => {
+                const msg = res.messages;
+                msg.forEach((element:any) => {
+                    console.log("msg == ", element);
+                    
+                    if (element.senderId === id) {
+                        messages = [...messages, { message: element.content, isSentByMe: true }]
+                    } else {
+                        messages = [...messages, { message: element.content, isSentByMe: false }]
+                    }
+                });
+                setMessages(messages);
+            });
+        });
+
+    }, [selectedChannel])
+
+    const socketRef = useRef<Socket | null>(null);
+    const whoami = async () => {
+        const me = await axios.get("http://localhost:3000/users/me", {
+            withCredentials: true,
+        });
+        return me.data;
+    }
+
+    const getSelectedChannel = async (channel: { name: string; img: File | null; id: number }) => {
+        setSelectedChannel(channel);
+    }
     useEffect(() => {
         if (socketRef.current === null) {
             socketRef.current = io("http://localhost:3000", {
@@ -115,9 +170,7 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-
         socket?.on("newmessage", (dto: any) => {
-            console.log("message received: ", dto[0].message);
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -146,12 +199,11 @@ const Chat = () => {
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[8vh] hover:cursor-pointer ${
-                                    selectedChannel === channel
-                                        ? "active-channel"
-                                        : ""
-                                }`}
-                                onClick={() => setSelectedChannel(channel)}
+                                className={`channel flex relative top-0 items-center px-[1vw] scroll-auto h-[8vh] hover:cursor-pointer ${selectedChannel === channel
+                                    ? "active-channel"
+                                    : ""
+                                    }`}
+                                onClick={() => getSelectedChannel(channel)}
                             >
                                 <img
                                     className="w-[2.5vw] h-[2.5vw] rounded-full object-cover"
