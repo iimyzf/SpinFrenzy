@@ -2,10 +2,10 @@ import {
     BsFillBellFill,
     BsFillChatLeftTextFill,
     BsFillPersonFill,
-    BsPersonFillAdd,
-    BsPersonFillSlash,
+    // BsPersonFillAdd,
+    // BsPersonFillSlash,
     BsSearch,
-    BsVolumeMuteFill,
+    // BsVolumeMuteFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
@@ -77,13 +77,13 @@ const Dashboard = () => {
         setIsActiveUser(userId === isActiveUser ? null : userId);
     };
 
-    const [userHover, setUserHover] = useState(null);
-    const handleUserHoverEnter = (userId: any) => {
-        setUserHover(userId);
-    };
-    const handleUserHoverLeave = () => {
-        setUserHover(null);
-    };
+    // const [userHover, setUserHover] = useState(null);
+    // const handleUserHoverEnter = (userId: any) => {
+    //     setUserHover(userId);
+    // };
+    // const handleUserHoverLeave = () => {
+    //     setUserHover(null);
+    // };
 
     const [users, setUsers] = useState<User[]>([]);
     const [query, setQuery] = useState("");
