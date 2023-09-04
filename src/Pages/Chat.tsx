@@ -10,8 +10,8 @@ import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { GiRoundBottomFlask } from "react-icons/gi";
+// import { Link } from "react-router-dom";
+// import { GiRoundBottomFlask } from "react-icons/gi";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
