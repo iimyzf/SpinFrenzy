@@ -11,15 +11,13 @@ import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { GiRoundBottomFlask } from "react-icons/gi";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: File | null }[]
+        { name: string; img: File | null; id: number }[]
     >([]);
-    // const socket = io('http://localhost:3000', {
-    //     withCredentials: true,
-    // })
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<
         {
@@ -30,6 +28,7 @@ const Chat = () => {
     const [selectedChannel, setSelectedChannel] = useState<{
         name: string;
         img: File | null;
+        id: number;
     } | null>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,10 +45,10 @@ const Chat = () => {
                 },
             ]);
             setInputValue("");
+            console.log("channel id == ", selectedChannel?.id)
             const dto = {
-                id: 1,
+                id: selectedChannel?.id,
                 message: inputValue.trim(),
-                receiverId: 2,
             };
             socket?.emit("createMessage", dto, {
                 withCredentials: true,
@@ -63,16 +62,12 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: File }) => {
+    const addChannel = async (currentChannel: { name: string; img: File; id: number }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
             formData.append("file", currentChannel.img);
             formData.append("name", currentChannel.name);
-            // const data = {
-            //     name: currentChannel.name,
-            // };
-
             await axios.post("http://localhost:3000/chat/new", formData, {
                 withCredentials: true,
             });
@@ -89,6 +84,38 @@ const Chat = () => {
 
     const messagesContainerRef = useRef<HTMLDivElement>(null);
 
+    const getRoomChannels = async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/users/me/chatrooms", {
+                withCredentials: true,
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const getChannelmgs = async (id: any) => {
+        try {
+            const res = await axios.get("http://localhost:3000/chat/getroomsmgs?id=" + id, {
+                withCredentials: true,
+            })
+            console.log(res.data);
+            return res.data;
+
+        } catch (error) {
+            // console.log(error);
+        }
+    }
+    useEffect(() => {
+        const res = getRoomChannels().then((res) => {
+            let newchannel: any[] = [];
+            res.forEach((element: any) => {
+                const room = element.room;
+                newchannel = [...newchannel, { name: room.name, img: null, id: room.id }]
+            });
+            setChannels(newchannel);
+        });
+    }, [])
     useEffect(() => {
         // Scroll to the bottom when a new message is added
         if (messagesContainerRef.current) {
@@ -98,8 +125,44 @@ const Chat = () => {
     }, [messages]);
 
     //-------------------------------------------casper-------------------------------------//
-    const socketRef = useRef<Socket | null>(null);
 
+    useEffect(() => {
+        let id: number = 0; 
+        whoami().then((res)=> {
+            id = res.id;
+            console.log("id == ", id);
+            let messages:   {
+                message: string;
+                isSentByMe: boolean;
+            }[] = [];
+            getChannelmgs(1).then((res) => {
+                const msg = res.messages;
+                msg.forEach((element:any) => {
+                    console.log("msg == ", element);
+                    
+                    if (element.senderId === id) {
+                        messages = [...messages, { message: element.content, isSentByMe: true }]
+                    } else {
+                        messages = [...messages, { message: element.content, isSentByMe: false }]
+                    }
+                });
+                setMessages(messages);
+            });
+        });
+
+    }, [selectedChannel])
+
+    const socketRef = useRef<Socket | null>(null);
+    const whoami = async () => {
+        const me = await axios.get("http://localhost:3000/users/me", {
+            withCredentials: true,
+        });
+        return me.data;
+    }
+
+    const getSelectedChannel = async (channel: { name: string; img: File | null; id: number }) => {
+        setSelectedChannel(channel);
+    }
     useEffect(() => {
         if (socketRef.current === null) {
             socketRef.current = io("http://localhost:3000", {
@@ -107,9 +170,7 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-
         socket?.on("newmessage", (dto: any) => {
-            console.log("message received: ", dto[0].message);
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
