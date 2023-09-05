@@ -51,7 +51,6 @@ const Profile = () => {
     };
 
     const handleBioSave = () => {
-        // Save the bio here (e.g., send it to the server)
         setIsBioEditing(false);
     };
 
