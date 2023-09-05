@@ -16,7 +16,7 @@ import { GiRoundBottomFlask } from "react-icons/gi";
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: File | null; id: number }[]
+        { name: string; img: string | File ; id: number }[]
     >([]);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<
@@ -27,7 +27,7 @@ const Chat = () => {
     >([]);
     const [selectedChannel, setSelectedChannel] = useState<{
         name: string;
-        img: File | null;
+        img: string | File;
         id: number;
     } | null>(null);
 
@@ -62,7 +62,7 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: File; id: number }) => {
+    const addChannel = async (currentChannel: { name: string; img: string; id: number }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
@@ -106,12 +106,19 @@ const Chat = () => {
             // console.log(error);
         }
     }
+    const getimg = async (roomid: number) => {
+        const res = await axios.get("http://localhost:3000/" + roomid + "room.png", {
+            withCredentials: true,
+        })
+        return res.data
+    }
     useEffect(() => {
         const res = getRoomChannels().then((res) => {
             let newchannel: any[] = [];
             res.forEach((element: any) => {
                 const room = element.room;
-                newchannel = [...newchannel, { name: room.name, img: null, id: room.id }]
+                const url = "http://localhost:3000/" + room.id + "room.png";
+                newchannel = [...newchannel, { name: room.name, img: url, id: room.id }]
             });
             setChannels(newchannel);
         });
@@ -127,28 +134,32 @@ const Chat = () => {
     //-------------------------------------------casper-------------------------------------//
 
     useEffect(() => {
-        let id: number = 0; 
-        whoami().then((res)=> {
-            id = res.id;
-            console.log("id == ", id);
-            let messages:   {
-                message: string;
-                isSentByMe: boolean;
-            }[] = [];
-            getChannelmgs(1).then((res) => {
-                const msg = res.messages;
-                msg.forEach((element:any) => {
-                    console.log("msg == ", element);
-                    
-                    if (element.senderId === id) {
-                        messages = [...messages, { message: element.content, isSentByMe: true }]
-                    } else {
-                        messages = [...messages, { message: element.content, isSentByMe: false }]
-                    }
+        if(selectedChannel?.id !== undefined)
+        {
+            let id: number = 0; 
+            whoami().then((res)=> {
+                id = res.id;
+                console.log("id == ", id);
+                let messages:   {
+                    message: string;
+                    isSentByMe: boolean;
+                }[] = [];
+                console.log("selected channel --> ",selectedChannel?.id);
+                getChannelmgs(selectedChannel?.id).then((res) => {
+                    const msg = res.messages;
+                    msg.forEach((element:any) => {
+                        // console.log("msg == ", element);
+                        
+                        if (element.senderId === id) {
+                            messages = [...messages, { message: element.content, isSentByMe: true }]
+                        } else {
+                            messages = [...messages, { message: element.content, isSentByMe: false }]
+                        }
+                    });
+                    setMessages(messages);
                 });
-                setMessages(messages);
             });
-        });
+        }
 
     }, [selectedChannel])
 
@@ -160,7 +171,7 @@ const Chat = () => {
         return me.data;
     }
 
-    const getSelectedChannel = async (channel: { name: string; img: File | null; id: number }) => {
+    const getSelectedChannel = async (channel: { name: string; img: string | File; id: number }) => {
         setSelectedChannel(channel);
     }
     useEffect(() => {
@@ -208,9 +219,9 @@ const Chat = () => {
                                 <img
                                     className="w-[2.5vw] h-[2.5vw] rounded-full object-cover"
                                     src={
-                                        channel.img
-                                            ? URL.createObjectURL(channel.img)
-                                            : Apollo
+                                        typeof channel.img === "string"
+                                            ? channel.img
+                                            : URL.createObjectURL(channel.img)
                                     }
                                     alt="Apollo"
                                 />
@@ -228,9 +239,9 @@ const Chat = () => {
                         <img
                             className="w-[2.5vw] h-[2.5vw] rounded-full absolute top-[2vh] left-[2vw] object-cover"
                             src={
-                                selectedChannel?.img
-                                    ? URL.createObjectURL(selectedChannel?.img)
-                                    : Apollo
+                                typeof selectedChannel?.img === "string"
+                                ? selectedChannel?.img
+                                : URL.createObjectURL(selectedChannel?.img)
                             }
                             alt="Apollo"
                         />
