@@ -6,7 +6,7 @@ import {
     BsPersonFillAdd,
     BsPersonFillSlash,
 } from "react-icons/bs";
-import Apollo from "../assets/Apollo.jpg";
+// import Apollo from "../assets/Apollo.jpg";
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import "./ViewProfile.css";

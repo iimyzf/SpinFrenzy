@@ -1,14 +1,3 @@
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    height: 100%;
-    transition: height 1s ease-in-out;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-
 .card {
     position: relative;
     height: 20vh;
@@ -18,17 +7,34 @@
     transform-origin: 50% 50% 0;
 }
 
-.card--expanded {
-    height: 30vh;
-    width: 30vh;
+.easy-mode:hover {
+    cursor: pointer;
+    background-image: url("src/assets/easy.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 165%;
+    color: transparent;
+    backdrop-filter: blur(1.5px);
 }
 
-.card:last-of-type::after {
-    content: "";
-    display: inline-block;
-    width: 10px;
-    right: -10px;
-    position: absolute;
+.medium-mode:hover {
+    cursor: pointer;
+    background-image: url("src/assets/medium.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 165%;
+    color: transparent;
+    backdrop-filter: blur(1.5px);
+}
+
+.hard-mode:hover {
+    cursor: pointer;
+    background-image: url("src/assets/hard.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 165%;
+    color: transparent;
+    backdrop-filter: blur(1.5px);
 }
 
 .game-div:hover {
@@ -62,7 +68,7 @@
 }
 
 .member-btn {
-	transition: 0.5s;
+    transition: 0.5s;
     cursor: pointer;
     display: inline-block;
 }
@@ -124,10 +130,6 @@
     display: none;
 }
 
-/* .search:hover > .search-txt { */
-    /* width: 15vw; */
-/* } */
-
 .search-btn {
     float: right;
 }
@@ -141,10 +143,6 @@
     .card {
         height: 14vh;
         width: 14vh;
-    }
-    .card--expanded {
-        height: 16vh;
-        width: 16vh;
     }
     .iconBtn:hover > .box {
         height: 15vh;
@@ -165,14 +163,10 @@
     }
 }
 
-@media not all and (min-width: 768px) {
+@media not all and (max-width: 768px) {
     .card {
         height: 14vh;
         width: 14vh;
-    }
-    .card--expanded {
-        height: 16vh;
-        width: 16vh;
     }
     .iconBtn:hover > .box {
         height: 15vh;
@@ -190,6 +184,33 @@
     .user-btn:hover > .user-box {
         width: 15vw;
         height: 6.2vh;
+    }
+    .search-txt {
+        width: 20vw;
+    }
+}
+
+@media not all and (min-width: 1024px) {
+    .card {
+        height: 12vh;
+        width: 12vh;
+    }
+    .iconBtn:hover > .box {
+        height: 25vh;
+    }
+    .messages-box,
+    .notification-box {
+        width: 30vw;
+    }
+    .notification-box {
+        left: -20vw;
+    }
+    .user-box {
+        left: -12vw;
+    }
+    .user-btn:hover > .user-box {
+        width: 15vw;
+        height: 7.2vh;
     }
     .search-txt {
         width: 20vw;

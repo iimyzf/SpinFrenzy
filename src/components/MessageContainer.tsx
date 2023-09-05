@@ -10,13 +10,13 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
         <>
             {isSentByMe ? (
                 <div className="flex justify-end items-end ml-[15vw] mb-[.5vw] gap-[.5vw]">
-                    <span className="text-[.6vw] opacity-40 whitespace-nowrap">
+                    <span className="text-[.6vw] max-sm:text-[1.1vw] opacity-40 whitespace-nowrap">
                         23:16 PM
                     </span>
                     <div className="flex justify-end items-end">
                         <div className="flex justify-end">
                             <div className="msg-container">
-                                <p className="text-start p-[1vw] text-[.9vw]">
+                                <p className="text-start p-[1vw] text-[.9vw] max-sm:text-[1.5vw]">
                                     {message}
                                 </p>
                             </div>
@@ -32,11 +32,11 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
                             alt="Apollo"
                         />
                         <div className="msg-container">
-                            <p className="text-start p-[1vw] text-[.9vw]">
+                            <p className="text-start p-[1vw] text-[.9vw] max-sm:text-[1.5vw]">
                                 {message}
                             </p>
                         </div>
-                        <span className="text-[.6vw] opacity-40 whitespace-nowrap">
+                        <span className="text-[.6vw] max-sm:text-[1.1vw] opacity-40 whitespace-nowrap">
                             23:16 PM
                         </span>
                     </div>
