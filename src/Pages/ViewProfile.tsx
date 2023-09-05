@@ -145,7 +145,7 @@ const ViewProfile = () => {
                         </div>
                     </div>
                     <h4 className="font-light absolute top-[18vw] text-[1vw] max-sm:top-[36vw] max-sm:text-[2.2vw] max-md:top-[28vw] max-md:text-[1.5vw]">
-                        {user?.username}
+                        @{user?.username}
                     </h4>
                     <h3 className="font-bold absolute top-[19.5vw] text-[1vw] max-sm:top-[39vw] max-sm:text-[2.5vw] max-md:top-[30vw] max-md:text-[1.5vw]">
                         {user?.firstname} {user?.lastname}
