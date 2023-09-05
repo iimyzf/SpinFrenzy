@@ -97,6 +97,7 @@ const Profile = () => {
             username: username,
             photo: image
         }, {withCredentials: true});
+        navigate(-1);
     }
 
     const navigate = useNavigate();

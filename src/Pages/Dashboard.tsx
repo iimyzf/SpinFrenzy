@@ -13,6 +13,8 @@ import { useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
 import { FiLogOut } from "react-icons/fi";
 import axios from "axios";
+import { io, Socket } from "socket.io-client";
+
 
 interface User {
     id: number;
@@ -90,8 +92,13 @@ const Dashboard = () => {
     const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
     const [friends, setFriends] = useState<Friend[]>([]);
-      
-      useEffect(() => {
+    const [socket, setSocket] = useState<Socket>();
+    
+    useEffect(() => {
+        setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
+    }, []);
+
+    useEffect(() => {
         try {
             axios.get("http://localhost:3000/users/me/friends", { withCredentials: true })
             .then( res => {
