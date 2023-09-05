@@ -2,10 +2,7 @@ import {
     BsFillBellFill,
     BsFillChatLeftTextFill,
     BsFillPersonFill,
-    // BsPersonFillAdd,
-    // BsPersonFillSlash,
     BsSearch,
-    // BsVolumeMuteFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Apollo from "../assets/Apollo.jpg";
@@ -13,6 +10,8 @@ import { useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
 import { FiLogOut } from "react-icons/fi";
 import axios from "axios";
+import { io, Socket } from "socket.io-client";
+
 
 interface User {
     id: number;
@@ -30,41 +29,6 @@ interface Friend {
 }
 
 const Dashboard = () => {
-    const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
-        null
-    );
-    const [isNavExpanded, setIsNavExpanded] = useState<boolean>(false);
-
-    const handleCardClick = (index: number) => {
-        if (index === expandedCardIndex) {
-            setExpandedCardIndex(null);
-            setIsNavExpanded(false);
-        } else {
-            if (!isNavExpanded) {
-                setIsNavExpanded(true);
-            }
-            setExpandedCardIndex(index);
-            scrollToCard(index);
-        }
-    };
-
-    const scrollToCard = (index: number) => {
-        const outer = document.querySelector(".nav") as HTMLElement;
-        const target = document.querySelectorAll(".card")[index] as HTMLElement;
-
-        const containerWidth = outer.offsetWidth;
-        const targetWidth = 300;
-        const targetIndex = index;
-        const leftScreenOffset = (containerWidth - targetWidth) / 2;
-        const leftSiblingOffset = (target.offsetWidth + 10) * targetIndex;
-        const scrollValue = leftSiblingOffset - leftScreenOffset;
-
-        outer.scrollTo({
-            left: Math.max(0, scrollValue),
-            behavior: "smooth",
-        });
-    };
-
     const [isHovered, setIsHovered] = useState(null);
     const [isActiveUser, setIsActiveUser] = useState(null);
     const handleMouseEnter = (userId: any) => {
@@ -90,6 +54,12 @@ const Dashboard = () => {
     const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
     const [friends, setFriends] = useState<Friend[]>([]);
+    const [socket, setSocket] = useState<Socket>();
+    
+    useEffect(() => {
+        setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
+    }, []);
+
 
     useEffect(() => {
         try {
@@ -271,6 +241,41 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <div className="container-1 max-sm:h-[6vh] max-md:h-[5vh] md:hidden max-md:mt-[1vw] max-sm:mb-[1vw] mx-[3vw] px-[2vw] flex justify-start items-center overflow-x-scroll no-scrollbar overflow-hidden ">
+                {friends?.map((friend, index) => (
+                    <Link
+                        to={`/view-profile?id=${friend.id}`}
+                        className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center mr-[2vw]"
+                    >
+                        <button
+                            className="friend-bn absolute"
+                            onMouseEnter={() => handleMouseEnter(index)}
+                            onMouseLeave={handleMouseLeave}
+                            onClick={() => handleUserClick(index)}
+                        >
+                            <div className="hover:scale-105">
+                                <img
+                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
+                                    src={friend.photo}
+                                    alt="friend-pic"
+                                />
+                                <span
+                                    className={`rounded-full ${
+                                        friend.online
+                                            ? "bg-green-400"
+                                            : "bg-gray-400"
+                                    } w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0`}
+                                ></span>
+                            </div>
+                            {isHovered == index && (
+                                <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
+                                    {friend.username}
+                                </div>
+                            )}
+                        </button>
+                    </Link>
+                ))}
+            </div>
             <div className="flex mx-[3vw]">
                 <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
                     {friends?.map((friend, index) => (
@@ -290,7 +295,13 @@ const Dashboard = () => {
                                         src={friend.photo}
                                         alt="friend-pic"
                                     />
-                                    <span className={`rounded-full bg-${ friend.online ? `green` : `gray`}-400 w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0`}></span>
+                                    <span
+                                        className={`rounded-full ${
+                                            friend.online
+                                                ? "bg-green-400"
+                                                : "bg-gray-400"
+                                        } w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0`}
+                                    ></span>
                                 </div>
                                 {isHovered == index && (
                                     <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
@@ -308,54 +319,23 @@ const Dashboard = () => {
                                 Play a Game
                             </h2>
                             <div className="handler flex justify-center items-center w-full h-full mt-[2vw] max-sm:mt-0 max-md:mt-0 max-lg:mt-0">
-                                <nav
-                                    className={`no-scrollbar nav${
-                                        isNavExpanded ? " nav--expanded" : ""
-                                    } gap-[.4vw] max-sm:gap-[1.2vw] max-md:gap-[1.2vw] max-lg:gap-[.5vw]`}
-                                >
+                                <nav className="no-scrollbar gap-[.4vw] max-sm:gap-[1.2vw] max-md:gap-[1.2vw] max-lg:gap-[.5vw] flex">
                                     <Link to="/game">
-                                        <div
-                                            className={`card${
-                                                expandedCardIndex === 0
-                                                    ? " card--expanded easy-mode"
-                                                    : ""
-                                            } flex justify-center items-center`}
-                                            onMouseEnter={() =>
-                                                handleCardClick(0)
-                                            }
-                                        >
+                                        <div className="card easy-mode flex justify-center items-center">
                                             <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                                 EASY
                                             </p>
                                         </div>
                                     </Link>
                                     <Link to="/game">
-                                        <div
-                                            className={`card${
-                                                expandedCardIndex === 1
-                                                    ? " card--expanded medium-mode"
-                                                    : ""
-                                            } flex justify-center items-center`}
-                                            onMouseEnter={() =>
-                                                handleCardClick(1)
-                                            }
-                                        >
+                                        <div className="card medium-mode flex justify-center items-center">
                                             <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                                 Medium
                                             </p>
                                         </div>
                                     </Link>
                                     <Link to="/game">
-                                        <div
-                                            className={`card${
-                                                expandedCardIndex === 2
-                                                    ? " card--expanded hard-mode"
-                                                    : ""
-                                            } flex justify-center items-center`}
-                                            onMouseEnter={() =>
-                                                handleCardClick(2)
-                                            }
-                                        >
+                                        <div className="card hard-mode flex justify-center items-center">
                                             <p className="font-bold font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                                 Hard
                                             </p>

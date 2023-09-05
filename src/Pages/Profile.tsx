@@ -51,7 +51,6 @@ const Profile = () => {
     };
 
     const handleBioSave = () => {
-        // Save the bio here (e.g., send it to the server)
         setIsBioEditing(false);
     };
 
@@ -97,6 +96,7 @@ const Profile = () => {
             username: username,
             photo: image
         }, {withCredentials: true});
+        navigate(-1);
     }
 
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { BsCheck } from "react-icons/bs";
+import { BsCheck, BsImage } from "react-icons/bs";
 import { useState } from "react";
 import Apollo from "../assets/Apollo.jpg";
 import "./AddChannel.css";
@@ -64,7 +64,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                     </h3>
                                     <label
                                         htmlFor="imageInput"
-                                        className=" label"
+                                        className=" label relative"
                                     >
                                         <img
                                             src={
@@ -72,11 +72,17 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                                     ? URL.createObjectURL(
                                                           selectedImage
                                                       )
-                                                    : Apollo
+                                                    : ""
                                             }
-                                            className="uploaded w-[8vw] h-[8vw] max-sm:w-[25vw] max-sm:h-[25vw] max-md:w-[20vw] max-md:h-[20vw] rounded-full bg-white cursor-pointer object-cover"
-                                            alt="Selected"
+                                            className="uploaded w-[8vw] h-[8vw] max-sm:w-[25vw] max-sm:h-[25vw] max-md:w-[20vw] max-md:h-[20vw] rounded-full bgwhite cursor-pointer object-cover"
                                         />
+                                        <h2
+                                            className={`absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 ${
+                                                selectedImage ? "hidden" : ""
+                                            }`}
+                                        >
+                                            <BsImage className="text-[2vw] max-sm:text-[5vw] max-md:text-[5vw] max-lg:text-[2vw] cursor-pointer" />
+                                        </h2>
                                     </label>
                                 </div>
                                 <div className="flex flex-col items-start mt-[1vw]">
