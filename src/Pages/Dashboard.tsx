@@ -60,6 +60,12 @@ const Dashboard = () => {
         setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
     }, []);
 
+    // useEffect(() => {
+    //     socket?.on("updateRooms", rooms => {
+    //         console.log(rooms);
+    //     });
+    // }, [socket])
+
 
     useEffect(() => {
         try {
