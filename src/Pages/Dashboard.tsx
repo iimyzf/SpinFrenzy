@@ -70,27 +70,35 @@ const Dashboard = () => {
         setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
     }, []);
     
+    async function fetchPlayersData(playerOneId: number, playerTwoId: number) {
+        try {
+            const [res1, res2] = await Promise.all([
+                axios.get(`http://localhost:3000/users/userinfos?id=${playerOneId}`, { withCredentials: true }),
+                axios.get(`http://localhost:3000/users/userinfos?id=${playerTwoId}`, { withCredentials: true })
+            ]);
+
+            const game: Game = {
+                player1: res1.data,
+                player2: res2.data,
+            }
+            setGames((prevGames) => [...prevGames, game]);
+
+        } catch (error) {
+          console.log("error fetching ...");
+        }
+      }
+      
+
     useEffect(() => {
         socket?.on("initRooms", rooms => {
+            console.log(rooms);
             for (let room of rooms) {
-                let player1: Player = {photo: "", username: ""};
-                let player2: Player = {photo: "", username: ""};
-
-                let game: Game = {player1, player2};
-                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerOneId}`, { withCredentials: true })
-                .then((res) => {
-                    game.player1 = res.data;
-                })
-                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerTwoId}`, { withCredentials: true })
-                .then((res) => {
-                    game.player2 = res.data;
-                })
-                setGames((prevGames) => [...prevGames, game]);
+                fetchPlayersData(room.playerOneId, room.playerTwoId);
             }
         });
 
         socket?.on("addRoom", room => {
-            console.log(room);
+            // console.log(room);
             if (!room) {console.log("no room found")}
             
             // try {
@@ -404,6 +412,44 @@ const Dashboard = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                 live games
                             </h2>
+                            {games?.map((game, index) => (
+                            <Link key={index} to="/game">
+                                <div
+                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
+                                    title="Click to watch the game"
+                                >
+                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                        <img
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
+                                            src={game.player1.photo}
+                                            alt="profile-pic"
+                                        />
+                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                            {game.player1.username}
+                                        </h2>
+                                    </div>
+                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                        3
+                                    </h1>
+                                    <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                        VS
+                                    </h1>
+                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                        6
+                                    </h1>
+                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                        {game.player2.username}
+                                        </h2>
+                                        <img
+                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
+                                            src={game.player2.photo}
+                                            alt="profile-pic"
+                                        />
+                                    </div>
+                                </div>
+                            </Link>
+                            ))}
                             <Link to="/game">
                                 <div
                                     className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
