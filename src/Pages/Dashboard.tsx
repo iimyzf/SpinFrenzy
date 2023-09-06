@@ -28,6 +28,15 @@ interface Friend {
     photo: string;
 }
 
+interface Player {
+    photo: string;
+    username: string;
+}
+interface Game {
+    player1: Player;
+    player2: Player;
+}
+
 const Dashboard = () => {
     const [isHovered, setIsHovered] = useState(null);
     const [isActiveUser, setIsActiveUser] = useState(null);
@@ -55,16 +64,56 @@ const Dashboard = () => {
 
     const [friends, setFriends] = useState<Friend[]>([]);
     const [socket, setSocket] = useState<Socket>();
+    const [games, setGames] = useState<Game[]>([]);
     
     useEffect(() => {
         setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
     }, []);
+    
+    useEffect(() => {
+        socket?.on("initRooms", rooms => {
+            for (let room of rooms) {
+                let player1: Player = {photo: "", username: ""};
+                let player2: Player = {photo: "", username: ""};
 
-    // useEffect(() => {
-    //     socket?.on("updateRooms", rooms => {
-    //         console.log(rooms);
-    //     });
-    // }, [socket])
+                let game: Game = {player1, player2};
+                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerOneId}`, { withCredentials: true })
+                .then((res) => {
+                    game.player1 = res.data;
+                })
+                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerTwoId}`, { withCredentials: true })
+                .then((res) => {
+                    game.player2 = res.data;
+                })
+                setGames((prevGames) => [...prevGames, game]);
+            }
+        });
+
+        socket?.on("addRoom", room => {
+            console.log(room);
+            if (!room) {console.log("no room found")}
+            
+            // try {
+            //     axios.get(`http://localhost:3000/users/byid?id=${rooms.playerOneId}`, {
+            //             withCredentials: true,
+            //         }).then((res) => {
+                        
+            //             const newFriends = res.data.friends;
+            //             setFriends((prevFriends) => [
+            //                 ...prevFriends,
+            //                 ...newFriends,
+            //             ]);
+            //         });
+            // } catch (error) {
+            //     console.error("Error fetching Users", error);
+            // }
+        });
+
+        return () => {
+            socket?.off("updateRooms");
+            socket?.disconnect();
+        }
+    }, [socket])
 
 
     useEffect(() => {
@@ -75,7 +124,6 @@ const Dashboard = () => {
                 })
                 .then((res) => {
                     const newFriends = res.data.friends;
-                    console.log(newFriends);
                     setFriends((prevFriends) => [
                         ...prevFriends,
                         ...newFriends,
@@ -84,7 +132,6 @@ const Dashboard = () => {
         } catch (error) {
             console.error("Error fetching friends:", error);
         }
-        console.log(friends);
     }, []);
 
     useEffect(() => {
@@ -116,6 +163,7 @@ const Dashboard = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [searchContainerRef]);
+
 
     return (
         <div className="my-[1vw] max-sm:my-[2vw] flex flex-col">
@@ -250,6 +298,7 @@ const Dashboard = () => {
             <div className="container-1 max-sm:h-[6vh] max-md:h-[5vh] md:hidden max-md:mt-[1vw] max-sm:mb-[1vw] mx-[3vw] px-[2vw] flex justify-start items-center overflow-x-scroll no-scrollbar overflow-hidden ">
                 {friends?.map((friend, index) => (
                     <Link
+                        key={index}
                         to={`/view-profile?id=${friend.id}`}
                         className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center mr-[2vw]"
                     >
