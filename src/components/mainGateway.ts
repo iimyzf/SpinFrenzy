@@ -9,6 +9,19 @@ const setOnline = async () => {
     });
 };
 
+const setOffline = () => {
+    socket.on('disconnect', () => {
+        console.log('disconnected')
+    })
+}
+
+const setInGame = () => {
+    socket.on('inGame', () => {
+        console.log('inGame')
+    })
+}
+
+
 const recieveNotification = () => {
     socket.on("notification", (data) => {
         console.log(data);

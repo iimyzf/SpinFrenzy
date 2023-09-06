@@ -173,7 +173,7 @@ const Dashboard = () => {
                         <Link to="/chat">
                             <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
                         </Link>
-                        <div className="box messages-box overflow-y-scroll no-scrollbar">
+                        <div className="box messages-box overflow-y-scroll no-scrollbar w-[20vw]">
                             <div className="display">
                                 <div className="cont ">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center ">
@@ -195,7 +195,7 @@ const Dashboard = () => {
                     </div>
                     <div className="iconBtn">
                         <BsFillBellFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
-                        <div className="box notification-box overflow-y-scroll no-scrollbar">
+                        <div className="box notification-box overflow-y-scroll no-scrollbar w-[20vw]">
                             <div className="display">
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
@@ -218,7 +218,7 @@ const Dashboard = () => {
                     </div>
                     <div className="iconBtn user-btn">
                         <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
-                        <div className="box user-box overflow-y-scroll no-scrollbar">
+                        <div className="box user-box overflow-y-scroll no-scrollbar w-[8vw]">
                             <div className="display">
                                 <div className="cont">
                                     <Link to="/profile">
@@ -286,6 +286,7 @@ const Dashboard = () => {
                 <div className="friends-container container-1 mt-[1vw] py-[1vh] flex flex-col w-[5vw] max-sm:w-[8vw] max-sm:mr-[2vw] max-h-[100vh] justify-start items-center overflow-y-scroll no-scrollbar max-sm:hidden max-md:hidden space-y-4">
                     {friends?.map((friend, index) => (
                         <Link
+                            key={index}
                             to={`/view-profile?id=${friend.id}`}
                             className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center"
                         >
