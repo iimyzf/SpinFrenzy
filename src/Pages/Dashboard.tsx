@@ -33,8 +33,14 @@ interface Player {
     username: string;
 }
 interface Game {
+    roomName: string;
     player1: Player;
     player2: Player;
+}
+
+interface Score {
+    score1: number;
+    score2: number;
 }
 
 const Dashboard = () => {
@@ -65,19 +71,23 @@ const Dashboard = () => {
     const [friends, setFriends] = useState<Friend[]>([]);
     const [socket, setSocket] = useState<Socket>();
     const [games, setGames] = useState<Game[]>([]);
+    const [gamesMap, setGamesMap] = useState(new Map<string, Score>());
     
     useEffect(() => {
         setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
     }, []);
+
     
-    async function fetchPlayersData(playerOneId: number, playerTwoId: number) {
+
+    async function fetchPlayersData(room: any) {
         try {
             const [res1, res2] = await Promise.all([
-                axios.get(`http://localhost:3000/users/userinfos?id=${playerOneId}`, { withCredentials: true }),
-                axios.get(`http://localhost:3000/users/userinfos?id=${playerTwoId}`, { withCredentials: true })
+                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerOneId}`, { withCredentials: true }),
+                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerTwoId}`, { withCredentials: true })
             ]);
 
             const game: Game = {
+                roomName: room.roomName,
                 player1: res1.data,
                 player2: res2.data,
             }
@@ -91,34 +101,42 @@ const Dashboard = () => {
 
     useEffect(() => {
         socket?.on("initRooms", rooms => {
-            console.log(rooms);
+            console.log("init rooms");
+            console.log("score1 ===> ",rooms[0].score1);
+            const newMap = new Map<string, Score>(gamesMap);
             for (let room of rooms) {
-                fetchPlayersData(room.playerOneId, room.playerTwoId);
+                fetchPlayersData(room);
+                newMap.set(room.roomName, {
+                    score1: room.score1,
+                    score2: room.score2
+                });
             }
+            setGamesMap(newMap);
         });
 
         socket?.on("addRoom", room => {
-            // console.log(room);
-            if (!room) {console.log("no room found")}
-            
-            // try {
-            //     axios.get(`http://localhost:3000/users/byid?id=${rooms.playerOneId}`, {
-            //             withCredentials: true,
-            //         }).then((res) => {
-                        
-            //             const newFriends = res.data.friends;
-            //             setFriends((prevFriends) => [
-            //                 ...prevFriends,
-            //                 ...newFriends,
-            //             ]);
-            //         });
-            // } catch (error) {
-            //     console.error("Error fetching Users", error);
-            // }
+            fetchPlayersData(room);
+            const newMap = new Map<string, Score>(gamesMap);
+            newMap.set(room.roomName, {
+                score1: room.score1,
+                score2: room.score2
+            });
+            setGamesMap(newMap);
+        });
+
+        socket?.on("updateScore", data => {
+            const newMap = new Map<string, Score>(gamesMap);
+            newMap.set(data.roomName, {
+                score1: data.score1,
+                score2: data.score2
+            })
+            setGamesMap(newMap);
         });
 
         return () => {
-            socket?.off("updateRooms");
+            socket?.off("initRooms");
+            socket?.off("addRoom");
+            socket?.off("updateScore");
             socket?.disconnect();
         }
     }, [socket])
@@ -429,13 +447,13 @@ const Dashboard = () => {
                                         </h2>
                                     </div>
                                     <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        3
+                                        {gamesMap.get(game.roomName)?.score1}
                                     </h1>
                                     <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
                                         VS
                                     </h1>
                                     <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        6
+                                        {gamesMap.get(game.roomName)?.score2}
                                     </h1>
                                     <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
                                         <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
