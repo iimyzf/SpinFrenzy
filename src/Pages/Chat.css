@@ -33,7 +33,6 @@
 .menuToggle {
     display: block;
     position: relative;
-    /* top: 50px; */
     z-index: 1;
     -webkit-user-select: none;
     user-select: none;
@@ -45,16 +44,11 @@
     transition: all 0.3s ease;
 }
 
-/* .menuToggle a:hover {
-    color: tomato;
-} */
-
 .menuToggle input {
     display: block;
     width: 2vw;
     height: 1.6vw;
     position: absolute;
-    /* top: -7px; */
     cursor: pointer;
     opacity: 0;
     z-index: 2;
@@ -66,12 +60,12 @@
     display: block;
     width: 1.65vw;
     height: 0.14vw;
-    margin-bottom: .3vw;
+    margin-bottom: 0.3vw;
     position: relative;
     background: #cdcdcd;
-    border-radius: .1vw;
+    border-radius: 0.1vw;
     z-index: 1;
-    transform-origin: .14vw 0;
+    transform-origin: 0.14vw 0;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
         background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
 }
@@ -104,12 +98,7 @@
 }
 
 .menuItem {
-    /* position: absolute; */
-    /* width: 25vw; */
-    /* height: 91vh; */
-    /* padding: 3vw; */
-    /* padding-top: 125px; */
-    background: rgba(36, 36, 36, 0.875);
+    background: rgba(29, 28, 28, 0.875);
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     transform-origin: 0% 0%;
@@ -117,7 +106,6 @@
 }
 
 .menuItem li {
-    /* padding: vw 0; */
     font-size: 1vw;
 }
 
@@ -144,6 +132,15 @@
     overflow: hidden;
 }
 
-/* .menu--right .menuItem li a:hover {
-    padding-left: 5px;
-} */
+.members-text {
+    position: absolute;
+    top: 2.6vh;
+    right: 23.5vw;
+    opacity: 0;
+    z-index: 3;
+}
+
+.menuToggle input:checked ~ .members-text {
+    opacity: 1;
+	transition: opacity 2s ease-in-out;
+}

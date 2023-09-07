@@ -15,7 +15,7 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
                     </span>
                     <div className="flex justify-end items-end">
                         <div className="flex justify-end">
-                            <div className="msg-container">
+                            <div className="msg-container rounded-[.5vw]">
                                 <p className="text-start p-[1vw] text-[.9vw] max-sm:text-[1.5vw]">
                                     {message}
                                 </p>
@@ -31,7 +31,7 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
                             src={Apollo}
                             alt="Apollo"
                         />
-                        <div className="msg-container">
+                        <div className="msg-container rounded-[.5vw]">
                             <p className="text-start p-[1vw] text-[.9vw] max-sm:text-[1.5vw]">
                                 {message}
                             </p>

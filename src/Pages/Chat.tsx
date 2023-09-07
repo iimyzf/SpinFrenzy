@@ -1,7 +1,14 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
-import { BsFillLightningChargeFill, BsFillVolumeMuteFill, BsPersonFillDash, BsPersonFillSlash, BsSendFill, BsThreeDotsVertical } from "react-icons/bs";
+import {
+    BsFillLightningChargeFill,
+    BsFillVolumeMuteFill,
+    BsPersonFillDash,
+    BsPersonFillSlash,
+    BsSendFill,
+    BsThreeDotsVertical,
+} from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -117,32 +124,38 @@ const Chat = () => {
         }
     };
     const getimg = async (roomid: number) => {
-        const res = await axios.get("http://localhost:3000/" + roomid + "room.png", {
-            withCredentials: true,
-        })
-        return res.data
-    }
-    const getuserinfo = (id: number)=> {
-        axios.get("http://localhost:3000/users/" + id).then((res)=> {
+        const res = await axios.get(
+            "http://localhost:3000/" + roomid + "room.png",
+            {
+                withCredentials: true,
+            }
+        );
+        return res.data;
+    };
+    const getuserinfo = (id: number) => {
+        axios.get("http://localhost:3000/users/" + id).then((res) => {
             return res.data;
         });
-    }
+    };
     useEffect(() => {
         getRoomChannels().then((res) => {
             let newchannel: any[] = [];
             res.forEach((element: any) => {
                 const room = element.room;
-                console.log(room)
-                let url: string 
-                if(room.isdm)
-                {
-                    url = "http://localhost:3000/" + room.name.split('dm')[1] + ".png";
+                console.log(room);
+                let url: string;
+                if (room.isdm) {
+                    url =
+                        "http://localhost:3000/" +
+                        room.name.split("dm")[1] +
+                        ".png";
                     console.log(url);
                     room.name = "dm";
-                }
-                else            
-                    url = "http://localhost:3000/" + room.id + "room.png";
-                newchannel = [...newchannel, { name: room.name, img: url, id: room.id }]
+                } else url = "http://localhost:3000/" + room.id + "room.png";
+                newchannel = [
+                    ...newchannel,
+                    { name: room.name, img: url, id: room.id },
+                ];
             });
             setChannels(newchannel);
         });
@@ -167,7 +180,7 @@ const Chat = () => {
                     message: string;
                     isSentByMe: boolean;
                 }[] = [];
-                console.log("selected channel --> ",selectedChannel?.id);
+                console.log("selected channel --> ", selectedChannel?.id);
                 getChannelmsg(selectedChannel?.id).then((res) => {
                     const msg = res.messages;
                     msg.forEach((element: any) => {
@@ -284,6 +297,7 @@ const Chat = () => {
                         <div className="menu--right" role="navigation">
                             <div className="menuToggle">
                                 <input type="checkbox" />
+								<p className="members-text font-satoshi font-medium uppercase text-[1vw]">members</p>
                                 <span></span>
                                 <span></span>
                                 <span></span>
@@ -296,17 +310,29 @@ const Chat = () => {
                                                         className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
                                                         src={Apollo}
                                                     />
-                                                    <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
+                                                    <p className="font-satoshi font-medium text-[.9vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
                                                         username
                                                     </p>
                                                 </div>
                                             </a>
-											<div className="flex items-center justify-center gap-[.5vw]">
-												<BsFillVolumeMuteFill />
-												<BsPersonFillSlash />
-												<BsPersonFillDash />
-												<BsFillLightningChargeFill />
-											</div>
+                                            <div className="flex items-center justify-center gap-[.8vw]">
+                                                <BsFillVolumeMuteFill
+                                                    className="text-[1.8vw] p-1 cursor-pointer"
+                                                    title="mute"
+                                                />
+                                                <BsPersonFillSlash
+                                                    className="text-[1.5vw] p-1 cursor-pointer"
+                                                    title="block"
+                                                />
+                                                <BsPersonFillDash
+                                                    className="text-[1.5vw] p-1 cursor-pointer"
+                                                    title="ban"
+                                                />
+                                                <BsFillLightningChargeFill
+                                                    className="text-[1.5vw] p-1 cursor-pointer"
+                                                    title="set as admin"
+                                                />
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
