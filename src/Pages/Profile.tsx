@@ -4,6 +4,7 @@ import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import QrCode from "../components/QrCode";
 
 const Profile = () => {
     const [image, setImage] = useState<string>(Apollo);
@@ -20,17 +21,22 @@ const Profile = () => {
     const [isBioEditing, setIsBioEditing] = useState(false);
     const [isAuthOn, setIsAuthOn] = useState(false);
     const [isAuthOff, setIsAuthOff] = useState(false);
-
+    const [qrCode, setQrCode] = useState(false);
+    const toggleQrCode = () => {
+		console.log("Clicked!");
+        setQrCode(!qrCode);
+    };
 
     useEffect(() => {
-        axios.get("http://localhost:3000/users/me", { withCredentials: true })
-        .then(res => {
-            setImage(res.data.photo);
-            setUsername(res.data.username);
-            setFullName(`${res.data.firstname} ${res.data.lastname}`);
-            setBio(res.data.bio);
-        })
-    }, [])
+        axios
+            .get("http://localhost:3000/users/me", { withCredentials: true })
+            .then((res) => {
+                setImage(res.data.photo);
+                setUsername(res.data.username);
+                setFullName(`${res.data.firstname} ${res.data.lastname}`);
+                setBio(res.data.bio);
+            });
+    }, []);
 
     const handleAuthOn = () => {
         console.log("it on now!");
@@ -91,13 +97,17 @@ const Profile = () => {
     };
 
     const postData = async () => {
-        await axios.post("http://localhost:3000/users/me", {
-            bio: bio,
-            username: username,
-            photo: image
-        }, {withCredentials: true});
+        await axios.post(
+            "http://localhost:3000/users/me",
+            {
+                bio: bio,
+                username: username,
+                photo: image,
+            },
+            { withCredentials: true }
+        );
         navigate(-1);
-    }
+    };
 
     const navigate = useNavigate();
 
@@ -262,35 +272,36 @@ const Profile = () => {
                             <div className="switches-container">
                                 <input
                                     type="radio"
-                                    id="switchOn"
-                                    name="switchPlan"
-                                    value="On"
-                                    checked={true}
-                                />
-                                <input
-                                    type="radio"
-                                    id="switchOff"
+                                    id="switchff"
                                     name="switchPlan"
                                     value="Off"
                                 />
-                                <label
-                                    htmlFor="switchOn"
-                                    onClick={handleAuthOn}
-                                >
-                                    ON
-                                </label>
+                                <input
+                                    type="radio"
+                                    id="switchOn"
+                                    name="switchPlan"
+                                    value="On"
+                                    checked={qrCode ? true : false}
+                                />
                                 <label
                                     htmlFor="switchOff"
-                                    onClick={handleAuthOff}
+                                    onClick={toggleQrCode}
                                 >
                                     OFF
                                 </label>
+                                <label
+                                    htmlFor="switchOn"
+                                    onClick={toggleQrCode}
+                                >
+                                    ON
+                                </label>
                                 <div className="switch-wrapper">
-                                    <div className="switch"></div>
+                                    {/* <div className="switch"></div> */}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {qrCode && <QrCode toggleQrCode={toggleQrCode} />}
                     <div className="mt-[3vw] w-[49vw] max-sm:mt-[8vw] max-sm:w-full max-sm:pr-[2.8vw] max-md:mt-[8vw] max-md:w-full max-md:pr-[2.8vw]">
                         <div className="child flex gap-[4vw] justify-end items-center">
                             <h3 className="font-light text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]">
@@ -302,12 +313,22 @@ const Profile = () => {
                                 </a>
                             </h3>
                             <h3 className="font-bold text-[1.3vw] max-sm:text-[2.5vw] max-md:text-[2.5vw]">
-                                <a className="hover:cursor-pointer" onClick={postData}>SAVE</a>
+                                <a
+                                    className="hover:cursor-pointer"
+                                    onClick={postData}
+                                >
+                                    SAVE
+                                </a>
                             </h3>
                         </div>
                     </div>
                 </div>
             </div>
+            {/* {qrCode && (
+                <QrCode
+                    toggleQrCode={toggleQrCode}
+                />
+            )} */}
         </div>
     );
 };
