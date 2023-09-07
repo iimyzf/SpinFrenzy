@@ -41,7 +41,7 @@ const Chat = () => {
                 ...prevMessages,
                 {
                     message: inputValue.trim(),
-                    isSentByMe: false,
+                    isSentByMe: true,
                 },
             ]);
             setInputValue("");
@@ -50,9 +50,10 @@ const Chat = () => {
                 id: selectedChannel?.id,
                 message: inputValue.trim(),
             };
-            socket?.emit("createMessage", dto, {
+            let ret = socket?.emit("createMessage", dto, {
                 withCredentials: true,
             });
+            console.log("--------------========", ret);
         }
     };
 
@@ -101,7 +102,7 @@ const Chat = () => {
             console.error(error);
         }
     };
-    const getChannelmgs = async (id: any) => {
+    const getChannelmsg = async (id: any) => {
         try {
             const res = await axios.get(
                 "http://localhost:3000/chat/getroomsmgs?id=" + id,
@@ -116,24 +117,32 @@ const Chat = () => {
         }
     };
     const getimg = async (roomid: number) => {
-        const res = await axios.get(
-            "http://localhost:3000/" + roomid + "room.png",
-            {
-                withCredentials: true,
-            }
-        );
-        return res.data;
-    };
+        const res = await axios.get("http://localhost:3000/" + roomid + "room.png", {
+            withCredentials: true,
+        })
+        return res.data
+    }
+    const getuserinfo = (id: number)=> {
+        axios.get("http://localhost:3000/users/" + id).then((res)=> {
+            return res.data;
+        });
+    }
     useEffect(() => {
-        const res = getRoomChannels().then((res) => {
+        getRoomChannels().then((res) => {
             let newchannel: any[] = [];
             res.forEach((element: any) => {
                 const room = element.room;
-                const url = "http://localhost:3000/" + room.id + "room.png";
-                newchannel = [
-                    ...newchannel,
-                    { name: room.name, img: url, id: room.id },
-                ];
+                console.log(room)
+                let url: string 
+                if(room.isdm)
+                {
+                    url = "http://localhost:3000/" + room.name.split('dm')[1] + ".png";
+                    console.log(url);
+                    room.name = "dm";
+                }
+                else            
+                    url = "http://localhost:3000/" + room.id + "room.png";
+                newchannel = [...newchannel, { name: room.name, img: url, id: room.id }]
             });
             setChannels(newchannel);
         });
@@ -158,12 +167,11 @@ const Chat = () => {
                     message: string;
                     isSentByMe: boolean;
                 }[] = [];
-                console.log("selected channel --> ", selectedChannel?.id);
-                getChannelmgs(selectedChannel?.id).then((res) => {
+                console.log("selected channel --> ",selectedChannel?.id);
+                getChannelmsg(selectedChannel?.id).then((res) => {
                     const msg = res.messages;
                     msg.forEach((element: any) => {
                         // console.log("msg == ", element);
-
                         if (element.senderId === id) {
                             messages = [
                                 ...messages,
@@ -204,7 +212,7 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-        socket?.on("newmessage", (dto: any) => {
+        const ret = socket?.on("newmessage", (dto: any) => {
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {

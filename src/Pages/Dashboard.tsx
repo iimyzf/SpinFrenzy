@@ -119,6 +119,17 @@ const Dashboard = () => {
             setGamesMap(new Map<string, any>(map));
         });
 
+        socket?.on("removeRoom", (data) => {
+            console.log("remove ===> \n", data.map);
+            // for (let room of data.rooms) {
+            //     fetchPlayersData(room);
+            // }
+            setGamesMap(new Map<string, any>(data.map));
+            const newGames: Game[] = games.filter(game => {game.roomName !== data.roomName});
+            console.log(newGames);
+            setGames(newGames);
+        });
+
         return () => {
             socket?.off("initRooms");
             socket?.off("addRoom");
