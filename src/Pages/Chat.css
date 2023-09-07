@@ -45,9 +45,9 @@
     transition: all 0.3s ease;
 }
 
-.menuToggle a:hover {
+/* .menuToggle a:hover {
     color: tomato;
-}
+} */
 
 .menuToggle input {
     display: block;
@@ -104,10 +104,10 @@
 }
 
 .menuItem {
-    position: absolute;
-    width: 30vw;
-    height: 100vh;
-    padding: 3vw;
+    /* position: absolute; */
+    /* width: 25vw; */
+    /* height: 91vh; */
+    /* padding: 3vw; */
     /* padding-top: 125px; */
     background: rgba(36, 36, 36, 0.875);
     list-style-type: none;
@@ -117,7 +117,7 @@
 }
 
 .menuItem li {
-    padding: 2vw 0;
+    /* padding: vw 0; */
     font-size: 1vw;
 }
 
@@ -144,6 +144,6 @@
     overflow: hidden;
 }
 
-.menu--right .menuItem li a:hover {
+/* .menu--right .menuItem li a:hover {
     padding-left: 5px;
-}
+} */

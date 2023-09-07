@@ -1,7 +1,7 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
-import { BsSendFill, BsThreeDotsVertical } from "react-icons/bs";
+import { BsFillLightningChargeFill, BsFillVolumeMuteFill, BsPersonFillDash, BsPersonFillSlash, BsSendFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -273,20 +273,34 @@ const Chat = () => {
                             {selectedChannel.name}
                         </h3>
 
-                        {/* <span className="absolute top-[3vh] right-[2vw] max-sm:top-[2vh] max-sm:right-[2vw] max-md:top-[1.5vh] max-md:right-[4vw]">
-                            <BsThreeDotsVertical className="text-[1.2vw] max-sm:text-[2.2vw] max-md:text-[2vw]" />
-                        </span> */}
-
                         <div className="menu--right" role="navigation">
                             <div className="menuToggle">
                                 <input type="checkbox" />
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                <ul className="menuItem member-menu">
-                                    {/* <li>
-                                        <a href="#" className="bg-red-600">Home</a>
-                                    </li> */}
+                                <ul className="menuItem member-menu absolute w-[30vw] h-[91vh] pt-[3vw] pr-[9vw] pl-[1vw]">
+                                    <li className="h-full overflow-y-scroll no-scrollbar mt-[3.3vh] pb-[5.5vh]">
+                                        <div className="container-1 flex justify-between items-center p-[.6vw]">
+                                            <a href="https://google.com">
+                                                <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
+                                                    <img
+                                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
+                                                        src={Apollo}
+                                                    />
+                                                    <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
+                                                        username
+                                                    </p>
+                                                </div>
+                                            </a>
+											<div className="flex items-center justify-center gap-[.5vw]">
+												<BsFillVolumeMuteFill />
+												<BsPersonFillSlash />
+												<BsPersonFillDash />
+												<BsFillLightningChargeFill />
+											</div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
