@@ -100,37 +100,23 @@ const Dashboard = () => {
       
 
     useEffect(() => {
-        socket?.on("initRooms", rooms => {
-            console.log("init rooms");
-            console.log("score1 ===> ",rooms[0].score1);
-            const newMap = new Map<string, Score>(gamesMap);
-            for (let room of rooms) {
+        socket?.on("initRooms", data => {
+            for (let room of data.rooms) {
                 fetchPlayersData(room);
-                newMap.set(room.roomName, {
-                    score1: room.score1,
-                    score2: room.score2
-                });
             }
-            setGamesMap(newMap);
+            console.log("init ===> \n", data);
+            setGamesMap(new Map<string, any>(data.map));
         });
 
-        socket?.on("addRoom", room => {
-            fetchPlayersData(room);
-            const newMap = new Map<string, Score>(gamesMap);
-            newMap.set(room.roomName, {
-                score1: room.score1,
-                score2: room.score2
-            });
-            setGamesMap(newMap);
+        socket?.on("addRoom", data => {
+            fetchPlayersData(data.room);
+            console.log("add ===> \n", data.map);
+            setGamesMap(new Map<string, any>(data.map));
         });
 
-        socket?.on("updateScore", data => {
-            const newMap = new Map<string, Score>(gamesMap);
-            newMap.set(data.roomName, {
-                score1: data.score1,
-                score2: data.score2
-            })
-            setGamesMap(newMap);
+        socket?.on("updateScore", (map: Map<string , Score>) => {
+            console.log("update ===> \n", map);
+            setGamesMap(new Map<string, any>(map));
         });
 
         return () => {
@@ -189,7 +175,6 @@ const Dashboard = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [searchContainerRef]);
-
 
     return (
         <div className="my-[1vw] max-sm:my-[2vw] flex flex-col">
