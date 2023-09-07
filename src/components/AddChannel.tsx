@@ -20,7 +20,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
     };
 
     const handleSave = () => {
-        if (channelName !== "" && (isPublic || isPrivate || isProtected)) {
+        if (channelName !== "" && (isPublic || isPrivate || isProtected) && selectedImage) {
             addChannel({ name: channelName, img: selectedImage });
             setChannelName("");
             setSelectedImage(null);

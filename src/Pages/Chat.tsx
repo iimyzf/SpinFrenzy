@@ -16,7 +16,7 @@ import axios from "axios";
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [channels, setChannels] = useState<
-        { name: string; img: string | File ; id: number }[]
+        { name: string; img: string | File; id: number }[]
     >([]);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<
@@ -63,7 +63,11 @@ const Chat = () => {
         }
     };
 
-    const addChannel = async (currentChannel: { name: string; img: string; id: number }) => {
+    const addChannel = async (currentChannel: {
+        name: string;
+        img: string;
+        id: number;
+    }) => {
         const newChannel = [...channels, currentChannel];
         try {
             const formData = new FormData();
@@ -111,7 +115,7 @@ const Chat = () => {
         } catch (error) {
             // console.log(error);
         }
-    }
+    };
     const getimg = async (roomid: number) => {
         const res = await axios.get("http://localhost:3000/" + roomid + "room.png", {
             withCredentials: true,
@@ -154,33 +158,37 @@ const Chat = () => {
     //-------------------------------------------casper-------------------------------------//
 
     useEffect(() => {
-        if(selectedChannel?.id !== undefined)
-        {
-            let id: number = 0; 
-            whoami().then((res)=> {
+        if (selectedChannel?.id !== undefined) {
+            let id: number = 0;
+            whoami().then((res) => {
                 id = res.id;
                 console.log("id == ", id);
-                let messages:   {
+                let messages: {
                     message: string;
                     isSentByMe: boolean;
                 }[] = [];
                 console.log("selected channel --> ",selectedChannel?.id);
                 getChannelmsg(selectedChannel?.id).then((res) => {
                     const msg = res.messages;
-                    msg.forEach((element:any) => {
+                    msg.forEach((element: any) => {
                         // console.log("msg == ", element);
                         if (element.senderId === id) {
-                            messages = [...messages, { message: element.content, isSentByMe: true }]
+                            messages = [
+                                ...messages,
+                                { message: element.content, isSentByMe: true },
+                            ];
                         } else {
-                            messages = [...messages, { message: element.content, isSentByMe: false }]
+                            messages = [
+                                ...messages,
+                                { message: element.content, isSentByMe: false },
+                            ];
                         }
                     });
                     setMessages(messages);
                 });
             });
         }
-
-    }, [selectedChannel])
+    }, [selectedChannel]);
 
     const socketRef = useRef<Socket | null>(null);
     const whoami = async () => {
@@ -190,7 +198,11 @@ const Chat = () => {
         return me.data;
     };
 
-    const getSelectedChannel = async (channel: { name: string; img: string | File; id: number }) => {
+    const getSelectedChannel = async (channel: {
+        name: string;
+        img: string | File;
+        id: number;
+    }) => {
         setSelectedChannel(channel);
     };
     useEffect(() => {
@@ -260,17 +272,33 @@ const Chat = () => {
                             className="w-[2.5vw] h-[2.5vw] max-sm:w-[6vw] max-sm:h-[6vw] max-md:w-[4vw] max-md:h-[4vw] rounded-full absolute top-[2vh] max-sm:top-[1vh] max-md:top-[1vh] left-[2vw] max-sm:left-[3vw] max-md:left-[3vw] object-cover"
                             src={
                                 typeof selectedChannel?.img === "string"
-                                ? selectedChannel?.img
-                                : URL.createObjectURL(selectedChannel?.img)
+                                    ? selectedChannel?.img
+                                    : URL.createObjectURL(selectedChannel?.img)
                             }
                             alt="Apollo"
                         />
                         <h3 className="absolute top-[3vh] max-sm:top-[1.8vh] max-md:top-[1.8vh] font-bold left-[5.5vw] max-sm:left-[11vw] max-md:left-[8vw] text-[1vw] max-sm:text-[2vw] max-md:text-[1.4vw]">
                             {selectedChannel.name}
                         </h3>
-                        <span className="absolute top-[3vh] right-[2vw] max-sm:top-[2vh] max-sm:right-[2vw] max-md:top-[1.5vh] max-md:right-[4vw]">
+
+                        {/* <span className="absolute top-[3vh] right-[2vw] max-sm:top-[2vh] max-sm:right-[2vw] max-md:top-[1.5vh] max-md:right-[4vw]">
                             <BsThreeDotsVertical className="text-[1.2vw] max-sm:text-[2.2vw] max-md:text-[2vw]" />
-                        </span>
+                        </span> */}
+
+                        <div className="menu--right" role="navigation">
+                            <div className="menuToggle">
+                                <input type="checkbox" />
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <ul className="menuItem member-menu">
+                                    {/* <li>
+                                        <a href="#" className="bg-red-600">Home</a>
+                                    </li> */}
+                                </ul>
+                            </div>
+                        </div>
+
                         <span className="line absolute top-[8vh] max-sm:top-[5vh] max-md:top-[5vh]"></span>
                         <span className="line absolute bottom-[9vh] max-sm:bottom-[5vh] max-md:bottom-[5vh]"></span>
                         <div className="h-[72.5vh] max-sm:h-[35vh] max-md:h-[35vh] w-full mb-[1vh] max-sm:mb-0 max-md:mb-0 px-[1.5vw] overflow-y-scroll no-scrollbar overflow-hidden">
