@@ -20,6 +20,7 @@ interface UserInfo {
     lastname: string;
     bio: string;
     id: number;
+    online: boolean;
 };
 
 
@@ -41,13 +42,15 @@ const ViewProfile = () => {
         axios.get(`http://localhost:3000/users/byid?id=${id}`, {withCredentials: true})
         .then(res => {
             const data = res.data;
+            console.log(res.data);
             setUser({
-                photo: data.photo,
-                username: data.username,
-                firstname: data.firstname,
-                lastname: data.lastname,
-                bio: data.bio,
+                photo: data.user.photo,
+                username: data.user.username,
+                firstname: data.user.firstname,
+                lastname: data.user.lastname,
+                bio: data.user.bio,
                 id: userid,
+                online: data.user.online
             });
         });
     };
@@ -154,7 +157,7 @@ const ViewProfile = () => {
                                 src={user?.photo}
                                 alt="Apollo"
                             />
-                            <span className="status rounded-full bg-green-400 w-[1.5vw] h-[1.5vw] max-sm:w-[4vw] max-sm:h-[4vw] max-md:w-[3vw] max-md:h-[3vw] absolute top-0 right-[.5vw]"></span>
+                            <span className={`status rounded-full bg-${user?.online ? "green" : "gray"}-400 w-[1.5vw] h-[1.5vw] max-sm:w-[4vw] max-sm:h-[4vw] max-md:w-[3vw] max-md:h-[3vw] absolute top-0 right-[.5vw]`}></span>
                         </div>
                     </div>
                     <h4 className="font-light absolute top-[18vw] text-[1vw] max-sm:top-[36vw] max-sm:text-[2.2vw] max-md:top-[28vw] max-md:text-[1.5vw]">
