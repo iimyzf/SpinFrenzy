@@ -120,19 +120,7 @@ const Dashboard = () => {
         socket?.on("updateScore", (map: Map<string, Score>) => {
             console.log("update ===> \n", map);
             setGamesMap(new Map<string, any>(map));
-        });
-
-        socket?.on("removeRoom", (data) => {
-            console.log("remove ===> \n", data.map);
-            // for (let room of data.rooms) {
-            //     fetchPlayersData(room);
-            // }
-            setGamesMap(new Map<string, any>(data.map));
-            const newGames: Game[] = games.filter((game) => {
-                game.roomName !== data.roomName;
-            });
-            console.log(newGames);
-            setGames(newGames);
+            console.log(games);
         });
 
         return () => {
@@ -140,8 +128,24 @@ const Dashboard = () => {
             socket?.off("addRoom");
             socket?.off("updateScore");
             socket?.disconnect();
-        };
-    }, [socket]);
+        }
+    }, [socket])
+
+    useEffect(() => {
+        socket?.on("removeRoom", (data) => {
+            console.log("remove ===> \n");
+            setGamesMap(new Map<string, any>(data.map));
+            const newGames: Game[] = games.filter(game => game.roomName !== data.roomName);
+            console.log(newGames);
+            setGames(newGames);
+        });
+
+        return () => {
+            socket?.off("removeRoom");
+        }
+
+    }, [games]);
+
 
     useEffect(() => {
         try {
