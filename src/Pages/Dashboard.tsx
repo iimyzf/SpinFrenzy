@@ -12,7 +12,6 @@ import { FiLogOut } from "react-icons/fi";
 import axios from "axios";
 import { io, Socket } from "socket.io-client";
 
-
 interface User {
     id: number;
     username: string;
@@ -72,35 +71,39 @@ const Dashboard = () => {
     const [socket, setSocket] = useState<Socket>();
     const [games, setGames] = useState<Game[]>([]);
     const [gamesMap, setGamesMap] = useState(new Map<string, Score>());
-    
-    useEffect(() => {
-        setSocket( io("http://localhost:3000/stream", { withCredentials: true }));
-    }, []);
 
-    
+    useEffect(() => {
+        setSocket(
+            io("http://localhost:3000/stream", { withCredentials: true })
+        );
+    }, []);
 
     async function fetchPlayersData(room: any) {
         try {
             const [res1, res2] = await Promise.all([
-                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerOneId}`, { withCredentials: true }),
-                axios.get(`http://localhost:3000/users/userinfos?id=${room.playerTwoId}`, { withCredentials: true })
+                axios.get(
+                    `http://localhost:3000/users/userinfos?id=${room.playerOneId}`,
+                    { withCredentials: true }
+                ),
+                axios.get(
+                    `http://localhost:3000/users/userinfos?id=${room.playerTwoId}`,
+                    { withCredentials: true }
+                ),
             ]);
 
             const game: Game = {
                 roomName: room.roomName,
                 player1: res1.data,
                 player2: res2.data,
-            }
+            };
             setGames((prevGames) => [...prevGames, game]);
-
         } catch (error) {
-          console.log("error fetching ...");
+            console.log("error fetching ...");
         }
-      }
-      
+    }
 
     useEffect(() => {
-        socket?.on("initRooms", data => {
+        socket?.on("initRooms", (data) => {
             for (let room of data.rooms) {
                 fetchPlayersData(room);
             }
@@ -108,23 +111,16 @@ const Dashboard = () => {
             setGamesMap(new Map<string, any>(data.map));
         });
 
-        socket?.on("addRoom", data => {
+        socket?.on("addRoom", (data) => {
             fetchPlayersData(data.room);
             console.log("add ===> \n", data.map);
             setGamesMap(new Map<string, any>(data.map));
         });
 
-        socket?.on("updateScore", (map: Map<string , Score>) => {
+        socket?.on("updateScore", (map: Map<string, Score>) => {
             console.log("update ===> \n", map);
             setGamesMap(new Map<string, any>(map));
             console.log(games);
-        });
-
-        socket?.on("removeRoom", (data) => {
-            console.log("remove ===> \n");
-            setGamesMap(new Map<string, any>(data.map));
-            const newGames: Game[] = games.filter(game => game.roomName !== data.roomName);
-            setGames(newGames);
         });
 
         return () => {
@@ -259,7 +255,7 @@ const Dashboard = () => {
                             <div className="display">
                                 <div className="cont ">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center ">
-                                        <a href="https://google.com">
+                                        <Link to="/chat">
                                             <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
                                                 <img
                                                     className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
@@ -269,7 +265,7 @@ const Dashboard = () => {
                                                     mamella sent you a message
                                                 </p>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -281,7 +277,7 @@ const Dashboard = () => {
                             <div className="display">
                                 <div className="cont">
                                     <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
-                                        <a href="https://google.com">
+                                        <Link to="/chat">
                                             <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
                                                 <img
                                                     className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
@@ -292,7 +288,7 @@ const Dashboard = () => {
                                                     request
                                                 </p>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -439,42 +435,48 @@ const Dashboard = () => {
                                 live games
                             </h2>
                             {games?.map((game, index) => (
-                            <Link key={index} to="/game">
-                                <div
-                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
-                                    title="Click to watch the game"
-                                >
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                        <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                            src={game.player1.photo}
-                                            alt="profile-pic"
-                                        />
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                            {game.player1.username}
-                                        </h2>
+                                <Link key={index} to="/game">
+                                    <div
+                                        className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
+                                        title="Click to watch the game"
+                                    >
+                                        <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                            <img
+                                                className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
+                                                src={game.player1.photo}
+                                                alt="profile-pic"
+                                            />
+                                            <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                                {game.player1.username}
+                                            </h2>
+                                        </div>
+                                        <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                            {
+                                                gamesMap.get(game.roomName)
+                                                    ?.score1
+                                            }
+                                        </h1>
+                                        <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                            VS
+                                        </h1>
+                                        <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                            {
+                                                gamesMap.get(game.roomName)
+                                                    ?.score2
+                                            }
+                                        </h1>
+                                        <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                            <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                                {game.player2.username}
+                                            </h2>
+                                            <img
+                                                className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
+                                                src={game.player2.photo}
+                                                alt="profile-pic"
+                                            />
+                                        </div>
                                     </div>
-                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        {gamesMap.get(game.roomName)?.score1}
-                                    </h1>
-                                    <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        VS
-                                    </h1>
-                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        {gamesMap.get(game.roomName)?.score2}
-                                    </h1>
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                        {game.player2.username}
-                                        </h2>
-                                        <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
-                                            src={game.player2.photo}
-                                            alt="profile-pic"
-                                        />
-                                    </div>
-                                </div>
-                            </Link>
+                                </Link>
                             ))}
                             <Link to="/game">
                                 <div

@@ -1,7 +1,13 @@
 import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
-import { BsSendFill, BsThreeDotsVertical } from "react-icons/bs";
+import {
+    BsFillLightningChargeFill,
+    BsFillVolumeMuteFill,
+    BsPersonFillDash,
+    BsPersonFillSlash,
+    BsSendFill,
+} from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import MessageContainer from "../components/MessageContainer";
@@ -10,8 +16,7 @@ import { Socket, io } from "socket.io-client";
 import AddChannel from "../components/AddChannel";
 
 import axios from "axios";
-// import { Link } from "react-router-dom";
-// import { GiRoundBottomFlask } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -41,7 +46,7 @@ const Chat = () => {
                 ...prevMessages,
                 {
                     message: inputValue.trim(),
-                    isSentByMe: false,
+                    isSentByMe: true,
                 },
             ]);
             setInputValue("");
@@ -50,9 +55,10 @@ const Chat = () => {
                 id: selectedChannel?.id,
                 message: inputValue.trim(),
             };
-            socket?.emit("createMessage", dto, {
+            let ret = socket?.emit("createMessage", dto, {
                 withCredentials: true,
             });
+            console.log("--------------========", ret);
         }
     };
 
@@ -101,7 +107,7 @@ const Chat = () => {
             console.error(error);
         }
     };
-    const getChannelmgs = async (id: any) => {
+    const getChannelmsg = async (id: any) => {
         try {
             const res = await axios.get(
                 "http://localhost:3000/chat/getroomsmgs?id=" + id,
@@ -124,12 +130,26 @@ const Chat = () => {
         );
         return res.data;
     };
+    const getuserinfo = (id: number) => {
+        axios.get("http://localhost:3000/users/" + id).then((res) => {
+            return res.data;
+        });
+    };
     useEffect(() => {
-        const res = getRoomChannels().then((res) => {
+        getRoomChannels().then((res) => {
             let newchannel: any[] = [];
             res.forEach((element: any) => {
                 const room = element.room;
-                const url = "http://localhost:3000/" + room.id + "room.png";
+                console.log(room);
+                let url: string;
+                if (room.isdm) {
+                    url =
+                        "http://localhost:3000/" +
+                        room.name.split("dm")[1] +
+                        ".png";
+                    console.log(url);
+                    room.name = "dm";
+                } else url = "http://localhost:3000/" + room.id + "room.png";
                 newchannel = [
                     ...newchannel,
                     { name: room.name, img: url, id: room.id },
@@ -159,11 +179,10 @@ const Chat = () => {
                     isSentByMe: boolean;
                 }[] = [];
                 console.log("selected channel --> ", selectedChannel?.id);
-                getChannelmgs(selectedChannel?.id).then((res) => {
+                getChannelmsg(selectedChannel?.id).then((res) => {
                     const msg = res.messages;
                     msg.forEach((element: any) => {
                         // console.log("msg == ", element);
-
                         if (element.senderId === id) {
                             messages = [
                                 ...messages,
@@ -204,7 +223,7 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-        socket?.on("newmessage", (dto: any) => {
+        const ret = socket?.on("newmessage", (dto: any) => {
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -273,20 +292,57 @@ const Chat = () => {
                             {selectedChannel.name}
                         </h3>
 
-                        {/* <span className="absolute top-[3vh] right-[2vw] max-sm:top-[2vh] max-sm:right-[2vw] max-md:top-[1.5vh] max-md:right-[4vw]">
-                            <BsThreeDotsVertical className="text-[1.2vw] max-sm:text-[2.2vw] max-md:text-[2vw]" />
-                        </span> */}
-
                         <div className="menu--right" role="navigation">
                             <div className="menuToggle">
                                 <input type="checkbox" />
+                                <p className="members-text font-satoshi font-medium uppercase text-[1vw]">
+                                    members
+                                </p>
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                <ul className="menuItem member-menu">
-                                    {/* <li>
-                                        <a href="#" className="bg-red-600">Home</a>
-                                    </li> */}
+                                <ul className="menuItem member-menu absolute w-[30vw] h-[91vh] pt-[3vw] pr-[9vw] pl-[1vw]">
+                                    <li className="h-full overflow-y-scroll no-scrollbar mt-[3.3vh] pb-[5.5vh]">
+                                        <div className="container-1 flex justify-between items-center p-[.6vw]">
+                                            <Link to="/view-profile">
+                                                <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
+                                                    <img
+                                                        className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
+                                                        src={Apollo}
+                                                    />
+                                                    <p className="font-satoshi font-medium hover:underline text-[.9vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
+                                                        username
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                            <div className="flex items-center justify-center gap-[.8vw]">
+                                                <button>
+                                                    <BsFillVolumeMuteFill
+                                                        className="text-[1.8vw] p-1 cursor-pointer"
+                                                        title="mute"
+                                                    />
+                                                </button>
+                                                <button>
+                                                    <BsPersonFillSlash
+                                                        className="text-[1.5vw] p-1 cursor-pointer"
+                                                        title="block"
+                                                    />
+                                                </button>
+                                                <button>
+                                                    <BsPersonFillDash
+                                                        className="text-[1.5vw] p-1 cursor-pointer"
+                                                        title="ban"
+                                                    />
+                                                </button>
+                                                <button>
+                                                    <BsFillLightningChargeFill
+                                                        className="text-[1.5vw] p-1 cursor-pointer"
+                                                        title="set as admin"
+                                                    />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

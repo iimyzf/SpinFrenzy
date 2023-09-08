@@ -93,7 +93,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         onChange={handleChange}
                                         type="text"
                                         maxLength={25}
-                                        className="w-full h-14 mt-2 max-sm:w-full max-sm:h-[5vh] max-md:w-full max-md:h-[5vh] rounded-[.5vw] max-sm:rounded-[1.2vw] max-md:rounded-[1.2vw] input-container outline-none indent-[1vw] text-[1vw] max-sm:text-[3vw] max-md:text-[2vw]"
+                                        className="w-full h-[3vw] mt-2 max-sm:w-full max-sm:h-[5vh] max-md:w-full max-md:h-[5vh] rounded-[.5vw] max-sm:rounded-[1.2vw] max-md:rounded-[1.2vw] input-container outline-none indent-[1vw] text-[1vw] max-sm:text-[3vw] max-md:text-[2vw]"
                                     />
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -101,7 +101,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         Private Channel
                                     </h3>
                                     <span
-                                        className="check-span w-[3.5vw] h-[3.5vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
+                                        className="check-span w-[3vw] h-[3vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
                                         onClick={handlePrivateCheck}
                                     >
                                         {isPrivate && (
@@ -114,7 +114,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         Public Channel
                                     </h3>
                                     <span
-                                        className="check-span w-[3.5vw] h-[3.5vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
+                                        className="check-span w-[3vw] h-[3vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
                                         onClick={handlePublicCheck}
                                     >
                                         {isPublic && (
@@ -127,7 +127,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         Protected Channel
                                     </h3>
                                     <span
-                                        className="check-span w-[3.5vw] h-[3.5vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
+                                        className="check-span w-[3vw] h-[3vw] max-sm:w-[10vw] max-sm:h-[10vw] max-md:w-[6vw] max-md:h-[6vw] rounded-[.5vw] max-sm:rounded-[1.2vw] flex justify-center items-center cursor-pointer"
                                         onClick={handleProtectedCheck}
                                     >
                                         {isProtected && (
@@ -143,13 +143,13 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                         <input
                                             type="password"
                                             maxLength={42}
-                                            className="w-full h-14 mt-2 max-sm:w-full max-sm:h-[5vh] max-md:w-full max-md:h-[5vh] rounded-[.5vw] max-sm:rounded-[1.2vw] max-md:rounded-[1.2vw] input-container outline-none indent-[1vw] text-[1vw] max-sm:text-[3vw] max-md:text-[2vw]"
+                                            className="w-full h-[3vw] mt-2 max-sm:w-full max-sm:h-[5vh] max-md:w-full max-md:h-[5vh] rounded-[.5vw] max-sm:rounded-[1.2vw] max-md:rounded-[1.2vw] input-container outline-none indent-[1vw] text-[1vw] max-sm:text-[3vw] max-md:text-[2vw]"
                                         />
                                     </>
                                 )}
                                 <div className="pt-[1vw] max-sm:pt-[.5vw] max-md:pt-[.5vw]">
                                     <div className="child flex gap-[2vw] max-sm:gap-[8vw] max-md:gap-[6vw] justify-end items-end">
-                                        <h3 className="text-[1vw] font-light max-sm:text-[3.5vw] max-md:text-[2vw]">
+                                        <h3 className="text-[.8vw] font-light max-sm:text-[3.5vw] max-md:text-[2vw]">
                                             <a
                                                 className="cursor-pointer"
                                                 onClick={togglePopup}
@@ -157,7 +157,7 @@ const AddChannel = ({ togglePopup, addChannel }: Props) => {
                                                 CANCEL
                                             </a>
                                         </h3>
-                                        <h3 className="text-[1.4vw] font-bold max-sm:text-[4.5vw] max-md:text-[3vw]">
+                                        <h3 className="text-[1.2vw] font-bold max-sm:text-[4.5vw] max-md:text-[3vw]">
                                             <a
                                                 className="cursor-pointer"
                                                 onClick={handleSave}
