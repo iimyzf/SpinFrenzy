@@ -108,7 +108,7 @@ const ViewProfile = () => {
             },
             {
                 name: "WINS",
-                data: [4, 7, 2, 4, 7, 12, 3, 6, 15],
+                data: [4, 7, 2, 4, 7, 1, 3, 6,2],
             },
             {
                 name: "DRAWS",
@@ -203,14 +203,14 @@ const ViewProfile = () => {
                             Match Statistics for <strong>{user?.username}</strong>
                         </h3>
                     </div>
-                    <Chart
+                    {/* <Chart
                         className="w-[60vw] h-full max-sm:w-[70vw] max-sm:h-full max-md:w-[70vw] max-md:h-full pt-[10vw] max-sm:pt-[30vw] max-md:pt-[15vw] text-[1vw] max-sm:text-[1vw]"
                         options={chartOptions}
                         series={chartSeries}
                         type="area"
                         // height={650}
                         // width={1150}
-                    />
+                    /> */}
                 </div>
             </div>
         </div>
