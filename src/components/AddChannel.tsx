@@ -1,6 +1,5 @@
 import { BsCheck, BsImage } from "react-icons/bs";
 import { useState } from "react";
-// import Apollo from "../assets/Apollo.jpg";
 import "./AddChannel.css";
 
 type Props = {

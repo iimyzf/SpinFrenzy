@@ -4,7 +4,7 @@ import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import QrCode from "../components/QrCode";
+import { QrCode } from "./index";
 
 const Profile = () => {
     const [image, setImage] = useState<string>(Apollo);
@@ -23,7 +23,7 @@ const Profile = () => {
     const [isAuthOff, setIsAuthOff] = useState(false);
     const [qrCode, setQrCode] = useState(false);
     const toggleQrCode = () => {
-		console.log("Clicked!");
+        console.log("Clicked!");
         setQrCode(!qrCode);
     };
 
@@ -324,11 +324,6 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            {/* {qrCode && (
-                <QrCode
-                    toggleQrCode={toggleQrCode}
-                />
-            )} */}
         </div>
     );
 };

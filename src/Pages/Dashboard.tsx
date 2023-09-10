@@ -4,14 +4,20 @@ import {
     BsFillPersonFill,
     BsSearch,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import Apollo from "../assets/Apollo.jpg";
-import { useEffect, useRef, useState } from "react";
-import "./Dashboard.css";
 import { FiLogOut } from "react-icons/fi";
-import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+    LiveGame,
+    PublicChannel,
+    Leaderboard,
+    Notifications,
+    MsgNotification,
+    FriendComponent,
+} from "./index";
 import { io, Socket } from "socket.io-client";
-import LiveGame from "../components/LiveGame";
+import axios from "axios";
+import "./Dashboard.css";
 
 interface User {
     id: number;
@@ -254,48 +260,11 @@ const Dashboard = () => {
                         <Link to="/chat">
                             <BsFillChatLeftTextFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
                         </Link>
-                        <div className="box messages-box overflow-y-scroll no-scrollbar w-[20vw]">
-                            <div className="display">
-                                <div className="cont ">
-                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center ">
-                                        <Link to="/chat">
-                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
-                                                <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
-                                                    src={Apollo}
-                                                />
-                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                                    mamella sent you a message
-                                                </p>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <MsgNotification />
                     </div>
                     <div className="iconBtn">
                         <BsFillBellFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
-                        <div className="box notification-box overflow-y-scroll no-scrollbar w-[20vw]">
-                            <div className="display">
-                                <div className="cont">
-                                    <div className="container-1 m-[.6vw] p-[.5vw] flex justify-center items-center">
-                                        <Link to="/chat">
-                                            <div className="flex justify-between items-center gap-[.6vw] max-sm:gap-[2vw] max-md:gap-[2vw] max-lg:gap-[2vw]">
-                                                <img
-                                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[4vw] max-lg:h-[4vw] rounded-full"
-                                                    src={Apollo}
-                                                />
-                                                <p className="font-satoshi font-normal text-[.8vw] max-sm:text-[1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                                    mamella sent you a friend
-                                                    request
-                                                </p>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Notifications />
                     </div>
                     <div className="iconBtn user-btn">
                         <BsFillPersonFill className="hover:scale-110 text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]" />
@@ -330,38 +299,11 @@ const Dashboard = () => {
             </div>
             <div className="container-1 max-sm:h-[6vh] max-md:h-[5vh] md:hidden max-md:mt-[1vw] max-sm:mb-[1vw] mx-[3vw] px-[2vw] flex justify-start items-center overflow-x-scroll no-scrollbar overflow-hidden ">
                 {friends?.map((friend, index) => (
-                    <Link
+                    <FriendComponent
                         key={index}
-                        to={`/view-profile?id=${friend.id}`}
-                        className="userdiv w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] flex justify-center items-center mr-[2vw]"
-                    >
-                        <button
-                            className="friend-bn absolute"
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={handleMouseLeave}
-                            onClick={() => handleUserClick(index)}
-                        >
-                            <div className="hover:scale-105">
-                                <img
-                                    className="w-[2.5vw] h-[2.5vw] max-sm:w-[4vw] max-sm:h-[4vw] rounded-full"
-                                    src={friend.photo}
-                                    alt="friend-pic"
-                                />
-                                <span
-                                    className={`rounded-full ${
-                                        friend.online
-                                            ? "bg-green-400"
-                                            : "bg-gray-400"
-                                    } w-[0.5vw] h-[0.5vw] max-sm:w-[.8vw] max-sm:h-[.8vw] absolute top-0 right-0`}
-                                ></span>
-                            </div>
-                            {isHovered == index && (
-                                <div className="absolute top-1/2 left-[3vw] max-sm:left-[5vw] -translate-y-1/2 rounded-[.5vw] px-[.8vw] py-[.4vw] bg-black font-bold font-satoshi text-[.6vw] max-sm:text-[1.2vw] ">
-                                    {friend.username}
-                                </div>
-                            )}
-                        </button>
-                    </Link>
+                        index={index}
+                        friend={friend}
+                    />
                 ))}
             </div>
             <div className="flex mx-[3vw]">
@@ -438,48 +380,6 @@ const Dashboard = () => {
                                 live games
                             </h2>
                             {games?.map((game, index) => (
-                                // <Link key={index} to="/game">
-                                //     <div
-                                //         className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
-                                //         title="Click to watch the game"
-                                //     >
-                                //         <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                //             <img
-                                //                 className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                //                 src={game.player1.photo}
-                                //                 alt="profile-pic"
-                                //             />
-                                //             <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                //                 {game.player1.username}
-                                //             </h2>
-                                //         </div>
-                                //         <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                //             {
-                                //                 gamesMap.get(game.roomName)
-                                //                     ?.score1
-                                //             }
-                                //         </h1>
-                                //         <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                //             VS
-                                //         </h1>
-                                //         <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                //             {
-                                //                 gamesMap.get(game.roomName)
-                                //                     ?.score2
-                                //             }
-                                //         </h1>
-                                //         <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                //             <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                //                 {game.player2.username}
-                                //             </h2>
-                                //             <img
-                                //                 className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
-                                //                 src={game.player2.photo}
-                                //                 alt="profile-pic"
-                                //             />
-                                //         </div>
-                                //     </div>
-                                // </Link>
                                 <LiveGame
                                     key={index}
                                     game={game}
@@ -487,42 +387,6 @@ const Dashboard = () => {
                                     gamesMap={gamesMap}
                                 />
                             ))}
-                            <Link to="/game">
-                                <div
-                                    className="game-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center"
-                                    title="Click to watch the game"
-                                >
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                        <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                            src={Apollo}
-                                            alt="profile-pic"
-                                        />
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                            username
-                                        </h2>
-                                    </div>
-                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        3
-                                    </h1>
-                                    <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        VS
-                                    </h1>
-                                    <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                        6
-                                    </h1>
-                                    <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                        <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                            username
-                                        </h2>
-                                        <img
-                                            className="ppic rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
-                                            src={Apollo}
-                                            alt="profile-pic"
-                                        />
-                                    </div>
-                                </div>
-                            </Link>
                         </div>
                     </div>
                     <div className="flex gap-[1vw] h-[50vh] max-sm:flex-col max-md:flex-col">
@@ -530,65 +394,13 @@ const Dashboard = () => {
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                 popular public channels
                             </h2>
-                            <div className="channel-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] items-center">
-                                <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                    <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                        src={Apollo}
-                                        alt="channel-pic"
-                                    />
-                                    <div className="flex flex-col items-start">
-                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                            name of the channel
-                                        </h2>
-                                        <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh] opacity-70">
-                                            42 members
-                                        </h3>
-                                    </div>
-                                </div>
-                                <button className="join-channel container-1 px-[2vw] py-[.3vw] uppercase font-bold hover:scale-105 text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                    join
-                                </button>
-                            </div>
+                            <PublicChannel />
                         </div>
                         <div className="forth-container container-1 mt-[1vw] p-[1.5vw] max-sm:p-[3vw] w-1/2 overflow-y-scroll no-scrollbar max-sm:w-full max-sm:h-full max-md:w-full max-md:h-full">
                             <h2 className="font-bold font-satoshi uppercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
                                 leaderboard
                             </h2>
-                            <div className="person-div mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex justify-between container-1 px-[1.5vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] items-center">
-                                <div className="flex items-center gap-[1vw] max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                    <h1 className="font-black font-satoshi mr-[1vw] text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                        1
-                                    </h1>
-                                    <img
-                                        className="rounded-full w-[2vw] h-[2vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                        src={Apollo}
-                                        alt="channel-pic"
-                                    />
-                                    <div className="flex flex-col">
-                                        <h2 className="font-medium font-satoshi lowercase text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                            username
-                                        </h2>
-                                        <div className="flex gap-[1vw] max-sm:gap-[7.5vw] max-md:gap-[7.5vw] max-lg:gap-[2.5vw] items-center">
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                                games won: 24
-                                            </h3>
-                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                                /
-                                            </h1>
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                                games losses: 12
-                                            </h3>
-                                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                                /
-                                            </h1>
-                                            <h3 className="font-normal font-satoshi lowercase text-[.7vw] max-sm:text-[1.1vh] max-md:text-[1.1vh] max-lg:text-[1.1vh]">
-                                                draws: 6
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Leaderboard />
                         </div>
                     </div>
                 </div>
