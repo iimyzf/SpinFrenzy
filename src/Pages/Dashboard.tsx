@@ -209,9 +209,9 @@ const Dashboard = () => {
             <div className="first-container h-[8vh] max-sm:h-[6vh] max-md:h-[5vh] max-lg:h-[5vh] max-sm:mb-[.8vh] container-1 mx-[3vw] px-[2vw] flex justify-between items-center">
                 <Link
                     to="/home"
-                    className="font-black lowercase font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh]  max-lg:text-[1.2vh] tracking-wider"
+                    className="font-black font-satoshi text-[1vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh] tracking-wider"
                 >
-                    spinfrenzy
+                    SpinFrenzy
                 </Link>
                 <div className="flex gap-[2vw] items-center max-sm:gap-[5vw] max-md:gap-[5vw] max-lg:gap-[4vw]">
                     <div
