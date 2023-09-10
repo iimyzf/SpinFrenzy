@@ -1,6 +1,6 @@
 import { BsCheck, BsImage } from "react-icons/bs";
 import { useState } from "react";
-import "./AddChannel.css";
+import "../styles/AddChannel.css";
 
 type Props = {
     togglePopup: () => void;

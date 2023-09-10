@@ -1,10 +1,10 @@
-import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { QrCode } from "./index";
+import "../styles/Profile.css";
 
 const Profile = () => {
     const [image, setImage] = useState<string>(Apollo);

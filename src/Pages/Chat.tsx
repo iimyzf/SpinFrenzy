@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 import { MessageContainer, AddChannel } from "./index";
 import { Socket, io } from "socket.io-client";
 import axios from "axios";
-import "../components/AddChannel.css";
-import "./Chat.css";
+import "../styles/AddChannel.css";
+import "../styles/Chat.css";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);

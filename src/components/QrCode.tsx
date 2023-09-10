@@ -1,6 +1,6 @@
 import { BsXLg } from "react-icons/bs";
-import "./QrCode.css";
 import { useEffect } from "react";
+import "../styles/QrCode.css";
 
 interface QrCodeProps {
     toggleQrCode: () => void;

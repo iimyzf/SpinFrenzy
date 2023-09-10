@@ -17,7 +17,7 @@ import {
 } from "./index";
 import { io, Socket } from "socket.io-client";
 import axios from "axios";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 
 interface User {
     id: number;

@@ -8,9 +8,6 @@
 .child-container-1,
 .child-container-2 {
     display: flex;
-    /* justify-content: flex-start; */
-    /* align-items: center; */
-    /* height: 100vh; */
 }
 
 .status {
@@ -22,20 +19,10 @@
     background: rgba(217, 217, 217, 0.4);
 }
 
-/* .check-icon {
-    font-size: 2.2em;
-} */
-
 .custom-textarea {
     border: none;
     outline: none;
     background: none;
-    /* resize: none; */
-    /* height: 20vh; */
-    /* width: 16em;  */
-    /* font-family: inherit; */
-    /* font-size: inherit; */
-    /* color: inherit; */
 }
 
 :root {
@@ -44,24 +31,7 @@
     --switch-bg-color: rgba(217, 217, 217, 0.5);
     --switch-text-color: rgba(217, 217, 217, 0.4);
 }
-/* a container - decorative, not required */
-/* .containerr { */
-/* width: 10rem; */
-/* padding: 1rem; */
-/* margin-left: auto; */
-/* margin-right: auto; */
-/* margin-top: 5%; */
-/* } */
-/* p - decorative, not required */
-/* p { */
-/* margin-top: 2rem; */
-/* font-size: 0.75rem; */
-/* text-align: center; */
-/* } */
 
-/* container for all of the switch elements 
-    - adjust "width" to fit the content accordingly 
-*/
 .switches-container {
     width: 10vw;
     position: relative;
@@ -123,37 +93,12 @@
     top: 0;
     bottom: 0;
     width: 50%;
-    /* padding: 0.15rem; */
     z-index: 1;
     transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     background: var(--switch-bg-color);
     transition: transform 0.5s;
     overflow: hidden;
 }
-
-/* switch box highlighter */
-/* .switch {
-    border-radius: 0.8vw;
-    background: var(--switch-bg-color);
-    height: 100%;
-} */
-
-/* switch box labels
-    - default setup
-    - toggle afterwards based on radio:checked status 
-*/
-/* .switch div {
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    display: block;
-    color: var(--switch-text-color);
-    transition: opacity 0.2s cubic-bezier(0.77, 0, 0.175, 1) 0.125s;
-    will-change: opacity;
-    position: absolute;
-    top: 0;
-    left: 0;
-} */
 
 /* slide the switch box from right to left */
 .switches-container input:nth-of-type(1):checked ~ .switch-wrapper {
