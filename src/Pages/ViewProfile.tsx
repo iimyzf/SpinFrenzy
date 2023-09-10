@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
-import "./ViewProfile.css";
+import "../styles/ViewProfile.css";
 import axios from "axios";
 
 interface UserInfo {

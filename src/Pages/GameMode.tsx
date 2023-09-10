@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Gamemode.css";
+import "../styles/Gamemode.css";
 
 const GameMode = () => {
     return (
