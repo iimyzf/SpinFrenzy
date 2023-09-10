@@ -20,6 +20,7 @@ interface User {
     lastname: string;
     online: boolean;
 }
+
 interface Friend {
     id: number;
     online: boolean;
@@ -31,6 +32,7 @@ interface Player {
     photo: string;
     username: string;
 }
+
 interface Game {
     roomName: string;
     player1: Player;

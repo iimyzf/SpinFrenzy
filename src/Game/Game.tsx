@@ -22,8 +22,8 @@ interface GameData {
 }
 
 interface PlayerData {
-  name: string;
-  avatar: string;
+  username: string;
+  photo: string;
 }
 
 
@@ -62,39 +62,36 @@ function Game() {
   };
   
   useEffect(() => {
-    console.log("test");
+    setSocket(io( "http://localhost:3000/game", { withCredentials: true } ));
+  }, []);
+
+  useEffect(() => {
     handleWindowResize();
-    // Attach the resize event listener when the component mounts
     window.addEventListener('resize', handleWindowResize);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
 
   useEffect(() => {
-    if (socketRef.current === null) {
-      socketRef.current = io( "http://localhost:3000/game", { withCredentials: true } );
-    }
-    setSocket(socketRef.current);
-    
-    socket?.on("join_room", async (obj: any) => {
+    console.log("SOCKET ...");
+    socket?.on("join_room", (obj: any) => {
+      console.log("JOINING ROOM ...");
       setData(obj.data);
       setRoomName(obj.roomName);
 
-      await axios.get( `http://localhost:3000/users/byid?id=${obj.playerOneId}`, { withCredentials: true } )
+      axios.get( `http://localhost:3000/users/userinfos?id=${obj.playerOneId}`, { withCredentials: true } )
       .then( (res) => {
-        setPlayerOne({name: res.data.lastname, avatar: res.data.photo});
+        setPlayerOne({username: res.data.username, photo: res.data.photo});
       })
 
-      await axios.get( `http://localhost:3000/users/byid?id=${obj.playerTwoId}`, { withCredentials: true } )
+      axios.get( `http://localhost:3000/users/userinfos?id=${obj.playerTwoId}`, { withCredentials: true } )
       .then( (res) => {
-        setPlayerTwo({name: res.data.lastname, avatar: res.data.photo});
+        setPlayerTwo({username: res.data.username, photo: res.data.photo});
       })
 
       setStarted(true);
-      console.log("start");
     });
 
     socket?.on("update", (data: GameData) => {
@@ -145,13 +142,13 @@ function Game() {
     </div>
     <div className="flex space-x-16 lg:space-x-48 items-center">
       <span className="flex flex-col items-center space-y-2">
-        <img src={playerOne?.avatar} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
-        <span className='text-white text-lg font-mono font-bold'>{playerOne?.name}</span>
+        <img src={playerOne?.photo} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
+        <span className='text-white text-lg font-mono font-bold'>{playerOne?.username}</span>
       </span>
       <span className="text-4xl lg:text-6xl text-white font-bold">VS</span>
       <span className="flex flex-col items-center space-y-2">
-      <img src={playerTwo?.avatar} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
-        <span className='text-white text-lg font-mono font-bold'>{playerTwo?.name}</span>
+      <img src={playerTwo?.photo} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
+        <span className='text-white text-lg font-mono font-bold'>{playerTwo?.username}</span>
       </span>
     </div>
     <div  className='canvas' onMouseMove={handleMouseMove}>
