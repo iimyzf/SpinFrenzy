@@ -102,6 +102,7 @@ const Chat = () => {
                     withCredentials: true,
                 }
             );
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -139,8 +140,8 @@ const Chat = () => {
         getRoomChannels().then((res) => {
             let newchannel: any[] = [];
             res.forEach((element: any) => {
-                const room = element.room;
-                console.log(room);
+                const room = element;
+                console.log("---------->", room.photo);
                 newchannel = [
                     ...newchannel,
                     { name: room.name, img: room.photo, id: room.id },
@@ -214,7 +215,9 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-        const ret = socket?.on("newmessage", (dto: any) => {
+        const ret = socket?.on("newmessage", async (dto: any) => {
+            console.log(dto);
+            console.log("---------LLL>> ", selectedChannel?.id);
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -222,8 +225,12 @@ const Chat = () => {
                     isSentByMe: false,
                 },
             ]);
+            dto[0].id = selectedChannel?.id;
+            await axios.post("http://localhost:3000/chat/addmsg", dto, {
+                withCredentials: true,
+            })
         });
-    }, [socket]);
+    }, [socket, selectedChannel]);
 
     return (
         <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen max-sm:flex-col max-md:flex-col">
