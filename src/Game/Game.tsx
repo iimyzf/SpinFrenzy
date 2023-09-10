@@ -6,19 +6,20 @@ import GameField from './GameField';
 import axios from 'axios';
 
 
-interface BallPos {
+interface Ball {
 	x: number;
 	y: number;
+	velocityX: number;
+	velocityY: number;
+	speed: number;
 }
 
 interface GameData {
-	ballPos: BallPos;
+	ball: Ball;
 	leftPlayerY: number;
 	rightPlayerY: number;
-	speedX: number;
-	speedY: number;
-  leftScore: number;
-  rightScore: number;
+	leftScore: number;
+	rightScore: number;
 }
 
 interface PlayerData {
@@ -31,7 +32,6 @@ function Game() {
 
   const [started, setStarted] = useState<boolean>(false);
 
-  const socketRef = useRef<Socket | null>(null);
   const [roomName, setRoomName] = useState<string>();
 
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -152,7 +152,7 @@ function Game() {
       </span>
     </div>
     <div  className='canvas' onMouseMove={handleMouseMove}>
-      <ReactP5Wrapper sketch={GameField} leftPlayerY={data?.leftPlayerY} rightPlayerY={data?.rightPlayerY} ball={data?.ballPos}/>
+      <ReactP5Wrapper sketch={GameField} leftPlayerY={data?.leftPlayerY} rightPlayerY={data?.rightPlayerY} ball={data?.ball}/>
     </div>
     <div className="flex flex-col items-center">
     <span className="text-2xl lg:text-4xl text-white font-bold underline">score</span>
