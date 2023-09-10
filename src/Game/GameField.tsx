@@ -1,8 +1,13 @@
 import { Sketch, SketchProps } from "@p5-wrapper/react";
 
+
+
 interface Ball {
     x: number;
     y: number;
+    velocityX?: number;
+    velocityY?: number;
+    speed?: number;
 }
 
 interface GameProps extends SketchProps {
