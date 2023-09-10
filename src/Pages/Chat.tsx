@@ -1,4 +1,3 @@
-import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
 import {
@@ -10,13 +9,12 @@ import {
 } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
-import MessageContainer from "../components/MessageContainer";
-import "../components/AddChannel.css";
-import { Socket, io } from "socket.io-client";
-import AddChannel from "../components/AddChannel";
-
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { MessageContainer, AddChannel } from "./index";
+import { Socket, io } from "socket.io-client";
+import axios from "axios";
+import "../styles/AddChannel.css";
+import "../styles/Chat.css";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -154,7 +152,7 @@ const Chat = () => {
         // Scroll to the bottom when a new message is added
         if (messagesContainerRef.current) {
             messagesContainerRef.current.scrollTop =
-                   messagesContainerRef.current.scrollHeight;
+                messagesContainerRef.current.scrollHeight;
         }
     }, [messages]);
 

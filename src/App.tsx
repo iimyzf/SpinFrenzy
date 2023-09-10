@@ -4,15 +4,13 @@ import {
     Landing,
     Chat,
     ViewProfile,
-    // Home,
     GameMode,
-	Dashboard,
+    Dashboard,
 } from "./Pages/index";
 import AddChannel from "./components/AddChannel";
 import "./App.css";
 import Game from "./Game/Game";
-import {setOnline, recieveNotification} from "./components/mainGateway";
-
+import { setOnline, recieveNotification } from "./components/mainGateway";
 
 const App = () => {
     setOnline();
@@ -21,10 +19,8 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Landing />} />
-
-                <Route path="/profile" element={ <Profile />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/chat" element={<Chat />} />
-                {/* <Route path="/home" element={<Home />} /> */}
                 <Route path="/gamemode" element={<GameMode />} />
                 <Route path="/game" element={<Game />} />
                 <Route path="/home" element={<Dashboard />} />
