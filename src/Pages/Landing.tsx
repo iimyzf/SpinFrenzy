@@ -6,7 +6,7 @@ const Landing = () => {
     return (
         <>
             <div
-                className="back "
+                className="back"
                 style={{
                     backgroundImage: "url(" + backgroundImg + ")",
                     backgroundSize: "cover",

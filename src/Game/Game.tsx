@@ -4,21 +4,23 @@ import { useEffect, useState } from "react";
 import GameField from "./GameField";
 import axios from "axios";
 import "../styles/Game.css";
+import waiting from "../assets/waiting.json";
+import Lottie from "lottie-react";
 
 interface Ball {
-	x: number;
-	y: number;
-	velocityX: number;
-	velocityY: number;
-	speed: number;
+    x: number;
+    y: number;
+    velocityX: number;
+    velocityY: number;
+    speed: number;
 }
 
 interface GameData {
-	ball: Ball;
-	leftPlayerY: number;
-	rightPlayerY: number;
-	leftScore: number;
-	rightScore: number;
+    ball: Ball;
+    leftPlayerY: number;
+    rightPlayerY: number;
+    leftScore: number;
+    rightScore: number;
 }
 
 interface PlayerData {
@@ -29,7 +31,7 @@ interface PlayerData {
 function Game() {
     const [started, setStarted] = useState<boolean>(false);
 
-  const [roomName, setRoomName] = useState<string>();
+    const [roomName, setRoomName] = useState<string>();
 
     const [socket, setSocket] = useState<Socket | null>(null);
 
@@ -122,51 +124,99 @@ function Game() {
         socket?.emit("move", { posY, roomName });
     };
 
-  if (endMatch) {
-    socket?.disconnect();
+    if (endMatch) {
+        socket?.disconnect();
+        return (
+            <div className="flex flex-col items-center justify-center w-full h-screen absolute">
+                <h2 className="font-bold font-satoshi text-[1.5vw] text-center leading-[2.2vw]">
+                    The match has ended.
+                    <br />
+                    Would you like to play again?
+                </h2>
+                <div className="flex gap-[3vw] mt-[2vw]">
+                    <button
+                        className="hover:scale-105 text-white font-bold font-satoshi w-[10vw] h-[3vw] container-1 text-[1vw]"
+                        onClick={() => window.location.reload()}
+                    >
+                        Yes
+                    </button>
+
+                    <button
+                        className="hover:scale-105 text-white font-bold font-satoshi w-[10vw] h-[3vw] container-1 text-[1vw]"
+                        onClick={() => window.location.replace("/")}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>
+        );
+    } else if (!started) {
+        return (
+            <div className="flex flex-col items-center justify-center w-full h-screen absolute">
+                <h2 className="font-bold font-satoshi text-[1.5vw] text-center">
+                    Waiting for a Player to join...
+                </h2>
+                <Lottie animationData={waiting} loop={true} className="w-60" />
+            </div>
+        );
+    }
     return (
-      <div className='bg-black text-white text-xl'>
-        --- End Match ---
-      </div>
+        <div className="bg-black h-screen flex flex-col py-12  items-center space-y-4  overflow-y-scroll">
+            <div className="absolute top-4 left-4 flex items-center space-x-2">
+                <div className=" w-12 h-12 rounded-full bg-gray-400 "></div>
+                <span className="text-white text-xl font-bold">
+                    leave the match
+                </span>
+            </div>
+            <div className="flex space-x-16 lg:space-x-48 items-center">
+                <span className="flex flex-col items-center space-y-2">
+                    <img
+                        src={playerOne?.photo}
+                        className="h-16 lg:h-20 w-16 lg:w-20 rounded-full"
+                    />
+                    <span className="text-white text-lg font-mono font-bold">
+                        {playerOne?.username}
+                    </span>
+                </span>
+                <span className="text-4xl lg:text-6xl text-white font-bold">
+                    VS
+                </span>
+                <span className="flex flex-col items-center space-y-2">
+                    <img
+                        src={playerTwo?.photo}
+                        className="h-16 lg:h-20 w-16 lg:w-20 rounded-full"
+                    />
+                    <span className="text-white text-lg font-mono font-bold">
+                        {playerTwo?.username}
+                    </span>
+                </span>
+            </div>
+            <div className="canvas" onMouseMove={handleMouseMove}>
+                <ReactP5Wrapper
+                    sketch={GameField}
+                    leftPlayerY={data?.leftPlayerY}
+                    rightPlayerY={data?.rightPlayerY}
+                    ball={data?.ballPos}
+                />
+            </div>
+            <div className="flex flex-col items-center">
+                <span className="text-2xl lg:text-4xl text-white font-bold underline">
+                    score
+                </span>
+                <div className="flex space-x-16 lg:space-x-48 items-center">
+                    <span className="text-white text-2xl lg:text-4xl font-black">
+                        {data?.leftScore}
+                    </span>
+                    <span className="text-white text-2xl lg:text-4xl font-black">
+                        -
+                    </span>
+                    <span className="text-white text-2xl lg:text-4xl font-black">
+                        {data?.rightScore}
+                    </span>
+                </div>
+            </div>
+        </div>
     );
-  }
-  else if (!started) {
-    return (
-      <div className='bg-black text-white text-xl'>
-        --- waiting another player to join you ---
-      </div>
-    );
-  }
-  return (
-    <div className="bg-black h-screen flex flex-col py-12  items-center space-y-4  overflow-y-scroll">
-    <div className="absolute top-4 left-4 flex items-center space-x-2">
-    <div className=" w-12 h-12 rounded-full bg-gray-400 "></div>
-    <span className="text-white text-xl font-bold">leave the match</span>
-    </div>
-    <div className="flex space-x-16 lg:space-x-48 items-center">
-      <span className="flex flex-col items-center space-y-2">
-        <img src={playerOne?.photo} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
-        <span className='text-white text-lg font-mono font-bold'>{playerOne?.username}</span>
-      </span>
-      <span className="text-4xl lg:text-6xl text-white font-bold">VS</span>
-      <span className="flex flex-col items-center space-y-2">
-      <img src={playerTwo?.photo} className="h-16 lg:h-20 w-16 lg:w-20 rounded-full" />
-        <span className='text-white text-lg font-mono font-bold'>{playerTwo?.username}</span>
-      </span>
-    </div>
-    <div  className='canvas' onMouseMove={handleMouseMove}>
-      <ReactP5Wrapper sketch={GameField} leftPlayerY={data?.leftPlayerY} rightPlayerY={data?.rightPlayerY} ball={data?.ballPos}/>
-    </div>
-    <div className="flex flex-col items-center">
-    <span className="text-2xl lg:text-4xl text-white font-bold underline">score</span>
-    <div className="flex space-x-16 lg:space-x-48 items-center">
-          <span className="text-white text-2xl lg:text-4xl font-black">{data?.leftScore}</span>
-          <span className="text-white text-2xl lg:text-4xl font-black">:</span>
-          <span className="text-white text-2xl lg:text-4xl font-black">{data?.rightScore}</span>
-    </div>
-    </div>
-    </div>
-  );
 }
 
 export default Game;
