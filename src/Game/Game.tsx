@@ -143,7 +143,7 @@ function Game() {
 
                     <button
                         className="hover:scale-105 text-white font-bold font-satoshi w-[10vw] h-[3vw] container-1 text-[1vw]"
-                        onClick={() => window.location.replace("/")}
+                        onClick={() => window.location.replace("/home")}
                     >
                         No
                     </button>
@@ -196,7 +196,7 @@ function Game() {
                     sketch={GameField}
                     leftPlayerY={data?.leftPlayerY}
                     rightPlayerY={data?.rightPlayerY}
-                    ball={data?.ballPos}
+                    ball={data?.ball}
                 />
             </div>
             <div className="flex flex-col items-center">
