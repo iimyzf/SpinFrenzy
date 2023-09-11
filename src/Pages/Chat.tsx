@@ -94,7 +94,8 @@ const Chat = () => {
 
     const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-    const getRoomChannels = async () => {
+    async function getRoomChannels() {
+        console.log("HIII")
         try {
             const response = await axios.get(
                 "http://localhost:3000/users/me/chatrooms",
@@ -130,33 +131,67 @@ const Chat = () => {
         );
         return res.data;
     };
-    const getuserinfo = (id: number) => {
-        axios.get("http://localhost:3000/users/" + id).then((res) => {
+    const getuserinfo = async (id: number) => {
+        await axios.get("http://localhost:3000/users/" + id).then((res) => {
             return res.data;
         });
     };
+    async function getdminfos(id: number) {
+        const res = await axios.get("http://localhost:3000/chat/getdminfos?id=" + id, {
+            withCredentials: true,
+        })
+        const room = {
+            name: res.data.name,
+            img: res.data.photo,
+            id: res.data.id,
+        }
+        return room;
+    };
     useEffect(() => {
-        getRoomChannels().then((res) => {
-            let newchannel: any[] = [];
-            res.forEach((element: any) => {
-                const room = element.room;
-                console.log(room);
-                let url: string;
-                if (room.isdm) {
-                    url =
-                        "http://localhost:3000/" +
-                        room.name.split("dm")[1] +
-                        ".png";
-                    console.log(url);
-                    room.name = "dm";
-                } else url = "http://localhost:3000/" + room.id + "room.png";
-                newchannel = [
-                    ...newchannel,
-                    { name: room.name, img: url, id: room.id },
-                ];
-            });
-            setChannels(newchannel);
+        async function Getmyrooms() {
+        const rooms = await getRoomChannels();
+        console.log(rooms)
+        let newchannel: any[] = [];
+        let room;
+        rooms.forEach(async (element: any) => {
+            if(element.isdm !== true) {
+                room = {
+                    name: element.name,
+                    img: element.photo,
+                    id: element.id,
+                };
+                console.log(room)
+                newchannel = [...newchannel, room];
+                setChannels(newchannel);
+            }
+            else{
+                const dm = await getdminfos(element.id);
+                newchannel = [...newchannel, dm];
+                setChannels(newchannel);
+            }
         });
+    }
+    Getmyrooms();
+        // getRoomChannels().then((res) => {
+        //     let newchannel: any[] = [];
+        //     res.forEach((element: any) => {
+        //         const room = element.room;
+        //         console.log(room)
+        //         if(room.isdm === true) {
+        //             getdminfos(room.id).then((res: any) => {
+        //                 newchannel = [
+        //                     ...newchannel,
+        //                     { name: res.name, img: res.photo, id: res.id },
+        //                 ];
+        //             })
+        //         }
+        //         newchannel = [
+        //             ...newchannel,
+        //             { name: room.name, img: room.photo, id: room.id },
+        //         ];
+        //     });
+        //     setChannels(newchannel);
+        // });
     }, []);
     useEffect(() => {
         // Scroll to the bottom when a new message is added
@@ -182,7 +217,6 @@ const Chat = () => {
                 getChannelmsg(selectedChannel?.id).then((res) => {
                     const msg = res.messages;
                     msg.forEach((element: any) => {
-                        // console.log("msg == ", element);
                         if (element.senderId === id) {
                             messages = [
                                 ...messages,
