@@ -1,4 +1,4 @@
-import "./Landing.css";
+import "../styles/Landing.css";
 import backgroundImg from "../assets/ping.gif";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const Landing = () => {
     return (
         <>
             <div
-                className="back "
+                className="back"
                 style={{
                     backgroundImage: "url(" + backgroundImg + ")",
                     backgroundSize: "cover",

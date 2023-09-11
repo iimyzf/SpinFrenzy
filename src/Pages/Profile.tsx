@@ -1,29 +1,31 @@
-import "./Profile.css";
 import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
-import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import QrCode from "../components/QrCode";
+import { QrCode } from "./index";
+import "../styles/Profile.css";
+
+
+interface Data {
+    photo?: string;
+    username?: string;
+    fullname?: string;
+    bio?: string;
+    online?: boolean;
+    github?: string;
+    linkedin?: string;
+    instagram?: string;
+};
 
 const Profile = () => {
-    const [image, setImage] = useState<string>(Apollo);
-    const [username, setUsername] = useState("username");
-    const [fullName, setFullName] = useState("fullName");
-    const [github, setGithub] = useState("github");
-    const [linkedin, setLinkedin] = useState("linkedin");
-    const [instagram, setInstagram] = useState("instagram");
-    // const [isChecked, setIsChecked] = useState<Record<string, boolean>>({});
-    const [online, setOnline] = useState(false);
-    const [bio, setBio] = useState(
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, quis quae nulla optio suscipit libero excepturi omnis cum, quidem cupiditate asperioresodio quam! Distinctio nesciunt soluta quam quas accusamus minus? Lorem ipsum dolor sit amet consectetured"
-    );
+    const [data, setData] = useState<Data>({});
+
     const [isBioEditing, setIsBioEditing] = useState(false);
     const [isAuthOn, setIsAuthOn] = useState(false);
     const [isAuthOff, setIsAuthOff] = useState(false);
     const [qrCode, setQrCode] = useState(false);
     const toggleQrCode = () => {
-		console.log("Clicked!");
+        console.log("Clicked!");
         setQrCode(!qrCode);
     };
 
@@ -31,29 +33,38 @@ const Profile = () => {
         axios
             .get("http://localhost:3000/users/me", { withCredentials: true })
             .then((res) => {
-                setImage(res.data.photo);
-                setUsername(res.data.username);
-                setFullName(`${res.data.firstname} ${res.data.lastname}`);
-                setBio(res.data.bio);
+                const data: Data = {
+                    photo: res.data.photo,
+                    username: res.data.username,
+                    fullname: `${res.data.firstname} ${res.data.lastname}`,
+                    bio: res.data.bio,
+                    online: res.data.online,
+                    github: "",
+                    linkedin: "",
+                    instagram: "",
+                };
+                setData(data);
             });
     }, []);
 
-    const handleAuthOn = () => {
-        console.log("it on now!");
-        setIsAuthOn(!isAuthOn);
-    };
+    // const handleAuthOn = () => {
+    //     console.log("it on now!");
+    //     setIsAuthOn(!isAuthOn);
+    // };
 
-    const handleAuthOff = () => {
-        console.log("it off now!");
-        setIsAuthOff(!isAuthOff);
-    };
+    // const handleAuthOff = () => {
+    //     console.log("it off now!");
+    //     setIsAuthOff(!isAuthOff);
+    // };
 
     const handleBioEdit = () => {
         setIsBioEditing(!isBioEditing);
     };
 
     const handleBioChange = (e: any) => {
-        setBio(e.target.value);
+        setData({...data,
+            bio: e.target.value,
+        });
     };
 
     const handleBioSave = () => {
@@ -67,28 +78,48 @@ const Profile = () => {
     //     }));
     // };
 
-    const handleOnline = () => {
-        setOnline(!online);
-    };
+    // const handleOnline = () => {        
+    //     setOnline(!online);
+    // };
 
     const handleGithubChange = (e: any) => {
-        setGithub(e.target.value);
+        if (e.target.value !== null) {
+            setData({...data,
+                github: e.target.value,
+            });
+        }
     };
 
     const handleLinkedinChange = (e: any) => {
-        setLinkedin(e.target.value);
+        if (e.target.value !== null) {
+            setData({...data,
+                linkedin: e.target.value,
+            });
+        }
     };
 
     const handleInstagramChange = (e: any) => {
-        setInstagram(e.target.value);
+        if (e.target.value !== null) {
+            setData({...data,
+                instagram: e.target.value,
+            });
+        }
     };
 
     const handleUsernameChange = (e: any) => {
-        setUsername(e.target.value);
+        if (e.target.value !== null) {
+            setData({...data,
+                username: e.target.value,
+            });
+        }
     };
 
     const handleFullNameChange = (e: any) => {
-        setFullName(e.target.value);
+        if (e.target.value !== null) {
+            setData({...data,
+                fullname: e.target.value,
+            });
+        }
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,13 +128,15 @@ const Profile = () => {
     };
 
     const postData = async () => {
+        const body: any = {
+            bio: data.bio,
+            username: data.username,
+        };
+        
+        console.log(body);
         await axios.post(
             "http://localhost:3000/users/me",
-            {
-                bio: bio,
-                username: username,
-                photo: image,
-            },
+            body,
             { withCredentials: true }
         );
         navigate(-1);
@@ -119,7 +152,7 @@ const Profile = () => {
                         <label htmlFor="imageInput">
                             <img
                                 className="w-[6vw] h-[6vw] max-sm:w-[14vw] max-sm:h-[14vw] max-md:w-[14vw] max-md:h-[14vw] rounded-full cursor-pointer"
-                                src={image}
+                                src={data?.photo}
                                 alt="Apollo"
                             />
                         </label>
@@ -131,24 +164,24 @@ const Profile = () => {
                             id="imageInput"
                         />
                         <span
-                            onClick={handleOnline}
+                            // onClick={handleOnline}
                             className={`status rounded-full w-[1.4vw] h-[1.4vw] max-sm:w-[4vw] max-sm:h-[4vw] max-md:w-[4vw] max-md:h-[4vw] absolute top-0 right-[.5vw] ${
-                                online ? "bg-green-400" : "bg-gray-400"
+                                data?.online ? "bg-green-400" : "bg-gray-400"
                             }`}
                         ></span>
                     </div>
                     <h4 className="font-light absolute top-[13vw] opacity-80 text-[.8vw] max-sm:top-[22vw] max-md:top-[18vw] max-sm:text-[1.8vw] max-md:text-[1.8vw]">
-                        @{username}
+                        @{data?.username}
                     </h4>
                     <h3 className="font-bold absolute top-[14.2vw] text-[1vw] max-sm:top-[24.5vw] max-sm:text-[2.4vw] max-md:top-[20.5vw] max-md:text-[2.4vw]">
-                        {fullName}
+                        {data?.fullname}
                     </h3>
                     <div className="bio absolute justify-center items-start top-[18vw] mx-[1.2vw] text-[.8vw] max-sm:top-[30vw] max-sm:mx-[4vw] max-sm:text-[1.5vw] max-md:top-[26vw] max-md:mx-[4vw] max-md:text-[1.5vw]">
                         {isBioEditing ? (
                             <>
                                 <textarea
                                     className="flex font-normal w-full text-start custom-textarea text-[.9vw] max-sm:text-[2vw] max-sm:w-[72vw] max-sm:h-[12vw] max-md:text-[2vw] max-md:w-[72vw] max-md:h-[12vw]"
-                                    value={bio}
+                                    value={data?.bio}
                                     maxLength={200}
                                     onChange={handleBioChange}
                                 />
@@ -162,7 +195,7 @@ const Profile = () => {
                         ) : (
                             <>
                                 <p className="font-normal w-full text-start text-[.9vw] max-sm:text-[2vw] max-md:text-[2vw]">
-                                    {bio}
+                                    {data?.bio}
                                 </p>
                                 <button
                                     className="float-right mt-[1vw] max-sm:mt-[1.5vw] max-md:mt-[1.5vw] font-medium underline"
@@ -176,17 +209,17 @@ const Profile = () => {
 
                     <ul className="flex gap-[2vw] max-sm:gap-[4vw] max-md:gap-[4vw] absolute bottom-[6vw] max-sm:bottom-[6vw] max-md:bottom-[3.5vw]">
                         <li>
-                            <a href={github} target="_blank">
+                            <a href={data?.github} target="_blank">
                                 <BsGithub className="text-[1vw] max-sm:text-[2.5vw] max-md:text-[2.5vw]" />
                             </a>
                         </li>
                         <li>
-                            <a href={linkedin} target="_blank">
+                            <a href={data?.linkedin} target="_blank">
                                 <BsLinkedin className="text-[1vw] max-sm:text-[2.5vw] max-md:text-[2.5vw]" />
                             </a>
                         </li>
                         <li>
-                            <a href={instagram} target="_blank">
+                            <a href={data?.instagram} target="_blank">
                                 <BsInstagram className="text-[1vw] max-sm:text-[2.5vw] max-md:text-[2.5vw]" />
                             </a>
                         </li>
@@ -324,11 +357,6 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            {/* {qrCode && (
-                <QrCode
-                    toggleQrCode={toggleQrCode}
-                />
-            )} */}
         </div>
     );
 };

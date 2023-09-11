@@ -1,4 +1,3 @@
-import "./Chat.css";
 import Apollo from "../assets/Apollo.jpg";
 import noChat from "../assets/no-chat.svg";
 import {
@@ -10,13 +9,12 @@ import {
 } from "react-icons/bs";
 import { FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
-import MessageContainer from "../components/MessageContainer";
-import "../components/AddChannel.css";
-import { Socket, io } from "socket.io-client";
-import AddChannel from "../components/AddChannel";
-
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { MessageContainer, AddChannel } from "./index";
+import { Socket, io } from "socket.io-client";
+import axios from "axios";
+import "../styles/AddChannel.css";
+import "../styles/Chat.css";
 
 const Chat = () => {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -103,6 +101,7 @@ const Chat = () => {
                     withCredentials: true,
                 }
             );
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -257,7 +256,9 @@ const Chat = () => {
             });
         }
         setSocket(socketRef.current);
-        const ret = socket?.on("newmessage", (dto: any) => {
+        const ret = socket?.on("newmessage", async (dto: any) => {
+            console.log(dto);
+            console.log("---------LLL>> ", selectedChannel?.id);
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -265,8 +266,12 @@ const Chat = () => {
                     isSentByMe: false,
                 },
             ]);
+            dto[0].id = selectedChannel?.id;
+            await axios.post("http://localhost:3000/chat/addmsg", dto, {
+                withCredentials: true,
+            })
         });
-    }, [socket]);
+    }, [socket, selectedChannel]);
 
     return (
         <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen max-sm:flex-col max-md:flex-col">
