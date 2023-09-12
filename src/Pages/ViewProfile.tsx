@@ -19,34 +19,66 @@ interface UserInfo {
     bio: string;
     id: number;
     online: boolean;
+};
+
+interface Player {
+    photo: string;
+    username: string;
+};
+
+interface Game {
+    player1Id: number;
+    player1Score: number;
+    player2Id: number; 
+    player2Score: number;
+    type: string;
 }
 
 const ViewProfile = () => {
     const [user, setUser] = useState<UserInfo>();
+    const [map, setMap] = useState(new Map<number, Player>());
+    const [games, setGames] = useState<Game[]>([]);
 
     const getUserInfo = async () => {
+        const map = new Map<number, UserInfo>();
+
         const queryParams = new URLSearchParams(window.location.search);
         let id = queryParams.get("id");
         if (id == null) id = "0";
         let userid: number = +id;
         console.log("userid--------> ", id);
-        axios
-            .get(`http://localhost:3000/users/byid?id=${id}`, {
+        await axios.get(
+            `http://localhost:3000/users/byid?id=${id}`, {
                 withCredentials: true,
-            })
-            .then((res) => {
-                const data = res.data;
-                console.log(res.data);
-                setUser({
-                    photo: data.user.photo,
-                    username: data.user.username,
-                    firstname: data.user.firstname,
-                    lastname: data.user.lastname,
-                    bio: data.user.bio,
-                    id: userid,
-                    online: data.user.online,
-                });
+            }
+        ).then((res) => {
+            const data = res.data;
+            setUser({
+                photo: data.user.photo,
+                username: data.user.username,
+                firstname: data.user.firstname,
+                lastname: data.user.lastname,
+                bio: data.user.bio,
+                id: userid,
+                online: data.user.online,
             });
+
+            const newMAp = new Map<number, Player>(map);
+            newMAp.set(userid, {
+                photo: data.user.photo,
+                username: data.user.username
+            });
+            setMap(newMAp);
+        });
+        // get user games
+        await axios.get(
+            `http://localhost:3000/users/usergames?id=${id}`, {
+                withCredentials: true
+            }
+        ).then((res) => {
+            if (res.data)
+                setGames(res.data.games);
+        })
     };
 
     const CreateaDmmsg = async () => {
@@ -58,9 +90,46 @@ const ViewProfile = () => {
             withCredentials: true,
         });
     };
+
     useEffect(() => {
         getUserInfo();
     }, []);
+
+    useEffect(() => {
+        console.log(games);
+        const promises: any[] = [];
+
+        {games.map( game => {
+            if (map.has(game.player1Id) === false) {
+                promises.push(
+                    axios.get(
+                        `http://localhost:3000/users/userinfos?id=${game.player1Id}`,
+                        { withCredentials: true }
+                    )
+                );
+            }
+            if (map.has(game.player2Id) === false) {
+                promises.push(
+                    axios.get(
+                        `http://localhost:3000/users/userinfos?id=${game.player2Id}`,
+                        { withCredentials: true }
+                    )
+                );
+            }
+        })}
+
+        Promise.all(promises).then((results) => {
+            console.log(results);
+            const newMAp = new Map<number, Player>(map);
+            results.map(res => {
+                newMAp.set(res.data.id, {
+                    photo: res.data.photo,
+                    username: res.data.username
+                });
+            });
+            setMap(newMAp);
+        });
+    }, [games])
 
     const addFriend = async () => {
         await axios.post(
@@ -69,6 +138,8 @@ const ViewProfile = () => {
             { withCredentials: true }
         );
     };
+
+
 
     return (
         <div className="parent flex justify-center items-center h-screen gap-[1vw] max-sm:gap-[3vw] max-sm:flex-col max-md:flex-col max-md:my-[2vh]">
@@ -195,7 +266,41 @@ const ViewProfile = () => {
                         <h3 className="text-[1vw] max-sm:text-[2.5vw] max-md:text-[2vw] mt-[5vw]">
                             Match History for <strong>{user?.username}</strong>
                         </h3>
-                        <div className="game-di mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[2vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center w-full">
+                        
+                        {games.map((game, index) => (
+                            <div key={index} className="game-di mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[2vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center w-full">
+                                <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                    <img
+                                        className="ppic rounded-full w-[3vw] h-[3vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
+                                        src={map.get(game.player1Id)?.photo}
+                                        alt="profile-pic"
+                                    />
+                                    <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                    {map.get(game.player1Id)?.username}
+                                    </h2>
+                                </div>
+                                <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                    {game.player1Score}
+                                </h1>
+                                <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                    VS
+                                </h1>
+                                <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
+                                    {game.player2Score}
+                                </h1>
+                                <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
+                                    <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
+                                    {map.get(game.player2Id)?.username}
+                                    </h2>
+                                    <img
+                                        className="ppic rounded-full w-[3vw] h-[3vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
+                                        src={map.get(game.player2Id)?.photo}
+                                        alt="profile-pic"
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                        {/* <div className="game-di mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[2vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center w-full">
                             <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
                                 <img
                                     className="ppic rounded-full w-[3vw] h-[3vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
@@ -225,7 +330,7 @@ const ViewProfile = () => {
                                     alt="profile-pic"
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
