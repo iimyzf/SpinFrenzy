@@ -19,6 +19,9 @@ interface UserInfo {
     bio: string;
     id: number;
     online: boolean;
+    wins: number;
+    loses: number;
+    ratio: number;
 };
 
 interface Player {
@@ -48,25 +51,28 @@ const ViewProfile = () => {
         let userid: number = +id;
         console.log("userid--------> ", id);
         await axios.get(
-            `http://localhost:3000/users/byid?id=${id}`, {
+            `http://localhost:3000/users/userinfos?id=${id}`, {
                 withCredentials: true,
             }
         ).then((res) => {
             const data = res.data;
             setUser({
-                photo: data.user.photo,
-                username: data.user.username,
-                firstname: data.user.firstname,
-                lastname: data.user.lastname,
-                bio: data.user.bio,
+                photo: data.photo,
+                username: data.username,
+                firstname: data.firstname,
+                lastname: data.lastname,
+                bio: data.bio,
                 id: userid,
-                online: data.user.online,
+                online: data.online,
+                wins: data.wins,
+                loses: data.losses,
+                ratio: data.wins / (data.wins+data.losses)
             });
 
             const newMAp = new Map<number, Player>(map);
             newMAp.set(userid, {
-                photo: data.user.photo,
-                username: data.user.username
+                photo: data.photo,
+                username: data.username
             });
             setMap(newMAp);
         });
@@ -243,7 +249,7 @@ const ViewProfile = () => {
                                     games won
                                 </p>
                                 <h3 className="font-black font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    3
+                                    {user?.wins}
                                 </h3>
                             </div>
                             <div className="flex items-center gap-[.5vw]">
@@ -251,15 +257,15 @@ const ViewProfile = () => {
                                     games lost
                                 </p>
                                 <h3 className="font-black font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    2
+                                    {user?.loses}
                                 </h3>
                             </div>
                             <div className="flex items-center gap-[.5vw]">
                                 <p className="font-medium font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    games played
+                                    win ratio
                                 </p>
                                 <h3 className="font-black font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    5
+                                    {user?.ratio}
                                 </h3>
                             </div>
                         </div>
