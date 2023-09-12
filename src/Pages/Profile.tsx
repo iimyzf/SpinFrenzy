@@ -21,8 +21,8 @@ const Profile = () => {
     const [data, setData] = useState<Data>({});
 
     const [isBioEditing, setIsBioEditing] = useState(false);
-    const [isAuthOn, setIsAuthOn] = useState(false);
-    const [isAuthOff, setIsAuthOff] = useState(false);
+    // const [isAuthOn, setIsAuthOn] = useState(false);
+    // const [isAuthOff, setIsAuthOff] = useState(false);
     const [qrCode, setQrCode] = useState(false);
     const toggleQrCode = () => {
         console.log("Clicked!");
@@ -122,7 +122,7 @@ const Profile = () => {
         }
     };
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (_e: React.ChangeEvent<HTMLInputElement>) => {
         // const file = e.target.files && e.target.files[0];
         // // setImage(file);
     };
