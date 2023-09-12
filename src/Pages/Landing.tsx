@@ -1,4 +1,4 @@
-import "../styles/Landing.css";
+    import "../styles/Landing.css";
 import backgroundImg from "../assets/ping.gif";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Landing = () => {
                     <div className="flex flex-col justify-center items-center">
                         <p className="font-black text-[8vw] max-sm:text-[12vw] font-satoshi">
                             SpinFrenzy
-                        </p>
+                        </p>to
                         <p className="font-light text-center text-[1.2vw] max-sm:text-[3vw] font-satoshi uppercae -mt-[2vw] mb-[1.5vw] max-sm:-mt-[3.5vw] max-sm:mb-[5vw]">
                             aka, ft_transcendence
                         </p>

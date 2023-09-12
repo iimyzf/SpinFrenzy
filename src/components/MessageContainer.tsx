@@ -3,9 +3,11 @@ import Apollo from "../assets/Apollo.jpg";
 type props = {
     message: string;
     isSentByMe: boolean;
+    img: string;
 };
 
-const MessageContainer = ({ message, isSentByMe }: props) => {
+const MessageContainer = ({ message, isSentByMe, img }: props) => {
+    console.log(img);
     return (
         <>
             {isSentByMe ? (
@@ -28,7 +30,7 @@ const MessageContainer = ({ message, isSentByMe }: props) => {
                     <div className="flex justify-start items-end gap-[.5vw]">
                         <img
                             className="w-[2.2vw] h-[2.2vw] rounded-full"
-                            src={Apollo}
+                            src={img}
                             alt="Apollo"
                         />
                         <div className="msg-container rounded-[.5vw]">

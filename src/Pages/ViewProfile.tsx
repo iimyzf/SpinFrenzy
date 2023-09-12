@@ -10,6 +10,7 @@ import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import "../styles/ViewProfile.css";
 import axios from "axios";
+import {useNavigate, Link} from "react-router-dom";
 
 interface UserInfo {
     photo: string;
@@ -29,7 +30,6 @@ const ViewProfile = () => {
         let id = queryParams.get("id");
         if (id == null) id = "0";
         let userid: number = +id;
-        console.log("userid--------> ", id);
         axios
             .get(`http://localhost:3000/users/byid?id=${id}`, {
                 withCredentials: true,
@@ -48,20 +48,20 @@ const ViewProfile = () => {
                 });
             });
     };
-
     const CreateaDmmsg = async () => {
         const data = {
             isDm: true,
             receiver: user?.id,
         };
-        await axios.post("http://localhost:3000/chat/newdm", data, {
+         await axios.post("http://localhost:3000/chat/newdm", data, {
             withCredentials: true,
         });
+        navigate("/chat");
     };
     useEffect(() => {
         getUserInfo();
     }, []);
-
+    let navigate = useNavigate();
     const addFriend = async () => {
         await axios.post(
             "http://localhost:3000/users/sendfriendrequest",
@@ -88,7 +88,7 @@ const ViewProfile = () => {
                         </button>
                         <button
                             className="btn-2 w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full flex justify-center items-center cursor-pointer container-1"
-                            onClick={CreateaDmmsg}
+                            onClick={CreateaDmmsg} 
                         >
                             <span className="message absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw] max-sm:text-[1.2vw] max-sm:-top-[4vw] max-md:text-[1vw] max-md:-top-[4vw]">
                                 Message
@@ -97,14 +97,15 @@ const ViewProfile = () => {
                             </span>
                             <BsFillChatSquareTextFill className="text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]" />
                         </button>
-                        <button className="btn-3 w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full flex justify-center items-center cursor-pointer container-1">
+                        <Link to='/chat' className="btn-3 w-[3vw] h-[3vw] max-sm:w-[5vw] max-sm:h-[5vw] max-md:w-[5vw] max-md:h-[5vw] rounded-full flex justify-center items-center cursor-pointer container-1">
+                            
                             <span className="block absolute -top-[2.5vw] font-satoshi text-white font-bold text-[.6vw] max-sm:text-[1.2vw] max-sm:-top-[4vw] max-md:text-[1vw] max-md:-top-[4vw]">
                                 Block
                                 <br />
                                 {user?.username}
                             </span>
                             <BsPersonFillSlash className="text-[1vw] max-sm:text-[2vw] max-md:text-[2vw]" />
-                        </button>
+                        </Link>
                     </div>
                     <div className="img-holder absolute top-[10.5vw] max-sm:top-[14vw] max-md:top-[12vw]">
                         <div className="">

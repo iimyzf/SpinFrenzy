@@ -26,6 +26,7 @@ const Chat = () => {
         {
             message: string;
             isSentByMe: boolean;
+            img: string,
         }[]
     >([]);
     const [selectedChannel, setSelectedChannel] = useState<{
@@ -45,10 +46,10 @@ const Chat = () => {
                 {
                     message: inputValue.trim(),
                     isSentByMe: true,
+                    img: "",
                 },
             ]);
             setInputValue("");
-            console.log("channel id == ", selectedChannel?.id);
             const dto = {
                 id: selectedChannel?.id,
                 message: inputValue.trim(),
@@ -56,7 +57,6 @@ const Chat = () => {
             let ret = socket?.emit("createMessage", dto, {
                 withCredentials: true,
             });
-            console.log("--------------========", ret);
         }
     };
 
@@ -93,7 +93,6 @@ const Chat = () => {
     const messagesContainerRef = useRef<HTMLDivElement>(null);
 
     async function getRoomChannels() {
-        console.log("HIII")
         try {
             const response = await axios.get(
                 "http://localhost:3000/users/me/chatrooms",
@@ -101,13 +100,12 @@ const Chat = () => {
                     withCredentials: true,
                 }
             );
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error(error);
         }
     };
-    const getChannelmsg = async (id: any) => {
+    async function getChannelmsg(id: any) {
         try {
             const res = await axios.get(
                 "http://localhost:3000/chat/getroomsmgs?id=" + id,
@@ -115,10 +113,9 @@ const Chat = () => {
                     withCredentials: true,
                 }
             );
-            console.log(res.data);
             return res.data;
         } catch (error) {
-            // console.log(error);
+            console.log(error);
         }
     };
     const getimg = async (roomid: number) => {
@@ -146,52 +143,28 @@ const Chat = () => {
         }
         return room;
     };
-    useEffect(() => {
-        async function Getmyrooms() {
+    const Getmyrooms = async () => {
         const rooms = await getRoomChannels();
-        console.log(rooms)
         let newchannel: any[] = [];
         let room;
         rooms.forEach(async (element: any) => {
-            if(element.isdm !== true) {
+            if (element.isdm !== true) {
                 room = {
                     name: element.name,
                     img: element.photo,
                     id: element.id,
                 };
-                console.log(room)
                 newchannel = [...newchannel, room];
                 setChannels(newchannel);
             }
-            else{
+            else {
                 const dm = await getdminfos(element.id);
                 newchannel = [...newchannel, dm];
                 setChannels(newchannel);
             }
         });
     }
-    Getmyrooms();
-        // getRoomChannels().then((res) => {
-        //     let newchannel: any[] = [];
-        //     res.forEach((element: any) => {
-        //         const room = element.room;
-        //         console.log(room)
-        //         if(room.isdm === true) {
-        //             getdminfos(room.id).then((res: any) => {
-        //                 newchannel = [
-        //                     ...newchannel,
-        //                     { name: res.name, img: res.photo, id: res.id },
-        //                 ];
-        //             })
-        //         }
-        //         newchannel = [
-        //             ...newchannel,
-        //             { name: room.name, img: room.photo, id: room.id },
-        //         ];
-        //     });
-        //     setChannels(newchannel);
-        // });
-    }, []);
+    useEffect(()=>{Getmyrooms()},[]);
     useEffect(() => {
         // Scroll to the bottom when a new message is added
         if (messagesContainerRef.current) {
@@ -203,39 +176,34 @@ const Chat = () => {
     //-------------------------------------------casper-------------------------------------//
 
     useEffect(() => {
-        if (selectedChannel?.id !== undefined) {
-            let id: number = 0;
-            whoami().then((res) => {
+        async function getandSetmsgchannel() {
+            if (selectedChannel?.id !== undefined) {
+                let id: number = 0;
+                const res = await whoami();
                 id = res.id;
-                console.log("id == ", id);
                 let messages: {
                     message: string;
                     isSentByMe: boolean;
+                    img: string;
                 }[] = [];
-                console.log("selected channel --> ", selectedChannel?.id);
-                getChannelmsg(selectedChannel?.id).then((res) => {
-                    const msg = res.messages;
-                    msg.forEach((element: any) => {
-                        if (element.senderId === id) {
-                            messages = [
-                                ...messages,
-                                { message: element.content, isSentByMe: true },
-                            ];
-                        } else {
-                            messages = [
-                                ...messages,
-                                { message: element.content, isSentByMe: false },
-                            ];
-                        }
-                    });
-                    setMessages(messages);
-                });
-            });
+                const messagesres = await getChannelmsg(selectedChannel?.id)
+                const msgs = messagesres.messages;
+                for(let i = 0; i < msgs.length; i++) {
+                    if (msgs[i].senderId === id) {
+                        messages = [...messages, { message: msgs[i].content, isSentByMe: true,  img: ""}]
+                    }
+                    else {
+                        messages = [...messages, { message: msgs[i].content, isSentByMe: false, img: "http://localhost:3000/" + msgs[i].senderId + ".png" }]
+                    }
+                }
+                setMessages(messages);
+            }
         }
+        getandSetmsgchannel();
     }, [selectedChannel]);
 
     const socketRef = useRef<Socket | null>(null);
-    const whoami = async () => {
+    async function whoami() {
         const me = await axios.get("http://localhost:3000/users/me", {
             withCredentials: true,
         });
@@ -257,19 +225,14 @@ const Chat = () => {
         }
         setSocket(socketRef.current);
         const ret = socket?.on("newmessage", async (dto: any) => {
-            console.log(dto);
-            console.log("---------LLL>> ", selectedChannel?.id);
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
                     message: dto[0].message,
                     isSentByMe: false,
+                    img: "http://localhost:3000/" + dto[0].senderId + ".png",
                 },
             ]);
-            dto[0].id = selectedChannel?.id;
-            await axios.post("http://localhost:3000/chat/addmsg", dto, {
-                withCredentials: true,
-            })
         });
     }, [socket, selectedChannel]);
 
@@ -291,11 +254,10 @@ const Chat = () => {
                         {channels.map((channel, idx) => (
                             <div
                                 key={idx}
-                                className={`channel flex relative top-0 items-center px-[1vw] max-sm:px-[3vw] max-md:px-[3vw] scroll-auto h-[8vh] max-sm:h-[5vh] max-md:h-[5vh] hover:cursor-pointer ${
-                                    selectedChannel === channel
+                                className={`channel flex relative top-0 items-center px-[1vw] max-sm:px-[3vw] max-md:px-[3vw] scroll-auto h-[8vh] max-sm:h-[5vh] max-md:h-[5vh] hover:cursor-pointer ${selectedChannel === channel
                                         ? "active-channel"
                                         : ""
-                                }`}
+                                    }`}
                                 onClick={() => setSelectedChannel(channel)}
                             >
                                 <img
@@ -398,6 +360,8 @@ const Chat = () => {
                                         key={idx}
                                         message={message.message}
                                         isSentByMe={message.isSentByMe}
+                                        img={message.img}
+
                                     />
                                 ))}
                             </div>
