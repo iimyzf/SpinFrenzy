@@ -6,7 +6,6 @@ import {
     BsPersonFillAdd,
     BsPersonFillSlash,
 } from "react-icons/bs";
-import Apollo from "../assets/Apollo.jpg";
 import { useEffect, useState } from "react";
 import "../styles/ViewProfile.css";
 import axios from "axios";
@@ -22,7 +21,7 @@ interface UserInfo {
     online: boolean;
     wins: number;
     loses: number;
-    ratio: number;
+    games: number;
 };
 
 interface Player {
@@ -50,30 +49,29 @@ const ViewProfile = () => {
         let id = queryParams.get("id");
         if (id == null) id = "0";
         let userid: number = +id;
-        console.log("userid--------> ", id);
         await axios.get(
-            `http://localhost:3000/users/userinfos?id=${id}`, {
+            `http://localhost:3000/users/byid?id=${id}`, {
                 withCredentials: true,
             }
         ).then((res) => {
             const data = res.data;
             setUser({
-                photo: data.photo,
-                username: data.username,
-                firstname: data.firstname,
-                lastname: data.lastname,
-                bio: data.bio,
+                photo: data.user.photo,
+                username: data.user.username,
+                firstname: data.user.firstname,
+                lastname: data.user.lastname,
+                bio: data.user.bio,
                 id: userid,
-                online: data.online,
-                wins: data.wins,
-                loses: data.losses,
-                ratio: data.wins / (data.wins+data.losses)
+                online: data.user.online,
+                wins: data.user.wins,
+                loses: data.user.losses,
+                games: (data.user.wins + data.user.losses)
             });
 
             const newMAp = new Map<number, Player>(map);
             newMAp.set(userid, {
-                photo: data.photo,
-                username: data.username
+                photo: data.user.photo,
+                username: data.user.username
             });
             setMap(newMAp);
         });
@@ -83,8 +81,9 @@ const ViewProfile = () => {
                 withCredentials: true
             }
         ).then((res) => {
-            if (res.data)
+            if (res.data) {
                 setGames(res.data.games);
+            }
         })
     };
     const CreateaDmmsg = async () => {
@@ -127,7 +126,6 @@ const ViewProfile = () => {
         })}
 
         Promise.all(promises).then((results) => {
-            console.log(results);
             const newMAp = new Map<number, Player>(map);
             results.map(res => {
                 newMAp.set(res.data.id, {
@@ -265,10 +263,10 @@ const ViewProfile = () => {
                             </div>
                             <div className="flex items-center gap-[.5vw]">
                                 <p className="font-medium font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    win ratio
+                                    games played
                                 </p>
                                 <h3 className="font-black font-satoshi text-[1vw] container-1 px-[2vw] py-[1vw]">
-                                    {user?.ratio}
+                                    {user?.games}
                                 </h3>
                             </div>
                         </div>
@@ -309,37 +307,6 @@ const ViewProfile = () => {
                                 </div>
                             </div>
                         ))}
-                        {/* <div className="game-di mt-[1vw] max-sm:mt-[2.5vw] max-md:mt-[2vw] max-lg:mt-[2vw] flex container-1 px-[2vw] py-[.5vw] max-sm:py-[1vh] max-md:py-[1vh] max-lg:py-[1vh] justify-between items-center w-full">
-                            <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                <img
-                                    className="ppic rounded-full w-[3vw] h-[3vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] mr-[.5vw]"
-                                    src={Apollo}
-                                    alt="profile-pic"
-                                />
-                                <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                    username
-                                </h2>
-                            </div>
-                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                4
-                            </h1>
-                            <h1 className="vs font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                VS
-                            </h1>
-                            <h1 className="font-black font-satoshi text-[1vw] max-sm:text-[1.4vh] max-md:text-[1.4vh] max-lg:text-[1.4vh]">
-                                3
-                            </h1>
-                            <div className="flex items-center gap-5 max-sm:gap-[1vw] max-md:gap-[1vw] max-lg:gap-[1vw]">
-                                <h2 className="username font-medium font-satoshi text-[.8vw] max-sm:text-[1.2vh] max-md:text-[1.2vh] max-lg:text-[1.2vh]">
-                                    username
-                                </h2>
-                                <img
-                                    className="ppic rounded-full w-[3vw] h-[3vw] max-sm:w-[7vw] max-sm:h-[7vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[3.5vw] max-lg:h-[3.5vw] ml-[.5vw]"
-                                    src={Apollo}
-                                    alt="profile-pic"
-                                />
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </div>
