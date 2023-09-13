@@ -225,16 +225,17 @@ const Chat = () => {
         }
         setSocket(socketRef.current);
         const ret = socket?.on("newmessage", async (dto: any) => {
+            console.log("GOT HERE");
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
                     message: dto[0].message,
                     isSentByMe: false,
-                    img: "http://localhost:3000/" + dto[0].senderId + ".png",
+                    img: "http://localhost:3000/" + 1 + ".png",
                 },
             ]);
         });
-    }, [socket, selectedChannel]);
+    }, [selectedChannel]);
 
     return (
         <div className="parent flex flex-row justify-center items-center gap-[1vw] h-screen max-sm:flex-col max-md:flex-col">
