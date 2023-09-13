@@ -116,7 +116,6 @@ const Dashboard = () => {
             for (let room of data.rooms) {
                 fetchPlayersData(room);
             }
-            console.log("init ===> \n", data);
             setGamesMap(new Map<string, any>(data.map));
         });
 
